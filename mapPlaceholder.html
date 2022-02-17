@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Main Page</title>
+    <link rel="stylesheet" href="mainstyle.css">
+    <script src="funcs.js"></script>
+</head>
+<body>
+    <h1>This is not a map</h1>
+    <p>
+        Please choose a location from the list below
+    </p>
+    <form>
+        <div class="formBox">
+            <label for="location">Choose a Location:</label>
+
+            <select name="location" id="location">
+                <option value="">--Please choose an option--</option>
+                <option value="footage">Footage</option>
+                <option value="cargo">Cargo</option>
+                <option value="mojo">Mojo</option>
+                <option value="factory">Factory</option>
+                <option value="gay">G.A.Y.</option>
+                <option value="bloom">Bloom</option>
+            </select>
+
+        </div>
+        <div class="formBox">
+            <button id="btnAR">Click to see reviews</button>
+        </div>
+        <div id="msg">
+            <pre></pre>
+        </div>
+    </form>
+    <button id="reviewPageBtn">Review Page</button>
+    
+</body>
+</html>

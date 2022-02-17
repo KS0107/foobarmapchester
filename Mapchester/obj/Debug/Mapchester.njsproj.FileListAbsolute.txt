@@ -1,0 +1,3 @@
+C:\Users\natha\Documents\Mapchester\Mapchester\obj\Debug\Mapchester.njsproj.AssemblyReference.cache
+C:\Users\natha\Documents\Mapchester\Mapchester\obj\Debug\Mapchester.njsproj.CoreCompileInputs.cache
+C:\Users\natha\Documents\Mapchester\Mapchester\bin\Microsoft.NodejsTools.WebRole.dll

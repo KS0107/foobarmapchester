@@ -1,4 +1,103 @@
-//import 'mapbox-gl/dist/mapbox-gl.css';
+const defaultPlaceholderReviews = [
+    {
+        "id": "Mojo2022-02-05",
+        "location": "Mojo",
+        "date": "2022-02-05",
+        "rating": "4",
+        "review": "Pretty Good"
+    },
+    {
+        "id": "Mojo2022-02-12",
+        "location": "Mojo",
+        "date": "2022-02-12",
+        "rating": "5",
+        "review": "Amazing"
+    },
+    {
+        "id": "Footage2022-01-21",
+        "location": "Footage",
+        "date": "2022-01-21",
+        "rating": "2",
+        "review": "Bit Crowded"
+    },
+    {
+        "id": "Footage2022-01-03",
+        "location": "Footage",
+        "date": "2022-01-03",
+        "rating": "5",
+        "review": "Cheap drinks, good music"
+    },
+    {
+        "id": "Footage2022-02-07",
+        "location": "Footage",
+        "date": "2022-02-07",
+        "rating": "4",
+        "review": "Fun pub quiz and good selection of drinks"
+    },
+    {
+        "id": "Cargo2021-12-01",
+        "location": "Cargo",
+        "date": "2021-12-01",
+        "rating": "2",
+        "review": "Massive queue, expensive drinks"
+    },
+    {
+        "id": "Cargo2021-11-13",
+        "location": "Cargo",
+        "date": "2021-11-13",
+        "rating": "4",
+        "review": "Fast entry, Very cheap drinks for a club"
+    },
+    {
+        "id": "Cargo2021-11-05",
+        "location": "Cargo",
+        "date": "2021-11-05",
+        "rating": "5",
+        "review": "Lots of good music choices, good environment and cheap shots"
+    },
+    {
+        "id": "Mojo2022-01-15",
+        "location": "Mojo",
+        "date": "2022-01-15",
+        "rating": "3",
+        "review": "Bit pricey but stayed open late"
+    },
+    {
+        "id": "Factory2022-02-05",
+        "location": "Factory",
+        "date": "2022-02-05",
+        "rating": "4",
+        "review": "Alright overall"
+    },
+    {
+        "id": "Factory2021-10-02",
+        "location": "Factory",
+        "date": "2021-10-02",
+        "rating": "5",
+        "review": "Really fun night, vodka was good"
+    },
+    {
+        "id": "Gay2022-01-08",
+        "location": "Gay",
+        "date": "2022-01-08",
+        "rating": "5",
+        "review": "Open late, good songs and fun things to do"
+    },
+    {
+        "id": "Bloom2021-12-13",
+        "location": "Bloom",
+        "date": "2021-12-13",
+        "rating": "5",
+        "review": "Easy place to go for a late week night"
+    },
+    {
+        "id": "Bloom2021-12-11",
+        "location": "Bloom",
+        "date": "2021-12-11",
+        "rating": "4",
+        "review": "Fun place to go for a late one"
+    }
+];
 
 const seeReviews = (ev) => {
     const location = document.getElementById("location").value
@@ -47,7 +146,7 @@ const addReview = (ev) => {
 function loadPage(){
     let reviews = localStorage.getItem('reviews');
     if(reviews = null){
-        reviews = [{"id":"Mojo2022-02-05", "location":"Mojo", "date":"2022-02-05", "rating": "4", "review": "Pretty Good"}]
+        reviews = defaultPlaceholderReviews;
         localStorage.setItem('reviews', JSON.stringify(reviews));
     }
 }
@@ -89,11 +188,3 @@ function goToReviews() {
 function goToMap() {
     window.location = "mapPlaceholder.html"
 }
-
-//mapboxgl.accessToken = 'pk.eyJ1IjoiZ2VvcmdlZ29vZGV5IiwiYSI6ImNrd3h0NHNjbjAxdDEycG55MXBwaHEzMGYifQ.iu3DK1jhWiFeF7Es8Ysgvw';
-//const map = new mapboxgl.Map({
-    //container: 'map', // container ID
-    //style: 'mapbox://styles/georgegoodey/ckzwvtg49000514p0t2ugjdc7', // style URL
-    //center: [-74.5, 40], // starting position [lng, lat]
-    //zoom: 9 // starting zoom
-//});

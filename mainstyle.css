@@ -22,3 +22,6 @@ button:hover {
     transition: 0.25s ease-in-out;
     border-radius: 15px;
 }
+#map{
+    height: 500px;
+}

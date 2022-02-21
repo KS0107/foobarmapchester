@@ -6,9 +6,12 @@
     <title>Main Page</title>
     <link rel="stylesheet" href="mainstyle.css">
     <script src="funcs.js"></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.css' rel='stylesheet' />
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.js'></script>
 </head>
 <body>
     <h1>This is not a map</h1>
+    <button id="btnRP">Review Page</button>
     <p>
         Please choose a location from the list below
     </p>
@@ -18,12 +21,12 @@
 
             <select name="location" id="location">
                 <option value="">--Please choose an option--</option>
-                <option value="footage">Footage</option>
-                <option value="cargo">Cargo</option>
-                <option value="mojo">Mojo</option>
-                <option value="factory">Factory</option>
-                <option value="gay">G.A.Y.</option>
-                <option value="bloom">Bloom</option>
+                <option value="Footage">Footage</option>
+                <option value="Cargo">Cargo</option>
+                <option value="Mojo">Mojo</option>
+                <option value="Factory">Factory</option>
+                <option value="Gay">G.A.Y.</option>
+                <option value="Bloom">Bloom</option>
             </select>
 
         </div>
@@ -34,7 +37,20 @@
             <pre></pre>
         </div>
     </form>
-    <button id="btnRP">Review Page</button>
+    <div id="map">
+
+    </div>
+
+    <div id='map'></div>
+<script>
+mapboxgl.accessToken = 'pk.eyJ1IjoiZ2VvcmdlZ29vZGV5IiwiYSI6ImNrd3h0NHNjbjAxdDEycG55MXBwaHEzMGYifQ.iu3DK1jhWiFeF7Es8Ysgvw';
+const map = new mapboxgl.Map({
+container: 'map', // container ID
+style: 'mapbox://styles/mapbox/streets-v11', // style URL
+center: [-74.5, 40], // starting position [lng, lat]
+zoom: 9 // starting zoom
+});
+</script>
     
 </body>
 </html>

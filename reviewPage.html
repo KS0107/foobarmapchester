@@ -8,34 +8,44 @@
     <script src="funcs.js"></script>
 </head>
 <body>
-    <h1>Add a review</h1>
-    <p>
-        Please enter a review
-    </p>
-    <form>
-        <div class="formBox">
-            <label for="location">Location</label>
-            <input type="text" id="location" placeholder="Location" />
+    <div class="topBar">
+        <h1>Add a review</h1>
+        <div id="buttonLinks">
+            <button id="btnMP">Map Page</button>
+            <button>Four</button>
+            <button>Other</button>
+            <button>Link</button>
+            <button>Buttons</button>
         </div>
-        <div class="formBox">
-            <label for="date">Date</label>
-            <input type="date" id="date" />
-        </div>
-        <div class="formBox">
-            <label for="rating">Rating</label>
-            <input type="range" id="rating" max="5" min="1" step="1" />
-        </div>
-        <div class="formBox">
-            <label for="review">Review</label>
-            <input type="text" id="review" placeholder="Review" />
-        </div>
-        <div class="formBox">
-            <button id="btnAR">Click to add review</button>
-        </div>
-        <div id="msg">
-            <pre></pre>
-        </div>
-    </form>
-    <button id="btnMP">Map Page</button>
+    </div>
+    <div id="reviewBody">
+        <p>
+            Please enter a review
+        </p>
+        <form>
+            <div class="formBox">
+                <label for="location">Location</label>
+                <input type="text" id="location" placeholder="Location" />
+            </div>
+            <div class="formBox">
+                <label for="date">Date</label>
+                <input type="date" id="date" />
+            </div>
+            <div class="formBox">
+                <label for="rating">Rating</label>
+                <input type="range" id="rating" max="5" min="1" step="1" />
+            </div>
+            <div class="formBox">
+                <label for="review">Review</label>
+                <input type="text" id="review" placeholder="Review" />
+            </div>
+            <div class="formBox">
+                <button id="btnAR">Click to add review</button>
+            </div>
+            <div id="msg">
+                <pre></pre>
+            </div>
+        </form>
+    </div>
 </body>
 </html>

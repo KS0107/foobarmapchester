@@ -191,5 +191,5 @@ function goToReviews() {
 }
 
 function goToMap() {
-    window.location = "mapPlaceholder.html"
+    window.location = "index.html"
 }

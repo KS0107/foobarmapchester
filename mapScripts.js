@@ -1,4 +1,4 @@
-mapboxgl.accessToken = 'pk.eyJ1IjoiZ2VvcmdlZ29vZGV5IiwiYSI6ImNrd3h0NHNjbjAxdDEycG55MXBwaHEzMGYifQ.iu3DK1jhWiFeF7Es8Ysgvw';
+mapboxgl.accessToken = 'pk.eyJ1Ijoia3MwMTA3IiwiYSI6ImNrd3hpa2djNzBlYjYydnExYXJ3bXVqNW8ifQ.4eD36Q7KuGJIPegaAn37NQ';
 const geojson = {
     'type': 'FeatureCollection',
     'features': [
@@ -40,7 +40,7 @@ const geojson = {
 
 var map = new mapboxgl.Map({
     container: 'map', // container ID
-    style: 'mapbox://styles/georgegoodey/ckzwvtg49000514p0t2ugjdc7', // style URL
+    style: 'mapbox://styles/ks0107/ckzznmnzk001e14o50943ru4p', // style URL
     center: [-2.234618, 53.475721], // starting position [lng, lat]
     zoom: 13.85 // starting zoom
 });

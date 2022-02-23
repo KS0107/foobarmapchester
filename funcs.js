@@ -193,6 +193,7 @@ document.addEventListener("DOMContentLoaded", () => {   //Otherwise the onclick 
 
 function LightFunction() {
     document.body.style.backgroundColor = "lightgrey";
+    document.body.style.color = "black";
 }
 function goToReviews() {
     console.log("pressed")

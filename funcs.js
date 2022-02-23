@@ -190,10 +190,19 @@ document.addEventListener("DOMContentLoaded", () => {   //Otherwise the onclick 
         console.log("light function not found");
     }
 })
-
+let i = 1;
 function LightFunction() {
-    document.body.style.backgroundColor = "lightgrey";
-    document.body.style.color = "black";
+    if (i % 2 != 0) {
+        document.body.style.backgroundColor = "lightgrey";
+        document.body.style.color = "black";
+        document.getElementById("lightD").innerText = "Dark Mode"
+        i++;
+    } else {
+        document.body.style.backgroundColor = "rgb(31, 31, 31)";
+        document.body.style.color = "white";
+        document.getElementById("lightD").innerText = "Light Mode"
+        i++;
+    }
 }
 function goToReviews() {
     console.log("pressed")

@@ -4,7 +4,7 @@ function addUser($username, $password)
 	$sql = "INSERT INTO user (username, password) 
 			VALUES (:username, :password)";
 	// connect to the database
-	$pdo = new pdo('mysql:host=localhost; dbname=myDB', 'root', 'root');
+	$pdo = new pdo('mysql:host=dbhost.cs.man.ac.uk; dbname=2021_comp10120_z19', 'y02478jh', 'Hjy20011222.');
 	// Set  attributes
 	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING); 
 	// Hash password
@@ -22,8 +22,8 @@ function addUser($username, $password)
 function showDatabases()
 {
    $sql = "SHOW DATABASES";
-   $pdo = new pdo('mysql:host=localhost;',
-                 'root', 'root');
+   $pdo = new pdo('mysql:host=dbhost.cs.man.ac.uk;',
+                 'y02478jh', 'Hjy20011222.');
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
    $stmt = $pdo->prepare($sql);
    $stmt->execute();
@@ -39,7 +39,7 @@ function authenticateUser($username, $password)
 	$sql = "SELECT password
 			FROM   user
 			WHERE  username = :username";
-	$pdo = new pdo('mysql:host=localhost; dbname=myDB', 'root', 'root');
+	$pdo = new pdo('mysql:host=dbhost.cs.man.ac.uk; dbname=2021_comp10120_z19', 'y02478jh', 'Hjy20011222.');
 	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
 	$stmt = $pdo->prepare($sql);
 	$stmt->execute([

@@ -106,6 +106,11 @@ const seeReviews = (ev) => {
     const reviewsString = localStorage.getItem('reviews');
     const reviewsLocal = JSON.parse(reviewsString);
     console.log(reviewsLocal)
+    if(reviewsLocal == null){
+        loadReviews();
+        const reviewsString = localStorage.getItem('reviews');
+        const reviewsLocal = JSON.parse(reviewsString);
+    }
 
     const filteredReviews = []
     for (let i = 0; i < reviewsLocal.length; i++) {
@@ -143,16 +148,16 @@ const addReview = (ev) => {
     console.warn("added", { reviews });
 }
 
-function loadPage(){
+function loadReviews(){
     let reviews = localStorage.getItem('reviews');
-    if(reviews = null){
+    if(reviews == null){
         reviews = defaultPlaceholderReviews;
         localStorage.setItem('reviews', JSON.stringify(reviews));
     }
 }
 
 document.addEventListener("DOMContentLoaded", () => {   //Otherwise the onclick is assigned before the DOM is loaded
-    window.onload = loadPage
+    window.onload = loadReviews
     
     const reviewPageButton = document.getElementById("btnRP");
     if(reviewPageButton != null){

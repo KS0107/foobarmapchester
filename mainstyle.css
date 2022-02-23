@@ -94,3 +94,11 @@ select:hover {
     color: rgb(124, 124, 124);
     transition: 0.25s ease-in-out;
 }
+
+.marker {
+    display: block;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    padding: 0;
+    }

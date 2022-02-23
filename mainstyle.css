@@ -42,10 +42,11 @@ button:hover {
     bottom: 0;
     position: fixed;
     height: 85%;
-    width: 80%;
+    width: 100%;
 
 }
 #reviewBar{
+    background-color: rgb(31, 31, 31);
     text-align: center;
     height: 85%;
     width: 20%;
@@ -108,6 +109,6 @@ select:hover {
     }
 #lightD {
     position: relative;
-    top: 35vh;
+    top: 45vh;
     padding: 10px;
 }

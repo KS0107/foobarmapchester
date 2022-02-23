@@ -175,11 +175,13 @@ function LightFunction() {
         document.body.style.backgroundColor = "lightgrey";
         document.body.style.color = "black";
         document.getElementById("lightD").innerText = "Dark Mode"
+        document.getElementById("reviewBar").style.backgroundColor = "lightgrey";
         i++;
     } else {
         document.body.style.backgroundColor = "rgb(31, 31, 31)";
         document.body.style.color = "white";
         document.getElementById("lightD").innerText = "Light Mode"
+        document.getElementById("reviewBar").style.backgroundColor = "rgb(31, 31, 31)";
         i++;
     }
 }

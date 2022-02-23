@@ -100,34 +100,7 @@ const defaultPlaceholderReviews = [
 ];
 
 function seeReviews(){
-    const location = document.getElementById("location").value
 
-    console.log(location)
-    const reviewsString = localStorage.getItem('reviews');
-    const reviewsLocal = JSON.parse(reviewsString);
-    console.log(reviewsLocal)
-    if(reviewsLocal == null){
-        loadReviews();
-        const reviewsString = localStorage.getItem('reviews');
-        const reviewsLocal = JSON.parse(reviewsString);
-    }
-
-    const filteredReviews = []
-    for (let i = 0; i < reviewsLocal.length; i++) {
-        if(reviewsLocal[i].location == location){
-            filteredReviews.push(reviewsLocal[i])
-        }
-    }
-    console.log(filteredReviews)
-
-    let reviewTextBlockOut = ""
-    for (let i = 0; i < filteredReviews.length; i++) {
-        reviewTextBlockOut += ("Reviewed On: " + filteredReviews[i].date + "\n");
-        reviewTextBlockOut += ("Given A Score Of: " + filteredReviews[i].rating + " Out Of 5" + "\n");
-        reviewTextBlockOut += ("Review: " + filteredReviews[i].review + "\n\n");
-    }
-    let pre = document.querySelector("#msg pre");
-    pre.textContent = reviewTextBlockOut;
 }
 
 const addReview = (ev) => {
@@ -189,6 +162,12 @@ document.addEventListener("DOMContentLoaded", () => {   //Otherwise the onclick 
     }else{
         console.log("light function not found");
     }
+    const slideButton = document.getElementById("slider");
+    if(slideButton != null){
+        slideButton.onclick = slideInOut;
+    }else{
+        console.log("slide function not found");
+    }
 })
 let i = 1;
 function LightFunction() {
@@ -211,4 +190,17 @@ function goToReviews() {
 
 function goToMap() {
     window.location = "index.html"
+}
+let z = 1;
+let Imageoffset = 0;
+function slideInOut() {
+    if (z % 2 != 0) {
+        Imageoffset += 10;
+        document.getElementById("reviewBar").style.right = Imageoffset + "px";
+        z++;
+    } else {
+        Imageoffset -= 10;
+        document.getElementById("reviewBar").style.right = Imageoffset + "px";
+        z++;
+    }
 }

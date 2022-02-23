@@ -52,6 +52,8 @@ button:hover {
     position: fixed;
     right: 0;
     bottom: 0;
+    transition: 0.3s ease-in-out;
+    z-index: 5;
 }
 #reviewBar div {
     font-size: 16px;

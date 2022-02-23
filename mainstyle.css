@@ -2,8 +2,10 @@
 
 * {
     font-family: 'Montserrat';
-    background-color: rgb(31, 31, 31);
     color: white;
+}
+body {
+    background-color: rgb(31, 31, 31);
 }
 h1 {
     text-align: center;
@@ -102,3 +104,8 @@ select:hover {
     cursor: pointer;
     padding: 0;
     }
+#lightD {
+    position: relative;
+    top: 400px;
+    padding: 10px;
+}

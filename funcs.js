@@ -183,8 +183,17 @@ document.addEventListener("DOMContentLoaded", () => {   //Otherwise the onclick 
     }else{
         console.log("add review button not found");
     }
+    const lightandDarkButton = document.getElementById("lightD");
+    if(lightandDarkButton != null){
+        lightandDarkButton.onclick = LightFunction;
+    }else{
+        console.log("light function not found");
+    }
 })
 
+function LightFunction() {
+    document.body.style.backgroundColor = "lightgrey";
+}
 function goToReviews() {
     console.log("pressed")
     window.location = "reviewPage.html"

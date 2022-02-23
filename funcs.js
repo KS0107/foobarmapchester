@@ -195,12 +195,12 @@ let z = 1;
 let Imageoffset = 0;
 function slideInOut() {
     if (z % 2 != 0) {
-        Imageoffset += 10;
-        document.getElementById("reviewBar").style.right = Imageoffset + "px";
+        Imageoffset -= 20;
+        document.getElementById("reviewBar").style.right = Imageoffset + "vw";
         z++;
     } else {
-        Imageoffset -= 10;
-        document.getElementById("reviewBar").style.right = Imageoffset + "px";
+        Imageoffset += 20;
+        document.getElementById("reviewBar").style.right = Imageoffset + "vw";
         z++;
     }
 }

@@ -99,7 +99,7 @@ const defaultPlaceholderReviews = [
     }
 ];
 
-function seeReviews(location){
+function seeReviews(){
     const location = document.getElementById("location").value
 
     console.log(location)

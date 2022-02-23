@@ -16,7 +16,7 @@ const geojson = {
         {
             'type': 'Feature',
             'properties': {
-                'message': 'Turing',
+                'message': 'Turing Tap',
                 'iconSize': [40, 40]
             },
             'geometry': {
@@ -33,6 +33,50 @@ const geojson = {
             'geometry': {
                 'type': 'Point',
                 'coordinates': [-2.23687, 53.47016]
+            }
+        },
+        {
+            'type': 'Feature',
+            'properties': {
+                'message': 'Mojo',
+                'iconSize': [40, 40]
+            },
+            'geometry': {
+                'type': 'Point',
+                'coordinates': [-2.249815066033617, 53.481263991254615]
+            }
+        },
+        {
+            'type': 'Feature',
+            'properties': {
+                'message': 'Gay',
+                'iconSize': [40, 40]
+            },
+            'geometry': {
+                'type': 'Point',
+                'coordinates': [-2.2379910112825154, 53.47647216906738]
+            }
+        },
+        {
+            'type': 'Feature',
+            'properties': {
+                'message': 'Cargo',
+                'iconSize': [40, 40]
+            },
+            'geometry': {
+                'type': 'Point',
+                'coordinates': [-2.2412459798138444, 53.48478796773415]
+            }
+        },
+        {
+            'type': 'Feature',
+            'properties': {
+                'message': 'The Paramount',
+                'iconSize': [40, 40]
+            },
+            'geometry': {
+                'type': 'Point',
+                'coordinates': [-2.242571365193075, 53.47653556884342]
             }
         }
     ]
@@ -67,6 +111,13 @@ function seeReviews(){
     console.log(filteredReviews)
 
     let reviewTextBlockOut = ""
+    let totalRating = 0;
+    for (let i = 0; i < filteredReviews.length; i++) {
+        totalRating += parseInt(filteredReviews[i].rating);
+    }
+    finalRating = totalRating / filteredReviews.length
+    finalRating = Math.round(finalRating * 100)/100
+    reviewTextBlockOut += "Rating of: " + finalRating + "\n\n\n";
     for (let i = 0; i < filteredReviews.length; i++) {
         reviewTextBlockOut += ("Reviewed On: " + filteredReviews[i].date + "\n");
         reviewTextBlockOut += ("Given A Score Of: " + filteredReviews[i].rating + " Out Of 5" + "\n");

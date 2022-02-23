@@ -2,47 +2,49 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiZ2VvcmdlZ29vZGV5IiwiYSI6ImNrd3h0NHNjbjAxdDEyc
 const geojson = {
     'type': 'FeatureCollection',
     'features': [
-    {
-    'type': 'Feature',
-    'properties': {
-    'message': 'Factory',
-    'iconSize': [60, 60]
-    },
-    'geometry': {
-    'type': 'Point',
-    'coordinates': [-2.23733, 53.47404]
-    }
-    },
-    {
-    'type': 'Feature',
-    'properties': {
-    'message': 'Turing',
-    'iconSize': [50, 50]
-    },
-    'geometry': {
-    'type': 'Point',
-    'coordinates': [-2.22935, 53.46252]
-    }
-    },
-    {
-    'type': 'Feature',
-    'properties': {
-    'message': 'Footage',
-    'iconSize': [40, 40]
-    },
-    'geometry': {
-    'type': 'Point',
-    'coordinates': [-2.23687, 53.47016]
-    }
-    }
+        {
+            'type': 'Feature',
+            'properties': {
+                'message': 'Factory',
+                'iconSize': [40, 40]
+            },
+            'geometry': {
+                'type': 'Point',
+                'coordinates': [-2.23733, 53.47404]
+            }
+        },
+        {
+            'type': 'Feature',
+            'properties': {
+                'message': 'Turing',
+                'iconSize': [40, 40]
+            },
+            'geometry': {
+                'type': 'Point',
+                'coordinates': [-2.22935, 53.46252]
+            }
+        },
+        {
+            'type': 'Feature',
+            'properties': {
+                'message': 'Footage',
+                'iconSize': [40, 40]
+            },
+            'geometry': {
+                'type': 'Point',
+                'coordinates': [-2.23687, 53.47016]
+            }
+        }
     ]
-    };
+};
+
 const map = new mapboxgl.Map({
     container: 'map', // container ID
     style: 'mapbox://styles/georgegoodey/ckzwvtg49000514p0t2ugjdc7', // style URL
     center: [-2.234618, 53.475721], // starting position [lng, lat]
     zoom: 13.85 // starting zoom
 });
+
 for (const marker of geojson.features) {
     // Create a DOM element for each marker.
     const el = document.createElement('div');
@@ -55,7 +57,9 @@ for (const marker of geojson.features) {
     el.style.backgroundSize = '100%';
      
     el.addEventListener('click', () => {
-    window.alert(marker.properties.message);
+        //window.alert(marker.properties.message);
+        let locationName = document.getElementById("locationName");
+        locationName.textContent = marker.properties.message;
     });
      
     // Add markers to the map.

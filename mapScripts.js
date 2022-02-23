@@ -45,6 +45,37 @@ var map = new mapboxgl.Map({
     zoom: 13.85 // starting zoom
 });
 
+function seeReviews(){
+    const location = document.getElementById("locationName").textContent;
+
+    console.log(location)
+    const reviewsString = localStorage.getItem('reviews');
+    const reviewsLocal = JSON.parse(reviewsString);
+    console.log(reviewsLocal)
+    if(reviewsLocal == null){
+        loadReviews();
+        const reviewsString = localStorage.getItem('reviews');
+        const reviewsLocal = JSON.parse(reviewsString);
+    }
+
+    const filteredReviews = []
+    for (let i = 0; i < reviewsLocal.length; i++) {
+        if(reviewsLocal[i].location == location){
+            filteredReviews.push(reviewsLocal[i])
+        }
+    }
+    console.log(filteredReviews)
+
+    let reviewTextBlockOut = ""
+    for (let i = 0; i < filteredReviews.length; i++) {
+        reviewTextBlockOut += ("Reviewed On: " + filteredReviews[i].date + "\n");
+        reviewTextBlockOut += ("Given A Score Of: " + filteredReviews[i].rating + " Out Of 5" + "\n");
+        reviewTextBlockOut += ("Review: " + filteredReviews[i].review + "\n\n");
+    }
+    let pre = document.querySelector("#msg pre");
+    pre.textContent = reviewTextBlockOut;
+}
+
 for (const marker of geojson.features) {
     // Create a DOM element for each marker.
     const el = document.createElement('div');
@@ -60,7 +91,7 @@ for (const marker of geojson.features) {
         //window.alert(marker.properties.message);
         let locationName = document.getElementById("locationName");
         locationName.textContent = marker.properties.message;
-        //seeReviews();
+        seeReviews();
     });
      
     // Add markers to the map.

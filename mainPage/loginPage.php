@@ -44,7 +44,7 @@ session_start();
 					<span>
 						Don't have an account ?
 					</span>
-					<a href="signUp.php">
+					<a href="signUp.html">
 						Sign up
 					</a>
 				</div>

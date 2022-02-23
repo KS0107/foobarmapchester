@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Main Page</title>
+    <link rel="stylesheet" href="mainstyle.css">
+    <script src="funcs.js"></script>
+    <script src="mapScripts.js" defer></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.css' rel='stylesheet' />
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.js'></script>
+</head>
+<body>
+    <div class="topBar">
+        <h1>Le Mappe</h1>
+        <div id="buttonLinks">
+            <button id="btnRP">Review Page</button>
+            <button>Four</button>
+            <button>Other</button>
+            <button>Link</button>
+            <button>Buttons</button>
+        </div>
+    </div>
+    <div id="reviewBar">
+        <form>
+            <div class="formBox">
+                <label for="location">Choose a Location:</label>
+
+                <select name="location" id="location">
+                    <option value="">--Please choose an option--</option>
+                    <option value="Footage">Footage</option>
+                    <option value="Cargo">Cargo</option>
+                    <option value="Mojo">Mojo</option>
+                    <option value="Factory">Factory</option>
+                    <option value="Gay">G.A.Y.</option>
+                    <option value="Bloom">Bloom</option>
+                </select>
+
+            </div>
+            <div class="formBox">
+                <button id="btnSR" type="button">Click to see reviews</button>
+            </div>
+            <div id="msg">
+                <pre></pre>
+            </div>
+        </form>
+    </div>
+    <div id='map'></div>
+</body>
+</html>

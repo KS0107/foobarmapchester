@@ -208,7 +208,7 @@ function goToReviews() {
 }
 
 function goToMap() {
-    window.location = "index.html"
+    window.location = "Web Pages/map.html"
 }
 let z = 1;
 let Imageoffset = 0;

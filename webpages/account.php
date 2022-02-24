@@ -14,6 +14,8 @@ function addUser($username, $password)
 	$stmt = $pdo->prepare($sql);
 	// bind parameters with variables
 	$stmt->execute([
+	                    'firstname' => $firstname,
+	                    'lastname' => $lastname,
 						'username' => $username,
 						'password' => $password
 						]);

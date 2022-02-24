@@ -141,7 +141,10 @@ const addReview = (ev) => {
 function loadReviews(){
     let reviews = localStorage.getItem('reviews');
     if(reviews == null){
-        reviews = defaultPlaceholderReviews;
+        fetch('../JSONs/reviews.json')
+        .then(response => response.json())
+        .then(json => console.log(json + "t"));
+        console.log(json + "t")
         localStorage.setItem('reviews', JSON.stringify(reviews));
     }
 }

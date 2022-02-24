@@ -1,7 +1,7 @@
 <?php
 function addUser($username, $password)
 {	// insert username and password into users table  
-	$sql = "INSERT INTO user (Username, Password) 
+	$sql = "INSERT INTO User (Username, Password) 
 			VALUES (:username, :password)";
 	// connect to the database
 	$pdo = new pdo('mysql:host=dbhost.cs.man.ac.uk; dbname=2021_comp10120_z19', 'y02478jh', 'i7JLzgM-z5zv9T');

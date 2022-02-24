@@ -1,7 +1,7 @@
 <?php
 function addUser($username, $password)
 {	// insert username and password into users table  
-	$sql = "INSERT INTO user (username, password) 
+	$sql = "INSERT INTO user (Username, Password) 
 			VALUES (:username, :password)";
 	// connect to the database
 	$pdo = new pdo('mysql:host=dbhost.cs.man.ac.uk; dbname=2021_comp10120_z19', 'y02478jh', 'i7JLzgM-z5zv9T');
@@ -37,13 +37,13 @@ $stmt->setFetchMode(PDO::FETCH_ASSOC);
 function authenticateUser($username, $password) 
 {	
 	$sql = "SELECT password
-			FROM   user
-			WHERE  username = :username";
+			FROM   User
+			WHERE  Username = :Username";
 	$pdo = new pdo('mysql:host=dbhost.cs.man.ac.uk; dbname=2021_comp10120_z19', 'y02478jh', 'i7JLzgM-z5zv9T');
 	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
 	$stmt = $pdo->prepare($sql);
 	$stmt->execute([
-		'username' => $username
+		'Username' => $username
 					]);
 	$stmt->setFetchMode(PDO::FETCH_ASSOC);
 	$row = $stmt->fetch();

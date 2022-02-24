@@ -240,7 +240,7 @@ function goToTimetable() {
 }
 
 function goToLogin() {
-    window.location = "../webpages/login.php"
+    window.location = "../webpages/loginPage.php"
 }
 
 let z = 1;

@@ -1,7 +1,7 @@
 <?php
 function addUser($firstname, $lastname, $username, $password)
 {	// insert username and password into users table  
-	$sql = "INSERT INTO User (First name, Last name, Username, Password) 
+	$sql = "INSERT INTO User (Firstname, Lastname, Username, Password) 
 			VALUES (:firstname, :lastname, :username, :password)";
 	// connect to the database
 	$pdo = new pdo('mysql:host=dbhost.cs.man.ac.uk; dbname=2021_comp10120_z19', 'y02478jh', 'i7JLzgM-z5zv9T');
@@ -13,12 +13,12 @@ function addUser($firstname, $lastname, $username, $password)
 	//提供给预处理语句的参数不需要用引号括起来, ，驱动程序会自动处理。
 	$stmt = $pdo->prepare($sql);
 	// bind parameters with variables
-	$stmt->execute(array(
+	$stmt->execute([
 	                    'firstname' => $firstname,
 	                    'lastname' => $lastname,
 						'username' => $username,
 						'password' => $password
-						));
+						]);
 }
 
 function showDatabases()

@@ -94,10 +94,10 @@ var blackStyle = true
 function changeMapStyle(){
     if(blackStyle){
         console.log("is now white")
-        map.style = "mapbox://styles/georgegoodey/ckzznt1rc013614rweroxr40f";
+        map.setStyle("mapbox://styles/georgegoodey/ckzznt1rc013614rweroxr40f");//mapbox://styles/georgegoodey/ckzznt1rc013614rweroxr40f
         blackStyle = false;
     }else{
-        map.style =  'mapbox://styles/ks0107/ckzznmnzk001e14o50943ru4p';
+        map.setStyle('mapbox://styles/ks0107/ckzznmnzk001e14o50943ru4p');
         blackStyle = true;
     }
 }

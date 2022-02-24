@@ -1,0 +1,31 @@
+
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.32126.317
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}") = "Mapchester", "Mapchester\Mapchester.njsproj", "{7A66B685-EC98-4A55-AC09-83B6515EE72D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{99E4A1E1-BABE-4034-9C3B-A177423B4D50}"
+	ProjectSection(SolutionItems) = preProject
+		mapPlaceholder.html = mapPlaceholder.html
+		reviewPage.html = reviewPage.html
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7A66B685-EC98-4A55-AC09-83B6515EE72D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7A66B685-EC98-4A55-AC09-83B6515EE72D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7A66B685-EC98-4A55-AC09-83B6515EE72D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7A66B685-EC98-4A55-AC09-83B6515EE72D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {E4A022B4-2B5C-4220-B9F8-5ED852B1D1C8}
+	EndGlobalSection
+EndGlobal

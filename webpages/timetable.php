@@ -35,7 +35,7 @@
         </div>
     </div>
 	<!-- Time Table -->
-	<div>
+	<div id="pageBody">
 		<p>Your Timetable:</p>
 		<table class="timetable" >
 		  	<tr>

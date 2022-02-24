@@ -173,15 +173,15 @@ let i = 1;
 function LightFunction() {
     if (i % 2 != 0) {
         document.body.style.backgroundColor = "lightgrey";
+        document.getElementById("reviewBar").style.backgroundColor = "lightgrey";
         document.body.style.color = "black";
         document.getElementById("lightD").innerText = "Dark Mode"
-        document.getElementById("reviewBar").style.backgroundColor = "lightgrey";
         i++;
     } else {
         document.body.style.backgroundColor = "rgb(31, 31, 31)";
+        document.getElementById("reviewBar").style.backgroundColor = "rgb(31, 31, 31)";
         document.body.style.color = "white";
         document.getElementById("lightD").innerText = "Light Mode"
-        document.getElementById("reviewBar").style.backgroundColor = "rgb(31, 31, 31)";
         i++;
     }
 }

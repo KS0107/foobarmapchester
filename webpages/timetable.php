@@ -8,74 +8,34 @@
 	<meta charset="UTF-8">
 	<meta name="viewport">
 	<title>Document</title>
-	<style type="text/css">
-	/* navigation css */
-		.topnav {
-			padding: 15px;
-		 	background-color: #730C98;
-  			overflow: hidden;
-		}
-
-		.topnav a
-		{	
-			color: #121013;
-			text-decoration: none;
-			padding: 14px 16px;
-			font-size: 23px;       
-		}
-
-		.topnav a:hover {
- 			background-color: #ddd;
-  			color: black;
-		}
-
-		.active
-		{
-			background-color: #860AC2;
-		}
-	/* timetable css */
-		.timetable, th, td
-		{
-			border: 1px solid;
-			text-align: center;
-		}
-
-		.timetable
-		{
-			table-layout: fixed;
-			margin-left: auto;
-			margin-right: auto;
-			border-collapse: collapse;
-			width: 50%;                  
-		}
-
-		th, td
-		{
-			height: 50px;
-			overflow-wrap: break-word;
-		}
-	</style>
+	<link rel="stylesheet" href="../CSS/mainstyle.css">
+	<link rel="stylesheet" href="../CSS/timetable.css">
+    <script src="../Javascripts/funcs.js"></script>
 </head>
 <body>
 	<?php
 		
-		if ($_SESSION["login"] == "logined"){
-			header("location: loginPage.php");
-		}
-		else{
-			session_destroy();
-		}
+		// if ($_SESSION["login"] == "logined"){
+		// 	header("location: loginPage.php");
+		// }
+		// else{
+		// 	session_destroy();
+		// }
  	?>
 	<!-- Navigation Bar -->
-	<div class="topnav" style="text-align: center; ">
-		<a class="active" href="">Home</a>
-  		<a href="">Map</a>
-		<a href="">Plans</a>
-		<a href="">About</a>
-		<a href="">Sign In</a>
-	</div>
+	<div class="topBar">
+        <h1>Manchester Mapped</h1>
+        <div id="buttonLinks">
+            <button id="btnHP">Home Page</button>
+            <button id="btnMP">Map Page</button>
+            <button id="btnRP">Review Page</button>
+            <button id="btnTP">Timetable</button>
+            <button id="btnLP">Sign In</button>
+            <!-- <button id="slider">Collapse Reviews</button> -->
+        </div>
+    </div>
 	<!-- Time Table -->
-	<div>
+	<div id="pageBody">
 		<p>Your Timetable:</p>
 		<table class="timetable" >
 		  	<tr>

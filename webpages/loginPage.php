@@ -22,7 +22,7 @@ session_start();
             <button id="btnLP">Sign In</button>
         </div>
     </div>
-	<div id="loginBody">
+	<div id="pageBody">
 		<form class="form" method="post">
 			<span class="login-form-title">
 				Login
@@ -61,7 +61,7 @@ session_start();
 	</div>
 
 	<?php
-		if ($_SESSION["login"] == "login"){
+		if ($_SESSION["login"] == ["login"]){
 			require 'account.php';
 			$username = $_POST["username"];
 			$password = $_POST["password"];

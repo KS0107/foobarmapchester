@@ -19,7 +19,9 @@ catch (PDOException $pe){
 
 $username = $_POST['username'];
 $password = $_POST['password'];
-addUser($username, $password);
+$firstname = $_POST['firstname'];
+$lastname = $_POST['lastname'];
+addUser($firstname, $lastname, $username, $password);
 
 
 

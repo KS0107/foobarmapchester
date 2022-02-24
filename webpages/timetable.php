@@ -8,53 +8,9 @@
 	<meta charset="UTF-8">
 	<meta name="viewport">
 	<title>Document</title>
-	<style type="text/css">
-	/* navigation css */
-		.topnav {
-			padding: 15px;
-		 	background-color: #730C98;
-  			overflow: hidden;
-		}
-
-		.topnav a
-		{	
-			color: #121013;
-			text-decoration: none;
-			padding: 14px 16px;
-			font-size: 23px;       
-		}
-
-		.topnav a:hover {
- 			background-color: #ddd;
-  			color: black;
-		}
-
-		.active
-		{
-			background-color: #860AC2;
-		}
-	/* timetable css */
-		.timetable, th, td
-		{
-			border: 1px solid;
-			text-align: center;
-		}
-
-		.timetable
-		{
-			table-layout: fixed;
-			margin-left: auto;
-			margin-right: auto;
-			border-collapse: collapse;
-			width: 50%;                  
-		}
-
-		th, td
-		{
-			height: 50px;
-			overflow-wrap: break-word;
-		}
-	</style>
+	<link rel="stylesheet" href="../CSS/mainstyle.css">
+	<link rel="stylesheet" href="../CSS/timetable.css">
+    <script src="../Javascripts/funcs.js"></script>
 </head>
 <body>
 	<?php

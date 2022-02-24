@@ -1,0 +1,114 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&family=Poppins:wght@300;400;600&display=swap');
+
+* {
+    font-family: 'Montserrat';
+}
+body {
+    background-color: rgb(31, 31, 31);
+    color: white;
+    transition: 0.35s ease-in-out;
+}
+h1 {
+    text-align: center;
+    font-size: 20px;
+}
+button {
+    background-color: rgb(0, 0, 0);
+    border-radius: 10px;
+    font-size: 15px;
+    color: rgb(255, 255, 255);
+    border: none;
+    padding: 10px;
+    text-decoration: none;
+    cursor: pointer;
+}
+button:hover {
+    background-color: rgba(14, 14, 14, 0.692);
+    transition: 0.25s ease-in-out;
+    border-radius: 15px;
+}
+
+#reviewBody{
+    height: 80%;
+    width: 100%;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    font-size: 30px;
+}
+#map{
+    left: 0;
+    bottom: 0;
+    position: fixed;
+    height: 85%;
+    width: 100%;
+
+}
+#reviewBar{
+    background-color: rgb(31, 31, 31);
+    text-align: center;
+    height: 85%;
+    width: 20%;
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    transition: 0.3s ease-in-out;
+    z-index: 5;
+}
+#reviewBar div {
+    font-size: 16px;
+    display: block;
+}
+#msg {
+    box-sizing: border-box;
+    font-size: 10px;
+
+}
+.topBar{
+    left: 0;
+    top: 10px;
+    height: 0%;
+    width: 100%;
+    position: fixed;
+    background-color: rgb(0, 0, 0);
+}
+.topBar #buttonLinks{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}    
+.topBar button{
+    margin-left: 2%;
+    margin-right: 2%;
+    width: 20%;
+    height: 0%;
+}
+label {
+    margin-bottom: 15px;
+}
+#btnSR {
+    margin-top: 125px;
+    padding: 15px;
+}
+select {
+    margin-top: 20px;
+    color: rgb(255, 255, 255);
+    background-color: black;
+}
+select:hover {
+    color: rgb(124, 124, 124);
+    transition: 0.25s ease-in-out;
+}
+
+.marker {
+    display: block;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    padding: 0;
+    }
+#lightD {
+    position: relative;
+    top: 45vh;
+    padding: 10px;
+}

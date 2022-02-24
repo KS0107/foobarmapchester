@@ -149,6 +149,18 @@ function loadReviews(){
 document.addEventListener("DOMContentLoaded", () => {   //Otherwise the onclick is assigned before the DOM is loaded
     window.onload = loadReviews
     
+    const timetablePageButton = document.getElementById("btnTP");
+    if(timetablePageButton != null){
+        timetablePageButton.onclick = goToTimetable;
+    }else{
+        console.log("timetable link button not found");
+    }
+    const loginPageButton = document.getElementById("btnLP");
+    if(loginPageButton != null){
+        loginPageButton.onclick = goToLogin;
+    }else{
+        console.log("login link button not found");
+    }
     const reviewPageButton = document.getElementById("btnRP");
     if(reviewPageButton != null){
         reviewPageButton.onclick = goToReviews;
@@ -221,6 +233,14 @@ function goToMap() {
 
 function goToHome() {
     window.location = "../index.html"
+}
+
+function goToTimetable() {
+    window.location = "../webpages/timetable.php"
+}
+
+function goToLogin() {
+    window.location = "../webpages/login.php"
 }
 
 let z = 1;

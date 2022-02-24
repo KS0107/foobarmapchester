@@ -15,21 +15,25 @@
 <body>
 	<?php
 		
-		if ($_SESSION["login"] == "logined"){
-			header("location: loginPage.php");
-		}
-		else{
-			session_destroy();
-		}
+		// if ($_SESSION["login"] == "logined"){
+		// 	header("location: loginPage.php");
+		// }
+		// else{
+		// 	session_destroy();
+		// }
  	?>
 	<!-- Navigation Bar -->
-	<div class="topnav" style="text-align: center; ">
-		<a class="active" href="">Home</a>
-  		<a href="">Map</a>
-		<a href="">Plans</a>
-		<a href="">About</a>
-		<a href="">Sign In</a>
-	</div>
+	<div class="topBar">
+        <h1>Manchester Mapped</h1>
+        <div id="buttonLinks">
+            <button id="btnHP">Home Page</button>
+            <button id="btnMP">Map Page</button>
+            <button id="btnRP">Review Page</button>
+            <button id="btnTP">Timetable</button>
+            <button id="btnLP">Sign In</button>
+            <!-- <button id="slider">Collapse Reviews</button> -->
+        </div>
+    </div>
 	<!-- Time Table -->
 	<div>
 		<p>Your Timetable:</p>

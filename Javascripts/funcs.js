@@ -199,12 +199,14 @@ function LightFunction() {
         document.getElementById("reviewBar").style.backgroundColor = "lightgrey";
         document.body.style.color = "black";
         document.getElementById("lightD").innerText = "Dark Mode"
+        changeMapStyle();
         i++;
     } else {
         document.body.style.backgroundColor = "rgb(31, 31, 31)";
         document.getElementById("reviewBar").style.backgroundColor = "rgb(31, 31, 31)";
         document.body.style.color = "white";
         document.getElementById("lightD").innerText = "Light Mode"
+        changeMapStyle();
         i++;
     }
 }

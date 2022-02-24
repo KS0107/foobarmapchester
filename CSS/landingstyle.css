@@ -114,7 +114,6 @@ select:hover {
 }
 nav {
     grid-column: 2/24;
-    background-color: var(--bg-color);
     border-radius: 20px;
     margin-bottom: 30px;
     height: 80px;
@@ -136,7 +135,7 @@ nav {
     align-items: center;
     border-radius: 10px;
     text-decoration: none;
-    background-color: var(--bg-color);
+    background-color: rgb(31, 31, 31);
     padding: 12px 40px;
     margin-right: 50px;
     max-width: 80px;

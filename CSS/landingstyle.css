@@ -149,7 +149,7 @@ nav {
   }
   nav a:hover {
     background-color: rgba(14, 14, 14, 0.692);
-    color: gray;
+    color: rgb(75, 75, 75);
   }
   nav a:visited {
     color: white;

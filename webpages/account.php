@@ -13,11 +13,12 @@ function addUser($firstname, $lastname, $username, $password)
 	//提供给预处理语句的参数不需要用引号括起来, ，驱动程序会自动处理。
 	$stmt = $pdo->prepare($sql);
 	// bind parameters with variables
-	$stmt->execute([
+	$stmt->execute(array(
 	                    'firstname' => $firstname,
 	                    'lastname' => $lastname,
 						'username' => $username,
-						'password' => $password]);
+						'password' => $password
+						));
 }
 
 function showDatabases()

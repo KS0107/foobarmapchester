@@ -17,8 +17,7 @@ function addUser($firstname, $lastname, $username, $password)
 	                    'firstname' => $firstname,
 	                    'lastname' => $lastname,
 						'username' => $username,
-						'password' => $password
-						]);
+						'password' => $password]);
 }
 
 function showDatabases()

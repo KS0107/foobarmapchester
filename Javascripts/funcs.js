@@ -155,6 +155,12 @@ document.addEventListener("DOMContentLoaded", () => {   //Otherwise the onclick 
     }else{
         console.log("review link button not found");
     }
+    const homePageButton = document.getElementById("btnHP");
+    if(homePageButton != null){
+        homePageButton.onclick = goToHome;
+    }else{
+        console.log("home link button not found");
+    }
     const mapPageButton = document.getElementById("btnMP");
     if(mapPageButton != null){
         mapPageButton.onclick = goToMap;
@@ -210,6 +216,11 @@ function goToReviews() {
 function goToMap() {
     window.location = "../webpages/map.html"
 }
+
+function goToHome() {
+    window.location = "../index.html"
+}
+
 let z = 1;
 let Imageoffset = 0;
 function slideInOut() {

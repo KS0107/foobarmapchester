@@ -143,6 +143,7 @@ for (const marker of geojson.features) {
         let locationName = document.getElementById("locationName");
         locationName.textContent = marker.properties.message;
         seeReviews();
+        slideInOut();
     });
      
     // Add markers to the map.

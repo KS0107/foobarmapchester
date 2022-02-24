@@ -4,9 +4,9 @@ require "account.php";
 
 // Connet to the MySQL
 // configuration
-$host = 'localhost';
-$username = 'root';
-$password = 'root';
+$host = 'dbhost.cs.man.ac.uk';
+$username = 'y02478jh';
+$password = 'i7JLzgM-z5zv9T';
 
 // Create object of PDO and Catch error
 try {

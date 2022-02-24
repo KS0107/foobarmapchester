@@ -204,11 +204,11 @@ function LightFunction() {
 }
 function goToReviews() {
     console.log("pressed")
-    window.location = "reviewPage.html"
+    window.location = "../reviewPage.html"
 }
 
 function goToMap() {
-    window.location = "../Web Pages/map.html"
+    window.location = "../webpages/map.html"
 }
 let z = 1;
 let Imageoffset = 0;

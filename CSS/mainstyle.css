@@ -36,6 +36,16 @@ button:hover {
     bottom: 0;
     font-size: 30px;
 }
+
+#loginBody{
+    height: 80%;
+    width: 100%;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    font-size: 30px;
+}
+
 #map{
     left: 0;
     bottom: 0;

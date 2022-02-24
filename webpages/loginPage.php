@@ -8,49 +8,56 @@ session_start();
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
-	<link rel="stylesheet" href="../CSS/mainstyle.css">
+	<link rel="stylesheet" href="../CSS/loginPage.css">
 </head>
 <body>
 
+	<div class="topBar">
+        <h1>Login Page</h1>
+        <div id="buttonLinks">
+            <button id="btnHP">Home Page</button>
+            <button id="btnMP">Map Page</button>
+            <button id="btnRP">Review Page</button>
+            <button id="btnTP">Timetable</button>
+            <button id="btnLP">Sign In</button>
+        </div>
+    </div>
+	<div id="loginBody">
+		<form class="form" method="post">
+			<span class="login-form-title">
+				Login
+			</span>
 
-	<div class="limiter">
-		<div class="mainBody">
-			<form class="form" method="post">
-				<span class="login-form-title">
-					Login
+			<div class="wrap-input">
+				<span class="label-input">Username</span>
+				<input class="input" type="text" name="username" placeholder="Type your username">
+			</div>
+
+			<div class="wrap-input">
+				<span class="label-input">Password</span>
+				<input class="input" type="password" name="password" placeholder="Type your password">
+			</div>
+				
+			<div class="forget_password">
+				<a href="#">
+						Forgot password?
+				</a>
+			</div>
+
+			<div class="wrap-login-form-btn">
+				<input type="submit" class="login-form-btn" value="Log in">
+			</div>
+
+			<div class="register">
+				<span>
+					Don't have an account ?
 				</span>
+				<a href="signUpPage.html">
+					Sign up
+				</a>
+			</div>
 
-				<div class="wrap-input">
-					<span class="label-input">Username</span>
-					<input class="input" type="text" name="username" placeholder="Type your username">
-				</div>
-
-				<div class="wrap-input">
-					<span class="label-input">Password</span>
-					<input class="input" type="password" name="password" placeholder="Type your password">
-				</div>
-					
-				<div class="forget_password">
-					<a href="#">
-							Forgot password?
-					</a>
-				</div>
-
-				<div class="wrap-login-form-btn">
-					<input type="submit" class="login-form-btn" value="Log in">
-				</div>
-
-				<div class="register">
-					<span>
-						Don't have an account ?
-					</span>
-					<a href="signUpPage.html">
-						Sign up
-					</a>
-				</div>
-
-			</form>
-		</div>
+		</form>
 	</div>
 
 	<?php

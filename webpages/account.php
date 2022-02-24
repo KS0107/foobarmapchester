@@ -1,5 +1,5 @@
 <?php
-function addUser($username, $password)
+function addUser($firstname, $lastname, $username, $password)
 {	// insert username and password into users table  
 	$sql = "INSERT INTO User (First Name, Last Name, Username, Password) 
 			VALUES (:firstname, :lastname, :username, :password)";

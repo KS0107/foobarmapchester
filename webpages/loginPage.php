@@ -8,10 +8,9 @@ session_start();
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
-	<link rel="stylesheet" href="../CSS/loginPage.css">
+	<link rel="stylesheet" href="../CSS/mainstyle.css">
 </head>
 <body>
-
 	<div class="topBar">
         <h1>Login Page</h1>
         <div id="buttonLinks">

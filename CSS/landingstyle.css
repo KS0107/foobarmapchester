@@ -112,3 +112,44 @@ select:hover {
     top: 45vh;
     padding: 10px;
 }
+nav {
+    grid-column: 2/24;
+    background-color: var(--bg-color);
+    border-radius: 20px;
+    margin-bottom: 30px;
+    height: 80px;
+    display: flex;
+    text-align: center;
+  }
+  nav ul {
+    padding-top: 15px;
+    list-style: none;
+    text-decoration: none;
+  }
+  nav li {
+    display: inline;
+    align-items: center;
+  }
+  nav a {
+    justify-content: space-between;
+    font-weight: 300;
+    align-items: center;
+    border-radius: 10px;
+    text-decoration: none;
+    background-color: var(--bg-color);
+    padding: 12px 40px;
+    margin-right: 50px;
+    max-width: 80px;
+    min-width: 80px;
+    transition: 0.5s;
+  }
+  nav a:first-child {
+    margin-left: 60px;
+  }
+  nav a:hover {
+    background-color: rgb(44, 0, 70);
+    color: gray;
+  }
+  nav a:visited {
+    color: white;
+  }

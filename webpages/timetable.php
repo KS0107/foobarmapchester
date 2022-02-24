@@ -9,7 +9,7 @@
 	<meta name="viewport">
 	<title>Document</title>
 	<link rel="stylesheet" href="../CSS/mainstyle.css">
-	<!-- <link rel="stylesheet" href="../CSS/timetable.css"> -->
+	<link rel="stylesheet" href="../CSS/timetable.css">
     <script src="../Javascripts/funcs.js"></script>
 </head>
 <body>

@@ -11,7 +11,6 @@ body {
 h1 {
     text-align: center;
     font-size: 20px;
-
 }
 button {
     background-color: rgb(0, 0, 0);
@@ -76,7 +75,7 @@ button:hover {
 .topBar #buttonLinks{
     display: flex;
     justify-content: space-between;
-    margin-top: 20px;
+    margin-top: 10px;
 }    
 .topBar button{
     margin-left: 2%;

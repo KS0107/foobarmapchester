@@ -204,7 +204,7 @@ function LightFunction() {
 }
 function goToReviews() {
     console.log("pressed")
-    window.location = "../reviewPage.html"
+    window.location = "../webpages/reviewPage.html"
 }
 
 function goToMap() {

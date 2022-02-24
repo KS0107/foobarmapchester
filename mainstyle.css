@@ -76,6 +76,7 @@ button:hover {
 .topBar #buttonLinks{
     display: flex;
     justify-content: space-between;
+    margin-top: 20px;
 }    
 .topBar button{
     margin-left: 2%;

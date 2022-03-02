@@ -227,7 +227,13 @@ function LightFunction() {
 }
 function goToReviews() {
     console.log("pressed")
-    window.location = "../webpages/reviewPage.html"
+    var path =  window.location.pathname;
+    var page = path.split("/").pop();
+    if(page == "index.html"){
+        window.location = "webpages/reviewPage.html"
+    }else{
+        window.location = "../webpages/reviewPage.html"
+    }
 }
 
 function goToMap() {

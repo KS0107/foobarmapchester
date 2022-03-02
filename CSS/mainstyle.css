@@ -116,3 +116,18 @@ select:hover {
     top: 65vh;
     padding: 10px;
 }
+input {
+    border-radius: 10px;
+    border-color: whitesmoke;
+    padding: 3px;
+    width: 200px;
+    height: 10px;
+}
+#review[type=text] {
+    width: 500px;
+    transition:height 0.2s ease-in-out;
+}
+#review[type=text]:focus {
+    height: 300px;
+}
+

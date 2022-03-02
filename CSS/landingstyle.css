@@ -7,8 +7,8 @@ body {
     background-color: rgb(31, 31, 31);
     color: white;
     transition: 0.35s ease-in-out;
+    overflow-x: hidden;
 }
-
 h1 {
     text-align: center;
     font-size: 60px;

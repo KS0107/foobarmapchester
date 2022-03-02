@@ -295,6 +295,7 @@ function goToLogin() {
 function goToPage(page){
     var path =  window.location.pathname;
     var pathSections = path.split("/");
+    console.log(path, pathSections);
     if(pathSections[pathSections.length-1] == "index.html"){
         console.log("on index");
     }
@@ -337,13 +338,14 @@ function goToPage(page){
         default:
             console.log("Case didnt work");
     }
-    window.location = reconstructLink(pathSections);
+    newLink = reconstructLink(pathSections);
+    console.log(newLink);
 }
 
 function reconstructLink(sections){
     outLink = ""
     sections.forEach(element => {
-        outLink += ("\\" + element);
+        outLink += ("/" + element);
     });
     return outLink
 }

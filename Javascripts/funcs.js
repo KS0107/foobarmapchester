@@ -132,6 +132,7 @@ const addReview = (ev) => {
     const reviewsString = localStorage.getItem('reviews');
     const reviews = JSON.parse(reviewsString);
     reviews.push(review);
+    //Ollie code goes here
     localStorage.setItem('reviews', JSON.stringify(reviews));
     document.forms[0].reset();
 
@@ -151,7 +152,8 @@ function loadReviews(){
 
 document.addEventListener("DOMContentLoaded", () => {   //Otherwise the onclick is assigned before the DOM is loaded
     window.onload = loadReviews
-    
+    document.getElementById("review").value = "";
+
     const timetablePageButton = document.getElementById("btnTP");
     if(timetablePageButton != null){
         timetablePageButton.onclick = goToTimetable;
@@ -241,7 +243,7 @@ function goToMap() {
     var path =  window.location.pathname;
     var page = path.split("/").pop();
     if(page == "index.html"){
-        window.location = "../manchester/webpages/map.html"
+        window.location = "webpages/map.html"
     }else{
         window.location = "../webpages/map.html"
     }

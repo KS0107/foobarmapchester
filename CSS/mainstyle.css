@@ -29,10 +29,10 @@ button:hover {
 }
 
 #pageBody{
-    height: 80%;
     width: 100%;
+    height: 200px;
+    margin-top: 150px;
     text-align: center;
-    position: fixed;
     bottom: 0;
     font-size: 30px;
 }
@@ -63,7 +63,6 @@ button:hover {
 #msg {
     box-sizing: border-box;
     font-size: 10px;
-
 }
 .topBar{
     left: 0;
@@ -117,17 +116,39 @@ select:hover {
     padding: 10px;
 }
 input {
+    background-color: rgba(109, 109, 109, 0.26);
+    color:white;
     border-radius: 10px;
-    border-color: whitesmoke;
-    padding: 3px;
+    border-color: rgb(27, 27, 27);
+    padding: 5px;
     width: 200px;
-    height: 10px;
+    height: 14px;
 }
 #review[type=text] {
+
     width: 500px;
     transition:height 0.2s ease-in-out;
 }
+#rating{
+    -webkit-appearance: none;
+    appearance: none;
+    height: 15px; 
+    background: #000000; 
+    outline: none; 
+    opacity: 1; 
+}
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none; 
+    appearance: none;
+    width: 2px; 
+    height: 2px; 
+    background: #04AA6D; 
+    cursor: pointer; 
+    }
 #review[type=text]:focus {
-    height: 300px;
+    height: 200px;
 }
 
+p {
+    font-size: 20px;
+}

@@ -242,6 +242,7 @@ function goToReviews() {
 function goToMap() {
     var path =  window.location.pathname;
     var page = path.split("/").pop();
+    console.log(window.location.pathname);
     if(page == "index.html"){
         console.log("hello");
         window.location = "manchester/webpages/map.html"

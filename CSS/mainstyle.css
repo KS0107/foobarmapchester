@@ -31,7 +31,7 @@ button:hover {
 #pageBody{
     width: 100%;
     height: 200px;
-    margin-top: 150px;
+    margin-top: 110px;
     text-align: center;
     bottom: 0;
     font-size: 30px;
@@ -118,11 +118,12 @@ select:hover {
 input {
     background-color: rgba(109, 109, 109, 0.26);
     color:white;
-    border-radius: 10px;
+    border-radius: 12px;
     border-color: rgb(27, 27, 27);
-    padding: 5px;
+    padding: 8px;
     width: 200px;
     height: 14px;
+
 }
 #review[type=text] {
 
@@ -137,6 +138,10 @@ input {
     outline: none; 
     opacity: 1; 
 }
+input:focus {
+    outline: none;
+    border: 1px solid rgb(255, 255, 255);
+}
 .slider::-webkit-slider-thumb {
     -webkit-appearance: none; 
     appearance: none;
@@ -147,6 +152,8 @@ input {
     }
 #review[type=text]:focus {
     height: 200px;
+    outline: none;
+    border: 1px solid rgb(255, 255, 255);
 }
 
 p {

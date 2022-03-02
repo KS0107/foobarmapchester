@@ -151,7 +151,7 @@ function loadReviews(){
 }
 
 function loadText(){
-    document.getElementById("review").value = "";
+    //document.getElementById("review").value = "";
 }
 
 document.addEventListener("DOMContentLoaded", () => {   //Otherwise the onclick is assigned before the DOM is loaded
@@ -160,39 +160,48 @@ document.addEventListener("DOMContentLoaded", () => {   //Otherwise the onclick 
 
     const timetablePageButton = document.getElementById("btnTP");
     if(timetablePageButton != null){
-        timetablePageButton.onclick = goToTimetable;
+        //timetablePageButton.onclick = goToTimetable;
+        timetablePageButton.addEventListener('click', function(){
+            goToPage("T");
+        });
     }else{
         console.log("timetable link button not found");
     }
     const loginPageButton = document.getElementById("btnLP");
     if(loginPageButton != null){
-        loginPageButton.onclick = goToLogin;
+        //loginPageButton.onclick = goToLogin;
+        loginPageButton.addEventListener('click', function(){
+            goToPage("L");
+        });
     }else{
         console.log("login link button not found");
     }
     const reviewPageButton = document.getElementById("btnRP");
     if(reviewPageButton != null){
-        reviewPageButton.onclick = goToReviews;
+        //reviewPageButton.onclick = goToReviews;
+        reviewPageButton.addEventListener('click', function(){
+            goToPage("R");
+        });
     }else{
         console.log("review link button not found");
     }
     const homePageButton = document.getElementById("btnHP");
     if(homePageButton != null){
-        homePageButton.onclick = goToHome;
+        //homePageButton.onclick = goToHome;
+        homePageButton.addEventListener('click', function(){
+            goToPage("H");
+        });
     }else{
         console.log("home link button not found");
     }
     const mapPageButton = document.getElementById("btnMP");
     if(mapPageButton != null){
-        mapPageButton.onclick = goToMap;
+        //mapPageButton.onclick = goToMap;
+        mapPageButton.addEventListener('click', function(){
+            goToPage("M");
+        });
     }else{
         console.log("map link button not found");
-    }
-    const seeReviewsButton = document.getElementById("btnSR");
-    if(seeReviewsButton != null){
-        seeReviewsButton.onclick = seeReviews;
-    }else{
-        console.log("see reviews button not found");
     }
     const addReviewButton = document.getElementById("btnAR");
     if(addReviewButton != null){
@@ -251,7 +260,7 @@ function goToMap() {
     }else{
         window.location = "../webpages/map.html"
     }
-}//🅱
+}
 
 function goToHome() {
     var path =  window.location.pathname;
@@ -281,6 +290,62 @@ function goToLogin() {
     }else{
         window.location = "../webpages/loginPage.php"
     }
+}
+
+function goToPage(page){
+    var path =  window.location.pathname;
+    var pathSections = path.split("/");
+    if(pathSections[pathSections.length-1] == "index.html"){
+        console.log("on index");
+    }
+    switch(page){
+        case "T":
+            pathSections.pop();
+            if(pathSections[pathSections.length-1] == "manchester"){
+                pathSections.push("webpages");
+            }
+            pathSections.push("timetable.php");
+            break;
+        case "L":
+            pathSections.pop();
+            if(pathSections[pathSections.length-1] == "manchester"){
+                pathSections.push("webpages");
+            }
+            pathSections.push("loginPage.php");
+            break;
+        case "R":
+            pathSections.pop();
+            if(pathSections[pathSections.length-1] == "manchester"){
+                pathSections.push("webpages");
+            }
+            pathSections.push("reviewPage.html");
+            break;
+        case "M":
+                pathSections.pop();
+                if(pathSections[pathSections.length-1] == "manchester"){
+                    pathSections.push("webpages");
+                }
+                pathSections.push("map.html");
+                break;
+        case "H":
+                pathSections.pop();
+                if(pathSections[pathSections.length-1] == "webpages"){
+                    pathSections.pop();
+                }
+                pathSections.push("index.html");
+                break;
+        default:
+            console.log("Case didnt work");
+    }
+    window.location = reconstructLink(pathSections);
+}
+
+function reconstructLink(sections){
+    outLink = ""
+    sections.forEach(element => {
+        outLink += ("\\" + element);
+    });
+    return outLink
 }
 
 let z = 1;

@@ -243,6 +243,7 @@ function goToMap() {
     var path =  window.location.pathname;
     var page = path.split("/").pop();
     if(page == "index.html"){
+        console.log("hello");
         window.location = "manchester/webpages/map.html"
     }else{
         window.location = "../webpages/map.html"

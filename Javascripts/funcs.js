@@ -237,7 +237,7 @@ function goToReviews() {
     var path =  window.location.pathname;
     var page = path.split("/").pop();
     if(page == "index.html"){
-        window.location = "../manchester/webpages/reviewPage.html"
+        window.location = "webpages/reviewPage.html"
     }else{
         window.location = "../webpages/reviewPage.html"
     }

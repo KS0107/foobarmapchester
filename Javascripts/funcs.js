@@ -237,7 +237,7 @@ function goToReviews() {
     var path =  window.location.pathname;
     var page = path.split("/").pop();
     if(page == "index.html"){
-        window.location = "manchester/webpages/reviewPage.html"
+        window.location = "../webpages/reviewPage.html"
     }else{
         window.location = "../webpages/reviewPage.html"
     }
@@ -247,7 +247,7 @@ function goToMap() {
     var path =  window.location.pathname;
     var page = path.split("/").pop();
     if(page == "index.html"){
-        window.location.href = "webpages/map.html"
+        window.location.href = "../webpages/map.html"
     }else{
         window.location = "../webpages/map.html"
     }
@@ -267,7 +267,7 @@ function goToTimetable() {
     var path =  window.location.pathname;
     var page = path.split("/").pop();
     if(page == "index.html"){
-        window.location = "../manchester/webpages/timetable.php"
+        window.location = "../webpages/timetable.php"
     }else{
         window.location = "../webpages/timetable.php"
     }

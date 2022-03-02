@@ -241,7 +241,7 @@ function goToMap() {
     var path =  window.location.pathname;
     var page = path.split("/").pop();
     if(page == "index.html"){
-        window.location = "../manchester/webpages/map.html"
+        window.location = "webpages/map.html"
     }else{
         window.location = "../webpages/map.html"
     }
@@ -251,7 +251,7 @@ function goToHome() {
     var path =  window.location.pathname;
     var page = path.split("/").pop();
     if(page == "index.html"){
-        window.location = "../manchester/index.html"
+        window.location = "index.html"
     }else{
         window.location = "../index.html"
     }

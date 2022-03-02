@@ -151,7 +151,10 @@ function loadReviews(){
 }
 
 function loadText(){
-    //document.getElementById("review").value = "";
+    let reviewBox = document.getElementById("review")
+    if(reviewBox != null){
+        reviewBox.value = "";
+    }
 }
 
 document.addEventListener("DOMContentLoaded", () => {   //Otherwise the onclick is assigned before the DOM is loaded
@@ -160,7 +163,6 @@ document.addEventListener("DOMContentLoaded", () => {   //Otherwise the onclick 
 
     const timetablePageButton = document.getElementById("btnTP");
     if(timetablePageButton != null){
-        //timetablePageButton.onclick = goToTimetable;
         timetablePageButton.addEventListener('click', function(){
             goToPage("T");
         });
@@ -169,7 +171,6 @@ document.addEventListener("DOMContentLoaded", () => {   //Otherwise the onclick 
     }
     const loginPageButton = document.getElementById("btnLP");
     if(loginPageButton != null){
-        //loginPageButton.onclick = goToLogin;
         loginPageButton.addEventListener('click', function(){
             goToPage("L");
         });
@@ -178,7 +179,6 @@ document.addEventListener("DOMContentLoaded", () => {   //Otherwise the onclick 
     }
     const reviewPageButton = document.getElementById("btnRP");
     if(reviewPageButton != null){
-        //reviewPageButton.onclick = goToReviews;
         reviewPageButton.addEventListener('click', function(){
             goToPage("R");
         });
@@ -187,7 +187,6 @@ document.addEventListener("DOMContentLoaded", () => {   //Otherwise the onclick 
     }
     const homePageButton = document.getElementById("btnHP");
     if(homePageButton != null){
-        //homePageButton.onclick = goToHome;
         homePageButton.addEventListener('click', function(){
             goToPage("H");
         });
@@ -196,7 +195,6 @@ document.addEventListener("DOMContentLoaded", () => {   //Otherwise the onclick 
     }
     const mapPageButton = document.getElementById("btnMP");
     if(mapPageButton != null){
-        //mapPageButton.onclick = goToMap;
         mapPageButton.addEventListener('click', function(){
             goToPage("M");
         });
@@ -222,6 +220,7 @@ document.addEventListener("DOMContentLoaded", () => {   //Otherwise the onclick 
         console.log("slide function not found");
     }
 })
+
 let i = 1;
 function LightFunction() {
     if (i % 2 != 0) {
@@ -241,63 +240,10 @@ function LightFunction() {
     }
 }
 
-function goToReviews() {
-    console.log("pressed")
-    var path =  window.location.pathname;
-    var page = path.split("/").pop();
-    if(page == "index.html"){
-        window.location = "../manchester/webpages/reviewPage.html"
-    }else{
-        window.location = "../webpages/reviewPage.html"
-    }
-}
-
-function goToMap() {
-    var path =  window.location.pathname;
-    var page = path.split("/").pop();
-    if(page == "index.html"){
-        window.location.href = "webpages/map.html"
-    }else{
-        window.location = "../webpages/map.html"
-    }
-}
-
-function goToHome() {
-    var path =  window.location.pathname;
-    var page = path.split("/").pop();
-    if(page == "index.html"){
-        window.location.href = "index.html"
-    }else{
-        window.location = "../index.html"
-    }
-}
-
-function goToTimetable() {
-    var path =  window.location.pathname;
-    var page = path.split("/").pop();
-    if(page == "index.html"){
-        window.location = "../manchester/webpages/timetable.php"
-    }else{
-        window.location = "../webpages/timetable.php"
-    }
-}
-
-function goToLogin() {
-    var path =  window.location.pathname;
-    var page = path.split("/").pop();
-    if(page == "index.html"){
-        window.location = "../manchester/webpages/loginPage.php"
-    }else{
-        window.location = "../webpages/loginPage.php"
-    }
-}
-
 function goToPage(page){
     var path =  window.location.pathname;
     var pathSections = path.split("/");
-    console.log(path, pathSections);
     pathSections.shift();
-    console.log(pathSections)
     if(pathSections[pathSections.length-1] == "index.html"){
         console.log("on index");
     }
@@ -341,7 +287,6 @@ function goToPage(page){
             console.log("Case didnt work");
     }
     newLink = reconstructLink(pathSections);
-    console.log(newLink);
     window.location = newLink;
 }
 

@@ -231,29 +231,29 @@ function goToReviews() {
     var path =  window.location.pathname;
     var page = path.split("/").pop();
     if(page == "index.html"){
-        //window.location = "../manchester/webpages/reviewPage.html"
+        window.location = "../manchester/webpages/reviewPage.html"
     }else{
+        window.location = "../webpages/reviewPage.html"
     }
-    window.location = "../webpages/reviewPage.html"
 }
 
 function goToMap() {
     var path =  window.location.pathname;
     var page = path.split("/").pop();
     if(page == "index.html"){
-        window.location = "./webpages/map.html"
+        window.location = "webpages/map.html"
     }else{
-        window.location = "./webpages/map.html"
+        window.location = "../webpages/map.html"
     }
-}
+}//🅱
 
 function goToHome() {
     var path =  window.location.pathname;
     var page = path.split("/").pop();
     if(page == "index.html"){
-        window.location = "./manchester/index.html"
+        window.location = "index.html"
     }else{
-        window.location = "./manchester/index.html"
+        window.location = "../index.html"
     }
 }
 
@@ -261,7 +261,7 @@ function goToTimetable() {
     var path =  window.location.pathname;
     var page = path.split("/").pop();
     if(page == "index.html"){
-        window.location = "../manchester/webpages/timetable.html"
+        window.location = "webpages/timetable.php"
     }else{
         window.location = "../webpages/timetable.php"
     }
@@ -271,7 +271,7 @@ function goToLogin() {
     var path =  window.location.pathname;
     var page = path.split("/").pop();
     if(page == "index.html"){
-        window.location = "../manchester/webpages/loginPage.html"
+        window.location = "webpages/loginPage.php"
     }else{
         window.location = "../webpages/loginPage.php"
     }

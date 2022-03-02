@@ -115,6 +115,16 @@ select:hover {
     top: 65vh;
     padding: 10px;
 }
+textarea {
+    background-color: rgba(109, 109, 109, 0.26);
+    color:white;
+    border-radius: 12px;
+    border-color: rgb(27, 27, 27);
+    padding: 8px;
+    width: 200px;
+    height: 14px;
+
+}
 input {
     background-color: rgba(109, 109, 109, 0.26);
     color:white;
@@ -138,9 +148,9 @@ input {
     outline: none; 
     opacity: 1; 
 }
-input:focus {
+textarea:focus {
     outline: none;
-    border: 1px solid rgb(255, 255, 255);
+    border: 1px solid rgb(255, 32, 32);
 }
 .slider::-webkit-slider-thumb {
     -webkit-appearance: none; 
@@ -151,7 +161,7 @@ input:focus {
     cursor: pointer; 
     }
 #review[type=text]:focus {
-    height: 200px;
+    height: 300px;
     outline: none;
     border: 1px solid rgb(255, 255, 255);
 }

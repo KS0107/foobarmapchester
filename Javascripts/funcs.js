@@ -233,8 +233,8 @@ function goToReviews() {
     if(page == "index.html"){
         window.location = "../manchester/webpages/reviewPage.html"
     }else{
-        window.location = "../webpages/reviewPage.html"
     }
+    window.location = "../webpages/reviewPage.html"
 }
 
 function goToMap() {

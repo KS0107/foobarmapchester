@@ -6,7 +6,7 @@
 body {
     background-color: rgb(31, 31, 31);
     color: white;
-    transition: 0.35s ease-in-out;
+    transition: 0.2s ease-in-out;
 }
 h1 {
     text-align: center;
@@ -53,7 +53,7 @@ button:hover {
     position: fixed;
     right: 0;
     bottom: 0;
-    transition: 0.3s ease-in-out;
+    transition: 0.2s ease-in-out;
     z-index: 5;
 }
 #reviewBar div {
@@ -101,7 +101,7 @@ select {
 }
 select:hover {
     color: rgb(124, 124, 124);
-    transition: 0.25s ease-in-out;
+    transition: 0.15s ease-in-out;
 }
 
 .marker {

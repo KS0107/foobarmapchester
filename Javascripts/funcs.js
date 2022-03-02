@@ -225,6 +225,7 @@ function LightFunction() {
         i++;
     }
 }
+
 function goToReviews() {
     console.log("pressed")
     var path =  window.location.pathname;
@@ -244,7 +245,7 @@ function goToMap() {
     }else{
         window.location = "../webpages/map.html"
     }
-}
+}//🅱
 
 function goToHome() {
     var path =  window.location.pathname;
@@ -260,7 +261,7 @@ function goToTimetable() {
     var path =  window.location.pathname;
     var page = path.split("/").pop();
     if(page == "index.html"){
-        window.location = "webpages/timetable.html"
+        window.location = "webpages/timetable.php"
     }else{
         window.location = "../webpages/timetable.php"
     }
@@ -270,7 +271,7 @@ function goToLogin() {
     var path =  window.location.pathname;
     var page = path.split("/").pop();
     if(page == "index.html"){
-        window.location = "webpages/loginPage.html"
+        window.location = "webpages/loginPage.php"
     }else{
         window.location = "../webpages/loginPage.php"
     }

@@ -296,6 +296,8 @@ function goToPage(page){
     var path =  window.location.pathname;
     var pathSections = path.split("/");
     console.log(path, pathSections);
+    pathSections.shift();
+    console.log(pathSections)
     if(pathSections[pathSections.length-1] == "index.html"){
         console.log("on index");
     }
@@ -340,6 +342,7 @@ function goToPage(page){
     }
     newLink = reconstructLink(pathSections);
     console.log(newLink);
+    //window.location = newLink;
 }
 
 function reconstructLink(sections){

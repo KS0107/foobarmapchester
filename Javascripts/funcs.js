@@ -237,19 +237,43 @@ function goToReviews() {
 }
 
 function goToMap() {
-    window.location = "../webpages/map.html"
+    var path =  window.location.pathname;
+    var page = path.split("/").pop();
+    if(page == "index.html"){
+        window.location = "webpages/map.html"
+    }else{
+        window.location = "../webpages/map.html"
+    }
 }
 
 function goToHome() {
-    window.location = "../index.html"
+    var path =  window.location.pathname;
+    var page = path.split("/").pop();
+    if(page == "index.html"){
+        window.location = "index.html"
+    }else{
+        window.location = "../index.html"
+    }
 }
 
 function goToTimetable() {
-    window.location = "../webpages/timetable.php"
+    var path =  window.location.pathname;
+    var page = path.split("/").pop();
+    if(page == "index.html"){
+        window.location = "webpages/timetable.html"
+    }else{
+        window.location = "../webpages/timetable.php"
+    }
 }
 
 function goToLogin() {
-    window.location = "../webpages/loginPage.php"
+    var path =  window.location.pathname;
+    var page = path.split("/").pop();
+    if(page == "index.html"){
+        window.location = "webpages/loginPage.html"
+    }else{
+        window.location = "../webpages/loginPage.php"
+    }
 }
 
 let z = 1;

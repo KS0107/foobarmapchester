@@ -13,7 +13,6 @@ session_start();
 </head>
 <body>
 	<div class="topBar">
-        <h1>Login Page</h1>
         <div id="buttonLinks">
             <button id="btnHP">Home Page</button>
             <button id="btnMP">Map Page</button>

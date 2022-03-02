@@ -24,7 +24,6 @@
  	?>
 	<!-- Navigation Bar -->
 	<div class="topBar">
-        <h1>Manchester Mapped</h1>
         <div id="buttonLinks">
             <button id="btnHP">Home Page</button>
             <button id="btnMP">Map Page</button>

@@ -251,9 +251,9 @@ function goToHome() {
     var path =  window.location.pathname;
     var page = path.split("/").pop();
     if(page == "index.html"){
-        window.location = "./index.html"
+        window.location = "./manchester/index.html"
     }else{
-        window.location = "./index.html"
+        window.location = "./manchester/index.html"
     }
 }
 

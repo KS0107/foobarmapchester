@@ -342,7 +342,7 @@ function goToPage(page){
     }
     newLink = reconstructLink(pathSections);
     console.log(newLink);
-    //window.location = newLink;
+    window.location = newLink;
 }
 
 function reconstructLink(sections){

@@ -150,9 +150,13 @@ function loadReviews(){
     }
 }
 
+function loadText(){
+    document.getElementById("review").value = "";
+}
+
 document.addEventListener("DOMContentLoaded", () => {   //Otherwise the onclick is assigned before the DOM is loaded
     window.onload = loadReviews
-    document.getElementById("review").value = "";
+    window.onload = loadText
 
     const timetablePageButton = document.getElementById("btnTP");
     if(timetablePageButton != null){
@@ -245,7 +249,7 @@ function goToMap() {
     console.log(window.location.pathname);
     if(page == "index.html"){
         console.log("hello");
-        window.location = "manchester/webpages/map.html"
+        //window.location = "manchester/webpages/map.html"
     }else{
         window.location = "../webpages/map.html"
     }

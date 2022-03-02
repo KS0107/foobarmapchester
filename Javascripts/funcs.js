@@ -246,10 +246,8 @@ function goToReviews() {
 function goToMap() {
     var path =  window.location.pathname;
     var page = path.split("/").pop();
-    console.log(window.location.pathname);
     if(page == "index.html"){
-        console.log("hello");
-        //window.location = "manchester/webpages/map.html"
+        window.location.href = "webpages/map.html"
     }else{
         window.location = "../webpages/map.html"
     }
@@ -259,7 +257,7 @@ function goToHome() {
     var path =  window.location.pathname;
     var page = path.split("/").pop();
     if(page == "index.html"){
-        window.location = "../manchester/index.html"
+        window.location.href = "index.html"
     }else{
         window.location = "../index.html"
     }

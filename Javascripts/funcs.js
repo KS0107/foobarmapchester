@@ -1,15 +1,15 @@
 function seeReviews(){
-    const location = document.getElementById("locationName").textContent;
+    var location = document.getElementById("locationName").textContent;
 
-    const reviewsString = localStorage.getItem('reviews');
-    const reviewsLocal = JSON.parse(reviewsString);
+    var reviewsString = localStorage.getItem('reviews');
+    var reviewsLocal = JSON.parse(reviewsString);
     if(reviewsLocal == null){
         loadReviews();
-        const reviewsString = localStorage.getItem('reviews');
-        const reviewsLocal = JSON.parse(reviewsString);
+        reviewsString = localStorage.getItem('reviews');
+        reviewsLocal = JSON.parse(reviewsString);
     }
 
-    const filteredReviews = []
+    var filteredReviews = []
     for (let i = 0; i < reviewsLocal.length; i++) {
         if(reviewsLocal[i].location == location){
             filteredReviews.push(reviewsLocal[i])

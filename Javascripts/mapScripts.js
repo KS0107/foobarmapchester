@@ -146,7 +146,7 @@ for (const marker of geojson.features) {
     const width = marker.properties.iconSize[0];
     const height = marker.properties.iconSize[1];
     el.className = 'marker';
-    el.style.backgroundColor = "red"//`url(https://mms.businesswire.com/media/20210921005137/en/513573/4/Square_Logo.jpg)`;
+    el.style.backgroundColor = "grey";
     el.style.width = `${width}px`;
     el.style.height = `${height}px`;
     el.style.backgroundSize = '100%';

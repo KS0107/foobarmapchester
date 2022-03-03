@@ -140,13 +140,14 @@ function seeReviews(){
     pre.textContent = reviewTextBlockOut;
 }
 
-for (const marker of geojson.features) {
+for (var marker of geojson.features) {
     // Create a DOM element for each marker.
     const el = document.createElement('div');
     const width = marker.properties.iconSize[0];
     const height = marker.properties.iconSize[1];
     el.className = 'marker';
-    el.style.backgroundColor = "grey";
+    el.id = "mapmarker";
+    //el.style.backgroundColor = "grey";
     el.style.width = `${width}px`;
     el.style.height = `${height}px`;
     el.style.backgroundSize = '100%';

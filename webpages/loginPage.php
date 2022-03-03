@@ -58,6 +58,7 @@ session_start();
 	</div>
 
 	<?php
+		$_SESSION["login"] = "login";
 		if ($_SESSION["login"] == 'login'){
 			require 'account.php';
 			$username = $_POST["username"];
@@ -65,7 +66,6 @@ session_start();
 			//echo "<div> debugging1 </div>";
 			authenticateUser($username, $password);
 		}
-		//$_SESSION["login"] = "[login]";
 	?>
 
 

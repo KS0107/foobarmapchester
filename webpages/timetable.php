@@ -29,7 +29,7 @@
             <button id="btnMP">Map Page</button>
             <button id="btnRP">Review Page</button>
             <button id="btnTP">Timetable</button>
-            <button id="btnLP">Sign In</button>
+            <button id="btnSP">Sign Out</button>
             <!-- <button id="slider">Collapse Reviews</button> -->
         </div>
     </div>

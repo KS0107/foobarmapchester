@@ -110,6 +110,14 @@ document.addEventListener("DOMContentLoaded", () => {   //Otherwise the onclick 
     }else{
         console.log("map link button not found");
     }
+    const signoutPageButton = document.getElementById("btnSP");
+    if(signoutPageButton != null){
+        signoutPageButton.addEventListener('click', function(){
+            goToPage("S");
+        });
+    }else{
+        console.log("map link button not found");
+    }
     const addReviewButton = document.getElementById("btnAR");
     if(addReviewButton != null){
         addReviewButton.onclick = addReview;
@@ -179,19 +187,33 @@ function goToPage(page){
             pathSections.push("reviewPage.html");
             break;
         case "M":
-                pathSections.pop();
-                if(pathSections[pathSections.length-1] == "manchester"){
-                    pathSections.push("webpages");
-                }
-                pathSections.push("map.html");
-                break;
+            pathSections.pop();
+            if(pathSections[pathSections.length-1] == "manchester"){
+                pathSections.push("webpages");
+            }
+            pathSections.push("map.html");
+            break;
+        case "S":
+            pathSections.pop();
+            if(pathSections[pathSections.length-1] == "manchester"){
+                pathSections.push("webpages");
+            }
+            pathSections.push("logout.php");
+            break;
         case "H":
+            pathSections.pop();
+            if(pathSections[pathSections.length-1] == "manchester"){
+                pathSections.push("webpages");
+            }
+            pathSections.push("home.html");
+            break;
+        case "I":
+            pathSections.pop();
+            if(pathSections[pathSections.length-1] == "webpages"){
                 pathSections.pop();
-                if(pathSections[pathSections.length-1] == "webpages"){
-                    pathSections.pop();
-                }
-                pathSections.push("index.html");
-                break;
+            }
+            pathSections.push("index.html");
+            break;
         default:
             console.log("Case didnt work");
     }

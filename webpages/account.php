@@ -51,7 +51,7 @@ function authenticateUser($username, $password)
 	$row = $stmt->fetch();
 	if (password_verify($password, $row['Password'])){ 
 		echo "<h1>Worked</h1>"
-		$_SESSION['login'] = false;
+		$_SESSION['login'] = 'logged in';
 		header("location: timetable.php");
 	}
 	else{

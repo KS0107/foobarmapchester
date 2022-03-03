@@ -2,7 +2,7 @@
 session_start();
 if (!isset($_SESSION['login']))
 {
-  $_SESSION['login'] = true;
+  $_SESSION['login'] = 'login';
 }
 ?>
 
@@ -62,7 +62,7 @@ if (!isset($_SESSION['login']))
 	</div>
 
 	<?php
-		if ($_SESSION["login"] == true){
+		if ($_SESSION["login"] == 'login'){
 			require 'account.php';
 			$username = $_POST["username"];
 			$password = $_POST["password"];

@@ -15,7 +15,7 @@
 <body>
 	<?php
 		
-		if ($_SESSION["login"] == true){
+		if ($_SESSION["login"] == 'login'){
 			//header("location: loginPage.php");
 		}
 		else{

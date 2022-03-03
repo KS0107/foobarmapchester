@@ -72,6 +72,8 @@ if (!isset($_SESSION['login']))
 			}else{
 				header("location: map.html");
 			}
+		}else{
+			echo "No data sent";
 		}
 	?>
 

@@ -50,7 +50,8 @@ function authenticateUser($username, $password)
 	$stmt->setFetchMode(PDO::FETCH_ASSOC);
 	$row = $stmt->fetch();
 	if (password_verify($password, $row['Password'])){ 
-		$_SESSION['login'] = 'login';
+		echo "<h1>Worked</h1>"
+		$_SESSION['login'] = false;
 		header("location: timetable.php");
 	}
 	else{

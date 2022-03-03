@@ -1,5 +1,9 @@
 <?php
 session_start();
+if (!isset($_SESSION['login']))
+{
+  $_SESSION['login'] = true;
+}
 ?>
 
 <!DOCTYPE html>
@@ -62,8 +66,9 @@ session_start();
 			require 'account.php';
 			$username = $_POST["username"];
 			$password = $_POST["password"];
-			//echo "<div> debugging1 </div>";
 			authenticateUser($username, $password);
+		}else{
+			header("location: map.html");
 		}
 		//$_SESSION["login"] = "login";
 	?>

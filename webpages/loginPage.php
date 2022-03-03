@@ -62,14 +62,11 @@ if (!isset($_SESSION['login']))
 	</div>
 
 	<?php
-		if (isset($_POST["username"]))
-		{
-			if ($_SESSION["login"] == true){
-				require 'account.php';
-				$username = $_POST["username"];
-				$password = $_POST["password"];
-				authenticateUser($username, $password);
-			}
+		if ($_SESSION["login"] == true){
+			require 'account.php';
+			$username = $_POST["username"];
+			$password = $_POST["password"];
+			authenticateUser($username, $password);
 		}
 	?>
 

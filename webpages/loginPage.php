@@ -62,13 +62,16 @@ if (!isset($_SESSION['login']))
 	</div>
 
 	<?php
-		if ($_SESSION["login"] == true){
-			require 'account.php';
-			$username = $_POST["username"];
-			$password = $_POST["password"];
-			authenticateUser($username, $password);
-		}else{
-			header("location: map.html");
+		if (!isset($_SESSION['login']))
+		{
+			if ($_SESSION["login"] == true){
+				require 'account.php';
+				$username = $_POST["username"];
+				$password = $_POST["password"];
+				authenticateUser($username, $password);
+			}else{
+				header("location: map.html");
+			}
 		}
 	?>
 

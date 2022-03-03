@@ -15,11 +15,11 @@
 <body>
 	<?php
 		
-		if ($_SESSION["login"] == 'login'){
-			header("location: loginPage.php");
+		if ($_SESSION["login"] == true){
+			//header("location: loginPage.php");
 		}
 		else{
-			session_destroy();
+			//session_destroy();
 		}
  	?>
 	<!-- Navigation Bar -->

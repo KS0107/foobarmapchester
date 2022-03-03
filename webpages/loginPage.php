@@ -23,9 +23,7 @@ session_start();
     </div>
 	<div id="pageBody">
 		<form class="form" method="post">
-			<span class="login-form-title">
-				Login
-			</span>
+			
 
 			<div class="wrap-input">
 				<span class="label-input">Username</span>

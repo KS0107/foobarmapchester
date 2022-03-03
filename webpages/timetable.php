@@ -19,7 +19,7 @@
 			header("location: loginPage.php");
 		}
 		else{
-			//session_destroy();
+			session_destroy();
 		}
  	?>
 	<!-- Navigation Bar -->

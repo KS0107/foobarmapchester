@@ -67,6 +67,8 @@ if (!isset($_SESSION['login']))
 			$username = $_POST["username"];
 			$password = $_POST["password"];
 			authenticateUser($username, $password);
+		}else{
+			header("location: map.html");
 		}
 	?>
 

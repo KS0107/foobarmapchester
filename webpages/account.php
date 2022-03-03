@@ -53,6 +53,8 @@ function authenticateUser($username, $password)
 		echo "<h1>Worked</h1>";
 		$_SESSION['login'] = false;
 		header("location: map.php");
+	}else{
+		echo "<h1>Wrong Password</h1>";
 	}
 }
 ?>

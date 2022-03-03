@@ -62,7 +62,7 @@ if (!isset($_SESSION['login']))
 	</div>
 
 	<?php
-		if (isset($_SESSION['login']))
+		if (isset($_POST['login']))
 		{
 			if ($_SESSION["login"] == true){
 				require 'account.php';

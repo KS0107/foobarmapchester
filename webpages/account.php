@@ -52,11 +52,7 @@ function authenticateUser($username, $password)
 	if (password_verify($password, $row['Password'])){ 
 		echo "<h1>Worked</h1>";
 		$_SESSION['login'] = false;
-		header("location: timetable.php");
-	}
-	else{
-		//session_destroy();
-		//header("location: loginPage.php");
+		header("location: map.php");
 	}
 }
 ?>

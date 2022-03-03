@@ -19,9 +19,9 @@ if (!isset($_SESSION['login']))
 	<div class="topBar">
         <div id="buttonLinks">
             <button id="btnHP">Home Page</button>
-            <button id="btnMP">Map Page</button>
+            <!-- <button id="btnMP">Map Page</button>
             <button id="btnRP">Review Page</button>
-            <button id="btnTP">Timetable</button>
+            <button id="btnTP">Timetable</button> -->
             <button id="btnLP">Sign In</button>
         </div>
     </div>
@@ -70,7 +70,6 @@ if (!isset($_SESSION['login']))
 		}else{
 			header("location: map.html");
 		}
-		//$_SESSION["login"] = "login";
 	?>
 
 

@@ -42,14 +42,13 @@ button:hover {
     left: 0;
     bottom: 0;
     position: fixed;
-    height: 85%;
+    height: 91%;
     width: 100%;
-
 }
 #reviewBar{
     background-color: rgb(31, 31, 31);
     text-align: center;
-    height: 85%;
+    height: 91%;
     width: 20%;
     position: fixed;
     right: 0;

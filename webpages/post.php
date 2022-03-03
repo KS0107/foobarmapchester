@@ -9,9 +9,9 @@
 
 
     function record($date, $text, $sender){
-			$sql = "INSERT INTO chatRecords (date, content, sender)
+			$sql = "INSERT INTO ChatRecords (Date, Content, Sender)
 					VALUES (:date, :content, :sender)";
-			$pdo = new pdo('mysql:host=localhost; dbname=myDB', 'root', 'root');
+			$pdo = new pdo('mysql:host=dbhost.cs.man.ac.uk; dbname=2021_comp10120_z19', 'y02478jh', 'i7JLzgM-z5zv9T');
 			$stmt = $pdo->prepare($sql);
 			$stmt->execute([
 							"date" => $date,

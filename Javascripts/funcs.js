@@ -305,10 +305,12 @@ function slideInOut() {
     if (z % 2 != 0) {
         Imageoffset -= 20;
         document.getElementById("reviewBar").style.right = Imageoffset + "vw";
+        document.getElementById("slider").value = "Show Reviews";
         z++;
     } else {
         Imageoffset += 20;
         document.getElementById("reviewBar").style.right = Imageoffset + "vw";
+        document.getElementById("slider").value = "Collapse Reviews";
         z++;
     }
 }

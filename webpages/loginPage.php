@@ -58,14 +58,14 @@ session_start();
 	</div>
 
 	<?php
-		if ($_SESSION["login"] == ["login"]){
+		if ($_SESSION["login"] == false){
 			require 'account.php';
 			$username = $_POST["username"];
 			$password = $_POST["password"];
-			echo "<div> debugging1 </div>";
+			//echo "<div> debugging1 </div>";
 			authenticateUser($username, $password);
 		}
-		$_SESSION["login"] = "[login]";
+		// $_SESSION["login"] = "[login]";
 	?>
 
 

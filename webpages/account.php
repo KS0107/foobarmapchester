@@ -26,10 +26,10 @@ function showDatabases()
    $sql = "SHOW DATABASES";
    $pdo = new pdo('mysql:host=dbhost.cs.man.ac.uk;',
                  'y02478jh', 'i7JLzgM-z5zv9T');
-$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
+   $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
    $stmt = $pdo->prepare($sql);
    $stmt->execute();
-$stmt->setFetchMode(PDO::FETCH_ASSOC);
+   $stmt->setFetchMode(PDO::FETCH_ASSOC);
    while ($row = $stmt->fetch())
    {
         print("<h3>" . $row['Database'] . "</h3>");
@@ -50,7 +50,7 @@ function authenticateUser($username, $password)
 	$stmt->setFetchMode(PDO::FETCH_ASSOC);
 	$row = $stmt->fetch();
 	if (password_verify($password, $row['Password'])){ 
-		$_SESSION['login'] = "logined";
+		$_SESSION['login'] = true;
 		header("location: timetable.php");
 	}
 	else{

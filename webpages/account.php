@@ -55,8 +55,8 @@ function authenticateUser($username, $password)
 		header("location: timetable.php");
 	}
 	else{
-		session_destroy();
-		header("location: loginPage.php");
+		//session_destroy();
+		//header("location: loginPage.php");
 	}
 }
 ?>

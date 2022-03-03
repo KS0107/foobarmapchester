@@ -102,52 +102,13 @@ function changeMapStyle(){
     }
 }
 
-function seeReviews(){
-    const location = document.getElementById("locationName").textContent;
-
-    console.log(location)
-    const reviewsString = localStorage.getItem('reviews');
-    const reviewsLocal = JSON.parse(reviewsString);
-    console.log(reviewsLocal)
-    if(reviewsLocal == null){
-        loadReviews();
-        const reviewsString = localStorage.getItem('reviews');
-        const reviewsLocal = JSON.parse(reviewsString);
-    }
-
-    const filteredReviews = []
-    for (let i = 0; i < reviewsLocal.length; i++) {
-        if(reviewsLocal[i].location == location){
-            filteredReviews.push(reviewsLocal[i])
-        }
-    }
-    console.log(filteredReviews)
-
-    let reviewTextBlockOut = ""
-    let totalRating = 0;
-    for (let i = 0; i < filteredReviews.length; i++) {
-        totalRating += parseInt(filteredReviews[i].rating);
-    }
-    finalRating = totalRating / filteredReviews.length
-    finalRating = Math.round(finalRating * 100)/100
-    reviewTextBlockOut += "Rating of: " + finalRating + "\n\n\n";
-    for (let i = 0; i < filteredReviews.length; i++) {
-        reviewTextBlockOut += ("Reviewed On: " + filteredReviews[i].date + "\n");
-        reviewTextBlockOut += ("Given A Score Of: " + filteredReviews[i].rating + " Out Of 5" + "\n");
-        reviewTextBlockOut += ("Review: " + filteredReviews[i].review + "\n\n");
-    }
-    let pre = document.querySelector("#msg pre");
-    pre.textContent = reviewTextBlockOut;
-}
-
-for (var marker of geojson.features) {
+for (const marker of geojson.features) {
     // Create a DOM element for each marker.
     const el = document.createElement('div');
     const width = marker.properties.iconSize[0];
     const height = marker.properties.iconSize[1];
     el.className = 'marker';
     el.id = "mapmarker";
-    //el.style.backgroundColor = "grey";
     el.style.width = `${width}px`;
     el.style.height = `${height}px`;
     el.style.backgroundSize = '100%';

@@ -65,7 +65,7 @@ session_start();
 			echo "<div> debugging1 </div>";
 			authenticateUser($username, $password);
 		}
-		$_SESSION["login"] = "login";
+		$_SESSION["login"] = "[login]";
 	?>
 
 

@@ -118,6 +118,14 @@ document.addEventListener("DOMContentLoaded", () => {   //Otherwise the onclick 
     }else{
         console.log("map link button not found");
     }
+    const indexPageButton = document.getElementById("btnIP");
+    if(indexPageButton != null){
+        indexPageButton.addEventListener('click', function(){
+            goToPage("I");
+        });
+    }else{
+        console.log("home link button not found");
+    }
     const addReviewButton = document.getElementById("btnAR");
     if(addReviewButton != null){
         addReviewButton.onclick = addReview;

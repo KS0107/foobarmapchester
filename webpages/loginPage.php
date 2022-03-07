@@ -18,7 +18,7 @@ if (!isset($_SESSION['login']))
 <body>
 	<div class="topBar">
         <div id="buttonLinks">
-            <button id="btnHP">Home Page</button>
+            <button id="btnIP">Home Page</button>
             <!-- <button id="btnMP">Map Page</button>
             <button id="btnRP">Review Page</button>
             <button id="btnTP">Timetable</button> -->
@@ -72,8 +72,6 @@ if (!isset($_SESSION['login']))
 			}else{
 				header("location: map.html");
 			}
-		}else{
-			echo "No data sent";
 		}
 	?>
 

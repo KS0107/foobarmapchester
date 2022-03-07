@@ -1,16 +1,16 @@
-	<?php
+<?php
+	$ch = curl_init();
+	$URI = "https://web.cs.manchester.ac.uk/y02478jh/restapi/index.php/user/read";
 
-		readRecords();
-		function readRecords(){
-			$sql = "SELECT Date, Content
-					FROM ChatRecords";
-			$pdo = new pdo("mysql:host=dbhost.cs.man.ac.uk; dbname=2021_comp10120_z19", "y02478jh", "i7JLzgM-z5zv9T");
-			$stmt = $pdo->prepare($sql);
-			$stmt->execute();
-			$stmt->setFetchMode(PDO::FETCH_ASSOC);
-			while ($row = $stmt->fetch()){
-	        	print("<p>" . $row['Date'] . " " . $row['Content'] . "</p>");
-	    	}
-		}
+	curl_setopt($ch, CURLOPT_URL, $URI);
+	curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "GET");
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+	
+	$responce = curl_exec($ch);
+	$responce = json_decode($responce);
+	
+	foreach($responce as $value){
+			echo "<p>" . get_object_vars($value)["Date"] . "<br>" . get_object_vars($value)["Content"] . "</p>";
+	}
 	?>
 

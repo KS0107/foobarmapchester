@@ -26,29 +26,20 @@ if (!isset($_SESSION['login']))
         </div>
     </div>
 	<div id="pageBody">
-		<form class="form" method="post">
+		<form method="post">
 
             <h1>Are you sure you want to log out?</h1>
 
-			<div class="wrap-login-form-btn">
-				<input type="submit" class="login-form-btn" value="Log out">
-			</div>
-
-			<div class="register">
-				<span>
-					Don't have an account ?
-				</span>
-				<a href="signUpPage.html">
-					Sign up
-				</a>
-			</div>
+			<input type="submit" name="button1" class="button" value="Log out">
 
 		</form>
 	</div>
 
 	<?php
-		if (isset($_POST["username"]))
-		{
+		if(array_key_exists("button1", $_POST)){
+            button1();
+        }
+        function button1(){
 			$_SESSION["login"] = true;
 			header("location: index.html");
 		}

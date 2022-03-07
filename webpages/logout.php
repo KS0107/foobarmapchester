@@ -41,7 +41,7 @@ if (!isset($_SESSION['login']))
         }
         function button1(){
 			$_SESSION["login"] = true;
-			header("location: index.html");
+			header("location: ../index.html");
 		}
 	?>
 

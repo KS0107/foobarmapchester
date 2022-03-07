@@ -13,53 +13,52 @@ if (!isset($_SESSION['login']))
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
 	<link rel="stylesheet" href="../CSS/mainstyle.css">
+	<link rel="stylesheet" href="../CSS/loginPage.css">
 	<script src="../Javascripts/funcs.js"></script>
 </head>
 <body>
 	<div class="topBar">
         <div id="buttonLinks">
-            <button id="btnIP">Home Page</button>
+            <button id="btnIP">Home  Page</button>
             <!-- <button id="btnMP">Map Page</button>
             <button id="btnRP">Review Page</button>
             <button id="btnTP">Timetable</button> -->
             <button id="btnLP">Sign In</button>
         </div>
     </div>
-	<div id="pageBody">
-		<form class="form" method="post">
-			
+		<div class="mainBody">
+			<form class="form" method="post">
+				<div class="wrap-input">
+					<span class="label-input">Username</span>
+					<input class="input" type="text" name="username" placeholder="Type your username">
+				</div>
 
-			<div class="wrap-input">
-				<span class="label-input">Username</span>
-				<input class="input" type="text" name="username" placeholder="Type your username">
-			</div>
+				<div class="wrap-input">
+					<span class="label-input">Password</span>
+					<input class="input" type="password" name="password" placeholder="Type your password">
+				</div>
+					
+				<div class="forget_password">
+					<a href="#">
+							Forgot password?
+					</a>
+				</div>
 
-			<div class="wrap-input">
-				<span class="label-input">Password</span>
-				<input class="input" type="password" name="password" placeholder="Type your password">
-			</div>
-				
-			<div class="forget_password">
-				<a href="#">
-						Forgot password?
-				</a>
-			</div>
+				<div class="wrap-login-form-btn">
+					<input type="submit" class="login-form-btn" value="Log in">
+				</div>
 
-			<div class="wrap-login-form-btn">
-				<input type="submit" class="login-form-btn" value="Log in">
-			</div>
+				<div class="register">
+					<span>
+						Don't have an account ?
+					</span>
+					<a href="signUpPage.html">
+						Sign up
+					</a>
+					</div>
+			</form>
+		</div>
 
-			<div class="register">
-				<span>
-					Don't have an account ?
-				</span>
-				<a href="signUpPage.html">
-					Sign up
-				</a>
-			</div>
-
-		</form>
-	</div>
 
 	<?php
 		if (isset($_POST["username"]))

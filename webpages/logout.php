@@ -49,7 +49,7 @@ if (!isset($_SESSION['login']))
 	<?php
 		if (isset($_POST["username"]))
 		{
-			$_SESSION["login"] = true)
+			$_SESSION["login"] = true;
 			header("location: index.html");
 		}
 	?>

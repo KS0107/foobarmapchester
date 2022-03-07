@@ -59,6 +59,13 @@ function loadReviews(){
     }
 }
 
+function loadTimetable(){
+    if (window.location.pathname.split("/").pop() == "timetable.php"){
+        let timetable = getTimetable();
+    }
+    console.log(timetable);
+}
+
 function loadText(){
     let reviewBox = document.getElementById("review")
     if(reviewBox != null){
@@ -69,6 +76,7 @@ function loadText(){
 document.addEventListener("DOMContentLoaded", () => {   //Otherwise the onclick is assigned before the DOM is loaded
     window.onload = loadReviews
     window.onload = loadText
+    window.onload = loadTimetable    
 
     const timetablePageButton = document.getElementById("btnTP");
     if(timetablePageButton != null){

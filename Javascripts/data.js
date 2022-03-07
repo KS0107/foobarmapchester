@@ -120,6 +120,20 @@ const defaultPlaceholderReviews = [
     }
 ];
 
+const defaultPlaceholderTimetable = [
+    [true, true, true, false], 
+    [true, true, false, true],
+    [false, true, true, false], 
+    [true, false, false, true],
+    [false, true, true, true], 
+    [true, false, false, true],
+    [false, true, true, false]
+];
+
 function getReviews(){
     return defaultPlaceholderReviews;
+}
+
+function getTimetable(){
+    return defaultPlaceholderTimetable;
 }

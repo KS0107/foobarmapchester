@@ -13,15 +13,6 @@
     <script src="../Javascripts/funcs.js"></script>
 </head>
 <body>
-	<?php
-		
-		if ($_SESSION["login"] == true){
-			//header("location: loginPage.php");
-		}
-		else{
-			//session_destroy();
-		}
- 	?>
 	<!-- Navigation Bar -->
 	<div class="topBar">
         <div id="buttonLinks">

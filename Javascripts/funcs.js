@@ -53,7 +53,7 @@ const addReview = (ev) => {
 function loadReviews(){
     let reviews = localStorage.getItem('reviews');
     console.log(reviews)
-    if(reviews == null){
+    if(reviews != getReviews()){
         let reviews = getReviews();
         localStorage.setItem('reviews', JSON.stringify(reviews));
     }
@@ -186,7 +186,7 @@ function goToPage(page){
             if(pathSections[pathSections.length-1] == "manchester"){
                 pathSections.push("webpages");
             }
-            pathSections.push("timetable.php");
+            pathSections.push("timetable.html");
             break;
         case "L":
             pathSections.pop();

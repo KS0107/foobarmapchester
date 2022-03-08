@@ -52,7 +52,6 @@ const addReview = (ev) => {
 
 function loadReviews(){
     let reviews = localStorage.getItem('reviews');
-    console.log(reviews)
     if(reviews != getReviews()){
         let reviews = getReviews();
         localStorage.setItem('reviews', JSON.stringify(reviews));
@@ -61,7 +60,6 @@ function loadReviews(){
 
 function loadTimetable(){
     const pageName = window.location.pathname.split("/").pop()
-    console.log(pageName);
     if (pageName == "timetable.html"){
         let timetable = getTimetable();
         console.log(timetable);
@@ -85,16 +83,21 @@ function loadTimetable(){
 }
 
 function loadText(){
+    console.log("Loading text")
     let reviewBox = document.getElementById("review")
     if(reviewBox != null){
         reviewBox.value = "";
     }
 }
 
+function loadPageContent(){
+    loadReviews();
+    loadText();
+    loadTimetable();
+}
+
 document.addEventListener("DOMContentLoaded", () => {   //Otherwise the onclick is assigned before the DOM is loaded
-    window.onload = loadReviews
-    window.onload = loadText
-    window.onload = loadTimetable    
+    window.onload = loadPageContent;
 
     const timetablePageButton = document.getElementById("btnTP");
     if(timetablePageButton != null){

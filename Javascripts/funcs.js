@@ -60,10 +60,28 @@ function loadReviews(){
 }
 
 function loadTimetable(){
-    if (window.location.pathname.split("/").pop() == "timetable.php"){
+    const pageName = window.location.pathname.split("/").pop()
+    console.log(pageName);
+    if (pageName == "timetable.html"){
         let timetable = getTimetable();
+        console.log(timetable);
+        var timetableObj = document.getElementById("timetable")
+        timetable.forEach(element => {
+            var newRow = timetableObj.insertRow();
+            var newCell = newRow.insertCell();
+            newCell.textContent = element[0];
+            for (let i = 0; i < 7; i++) {
+                var newCell = newRow.insertCell();
+                if(element[1][i] == 1){
+                    newCell.textContent = "Busy";
+                    newCell.style.backgroundColor = "rgb(31, 31, 31)";
+                }else{
+                    newCell.textContent = "Free";
+                    newCell.style.backgroundColor = "rgb(117, 117, 117)";
+                }
+            }
+        });
     }
-    console.log(timetable);
 }
 
 function loadText(){
@@ -260,10 +278,16 @@ function slideInOut() {
         z++;
     }
 }
+
 window.addEventListener('scroll', function() {myFunction()});
+
 function myFunction() {
     var winScroll = document.body.scrollTop || document.documentElement.scrollTop;
     var height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
     var scrolled = (winScroll / height) * 100;
-    document.getElementById("myBar").style.width = scrolled + "%";
+    try {
+        document.getElementById("myBar").style.width = scrolled + "%";
+    } catch (error) {
+        console.log("Cant find myBar element");
+    }
 }

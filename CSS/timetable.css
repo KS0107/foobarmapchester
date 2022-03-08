@@ -1,21 +1,21 @@
 /* timetable css */
-.timetable, th, td
+#timetable, th, td
 {
-    border: 1px solid;
+    border: 2px solid rgb(117, 117, 117);
     text-align: center;
 }
 
-.timetable
+#timetable
 {
-    table-layout: fixed;
+    table-layout: auto;
     margin-left: auto;
     margin-right: auto;
     border-collapse: collapse;
-    width: 50%;                  
+    width: 100%;   
 }
 
 th, td
 {
-    height: 50px;
+    height: 80px;
     overflow-wrap: break-word;
 }

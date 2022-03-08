@@ -121,13 +121,10 @@ const defaultPlaceholderReviews = [
 ];
 
 const defaultPlaceholderTimetable = [
-    [true, true, true, false], 
-    [true, true, false, true],
-    [false, true, true, false], 
-    [true, false, false, true],
-    [false, true, true, true], 
-    [true, false, false, true],
-    [false, true, true, false]
+    ["10am-2pm", "1110011"],
+    ["2pm-6pm", "1101100"],
+    ["6pm-11pm", "0110011"],
+    ["11pm+", "1001011"]
 ];
 
 function getReviews(){

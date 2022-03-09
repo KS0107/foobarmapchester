@@ -120,6 +120,99 @@ const defaultPlaceholderReviews = [
     }
 ];
 
+const defaultPlaceholderMarkers = {
+    'type': 'FeatureCollection',
+    'features': [
+        {
+            'type': 'Feature',
+            'properties': {
+                'message': 'Factory',
+                'iconSize': [40, 40]
+            },
+            'geometry': {
+                'type': 'Point',
+                'coordinates': [-2.23733, 53.47404]
+            }
+        },
+        {
+            'type': 'Feature',
+            'properties': {
+                'message': 'Turing Tap',
+                'iconSize': [40, 40]
+            },
+            'geometry': {
+                'type': 'Point',
+                'coordinates': [-2.22935, 53.46252]
+            }
+        },
+        {
+            'type': 'Feature',
+            'properties': {
+                'message': 'Footage',
+                'iconSize': [40, 40]
+            },
+            'geometry': {
+                'type': 'Point',
+                'coordinates': [-2.23687, 53.47016]
+            }
+        },
+        {
+            'type': 'Feature',
+            'properties': {
+                'message': 'Mojo',
+                'iconSize': [40, 40]
+            },
+            'geometry': {
+                'type': 'Point',
+                'coordinates': [-2.249815066033617, 53.481263991254615]
+            }
+        },
+        {
+            'type': 'Feature',
+            'properties': {
+                'message': 'Gay',
+                'iconSize': [40, 40]
+            },
+            'geometry': {
+                'type': 'Point',
+                'coordinates': [-2.2379910112825154, 53.47647216906738]
+            }
+        },
+        {
+            'type': 'Feature',
+            'properties': {
+                'message': 'Cargo',
+                'iconSize': [40, 40]
+            },
+            'geometry': {
+                'type': 'Point',
+                'coordinates': [-2.2412459798138444, 53.48478796773415]
+            }
+        },
+        {
+            'type': 'Feature',
+            'properties': {
+                'message': 'The Paramount',
+                'iconSize': [40, 40]
+            },
+            'geometry': {
+                'type': 'Point',
+                'coordinates': [-2.242571365193075, 53.47653556884342]
+            }
+        }
+    ]
+};
+
+const defaultPlaceholderLocations = [
+    {
+        "ID": 0,
+        "Name": "Turing Tap",
+        "Address": "",
+        "Coords": "",
+        "": 0.0
+    }
+]
+
 const defaultPlaceholderTimetable = [
     ["10am-2pm", "1110011"],
     ["2pm-6pm", "1101100"],
@@ -127,8 +220,16 @@ const defaultPlaceholderTimetable = [
     ["11pm-10am", "1001011"]
 ];
 
+function generateMarkerData(){
+    
+}
+
 function getReviews(){
     return defaultPlaceholderReviews;
+}
+
+function getMarkers(){
+    return defaultPlaceholderMarkers;
 }
 
 function getTimetable(){

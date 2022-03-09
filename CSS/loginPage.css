@@ -24,7 +24,7 @@ a{
 .form{
     text-align: center;
     top: 30vh;
-    background-color: rgb(31, 31, 31);
+    background-color: rgba(31, 31, 31, 0);
 }
 
 .login-form-title {

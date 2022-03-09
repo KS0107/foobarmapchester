@@ -46,7 +46,7 @@ class UserController extends BaseController{
                     $respondData = json_decode("Username is not valid!");
                 }
  
-                $URL = $_SERVER['SERVER_NAME'] . "/manchester/webpages/map.html";
+                $URL = "https://" . $_SERVER['SERVER_NAME'] . "/manchester/webpages/map.html";
             }catch(Error $e){
                 $this->strErrorDesc = $e->getMessage();
                 $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';

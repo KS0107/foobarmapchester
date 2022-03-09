@@ -27,7 +27,7 @@ if (!isset($_SESSION['login']))
         </div>
     </div>
 		<div class="mainBody">
-			<form class="form" action="https://web.cs.manchester.ac.uk/y02478jh/restapi/index.php/user/authen" method="get">
+			<form class="form" action="../restapi/index.php/user/authen" method="get">
 				<div class="wrap-input">
 					<span class="label-input">Username</span>
 					<input class="input" type="text" name="username" placeholder="Input username">

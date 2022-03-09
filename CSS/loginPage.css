@@ -10,8 +10,6 @@ a{
   }
   
 .mainBody{
-    border: solid;
-    border-color: rgb(151, 147, 147);
     width: 20em;
     height: 30em;
     border-radius: 10px;

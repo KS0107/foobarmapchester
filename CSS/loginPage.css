@@ -15,6 +15,7 @@ a{
   }
   
 .mainBody{
+    margin-top: 30vh;
     border-radius: 10px;
     overflow: hidden;
     margin: 5em auto 0 auto;

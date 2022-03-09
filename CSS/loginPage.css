@@ -15,6 +15,7 @@ a{
   }
   
 .mainBody{
+    margin-top: 30vh;
     border-radius: 10px;
     overflow: hidden;
     margin: 5em auto 0 auto;
@@ -22,6 +23,7 @@ a{
 }
 
 .form{
+  margin-top: 15vh;
     text-align: center;
     top: 30vh;
     background-color: rgba(31, 31, 31, 0);
@@ -47,7 +49,7 @@ a{
     color: white;
     line-height: 1.5;
     padding-left: 7px;
-    margin-bottom: 50px;
+    margin-bottom: 30px;
         background-color: black;
   }
 
@@ -59,7 +61,11 @@ a{
     margin: 0 auto;
     display: block;
     width: 20%;
-    background: black
+    background: black;
+    border: none;
+  }
+  .input:focus {
+    outline: 1px solid white;
   }
 
 /* --------- */
@@ -88,6 +94,8 @@ a{
     color: white;
     padding: 20px;
     transition: 0.25s;
+    border: none;
+
   }
   
   .login-form-btn:hover{

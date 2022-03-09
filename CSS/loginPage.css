@@ -60,7 +60,8 @@ a{
     margin: 0 auto;
     display: block;
     width: 20%;
-    background: black
+    background: black;
+    outline: none;
   }
 
 /* --------- */

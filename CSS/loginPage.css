@@ -11,8 +11,6 @@ a{
   }
   
 .mainBody{
-    width: 20em;
-    height: 30em;
     border-radius: 10px;
     overflow: hidden;
     margin: 5em auto 0 auto;

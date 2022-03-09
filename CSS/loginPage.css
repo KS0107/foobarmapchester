@@ -94,4 +94,6 @@ a{
   .register{
       margin-top: 1em;
   }
-  
+  a:visited  {
+    color: white;
+  }

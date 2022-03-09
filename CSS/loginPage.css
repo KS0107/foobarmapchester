@@ -43,6 +43,7 @@ a{
     color: white;
     line-height: 1.5;
     padding-left: 7px;
+    margin-bottom: 50px;
   }
 
   .input {
@@ -59,8 +60,8 @@ a{
 /* --------- */
 
 .forget_password{
-    margin-top:0.5em;
-    margin-bottom: 0.1em;
+    margin-top:1em;
+    margin-bottom: 1em;
 }
 
   /*  Login Button  */

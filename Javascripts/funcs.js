@@ -297,7 +297,6 @@ function slideInOut() {
         z++;
     }
 }
-
 window.addEventListener('scroll', function() {myFunction()});
 
 function myFunction() {

@@ -14,7 +14,7 @@ a{
     border-radius: 10px;
     overflow: hidden;
     margin: 5em auto 0 auto;
-    background-color: rgb(31, 31, 31);
+    background-image: url(../images/map.png);
     color: white;
 }
 

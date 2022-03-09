@@ -4,10 +4,12 @@
     font-family: 'Montserrat';
 }
 body {
-    background-color: rgb(31, 31, 31);
+    background-image: url("../images/map.png");
+    background-attachment: fixed;
     color: white;
     transition: 0.35s ease-in-out;
     overflow-x: hidden;
+    overscroll-behavior: none;
 }
 h1 {
     text-align: center;
@@ -76,7 +78,7 @@ button:hover {
 .topBar #buttonLinks{
     display: flex;
     justify-content: space-between;
-    margin-top: 10px;
+    margin-top: 0px;
 }    
 .topBar button{
     margin-left: 2%;
@@ -165,7 +167,7 @@ nav {
     margin-bottom: 30px;
   }
   section li {
-    margin: 15px 0px;
+    margin: px 0px;
   }
   #friends {
     padding: 10px 0px;
@@ -209,7 +211,7 @@ nav {
     left:-10;
     width: 102%;
     height: 5px;
-    background: rgb(31, 31, 31);
+    background-color: rgba(0, 0, 0);
   }
   .progress-bar {
     height: 5px;

@@ -30,12 +30,12 @@ if (!isset($_SESSION['login']))
 			<form class="form" action="https://web.cs.manchester.ac.uk/y02478jh/restapi/index.php/user/authen" method="get">
 				<div class="wrap-input">
 					<span class="label-input">Username</span>
-					<input class="input" type="text" name="username" placeholder="Type your username">
+					<input class="input" type="text" name="username" placeholder="Input username">
 				</div>
 
 				<div class="wrap-input">
 					<span class="label-input">Password</span>
-					<input class="input" type="password" name="password" placeholder="Type your password">
+					<input class="input" type="password" name="password" placeholder="Input password">
 				</div>
 					
 				<div class="forget_password">

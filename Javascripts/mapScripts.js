@@ -82,11 +82,17 @@ const geojson = {
     ]
 };
 
+const bounds = [
+    [-2.279723291346777, 53.43227454888223], // Southwest coordinates
+    [-2.181081425869853, 53.50590158784653] // Northeast coordinates
+];
+
 var map = new mapboxgl.Map({
     container: 'map', // container ID
     style: 'mapbox://styles/ks0107/ckzznmnzk001e14o50943ru4p', // style URL
     center: [-2.234618, 53.475721], // starting position [lng, lat]
-    zoom: 13.85 // starting zoom
+    zoom: 13.85, // starting zoom
+    maxBounds: bounds
 });
 
 var blackStyle = true

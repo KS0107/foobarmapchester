@@ -50,7 +50,7 @@ if (!isset($_SESSION['login']))
 
 				<div class="register">
 					<span>
-						Don't have an account ?
+						Don't have an account?
 					</span>
 					<a href="signUpPage.html">
 						Sign up

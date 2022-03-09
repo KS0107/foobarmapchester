@@ -9,6 +9,14 @@
 	<link rel="stylesheet" type="text/css" href="chatFunc.css">
 </head>
 <body>
+	<div class="mainContainer">
+	<div class="friendList">
+		<div>Friends</div>
+		<div id="friends" style="border: solid;">
+			
+		</div>
+	</div>
+
 	<div id="wrapper">
 		<div id="menu">
 			<p class="welcome">Welcome, <b></b></p>
@@ -16,14 +24,14 @@
             <p class="logout"><a id="exit">Exit Chat</a></p>
 		</div>
 
-		<div id="chatbox">
-		</div>
+		<div id="chatbox"></div>
+		
 
 		<form name="message" method="post">
 			<input type="text" id="usermsg">
 			<input type="submit" id="submitmsg" value="Send">
 		</form>
+	</div>	
 	</div>
-
 </body>
 </html>

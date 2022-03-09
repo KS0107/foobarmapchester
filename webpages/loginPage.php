@@ -1,10 +1,10 @@
-<?php
+<!-- <?php
 session_start();
 if (!isset($_SESSION['login']))
 {
   $_SESSION['login'] = true;
 }
-?>
+?> -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -27,7 +27,7 @@ if (!isset($_SESSION['login']))
         </div>
     </div>
 		<div class="mainBody">
-			<form class="form" method="post">
+			<form class="form" action="https://web.cs.manchester.ac.uk/y02478jh/restapi/index.php/user/authen" method="get">
 				<div class="wrap-input">
 					<span class="label-input">Username</span>
 					<input class="input" type="text" name="username" placeholder="Type your username">
@@ -60,19 +60,20 @@ if (!isset($_SESSION['login']))
 		</div>
 
 
-	<?php
+	<!-- <?php
 		if (isset($_POST["username"]))
 		{
 			if ($_SESSION["login"] == true){
 				require 'account.php';
 				$username = $_POST["username"];
 				$password = $_POST["password"];
-				authenticateUser($username, $password);
+				// authenticateUser($username, $password);
+				header("location: http://localhost:8888/restapi/index.php/user/authen?username=" . $username . "&password=" . $password);
 			}else{
 				header("location: map.html");
 			}
 		}
-	?>
+	?> -->
 
 
 </body>

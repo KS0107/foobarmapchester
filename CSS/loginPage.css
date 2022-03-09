@@ -35,6 +35,7 @@ a{
   .wrap-input {
     width: 100%;
     border-bottom: 2px solid rgb(31, 31, 31);
+    margin-bottom: 50px;
   }
 
   .label-input {

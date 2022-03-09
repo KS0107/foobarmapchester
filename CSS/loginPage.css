@@ -39,6 +39,7 @@ a{
     width: 100%;
     margin-bottom: 4vh;
     margin-top: 4vh;
+    background-color: black;
   }
 
   .label-input {

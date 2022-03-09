@@ -116,6 +116,14 @@ document.addEventListener("DOMContentLoaded", () => {   //Otherwise the onclick 
     }else{
         console.log("login link button not found");
     }
+    const chatPageButton = document.getElementById("btnCP");
+    if(chatPageButton != null){
+        chatPageButton.addEventListener('click', function(){
+            goToPage("C");
+        });
+    }else{
+        console.log("login link button not found");
+    }
     const reviewPageButton = document.getElementById("btnRP");
     if(reviewPageButton != null){
         reviewPageButton.addEventListener('click', function(){
@@ -216,6 +224,13 @@ function goToPage(page){
                 pathSections.push("webpages");
             }
             pathSections.push("loginPage.php");
+            break;
+        case "C":
+            pathSections.pop();
+            if(pathSections[pathSections.length-1] == "manchester"){
+                pathSections.push("webpages");
+            }
+            pathSections.push("chatFunc.php");
             break;
         case "R":
             pathSections.pop();

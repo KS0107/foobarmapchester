@@ -39,7 +39,6 @@ a{
     width: 100%;
     margin-bottom: 4vh;
     margin-top: 4vh;
-    background-color: black;
   }
 
   .label-input {
@@ -49,6 +48,7 @@ a{
     line-height: 1.5;
     padding-left: 7px;
     margin-bottom: 50px;
+        background-color: black;
   }
 
   .input {
@@ -59,7 +59,7 @@ a{
     margin: 0 auto;
     display: block;
     width: 20%;
-    background: transparent;
+    background: black
   }
 
 /* --------- */

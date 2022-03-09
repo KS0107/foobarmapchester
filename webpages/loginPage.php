@@ -27,14 +27,15 @@ if (!isset($_SESSION['login']))
         </div>
     </div>
 		<div class="mainBody">
-			<form class="form" action="https://web.cs.manchester.ac.uk/y02478jh/restapi/index.php/user/authen" method="get">
+			<form class="form" action="../restapi/index.php/user/authen" method="get">
+			<span class="label-input">Username</span>
 				<div class="wrap-input">
-					<span class="label-input">Username</span>
+			
 					<input class="input" type="text" name="username" placeholder="Input username">
 				</div>
-
+				<span class="label-input">Password</span>
 				<div class="wrap-input">
-					<span class="label-input">Password</span>
+					
 					<input class="input" type="password" name="password" placeholder="Input password">
 				</div>
 					
@@ -50,7 +51,7 @@ if (!isset($_SESSION['login']))
 
 				<div class="register">
 					<span>
-						Don't have an account ?
+						Don't have an account?
 					</span>
 					<a href="signUpPage.html">
 						Sign up

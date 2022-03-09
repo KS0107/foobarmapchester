@@ -21,8 +21,10 @@ function ($Username)
 	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
 	$stmt = $pdo->prepare($sql);
 	$stmt->execute([
-		'10am2pm' => $10am2pm
-        '2pm6pm' => $2pm6pm
+		'10am2pm' => $time1
+        '2pm6pm' => $time2
+        '6pm11pm' => $time3
+        '11pm10am' => $time4
 					]);
 	$stmt->setFetchMode(PDO::FETCH_ASSOC);
 	$row = $stmt->fetch();

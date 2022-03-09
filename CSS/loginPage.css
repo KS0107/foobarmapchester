@@ -61,7 +61,7 @@ a{
     display: block;
     width: 20%;
     background: black;
-    border: none;
+    border: 1px whitesmoke;
   }
   .input:focus {
     outline: 1px solid white;

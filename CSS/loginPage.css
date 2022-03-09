@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&family=Poppins:wght@300;400;600&display=swap');
 
 a{
     text-decoration: none;
@@ -26,10 +27,9 @@ a{
 
 .login-form-title {
     display: block;
-    font-family: Poppins-Bold;
+    font-family: Montserrat;
     font-size: 39px;
     color: white;
-    line-height: 1.2;
     text-align: center;
   }
 
@@ -39,7 +39,7 @@ a{
   }
 
   .label-input {
-    font-family: Poppins-Regular;
+    font-family: Montserrat;
     font-size: 14px;
     color: white;
     line-height: 1.5;
@@ -47,7 +47,7 @@ a{
   }
 
   .input {
-    font-family: Poppins-Medium;
+    font-family: Montserrat;
     font-size: 16px;
     color: white;
     line-height: 1.2;
@@ -56,7 +56,6 @@ a{
     width: 100%;
     height: 55px;
     background: transparent;
-    padding: 0 7px 0 43px;
   }
 
 /* --------- */
@@ -88,6 +87,7 @@ a{
     padding: 20px;
     width: 100%;
     height: 50px;
+    transition: 0.25s;
   }
   
   .login-form-btn:hover{

@@ -93,6 +93,9 @@ label {
     margin-top: 125px;
     padding: 15px;
 }
+#btnAR {
+    margin-top: 20px;
+}
 select {
     margin-top: 20px;
     color: rgb(255, 255, 255);
@@ -123,6 +126,7 @@ textarea {
     padding: 8px;
     width: 200px;
     height: 14px;
+    overflow: hidden;
 
 }
 input {
@@ -132,7 +136,7 @@ input {
     border-color: rgb(27, 27, 27);
     padding: 8px;
     width: 200px;
-    height: 14px;
+    height: 16px;
 
 }
 #review[type=text] {
@@ -161,7 +165,7 @@ textarea:focus {
     cursor: pointer; 
     }
 #review[type=text]:focus {
-    height: 300px;
+    height: 27vh;
     outline: none;
     border: 1px solid rgb(255, 255, 255);
 }

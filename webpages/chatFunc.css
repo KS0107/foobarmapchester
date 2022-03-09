@@ -20,11 +20,7 @@
     font-size: 1.5rem;
     font-weight: bold;
   }
-   
-  input {
-    font-family: "Lato";
-  }
-   
+
   a {
     color: #0000ff;
     text-decoration: none;
@@ -34,27 +30,6 @@
     text-decoration: underline;
   }
    
-  #wrapper,
-  #loginform {
-    margin: 0 auto;
-    padding-bottom: 25px;
-    background: #eee;
-    width: 600px;
-    max-width: 100%;
-    border: 2px solid #212121;
-    border-radius: 4px;
-  }
-   
-  #loginform {
-    padding-top: 18px;
-    text-align: center;
-  }
-   
-  #loginform p {
-    padding: 15px 25px;
-    font-size: 1.4rem;
-    font-weight: bold;
-  }
    
   #chatbox {
     text-align: left;
@@ -69,31 +44,21 @@
     border-radius: 4px;
     border-bottom: 4px solid #a7a7a7;
   }
-   
+
+
   #usermsg {
     flex: 1;
     border-radius: 4px;
     border: 1px solid #ff9800;
   }
-   
-  #name {
-    border-radius: 4px;
-    border: 1px solid #ff9800;
-    padding: 2px 8px;
-  }
-   
-  #submitmsg,
-  #enter{
+
+  #submitmsg{
     background: #ff9800;
     border: 2px solid #e65100;
     color: white;
     padding: 4px 10px;
     font-weight: bold;
     border-radius: 4px;
-  }
-   
-  .error {
-    color: #ff0000;
   }
    
   #menu {
@@ -114,30 +79,21 @@
     margin-left: 10px;
   }
    
-  .msgln {
-    margin: 0 0 5px 0;
+  .mainContainer{
+    display: flex;
   }
-   
-  .msgln span.left-info {
-    color: orangered;
+  
+  .friendList{
+    width: 20%;
+    border: solid;
   }
-   
-  .msgln span.chat-time {
-    color: #666;
-    font-size: 60%;
-    vertical-align: super;
-  }
-   
-  .msgln b.user-name, .msgln b.user-name-left {
-    font-weight: bold;
-    background: #546e7a;
-    color: white;
-    padding: 2px 4px;
-    font-size: 90%;
+
+
+  #wrapper{
+    padding-bottom: 25px;
+    background: #eee;
+    width: 80%;
+    max-width: 100%;
+    border: 2px solid #212121;
     border-radius: 4px;
-    margin: 0 5px 0 0;
-  }
-   
-  .msgln b.user-name-left {
-    background: orangered;
   }

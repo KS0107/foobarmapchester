@@ -1,4 +1,4 @@
-<?php
+<!-- <?php
 
 	
     $date = date("g:i A");
@@ -25,4 +25,4 @@
      
     // file_put_contents("log.html", $text_message, FILE_APPEND | LOCK_EX);
 
-?>
+?> -->

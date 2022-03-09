@@ -61,7 +61,10 @@ a{
     display: block;
     width: 20%;
     background: black;
-    outline: none;
+    border: none;
+  }
+  .input:focus {
+    outline: 1px solid white;
   }
 
 /* --------- */

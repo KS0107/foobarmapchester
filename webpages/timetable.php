@@ -61,12 +61,11 @@ function getTimetable($UserID)
 	$pdo = new pdo('mysql:host=dbhost.cs.man.ac.uk; dbname=2021_comp10120_z19', 'y02478jh', 'i7JLzgM-z5zv9T');
 	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
 	$stmt = $pdo->prepare($sql);
-	echo $UserID;
 	$stmt->execute(["UserID"=>$UserID]);
-	$times = $stmt->fetchColumn();
-	echo $times;
-	setcookie("times", $times);
-	// $_SESSION['2pm6pm'] = $time2;
+	$time1 = $stmt->fetchColumn();
+	$time2 = $stmt->fetchColumn();
+	setcookie("time1", $time1);
+	setcookie("time2", $time2);
 	// $_SESSION['6pm11pm'] = $time3;
 	// $_SESSION['11pm10am'] = $time4;
 }

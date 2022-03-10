@@ -233,18 +233,20 @@ function getMarkers(){
 }
 
 function getTimetable(){
-    console.log("!!");
     let timetable = defaultPlaceholderTimetable;
-    const cookieValue = document.cookie
+    const cookieValue1 = document.cookie
     .split('; ')
-    .find(row => row.startsWith('times='))
+    .find(row => row.startsWith('time1='))
     .split('=')[1];
-    console.log("!!!");
+    const cookieValue2 = document.cookie
+    .split('; ')
+    .find(row => row.startsWith('time2='))
+    .split('=')[1];
     if(cookieValue != null){
-        timetable[0][1] = cookieValue;
-        timetable[1][1] = sessionStorage.getItem["2pm6pm"];
-        timetable[2][1] = sessionStorage.getItem["6pm11pm"];
-        timetable[3][1] = sessionStorage.getItem["11pm10am"];
+        timetable[0][1] = cookieValue1;
+        timetable[1][1] = cookieValue2;
+        // timetable[2][1] = sessionStorage.getItem["6pm11pm"];
+        // timetable[3][1] = sessionStorage.getItem["11pm10am"];
     }
     return timetable;
 }

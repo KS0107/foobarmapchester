@@ -18,10 +18,8 @@
 	</div>
 
 	<div id="wrapper">
-		<div id="menu">
-			<button class="deletemsg" id="delete">Delete</button>
-            <button class="logout" id="exit">Exit</button>
-		</div>
+		<button class="deletemsg" id="delete">Delete</button>
+        <button class="logout" id="exit">Exit</button>
 
 		<div id="chatbox"></div>
 		

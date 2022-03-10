@@ -10,17 +10,7 @@
     font-weight: 300;
   }
    
-  form {
-    padding: 15px 25px;
-    display: flex;
-    gap: 10px;
-    justify-content: center;
-  }
-   
-  form label {
-    font-size: 1.5rem;
-    font-weight: bold;
-  }
+  
    
   a:hover {
     text-decoration: underline;
@@ -61,19 +51,3 @@
     border-radius: 14px;
   }
    
-  #menu {
-    padding: 15px 25px;
-    display: flex;
-  }
-   
-  #menu p.welcome {
-    flex: 1;
-  }
-   
-  .mainContainer{
-    display: flex;
-  }
-  
-  .friendList{
-    width: 20%;
-  }

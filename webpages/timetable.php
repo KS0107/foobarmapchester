@@ -41,7 +41,7 @@
 </body>
 </html>
 <?php
-function getUserID($Username)
+function getUserID($UserID)
 {	
 	$sql = "SELECT UserID
 			FROM   Timetable
@@ -55,7 +55,7 @@ function getUserID($Username)
 	$stmt->setFetchMode(PDO::FETCH_ASSOC);
 	$row = $stmt->fetch();
 }
-function getTimetable($UserID)
+function getTimetable($UserID, $time1, $time2, $time3, $time4)
 {	
 	$sql = "SELECT 10am2pm, 2pm6pm, 6pm11pm, 11pm10am
 			FROM   Timetable

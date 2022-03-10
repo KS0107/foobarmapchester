@@ -233,12 +233,13 @@ function getMarkers(){
 }
 
 function getTimetable(){
+    console.log("!!");
     let timetable = defaultPlaceholderTimetable;
     const cookieValue = document.cookie
     .split('; ')
     .find(row => row.startsWith('times='))
     .split('=')[1];
-    console.log("!!");
+    console.log("!!!");
     if(cookieValue != null){
         timetable[0][1] = cookieValue;
         timetable[1][1] = sessionStorage.getItem["2pm6pm"];

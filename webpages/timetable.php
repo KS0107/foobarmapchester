@@ -75,6 +75,7 @@ function getTimetable($UserID)
 	$_SESSION['2pm6pm'] = $time2
 	$_SESSION['6pm11pm'] = $time3
 	$_SESSION['11pm10am'] = $time4
+	$_SESSION['gaming'] = "test"
 }
 getUserID($_COOKIE["username"])
 getTimetable($UserID)

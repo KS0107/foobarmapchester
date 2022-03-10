@@ -25,7 +25,7 @@
 		
 		<form name="message" method="post">
 			<input type="text" id="usermsg">
-			<input type="submit" id="submitmsg" value="Send">
+			<button id="send">Send</button>
 		</form>
 		</div>	
 	</div>

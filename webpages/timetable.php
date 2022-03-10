@@ -58,14 +58,14 @@ function getTimetable($UserID)
 {	
 	$sql = "SELECT 10am2pm, 2pm6pm, 6pm11pm, 11pm10am
 			FROM   Timetable
-			WHERE  UserID = :UserID";
+			WHERE  TimetableID = :UserID";
 	$pdo = new pdo('mysql:host=dbhost.cs.man.ac.uk; dbname=2021_comp10120_z19', 'y02478jh', 'i7JLzgM-z5zv9T');
 	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
 	$stmt = $pdo->prepare($sql);
 	$stmt->execute(["UserID"=>$UserID]);
 	$stmt->setFetchMode(PDO::FETCH_ASSOC);
 	$time1 = $stmt->fetch();
-	$_SESSION['10am2pm'] = $time1;
+	$_SESSION['10am2pm'] = $time1[0];
 	// $_SESSION['2pm6pm'] = $time2;
 	// $_SESSION['6pm11pm'] = $time3;
 	// $_SESSION['11pm10am'] = $time4;

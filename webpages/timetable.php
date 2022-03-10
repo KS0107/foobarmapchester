@@ -50,8 +50,7 @@ function getUserID($Username)
 	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
 	$stmt = $pdo->prepare($sql);
 	$stmt->execute(['Username' => $Username]);
-	$stmt->setFetchMode(PDO::FETCH_ASSOC);
-	$UserID = $stmt->fetch();
+	$UserID = $stmt->fetch(PDO::FETCH_ASSOC);
 	return $UserID;
 }
 function getTimetable($UserID)
@@ -62,7 +61,6 @@ function getTimetable($UserID)
 	$pdo = new pdo('mysql:host=dbhost.cs.man.ac.uk; dbname=2021_comp10120_z19', 'y02478jh', 'i7JLzgM-z5zv9T');
 	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
 	$stmt = $pdo->prepare($sql);
-	echo $UserID;
 	$stmt->execute(["UserID"=>$UserID]);
 	$time1 = $stmt->fetchColumn();
 	$_SESSION['10am2pm'] = $time1;

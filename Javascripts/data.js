@@ -242,11 +242,19 @@ function getTimetable(){
     .split('; ')
     .find(row => row.startsWith('time2='))
     .split('=')[1];
+    const cookieValue3 = document.cookie
+    .split('; ')
+    .find(row => row.startsWith('time3='))
+    .split('=')[1];
+    const cookieValue4 = document.cookie
+    .split('; ')
+    .find(row => row.startsWith('time4='))
+    .split('=')[1];
     if(cookieValue != null){
         timetable[0][1] = cookieValue1;
         timetable[1][1] = cookieValue2;
-        // timetable[2][1] = sessionStorage.getItem["6pm11pm"];
-        // timetable[3][1] = sessionStorage.getItem["11pm10am"];
+        timetable[2][1] = cookieValue3;
+        timetable[3][1] = cookieValue4;
     }
     return timetable;
 }

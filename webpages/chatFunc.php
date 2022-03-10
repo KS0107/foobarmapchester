@@ -19,19 +19,17 @@
 
 	<div id="wrapper">
 		<div id="menu">
-			<p class="welcome">Welcome, <b></b></p>
-			<p class="deletemsg"><a id="delete">Delete</a>
-            <p class="logout"><a id="exit">Exit Chat</a></p>
+			<button class="deletemsg" id="delete">Delete</button>
+            <button class="logout" id="exit">Exit</button>
 		</div>
 
 		<div id="chatbox"></div>
 		
-
 		<form name="message" method="post">
 			<input type="text" id="usermsg">
 			<input type="submit" id="submitmsg" value="Send">
 		</form>
-	</div>	
+		</div>	
 	</div>
 </body>
 </html>

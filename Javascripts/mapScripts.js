@@ -1,86 +1,4 @@
 mapboxgl.accessToken = 'pk.eyJ1Ijoia3MwMTA3IiwiYSI6ImNrd3hpa2djNzBlYjYydnExYXJ3bXVqNW8ifQ.4eD36Q7KuGJIPegaAn37NQ';
-const geojson = {
-    'type': 'FeatureCollection',
-    'features': [
-        {
-            'type': 'Feature',
-            'properties': {
-                'message': 'Factory',
-                'iconSize': [40, 40]
-            },
-            'geometry': {
-                'type': 'Point',
-                'coordinates': [-2.23733, 53.47404]
-            }
-        },
-        {
-            'type': 'Feature',
-            'properties': {
-                'message': 'Turing Tap',
-                'iconSize': [40, 40]
-            },
-            'geometry': {
-                'type': 'Point',
-                'coordinates': [-2.22935, 53.46252]
-            }
-        },
-        {
-            'type': 'Feature',
-            'properties': {
-                'message': 'Footage',
-                'iconSize': [40, 40]
-            },
-            'geometry': {
-                'type': 'Point',
-                'coordinates': [-2.23687, 53.47016]
-            }
-        },
-        {
-            'type': 'Feature',
-            'properties': {
-                'message': 'Mojo',
-                'iconSize': [40, 40]
-            },
-            'geometry': {
-                'type': 'Point',
-                'coordinates': [-2.249815066033617, 53.481263991254615]
-            }
-        },
-        {
-            'type': 'Feature',
-            'properties': {
-                'message': 'Gay',
-                'iconSize': [40, 40]
-            },
-            'geometry': {
-                'type': 'Point',
-                'coordinates': [-2.2379910112825154, 53.47647216906738]
-            }
-        },
-        {
-            'type': 'Feature',
-            'properties': {
-                'message': 'Cargo',
-                'iconSize': [40, 40]
-            },
-            'geometry': {
-                'type': 'Point',
-                'coordinates': [-2.2412459798138444, 53.48478796773415]
-            }
-        },
-        {
-            'type': 'Feature',
-            'properties': {
-                'message': 'The Paramount',
-                'iconSize': [40, 40]
-            },
-            'geometry': {
-                'type': 'Point',
-                'coordinates': [-2.242571365193075, 53.47653556884342]
-            }
-        }
-    ]
-};
 
 const bounds = [
     [-2.279723291346777, 53.43227454888223], // Southwest coordinates
@@ -108,7 +26,7 @@ function changeMapStyle(){
     }
 }
 
-for (const marker of geojson.features) {
+for (const marker of getMarkers().features) {
     // Create a DOM element for each marker.
     const el = document.createElement('div');
     const width = marker.properties.iconSize[0];

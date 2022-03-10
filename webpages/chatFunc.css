@@ -1,7 +1,6 @@
 * {
     margin: 0;
     padding: 0;
-    font-family: "Montserrat";
 }
    
   body {
@@ -51,7 +50,7 @@
   }
 
   #submitmsg{
-    background-color: #000000;
+    background-color: #929292;
     border: 2px solid #ffffff;
     color: white;
     padding: 4px 10px;
@@ -82,6 +81,5 @@
     padding-bottom: 25px;
     width: 80%;
     max-width: 100%;
-    border: 2px solid #212121;
-    border-radius: 4px;
+    border-radius: 14px;
   }

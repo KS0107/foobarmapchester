@@ -64,7 +64,7 @@ function getTimetable($UserID)
 	echo $UserID;
 	$stmt->execute(["UserID"=>$UserID]);
 	$times = $stmt->fetchColumn();
-	$_SESSION['10am2pm'] = $times["10am2pm"];
+	$_SESSION['10am2pm'] = $times;
 	// $_SESSION['2pm6pm'] = $time2;
 	// $_SESSION['6pm11pm'] = $time3;
 	// $_SESSION['11pm10am'] = $time4;

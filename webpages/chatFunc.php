@@ -11,7 +11,7 @@
 <body>
 	<div class="friendList">
 		<h2>Friends</h2>
-		<div id="friends" style="border: solid;">
+		<div id="friends">
 			
 		</div>
 	</div>

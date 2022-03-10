@@ -1,7 +1,7 @@
 * {
     margin: 0;
     padding: 0;
-  }
+}
    
   body {
     margin: 20px auto;
@@ -19,11 +19,6 @@
   form label {
     font-size: 1.5rem;
     font-weight: bold;
-  }
-
-  a {
-    color: #ffffff;
-    text-decoration: none;
   }
    
   a:hover {
@@ -53,7 +48,7 @@
   }
 
   #submitmsg{
-    background: #ffffff;
+    background: #000000;
     border: 2px solid #ffffff;
     color: white;
     padding: 4px 10px;
@@ -68,15 +63,6 @@
    
   #menu p.welcome {
     flex: 1;
-  }
-   
-  a#exit, a#delete {
-    color: white;
-    background: #c62828;
-    padding: 4px 8px;
-    border-radius: 4px;
-    font-weight: bold;
-    margin-left: 10px;
   }
    
   .mainContainer{

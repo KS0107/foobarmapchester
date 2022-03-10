@@ -16,6 +16,25 @@ class UserModel extends Database{
         return true;
     }
 
+    public function getMessage($sender, $receiver){
+        $sql = "SELECT MessageBody, CreateDate, UserID, RecipientID
+                FROM Message
+                WHERE UserID = :userid AND RecipientID = :recipientid
+                UNION
+                SELECT MessageBody, CreateDate, UserID, RecipientID
+                FROM Message
+                WHERE UserID = :recipientid1 AND RecipientID = :userid1
+                ORDER BY CreateDate ASC";
+
+        return $this->executeFetchQuery($sql, ["userid"=>$this->getID($sender), "recipientid"=>$this->getID($receiver),"recipientid1"=>$this->getID($receiver), "userid1"=>$this->getID($sender)]);
+    }
+
+    public function storeMessage($message, $userID, $receiverID){
+        $sql = "INSERT INTO Message (MessageBody, UserID, RecipientID)
+                VALUES (:message, :userid, :receiverid)";
+        return $this->executeQuery($sql, ["message"=>$message, "userid"=>$userID, "receiverid"=>$receiverID]);
+    }
+
     // ########### Authentication #############
     public function authentication($username, $password){
         $sql = "SELECT Password
@@ -81,18 +100,9 @@ class UserModel extends Database{
         return $this->executeFetchQuery($sql, ["username"=>$username])[0]["UserID"];
     }
 
-    public function getMessage($sender, $receiver){
-        $sql = "SELECT MessageBody, CreateDate, UserID, RecipientID
-                FROM Message
-                WHERE UserID = :userid AND RecipientID = :recipientid
-                UNION
-                SELECT MessageBody, CreateDate, UserID, RecipientID
-                FROM Message
-                WHERE UserID = :recipientid1 AND RecipientID = :userid1
-                ORDER BY CreateDate ASC";
+    
 
-        return $this->executeFetchQuery($sql, ["userid"=>$this->getID($sender), "recipientid"=>$this->getID($receiver),"recipientid1"=>$this->getID($receiver), "userid1"=>$this->getID($sender)]);
-    }
+    
 }
 
 ?>

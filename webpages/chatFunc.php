@@ -9,9 +9,8 @@
 	<link rel="stylesheet" type="text/css" href="chatFunc.css">
 </head>
 <body>
-	<div class="mainContainer">
 	<div class="friendList">
-		<div>Friends</div>
+		<h2>Friends</h2>
 		<div id="friends" style="border: solid;">
 			
 		</div>
@@ -28,6 +27,5 @@
 			<button id="send">Send</button>
 		</form>
 		</div>	
-	</div>
 </body>
 </html>

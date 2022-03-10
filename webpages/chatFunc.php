@@ -16,7 +16,6 @@
 		</div>
 	</div>
 
-	<div id="wrapper">
 		<button class="deletemsg" id="delete">Delete</button>
         <button class="logout" id="exit">Exit</button>
 
@@ -26,6 +25,5 @@
 			<input type="text" id="usermsg"></input>
 			<button id="send">Send</button>
 		</form>
-		</div>	
 </body>
 </html>

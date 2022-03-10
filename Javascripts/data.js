@@ -234,6 +234,7 @@ function getMarkers(){
 
 function getTimetable(){
     let timetable = defaultPlaceholderTimetable;
+    console.log(sessionStorage.getItem["10am2pm"]);
     if(sessionStorage.getItem["10am2pm"] != undefined){
         timetable[0][1] = sessionStorage.getItem["10am2pm"];
         timetable[1][1] = sessionStorage.getItem["2pm6pm"];

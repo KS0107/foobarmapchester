@@ -64,18 +64,18 @@ function getTimetable($UserID, $time1, $time2, $time3, $time4)
 	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
 	$stmt = $pdo->prepare($sql);
 	$stmt->execute([
-		'10am2pm' => $time1
-        '2pm6pm' => $time2
-        '6pm11pm' => $time3
+		'10am2pm' => $time1,
+        '2pm6pm' => $time2,
+        '6pm11pm' => $time3,
         '11pm10am' => $time4
 					]);
 	$stmt->setFetchMode(PDO::FETCH_ASSOC);
 	$row = $stmt->fetch();
-	$_SESSION['10am2pm'] = "test"
-	$_SESSION['2pm6pm'] = $time2
-	$_SESSION['6pm11pm'] = $time3
-	$_SESSION['11pm10am'] = $time4
+	$_SESSION['10am2pm'] = "test";
+	$_SESSION['2pm6pm'] = $time2;
+	$_SESSION['6pm11pm'] = $time3;
+	$_SESSION['11pm10am'] = $time4;
 }
-getUserID($_COOKIE["username"])
-getTimetable($UserID)
+getUserID($_COOKIE["username"]);
+getTimetable($UserID);
 ?>

@@ -71,11 +71,10 @@ function getTimetable($UserID)
 					]);
 	$stmt->setFetchMode(PDO::FETCH_ASSOC);
 	$row = $stmt->fetch();
-	$_SESSION['10am2pm'] = $time1
+	$_SESSION['10am2pm'] = "test"
 	$_SESSION['2pm6pm'] = $time2
 	$_SESSION['6pm11pm'] = $time3
 	$_SESSION['11pm10am'] = $time4
-	$_SESSION['gaming'] = "test"
 }
 getUserID($_COOKIE["username"])
 getTimetable($UserID)

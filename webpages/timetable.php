@@ -55,7 +55,7 @@ function getUserID($UserID)
 	$stmt->setFetchMode(PDO::FETCH_ASSOC);
 	$row = $stmt->fetch();
 }
-function getTimetable($time1, $time2, $time3, $time4)
+function getTimetable()
 {	
 	$sql = "SELECT 10am2pm, 2pm6pm, 6pm11pm, 11pm10am
 			FROM   Timetable
@@ -77,5 +77,5 @@ function getTimetable($time1, $time2, $time3, $time4)
 	$_SESSION['11pm10am'] = $time4;
 }
 getUserID($_COOKIE["username"]);
-getTimetable( $time1, $time2, $time3, $time4);
+getTimetable();
 ?>

@@ -41,7 +41,7 @@
 </body>
 </html>
 <?php
-function getUserID($UserID)
+function getUserID($Username)
 {	
 	$sql = "SELECT UserID
 			FROM   User
@@ -49,28 +49,27 @@ function getUserID($UserID)
 	$pdo = new pdo('mysql:host=dbhost.cs.man.ac.uk; dbname=2021_comp10120_z19', 'y02478jh', 'i7JLzgM-z5zv9T');
 	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
 	$stmt = $pdo->prepare($sql);
-	$stmt->execute(['UserID' => $UserID]);
+	$stmt->execute(['Username' => $Username]);
 	$stmt->setFetchMode(PDO::FETCH_ASSOC);
-	$row = $stmt->fetch();
+	$UserID = $stmt->fetch();
+	return $UserID;
 }
-function getTimetable()
+function getTimetable($UserID)
 {	
 	$sql = "SELECT 10am2pm, 2pm6pm, 6pm11pm, 11pm10am
 			FROM   Timetable
-			WHERE  UserID = 17";
+			WHERE  UserID = :UserID";
 	$pdo = new pdo('mysql:host=dbhost.cs.man.ac.uk; dbname=2021_comp10120_z19', 'y02478jh', 'i7JLzgM-z5zv9T');
 	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
 	$stmt = $pdo->prepare($sql);
-	$stmt->execute([
-		'10am2pm' => $time1, '2pm6pm' => $time2, '6pm11pm' => $time3, '11pm10am' => $time4
-	]);
+	$stmt->execute(["UserID"=>$UserID]);
 	$stmt->setFetchMode(PDO::FETCH_ASSOC);
-	$row = $stmt->fetch();
-	$_SESSION['10am2pm'] = "0101110";
-	$_SESSION['2pm6pm'] = $time2;
-	$_SESSION['6pm11pm'] = $time3;
-	$_SESSION['11pm10am'] = $time4;
+	$time1 = $stmt->fetch();
+	$_SESSION['10am2pm'] = $time1;
+	// $_SESSION['2pm6pm'] = $time2;
+	// $_SESSION['6pm11pm'] = $time3;
+	// $_SESSION['11pm10am'] = $time4;
 }
-getUserID($_COOKIE["username"]);
-getTimetable();
+$UserID = getUserID($_COOKIE["username"]);
+getTimetable($UserID);
 ?>

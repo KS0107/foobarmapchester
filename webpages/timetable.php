@@ -68,7 +68,7 @@ function getTimetable()
         '2pm6pm' => $time2,
         '6pm11pm' => $time3,
         '11pm10am' => $time4
-					]);
+	]);
 	$stmt->setFetchMode(PDO::FETCH_ASSOC);
 	$row = $stmt->fetch();
 	$_SESSION['10am2pm'] = "test";

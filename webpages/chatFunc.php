@@ -20,17 +20,16 @@
 	<div id="wrapper">
 		<div id="menu">
 			<button class="deletemsg" id="delete">Delete</button>
-            <button class="logout" id="exit">Exit Chat</button>
+            <button class="logout" id="exit">Exit</button>
 		</div>
 
 		<div id="chatbox"></div>
 		
-
 		<form name="message" method="post">
 			<input type="text" id="usermsg">
 			<input type="submit" id="submitmsg" value="Send">
 		</form>
-	</div>	
+		</div>	
 	</div>
 </body>
 </html>

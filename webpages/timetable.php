@@ -65,10 +65,7 @@ function getTimetable($UserID)
 	$stmt->execute(["UserID"=>$UserID]);
 	$times = $stmt->fetchColumn();
 	echo $times;
-	setcookie(
-		"times",
-		$value = $times
-	): bool
+	setcookie("times", $times);
 	// $_SESSION['2pm6pm'] = $time2;
 	// $_SESSION['6pm11pm'] = $time3;
 	// $_SESSION['11pm10am'] = $time4;

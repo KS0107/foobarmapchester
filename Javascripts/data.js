@@ -238,7 +238,7 @@ function getTimetable(){
     .split('; ')
     .find(row => row.startsWith('times='))
     .split('=')[1];
-    console.log(cookieValue);
+    console.log(cookieValue, "!!");
     if(cookieValue != null){
         timetable[0][1] = cookieValue;
         timetable[1][1] = sessionStorage.getItem["2pm6pm"];

@@ -1,5 +1,6 @@
 #mapmarker{
     border-radius: 50%;
+    border-color: rgb(255,255,255);
     padding: 5px;
     width: 150px;
     background: url('../images/martini-glass-3.png') rgb(88, 88, 88);

@@ -64,14 +64,11 @@ function getTimetable()
 	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
 	$stmt = $pdo->prepare($sql);
 	$stmt->execute([
-		'10am2pm' => $time1,
-        '2pm6pm' => $time2,
-        '6pm11pm' => $time3,
-        '11pm10am' => $time4
+		'10am2pm' => $time1, '2pm6pm' => $time2, '6pm11pm' => $time3, '11pm10am' => $time4
 	]);
 	$stmt->setFetchMode(PDO::FETCH_ASSOC);
 	$row = $stmt->fetch();
-	$_SESSION['10am2pm'] = "test";
+	$_SESSION['10am2pm'] = "0101110";
 	$_SESSION['2pm6pm'] = $time2;
 	$_SESSION['6pm11pm'] = $time3;
 	$_SESSION['11pm10am'] = $time4;

@@ -9,10 +9,9 @@
 	<link rel="stylesheet" type="text/css" href="chatFunc.css">
 </head>
 <body>
-	<div class="mainContainer">
 	<div class="friendList">
-		<div>Friends</div>
-		<div id="friends" style="border: solid;">
+		<h2>Friends</h2>
+		<div id="friends">
 			
 		</div>
 	</div>
@@ -25,9 +24,8 @@
 		
 		<form name="message" method="post">
 			<input type="text" id="usermsg">
-			<input type="submit" id="submitmsg" value="Send">
+			<button id="send">Send</button>
 		</form>
 		</div>	
-	</div>
 </body>
 </html>

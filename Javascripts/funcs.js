@@ -216,7 +216,7 @@ function goToPage(page){
             if(pathSections[pathSections.length-1] == "manchester"){
                 pathSections.push("webpages");
             }
-            pathSections.push("timetable.html");
+            pathSections.push("timetable.php");
             break;
         case "L":
             pathSections.pop();

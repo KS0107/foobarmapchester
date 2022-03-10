@@ -86,7 +86,7 @@ class UserController extends BaseController{
             );
                 if($bool){
                     $redirectBool = true;
-                    $URL = "https://web.cs.manchester.ac.uk/y02478jh/manchester/webpages/loginPage.php";
+                    $URL = "../../../webpages/loginPage.php";
                     $this->errorHandler($this->strErrorDesc, "", $this->strErrorHeader, $redirectBool, $URL);
                 }
             }catch(Error $e){

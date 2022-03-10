@@ -221,7 +221,7 @@ const defaultPlaceholderTimetable = [
 ];
 
 function generateMarkerData(){
-    
+
 }
 
 function getReviews(){
@@ -233,5 +233,12 @@ function getMarkers(){
 }
 
 function getTimetable(){
-    return defaultPlaceholderTimetable;
+    let timetable = defaultPlaceholderTimetable;
+    if(sessionStorage != null){
+        timetable[0][1] = sessionStorage.getItem["10am2pm"];
+        timetable[1][1] = sessionStorage.getItem["2pm6pm"];
+        timetable[2][1] = sessionStorage.getItem["6pm11pm"];
+        timetable[3][1] = sessionStorage.getItem["11pm10am"];
+    }
+    return timetable;
 }

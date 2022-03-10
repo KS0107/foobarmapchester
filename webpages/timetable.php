@@ -1,5 +1,5 @@
 <?php
-function ($Username)
+function getUserID($Username)
 {	
 	$sql = "SELECT UserID
 			FROM   Timetable
@@ -13,6 +13,7 @@ function ($Username)
 	$stmt->setFetchMode(PDO::FETCH_ASSOC);
 	$row = $stmt->fetch();
 }
+function getTimetable($UserID)
 {	
 	$sql = "SELECT 10am2pm, 2pm6pm, 6pm11pm, 11pm10am
 			FROM   Timetable
@@ -33,4 +34,6 @@ function ($Username)
 	$_SESSION['6pm11pm'] = $time3
 	$_SESSION['11pm10am'] = $time4
 }
+getUserID($_COOKIE["username"])
+getTimetable($UserID)
 ?>

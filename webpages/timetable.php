@@ -51,7 +51,7 @@ function getUserID($Username)
 	$stmt = $pdo->prepare($sql);
 	$stmt->execute(['Username' => $Username]);
 	$UserID = $stmt->fetch(PDO::FETCH_ASSOC);
-	return $UserID;
+	return $UserID['UserID'];
 }
 function getTimetable($UserID)
 {	

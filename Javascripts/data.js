@@ -250,7 +250,7 @@ function getTimetable(){
     .split('; ')
     .find(row => row.startsWith('time4='))
     .split('=')[1];
-    if(cookieValue != null){
+    if(cookieValue1 != null){
         timetable[0][1] = cookieValue1;
         timetable[1][1] = cookieValue2;
         timetable[2][1] = cookieValue3;

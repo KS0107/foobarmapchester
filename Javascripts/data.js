@@ -234,15 +234,14 @@ function getMarkers(){
 
 function getTimetable(){
     let timetable = defaultPlaceholderTimetable;
-    // try{
-        for (let i = 0; i < 4; i++) {
-            cookieValue = document.cookie.split('; ').find(row => row.startsWith('time'+(i+1)+'=')).split('=')[1];
-            if(cookieValue != null){
-                timetable[i][1] = cookieValue1;
-            }
+    for (let i = 0; i < 4; i++) {
+        cookieValue = document.cookie.split('; ').find(row => row.startsWith('time'+(i+1)+'=')).split('=')[1];
+        if(cookieValue != null){
+            timetable[i][1] = cookieValue1;
         }
+    }
     // }catch{
-        console.log("No timetable in cookies, using default");
+    //console.log("No timetable in cookies, using default");
     // }
 
 

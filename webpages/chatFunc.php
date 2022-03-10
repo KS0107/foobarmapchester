@@ -19,9 +19,8 @@
 
 	<div id="wrapper">
 		<div id="menu">
-			<p class="welcome">Welcome, <b></b></p>
-			<p class="deletemsg"><a id="delete">Delete</a>
-            <p class="logout"><a id="exit">Exit Chat</a></p>
+			<button class="deletemsg" id="delete">Delete</button>
+            <button class="logout" id="exit">Exit Chat</button>
 		</div>
 
 		<div id="chatbox"></div>

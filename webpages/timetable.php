@@ -64,8 +64,7 @@ function getTimetable($UserID)
 	$stmt = $pdo->prepare($sql);
 	echo $UserID;
 	$stmt->execute(["UserID"=>$UserID]);
-	$stmt->setFetchMode(PDO::FETCH_ASSOC);
-	$time1 = $stmt->fetch();
+	$time1 = $stmt->fetchColumn();
 	$_SESSION['10am2pm'] = $time1;
 	// $_SESSION['2pm6pm'] = $time2;
 	// $_SESSION['6pm11pm'] = $time3;

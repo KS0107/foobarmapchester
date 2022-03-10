@@ -234,9 +234,13 @@ function getMarkers(){
 
 function getTimetable(){
     let timetable = defaultPlaceholderTimetable;
-    console.log(sessionStorage.getItem["10am2pm"]);
-    if(sessionStorage.getItem["10am2pm"] != undefined){
-        timetable[0][1] = sessionStorage.getItem["10am2pm"];
+    const cookieValue = document.cookie
+    .split('; ')
+    .find(row => row.startsWith('times='))
+    .split('=')[1];
+    console.log(cookieValue);
+    if(cookieValue != null){
+        timetable[0][1] = cookieValue;
         timetable[1][1] = sessionStorage.getItem["2pm6pm"];
         timetable[2][1] = sessionStorage.getItem["6pm11pm"];
         timetable[3][1] = sessionStorage.getItem["11pm10am"];

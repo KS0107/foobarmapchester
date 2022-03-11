@@ -43,7 +43,7 @@ if (!isset($_SESSION['login']))
 			$_SESSION["login"] = true;
 			if (isset($_COOKIE['username'])) {
 				unset($_COOKIE['username']); 
-				setcookie('username', null, -1, '/'); 
+				setcookie('username', null, -1); 
 			header("location: ../index.html");
 		}
 	?>

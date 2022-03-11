@@ -44,7 +44,7 @@ class UserModel extends Database{
         
         if(password_verify($password, $result[0]["Password"])){
             $this->setCookie($username, time() + 86400);
-            echo "successfully loged in";
+            echo "successfully logged in";
             return true;
         }else{
             return false;
@@ -65,12 +65,12 @@ class UserModel extends Database{
     }
 
     public function setCookie($cookieValue, $duration){
-        if(!isset($_COOKIE["username"])){
+        // if(!isset($_COOKIE["username"])){
             setcookie("username", $cookieValue, $duration, "/");
             return true;
-        }else{
-            return false;
-        }
+        // }else{
+        //     return false;
+        // }
     }
 
     public function addUser($firstname, $lastname, $username, $password){

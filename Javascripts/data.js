@@ -241,10 +241,5 @@ function getTimetable(){
             timetable[i][1] = cookieValueSplit;
         }
     }
-    // }catch{
-    //console.log("No timetable in cookies, using default");
-    // }
-
-
     return timetable;
 }

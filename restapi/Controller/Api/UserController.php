@@ -31,7 +31,7 @@ class UserController extends BaseController{
     }
 
     public function authenAction(){
-        $redirectBool = false;
+        $redirectBool = true;
         if(strtoupper($this->requestMethod) == "GET"){
             try{
                 $userModel = new UserModel();

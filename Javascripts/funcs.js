@@ -61,7 +61,7 @@ function loadReviews(){
 function loadTimetable(){
     const pageName = window.location.pathname.split("/").pop()
     console.log(pageName)
-    if (pageName == "timetable.html"){
+    if (pageName == "timetable.php"){
         let timetable = getTimetable();
         console.log(timetable);
         var timetableObj = document.getElementById("timetable");

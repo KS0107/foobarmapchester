@@ -234,12 +234,12 @@ function getMarkers(){
 
 function getTimetable(){
     let timetable = defaultPlaceholderTimetable;
-    console.log(sessionStorage.getItem["10am2pm"]);
-    if(sessionStorage.getItem["10am2pm"] != undefined){
-        timetable[0][1] = sessionStorage.getItem["10am2pm"];
-        timetable[1][1] = sessionStorage.getItem["2pm6pm"];
-        timetable[2][1] = sessionStorage.getItem["6pm11pm"];
-        timetable[3][1] = sessionStorage.getItem["11pm10am"];
+    for (let i = 0; i < 4; i++) {
+        let cookieValue = document.cookie.split('; ').find(row => row.startsWith('time'+(i+1)+'='));
+        if(cookieValue != undefined){
+            cookieValueSplit = cookieValue.split('=')[1];
+            timetable[i][1] = cookieValueSplit;
+        }
     }
     return timetable;
 }

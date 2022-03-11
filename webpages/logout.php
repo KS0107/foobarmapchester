@@ -41,6 +41,9 @@ if (!isset($_SESSION['login']))
         }
         function button1(){
 			$_SESSION["login"] = true;
+			if (isset($_COOKIE['username'])) {
+				unset($_COOKIE['username']); 
+				setcookie('username', null, -1, '/'); 
 			header("location: ../index.html");
 		}
 	?>

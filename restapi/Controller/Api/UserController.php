@@ -137,5 +137,17 @@ class UserController extends BaseController{
 
         $this->errorHandler($this->strErrorDesc, $respondData, $this->strErrorHeader);
     }
+
+    public function messageIn(){
+        try{
+            if(strtoupper($this->requestMethod) == "POST"){
+                ;
+            }
+
+        }catch(Error $e){
+            $this->strErrorDesc = $e->getMessage();
+            $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
+        }
+    }
 }
 ?>

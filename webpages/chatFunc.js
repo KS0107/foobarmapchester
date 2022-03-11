@@ -9,7 +9,7 @@ $(document).ready(function(){
 
     $("#submitmsg").click(function(){
         var clientmsg = $("#usermsg").val();
-        $.post("post.php", {text: clientmsg});
+        $.post("", {text: clientmsg, receiver: receiver, sender: getCookie("username")});
         $("#usermsg").val("");
         return false;
     });
@@ -61,6 +61,7 @@ function chatHandler(friend){
     if(typeof(intervalID) !== "undefined"){
         clearInterval(intervalID);
     }
+    receiver = friend;
     intervalID = setInterval(loadLog, 500, friend);
 }
 

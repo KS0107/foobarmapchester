@@ -235,10 +235,10 @@ function getMarkers(){
 function getTimetable(){
     let timetable = defaultPlaceholderTimetable;
     for (let i = 0; i < 4; i++) {
-        console.log(cookieValue = document.cookie.split('; ').find(row => row.startsWith('time'+(i+1)+'=')));
-        //.split('=')[1];
-        if(cookieValue != null){
-            timetable[i][1] = cookieValue1;
+        let cookieValue = document.cookie.split('; ').find(row => row.startsWith('time'+(i+1)+'='));
+        if(cookieValue != undefined){
+            cookieValueSplit = cookieValue.split('=')[1];
+            timetable[i][1] = cookieValueSplit;
         }
     }
     // }catch{

@@ -63,7 +63,6 @@ function getTimetable($UserID)
 	$stmt = $pdo->prepare($sql);
 	$stmt->execute(["UserID"=>$UserID]);
 	$times = $stmt->fetch(PDO::FETCH_ASSOC);
-	echo $times["10am2pm"];
 	if(gettype($times["10am2pm"]) == "string"){
 		setcookie("time1", $times["10am2pm"]);
 		setcookie("time2", $times["2pm6pm"]);

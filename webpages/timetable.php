@@ -73,5 +73,6 @@ function getTimetable($UserID)
 	}
 }
 $UserID = getUserID($_COOKIE["username"]);
+echo $UserID;
 getTimetable($UserID);
 ?>

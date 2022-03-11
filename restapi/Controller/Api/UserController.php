@@ -31,7 +31,7 @@ class UserController extends BaseController{
     }
 
     public function authenAction(){
-        $redirectBool = false;
+        $redirectBool = true;
         if(strtoupper($this->requestMethod) == "GET"){
             try{
                 $userModel = new UserModel();
@@ -39,15 +39,18 @@ class UserController extends BaseController{
                 if($userModel->verifyUser($this->arrQueryStringParams["username"])){
                     $redirectBool = $userModel->authentication($this->arrQueryStringParams["username"], $this->arrQueryStringParams["password"]);
                     if($redirectBool){
+                        $URL = "../../../webpages/home.html";
                         $respondData = "";
                     }else{
+                        $URL = "../../../webpages/loginPage.php";
                         $respondData = json_decode("Password is wrong!");
                     }
                 }else{
+                    $URL = "../../../webpages/loginPage.php";
                     $respondData = json_decode("Username is not valid!");
                 }
  
-                $URL = "../../../webpages/home.html";
+                
             }catch(Error $e){
                 $this->strErrorDesc = $e->getMessage();
                 $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';

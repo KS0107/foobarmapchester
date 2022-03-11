@@ -31,6 +31,7 @@ class UserController extends BaseController{
     }
 
     public function authenAction(){
+        $redirectBool = false;
         if(strtoupper($this->requestMethod) == "GET"){
             try{
                 $userModel = new UserModel();
@@ -46,7 +47,7 @@ class UserController extends BaseController{
                     $respondData = json_decode("Username is not valid!");
                 }
  
-                $URL = "../../../webpages/map.html";
+                $URL = "../../../webpages/home.html";
             }catch(Error $e){
                 $this->strErrorDesc = $e->getMessage();
                 $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';

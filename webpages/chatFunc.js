@@ -78,7 +78,7 @@ function loadLog(friend){
             message += "<div style=\"text-align: left;\">" + text[1][i].CreateDate + "<br>" + text[1][i].MessageBody + "</div>";
         }      
     }
-    document.getElementById("#chatbox").innerHTML = message;
+    document.getElementById("chatbox").innerHTML = message;
     }   
     xhttp.open("GET", "https://web.cs.manchester.ac.uk/y02478jh/restapi/index.php/user/getMessage?receiver=" + friend);
     xhttp.send();

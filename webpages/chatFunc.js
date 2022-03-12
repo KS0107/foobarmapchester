@@ -66,6 +66,7 @@ function chatHandler(friend){
 }
 
 function loadLog(friend){
+    var oldscrollHeight = $("#chatbox")[0].scrollHeight - 20;
     const xhttp = new XMLHttpRequest();
     xhttp.onload = function() {
     var text = JSON.parse(this.responseText);

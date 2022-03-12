@@ -71,7 +71,7 @@ function loadLog(friend){
     xhttp.onload = function() {
     let text = JSON.parse(this.responseText);
     let message="";
-    alert("text[1].MessageBody: " + text[1].MessageBody + " text[0].Sender: " + text[0].Sender + " text.length: " + text.length + "json: " + this.responseText);
+    alert(" text[0].Sender: " + text[0].Sender + " text.length: " + text.length + "json: " + this.responseText);
     for(let i = 1; i < text.length; i++){
         if(text[i].UserID == text[0].Sender){
             message += "<div style=\"text-align: right;\">" + text[i].CreateDate + "<br>" + text[i].MessageBody + "</div>";
@@ -80,7 +80,7 @@ function loadLog(friend){
         }      
     }
     alert(message);
-    document.getElementById("#chatbox").innerHTML = message;
+    document.getElementById("#chatbox").innerHTML = this.responseText;
     }   
     xhttp.open("GET", "https://web.cs.manchester.ac.uk/y02478jh/restapi/index.php/user/getMessage?receiver=" + friend);
     xhttp.send();

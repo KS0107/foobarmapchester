@@ -69,7 +69,7 @@ function loadLog(friend){
     var oldscrollHeight = $("#chatbox")[0].scrollHeight - 20;
     const xhttp = new XMLHttpRequest();
     xhttp.onload = function() {
-    var text = JSON.parse(this.responseText);
+    let text = JSON.parse(this.responseText);
     let message="";
     for(let i = 1; i < text.length; i++){
         if(text[i].UserID == text[0].Sender){

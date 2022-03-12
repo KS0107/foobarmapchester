@@ -71,16 +71,14 @@ function loadLog(friend){
     xhttp.onload = function() {
     let text = JSON.parse(this.responseText);
     let message="";
-    alert(" text[0].Sender: " + text[0].Sender + " text.length: " + text.length + "json: " + this.responseText);
-    for(let i = 1; i < text.length; i++){
-        if(text[i].UserID == text[0].Sender){
-            message += "<div style=\"text-align: right;\">" + text[i].CreateDate + "<br>" + text[i].MessageBody + "</div>";
+    for(let i = 0; i < text[1].length; i++){
+        if(text[1][i].UserID == text[0].Sender){
+            message += "<div style=\"text-align: right;\">" + text[1][i].CreateDate + "<br>" + text[1][i].MessageBody + "</div>";
         }else{
-            message += "<div style=\"text-align: left;\">" + text[i].CreateDate + "<br>" + text[i].MessageBody + "</div>";
+            message += "<div style=\"text-align: left;\">" + text[1][i].CreateDate + "<br>" + text[1][i].MessageBody + "</div>";
         }      
     }
-    alert(message);
-    document.getElementById("#chatbox").innerHTML = this.responseText;
+    document.getElementById("#chatbox").innerHTML = message;
     }   
     xhttp.open("GET", "https://web.cs.manchester.ac.uk/y02478jh/restapi/index.php/user/getMessage?receiver=" + friend);
     xhttp.send();

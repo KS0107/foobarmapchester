@@ -108,7 +108,7 @@ class UserController extends BaseController{
     public function getFriendAction(){
         try{
             if(strtoupper($this->requestMethod) == "GET"){
-                $userModel = new userModel();
+                $userModel = new UserModel();
                 $respondData = $userModel->getFriend($this->arrQueryStringParams["username"]);
                 $respondData = json_encode($respondData);
             }else{
@@ -126,7 +126,7 @@ class UserController extends BaseController{
     public function getMessageAction(){
         try{
             if(strtoupper($this->requestMethod) == "GET"){
-                $userModel = new userModel();
+                $userModel = new UserModel();
                 $additionalInfo = array("Sender"=>$userModel->getID($_COOKIE['username']), "Reciver"=>$userModel->getID($this->arrQueryStringParams["receiver"]));
                 $respondData = $userModel->getMessage($_COOKIE['username'], $this->arrQueryStringParams["receiver"]);
                 $respondData = json_encode(array($additionalInfo, $respondData));
@@ -142,10 +142,17 @@ class UserController extends BaseController{
         $this->errorHandler($this->strErrorDesc, $respondData, $this->strErrorHeader);
     }
 
-    public function messageIn(){
+    public function msgInAction(){
         try{
             if(strtoupper($this->requestMethod) == "POST"){
-                ;
+                    $msg = $_POST["text"];
+                    $receiver = $_POST["receiver"];
+                    $sender = $_POST["sender"];
+                    $userModel = new UserModel();
+                    $userModel->storeMessage($msg, $userModel->getID($sender), $userModel->getID($receiver));
+            }else{
+                $this->strErrorDesc = 'Method not supported';
+                $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
             }
 
         }catch(Error $e){

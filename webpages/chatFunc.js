@@ -7,9 +7,9 @@ $(document).ready(function(){
         }
     })
 
-    $("#submitmsg").click(function(){
+    $("#send").click(function(){
         var clientmsg = $("#usermsg").val();
-        $.post("", {text: clientmsg, receiver: receiver, sender: getCookie("username")});
+        $.post("../restapi/index.php/user/msgIn", {text: clientmsg, receiver: receiver, sender: getCookie("username")});
         $("#usermsg").val("");
         return false;
     });

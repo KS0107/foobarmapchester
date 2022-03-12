@@ -71,7 +71,7 @@ function loadLog(friend){
     xhttp.onload = function() {
     let text = JSON.parse(this.responseText);
     let message="";
-    alert(text[0]);
+    alert(text[0][0]);
     // for(let i = 1; i < text.length; i++){
     //     if(text[i].UserID == text[0].Sender){
     //         message += "<div style=\"text-align: right;\">" + text[i].CreateDate + "<br>" + text[i].MessageBody + "</div>";

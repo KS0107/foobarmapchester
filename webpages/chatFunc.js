@@ -80,7 +80,7 @@ function loadLog(friend){
     //     }      
     // }
     // document.getElementById("chatbox").innerHTML = message;
-    // }   
+    }   
     xhttp.open("GET", "https://web.cs.manchester.ac.uk/y02478jh/restapi/index.php/user/getMessage?receiver=" + friend);
     xhttp.send();
 

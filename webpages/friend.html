@@ -15,7 +15,14 @@
         <button id="requestsbtn">requests</button>
     </div>
 
-    <div id="friendsBox">1</div>
+    <div id="friendsBox">
+        <div class="form-wrapper">
+            <form action="">
+                <input type="text" onkeyup="showUsers(this.value)">
+            </form>
+        </div>
+        <div id="showBox"></div>
+    </div>
     <div id="requestsBox">2</div>
 </body>
 </html>

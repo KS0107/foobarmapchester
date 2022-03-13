@@ -64,6 +64,7 @@ class UserModel extends Database{
         }
     }
 
+    // ################# functionalities #####################
     public function setCookie($cookieValue, $duration){
         // if(!isset($_COOKIE["username"])){
             setcookie("username", $cookieValue, $duration, "/");
@@ -100,7 +101,12 @@ class UserModel extends Database{
         return $this->executeFetchQuery($sql, ["username"=>$username])[0]["UserID"];
     }
 
-    
+   public function getUsersByInput($seg){
+       $sql = "SELECT Username
+                FROM User
+                WHERE Username LIKE :seg%";
+        return $this->executeFetchQuery($sql, ["seg"=>$seg]);
+   } 
 
     
 }

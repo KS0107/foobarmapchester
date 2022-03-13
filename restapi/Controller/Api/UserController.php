@@ -160,5 +160,23 @@ class UserController extends BaseController{
             $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
         }
     }
+
+    public function getUserByAction(){
+        try{
+            if(strtoupper($this->requestMethod) == "POST"){
+                $segment = $_POST["segment"];
+                $userModel = new UserModel();
+                $res = $userModel->getUsersByInput($segment);
+                $respondData = json_encode($res);
+            }else{
+                $this->strErrorDesc = 'Method not supported';
+                $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
+            }
+        }catch(Error $e){
+            $this->strErrorDesc = $e->getMessage();
+            $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
+        }
+        $this->errorHandler($this->strErrorDesc, $respondData, $this->strErrorHeader);
+    }
 }
 ?>

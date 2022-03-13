@@ -24,5 +24,5 @@ function showUsers(segment){
     }
     xmlhttp.open("POST", "../restapi/index.php/user/getUserBy");
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xmlhttp.send("segment" + segment);
+    xmlhttp.send("segment=" + segment);
 }

@@ -1,0 +1,15 @@
+.topbar{
+    text-align: center;
+}
+
+#friendsBox, #requestsBox{
+    border: solid;
+}
+
+#friendsBox{
+    display: block;
+}
+
+#requestsBox{
+    display: none;
+}

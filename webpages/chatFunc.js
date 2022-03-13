@@ -15,13 +15,16 @@ $(document).ready(function(){
     });
 
     $("#delete").click(function(){
-            $.get("https://web.cs.manchester.ac.uk/y02478jh/restapi/index.php/user/delete");
+            // $.get("https://web.cs.manchester.ac.uk/y02478jh/restapi/index.php/user/delete");
     });
 
     $("#f1").click(function(){
         $("#f1").html("yes");
     });
 
+    // $("#friendboxbtn").click(function(){
+    //     $("#friendbox").css("display", "block")
+    // });
 
     
 

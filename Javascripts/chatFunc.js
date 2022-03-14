@@ -38,7 +38,7 @@ $(document).ready(function(){
         }
         document.getElementById("friends").innerHTML = friendsList;
         }   
-        xhttp.open("GET", "https://web.cs.manchester.ac.uk/y02478jh/restapi/index.php/user/getFriend?username=" + getCookie("username"));
+        xhttp.open("GET", "../restapi/index.php/user/getFriend?username=" + getCookie("username"));
         xhttp.send();
     }
     setInterval(loadFriend, 1000);
@@ -83,7 +83,7 @@ function loadLog(friend){
     }
     document.getElementById("chatbox").innerHTML = message;
     }   
-    xhttp.open("GET", "https://web.cs.manchester.ac.uk/y02478jh/restapi/index.php/user/getMessage?receiver=" + friend);
+    xhttp.open("GET", "../restapi/index.php/user/getMessage?receiver=" + friend);
     xhttp.send();
 
     var newscrollHeight = $("#chatbox")[0].scrollHeight - 20; //Scroll height after the request

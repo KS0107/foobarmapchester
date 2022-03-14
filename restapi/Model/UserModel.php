@@ -109,7 +109,20 @@ class UserModel extends Database{
         return $this->executeFetchQuery($sql, ["seg"=>$seg]);
    } 
 
+   public function sendRequest($requester, $target){
+       $sql = "INSERT INTO Request (RequesterID, TargetID)
+                VALUES (:requesterid, :targetid)";
+        return $this->executeQuery($sql, ["requesterid"=>$requester, "targetid"=>$target]);
+   }
     
+   public function retrieveRequest($userid){
+       $sql = "SELECT User.Username, Request.CreateDate
+               FROM Request
+               LEFT JOIN User ON Request.RequesterID = User.UserID
+               WHERE Request.TargetID = :userid";
+       
+        return $this->executeFetchQuery($sql, ["userid"=>$userid]);
+   }
 }
 
 ?>

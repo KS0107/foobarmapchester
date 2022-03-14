@@ -15,7 +15,7 @@ $(document).ready(function(){
 function showUsers(segment){
     const xmlhttp = new XMLHttpRequest();
     xmlhttp.onload = function() {
-        let users = JSON.parse(this.responseText);
+        users = JSON.parse(this.responseText);
         show = "";
         for(i = 0; i < users.length; i++){
             show += "<div>" + users[i].Username + "</div>";

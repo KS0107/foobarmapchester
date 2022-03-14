@@ -104,7 +104,8 @@ class UserModel extends Database{
    public function getUsersByInput($seg){
        $sql = "SELECT Username
                 FROM User
-                WHERE Username LIKE :seg%";
+                WHERE Username LIKE :seg";
+                $seg .= "%";
         return $this->executeFetchQuery($sql, ["seg"=>$seg]);
    } 
 

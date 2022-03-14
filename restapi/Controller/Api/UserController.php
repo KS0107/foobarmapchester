@@ -163,7 +163,7 @@ class UserController extends BaseController{
 
     public function getUserByAction(){
         try{
-            if(strtoupper($this->requestMethod) == "GET"){
+            if(strtoupper($this->requestMethod) == "POST"){
                 $segment = $_POST["segment"];
                 $userModel = new UserModel();
                 $res = $userModel->getUsersByInput($segment);

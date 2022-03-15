@@ -34,7 +34,7 @@
 
 		<button class="deletemsg" id="delete">Delete</button>
         <button class="logout" id="exit">Exit</button>
-		<button id="friendboxbtn">FriendBox</button>
+		<button type="button" id="friendboxbtn" onclick="switch()">FriendBox</button>
 
 		<div id="chatbox"></div>
 		
@@ -48,14 +48,14 @@
 	</div>
 
 	<script>
-		document.getElementById("friendboxbtn").addEventListener("click", switch);
+		// document.getElementById("friendboxbtn").addEventListener("click", switch);
 		function switch(){
-			let hdl = document.getElementById("friendbox")
-			if(hdl.css == "none"){
-				hdl.css = "block";
+			if(document.getElementById("friendbox").style.display == "none"){
+				document.getElementById("friendbox").style.display = "block";
 			}else{
-				hdl.css = "none";
+				document.getElementById("friendbox").style.display = "none";
 			}
+			
 		}
 	</script>
 </body>

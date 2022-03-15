@@ -48,11 +48,14 @@
 	</div>
 
 	<script>
-		let hdl = document.getElementById("friendbox")
-		if(hdl.css == "none"){
-			hdl.css = "block";
-		}else{
-			hdl.css = "none";
+		document.getElementById("friendboxbtn").addEventListener("click", switch);
+		function switch(){
+			let hdl = document.getElementById("friendbox")
+			if(hdl.css == "none"){
+				hdl.css = "block";
+			}else{
+				hdl.css = "none";
+			}
 		}
 	</script>
 </body>

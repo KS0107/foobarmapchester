@@ -77,6 +77,8 @@ function loadTimetable(){
                 }else{
                     newCell.textContent = "Free";
                     newCell.style.backgroundColor = "rgb(117, 117, 117)";
+                }newCell.onclick = function(){
+                    flipCell(this, element[1][i]);
                 }
             }
         });
@@ -190,8 +192,31 @@ document.addEventListener("DOMContentLoaded", () => {   //Otherwise the onclick 
     }
 })
 
+var editing = false;
 function editTimetable(){
+    if(editing){
+        editing = false;
+    }else{
+        editing = true;
+    }
+}
 
+function flipCell(cell, status){
+    if(editing){
+        if(status == 0){
+            cell.textContent = "Busy";
+            cell.style.backgroundColor = "rgb(31, 31, 31)";
+            cell.onclick = function(){
+                flipCell(cell, 1);
+            }
+        }else{
+            cell.textContent = "Free";
+            cell.style.backgroundColor = "rgb(117, 117, 117)";
+            cell.onclick = function(){
+                flipCell(cell, 0);
+            }
+        }
+    }
 }
 
 let i = 1;

@@ -37,6 +37,7 @@
 			</tr>
 		</table>
 		<button id="btnET">Edit</button>
+		<button id="btnST">Save</button>
 	</div>
 
 </body>

@@ -67,6 +67,7 @@ function loadTimetable(){
         var timetableObj = document.getElementById("timetable");
         timetable.forEach(element => {
             var newRow = timetableObj.insertRow();
+            newRow.id = element[0];
             var newCell = newRow.insertCell();
             newCell.textContent = element[0];
             for (let i = 0; i < 7; i++) {
@@ -190,7 +191,34 @@ document.addEventListener("DOMContentLoaded", () => {   //Otherwise the onclick 
     }else{
         console.log("edit timetable function not found");
     }
+    const saveTimetableButton = document.getElementById("btnST");
+    if(saveTimetableButton != null){
+        saveTimetableButton.onclick = saveTimetable;
+    }else{
+        console.log("save timetable function not found");
+    }
 })
+
+function saveTimetable(){
+    if(editing){
+        editing = false;
+        var timetable = [["10am-2pm", "1110011"], ["2pm-6pm", "1101100"], ["6pm-11pm", "0110011"], ["11pm-10am", "1001011"]];
+        var timetableObj = document.getElementById("timetable");
+        timetable.forEach(element => {
+            endStringifiedData = ""
+            var timetableRow = document.getElementById(element[0]);
+            for (let i = 0; i < 7; i++) {
+                if(timetableRow.childNodes[i].textContent == "Busy"){
+                    endStringifiedData += "1";
+                }else{
+                    endStringifiedData += "0";
+                }
+            }
+            element[1] = endStringifiedData;
+        });
+        console.log(timetable);
+    }
+}
 
 var editing = false;
 function editTimetable(){

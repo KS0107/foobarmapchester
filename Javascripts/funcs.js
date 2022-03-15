@@ -182,7 +182,17 @@ document.addEventListener("DOMContentLoaded", () => {   //Otherwise the onclick 
     }else{
         console.log("slide function not found");
     }
+    const editTimetableButton = document.getElementById("btnET");
+    if(editTimetableButton != null){
+        editTimetableButton.onclick = editTimetable;
+    }else{
+        console.log("edit timetable function not found");
+    }
 })
+
+function editTimetable(){
+
+}
 
 let i = 1;
 function LightFunction() {

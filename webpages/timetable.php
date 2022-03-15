@@ -36,6 +36,7 @@
 		  		<th>Sun</th>
 			</tr>
 		</table>
+		<button id="btnET">Edit</button>
 	</div>
 
 </body>

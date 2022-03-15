@@ -44,16 +44,16 @@
 		</form>
 
 		<iframe id="friendbox" src="friend.html"  title="" style="
-    display: none;"></iframe>
+    visibility: hidden;"></iframe>
 	</div>
 
 	<script>
 		// document.getElementById("friendboxbtn").addEventListener("click", switch);
 		function switch(){
-			if(document.getElementById("friendbox").style.display == "none"){
-				document.getElementById("friendbox").style.display = "block";
+			if(document.getElementById("friendbox").style.visibility == "hidden"){
+				document.getElementById("friendbox").style.display = "visible";
 			}else{
-				document.getElementById("friendbox").style.display = "none";
+				document.getElementById("friendbox").style.display = "hidden";
 			}
 			
 		}

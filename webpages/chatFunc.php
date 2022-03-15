@@ -43,11 +43,17 @@
 			<button id="send">Send</button>
 		</form>
 
-		<iframe id="friendbox" src="friend.html"  title=""></iframe>
+		<iframe id="friendbox" src="friend.html"  title="" style="
+    display: none;"></iframe>
 	</div>
 
 	<script>
-
+		let hdl = document.getElementById("friendbox")
+		if(hdl.css == "none"){
+			hdl.css = "block";
+		}else{
+			hdl.css = "none";
+		}
 	</script>
 </body>
 </html>

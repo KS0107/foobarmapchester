@@ -18,15 +18,13 @@ $(document).ready(function(){
             // $.get("https://web.cs.manchester.ac.uk/y02478jh/restapi/index.php/user/delete");
     });
 
-    $("#f1").click(function(){
-        $("#f1").html("yes");
+    $("#friendbox").click(function(){
+        if($("#friendbox").css("display") == "none"){
+            $("#friendbox").css("display", "block");
+        }else{
+            $("#friendbox").css("display", "none");
+        }
     });
-
-    // $("#friendboxbtn").click(function(){
-    //     $("#friendbox").css("display", "block")
-    // });
-
-    
 
     function loadFriend(){
         const xhttp = new XMLHttpRequest();

@@ -51,11 +51,10 @@
 		// document.getElementById("friendboxbtn").addEventListener("click", switch);
 		function switch(){
 			if(document.getElementById("friendbox").style.visibility == "hidden"){
-				document.getElementById("friendbox").style.display = "visible";
+				document.getElementById("friendbox").style.visibility = "visible";
 			}else{
-				document.getElementById("friendbox").style.display = "hidden";
+				document.getElementById("friendbox").style.visibility = "hidden";
 			}
-			
 		}
 	</script>
 </body>

@@ -205,9 +205,9 @@ function saveTimetable(){
         var timetable = [["10am-2pm", "1110011"], ["2pm-6pm", "1101100"], ["6pm-11pm", "0110011"], ["11pm-10am", "1001011"]];
         var timetableObj = document.getElementById("timetable");
         timetable.forEach(element => {
-            endStringifiedData = ""
+            endStringifiedData = "";
             var timetableRow = document.getElementById(element[0]);
-            for (let i = 0; i < 7; i++) {
+            for (let i = 1; i < 8; i++) {
                 if(timetableRow.childNodes[i].textContent == "Busy"){
                     endStringifiedData += "1";
                 }else{

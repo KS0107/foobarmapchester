@@ -68,6 +68,11 @@ function getTimetable($UserID)
 		setcookie("time2", $times["2pm6pm"]);
 		setcookie("time3", $times["6pm11pm"]);
 		setcookie("time4", $times["11pm10am"]);
+	}else{
+		setcookie("time1", "1110011"]);
+		setcookie("time2", "1101100");
+		setcookie("time3", "0110011");
+		setcookie("time4", "1001011");
 	}
 }
 $UserID = getUserID($_COOKIE["username"]);

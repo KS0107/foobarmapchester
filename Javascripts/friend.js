@@ -48,7 +48,7 @@ function retrieveRequest(){
         res = JSON.parse(this.responseText);
         request = "";
         for(i = 0; i < res.length; i++){
-            request += "<div>" + "Date: " +res[i].CreateDate + "<br>" + res[i].Username + " wants to add you!!" + "</div";
+            request += "<div>" + "Date: " +res[i].CreateDate + "<br>" + res[i].Username + " wants to add you!! " + "<button onclick=\"requestYes(\'" + res[i].Username + "\')\">" + "yes" + "</button> " + " <button onclick=\"requestNo(\'" + res[i].Username +"\')\">no</button>" + "</div>";
         }
         document.getElementById("requestsBox").innerHTML = request;
     }
@@ -56,6 +56,14 @@ function retrieveRequest(){
     xmlhttp.send();
 }
 setInterval(retrieveRequest, 1000);
+
+function requestYes(friendname){
+    //send username with friend name to database linking them in friendship table and delete the request as well
+    const xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("POST", "../restapi/index.php/user/requestYes");
+    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlhttp.send("user=" + getCookie("username") + "&friendname=" + friendname);  
+}
 
 function getCookie(cname) {
     let name = cname + "=";

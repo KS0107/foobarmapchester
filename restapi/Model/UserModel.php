@@ -123,6 +123,20 @@ class UserModel extends Database{
        
         return $this->executeFetchQuery($sql, ["userid"=>$userid]);
    }
+
+   public function requestYes($usernameID, $friendnameID){
+        $sql = "INSERT INTO Friendship (FriendID, UserID)
+                VALUES 
+                (:fid, :uid),
+                (:uid, :fid)";
+        return $this->executeQuery($sql, ["fid"=>$friendnameID, "uid"=>$usernameID]);
+   }
+
+   public function requestDel($usernameID, $friendnameID){
+       $sql = "DELETE FROM Request
+                WHERE RequesterID = :fid AND TargetID = :uid";
+        return $this->executeQuery($sql, ["fid"=>$friendnameID, "uid"=>$usernameID]);
+   }
 }
 
 ?>

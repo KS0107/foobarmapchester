@@ -26,7 +26,6 @@ class UserController extends BaseController{
             $this->strErrorDesc = 'Method not supported';
             $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
         }
-
         $this->errorHandler($this->strErrorDesc, $respondData, $this->strErrorHeader);
     }
 
@@ -214,6 +213,27 @@ class UserController extends BaseController{
             $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
         }
         $this->errorHandler($this->strErrorDesc, $respondData, $this->strErrorHeader);
+    }
+
+    public function requestYesAction(){
+        if(strtoupper($this->requestMethod) == "POST"){
+            try{
+                $userModel = new UserModel;
+                $usernameID = $userModel->getID($_POST["user"]);
+                $friendnameID = $userModel->getID($_POST["friendname"]);
+                //friendship process
+                $userModel->requestYes($usernameID, $friendnameID);
+                //request deletion
+                $userModel->requestDel($usernameID, $friendnameID);
+            }catch(Error $e){
+                $this->strErrorDesc = $e->getMessage();
+                $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
+            }
+        }else{
+            $this->strErrorDesc = 'Method not supported';
+            $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
+        }
+        $this->errorHandler($this->strErrorDesc, "", $this->strErrorHeader);
     }
 }
 ?>

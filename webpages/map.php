@@ -49,24 +49,28 @@
     $pdo = new pdo('mysql:host=dbhost.cs.man.ac.uk; dbname=2021_comp10120_z19', 'y02478jh', 'i7JLzgM-z5zv9T');
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
     $stmt = $pdo->prepare($sql);
-	$stmt->execute([
-		'Username' => $UserID
-					]);
+	$stmt->execute();
 	$stmt->setFetchMode(PDO::FETCH_ASSOC);
 	$row = $stmt->fetch();
 
     //create an array
-    $emparray = array();
-    while($row =mysqli_fetch_assoc($result))
-    {
-        $emparray[] = $row;
-    }
+    //$emparray = array();
+    //while($row =mysqli_fetch_assoc($result))
+    //{
+    //    $emparray[] = $row;
+    //}
     
-    echo json_encode($emparray);
-    $fp = fopen('empdata.json', 'w');
-    fwrite($fp, json_encode($emparray));
-    fclose($fp);
+    //$stmt = $pdo->query('SELECT * FROM Location');
+    foreach ($stmt as $row)
+    {
+        echo $row['Name'] . "\n";
+    }
+
+    //echo json_encode($emparray);
+    //$fp = fopen('empdata.json', 'w');
+    //fwrite($fp, json_encode($emparray));
+    //fclose($fp);
 
     //close the db connection
-    mysqli_close($connection);
+    //mysqli_close($connection);
 ?>

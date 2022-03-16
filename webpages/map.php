@@ -69,7 +69,7 @@
         //echo $row['Coords'] . "\n";
         //echo $row['AvgReview'] . "\n";
 
-        echo '<div id='.$row['Name'].'>'.$row.'</div>';
+        echo '<div id='.$row['Name'].'>'.$row['Name'].'</div>';
 
     }
 

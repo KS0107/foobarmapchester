@@ -221,7 +221,9 @@ const defaultPlaceholderTimetable = [
 ];
 
 var locations = [];
-var markers = {};
+var markers = {'type': 'FeatureCollection',
+'features': []
+};
 function generateMarkerData(){
     defaultPlaceholderLocations.forEach(element =>{
         blankLocation = {

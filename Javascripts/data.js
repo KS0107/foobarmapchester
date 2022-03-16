@@ -208,7 +208,7 @@ const defaultPlaceholderLocations = [
         "ID": 0,
         "Name": "Turing Tap",
         "Address": "",
-        "Coords": "",
+        "Coords": [-2.22935, 53.46252],
         "AvgReview": 0.0
     }
 ]
@@ -220,7 +220,8 @@ const defaultPlaceholderTimetable = [
     ["11pm-10am", "1001011"]
 ];
 
-var markers = defaultPlaceholderMarkers;
+var locations = [];
+var markers = {};
 function generateMarkerData(){
     defaultPlaceholderLocations.forEach(element =>{
         blankLocation = {

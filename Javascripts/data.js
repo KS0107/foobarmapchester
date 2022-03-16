@@ -220,7 +220,7 @@ const defaultPlaceholderTimetable = [
     ["11pm-10am", "1001011"]
 ];
 
-var markers = defaultPlaceholderMarkers;
+//var markers = defaultPlaceholderMarkers;
 function generateMarkerData(){
     defaultPlaceholderLocations.forEach(element =>{
         blankLocation = {

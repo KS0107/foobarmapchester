@@ -54,7 +54,7 @@ label {
   a:hover {
     text-decoration: underline;
   }
-  h2 {
+  #title {
     text-align: center;
     color: white;
     margin-bottom: 5vh;

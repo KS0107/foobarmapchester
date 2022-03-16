@@ -41,8 +41,9 @@ for (const marker of getMarkers().features) {
         //window.alert(marker.properties.message);
         let locationName = document.getElementById("locationName");
         locationName.textContent = marker.properties.message;
+        alert(locationName.textContent);
         seeReviews();
-        getLocation();
+        getLocation(locationName.textContent);
     });
      
     // Add markers to the map.

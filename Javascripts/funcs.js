@@ -50,16 +50,17 @@ const addReview = (ev) => {
     document.forms[0].reset();
 }
 
-function getLocation(){
+function getLocation(MarkerLocation){
+    alert(MarkerLocation);
     const xhttp = new XMLHttpRequest();
     xhttp.onload = function(){
         text = JSON.parse(this.responseText);
         // alert(typeof(text));
-        alert(text.LocationName);
+        alert(text);
     }
-    LocationName = document.getElementById("locationName").textContent;
-    xhttp.open("GET","reviewPage.php?LocationName=" + LocationName);
-    xhttp.send();
+    xhttp.open("POST","../restapi/index.php/user/showReviews");
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("LocationName=" + MarkerLocation );
 }
 
 function loadReviews(){

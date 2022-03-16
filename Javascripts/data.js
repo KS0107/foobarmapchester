@@ -221,10 +221,12 @@ const defaultPlaceholderTimetable = [
 ];
 
 var locations = [];
-var markers = {};
+var markers = {'type': 'FeatureCollection',
+'features': []
+};
 function generateMarkerData(){
     defaultPlaceholderLocations.forEach(element =>{
-        blankLocation = {
+        var blankLocation = {
             'type': 'Feature',
             'properties': {
                 'message': '',
@@ -237,7 +239,9 @@ function generateMarkerData(){
         }
         blankLocation.properties.message = element.Name;
         blankLocation.geometry.coordinates = element.Coords;
-        markers.features.push();
+        console.log(blankLocation)
+        markers.features.push(blankLocation);
+        console.log(markers);
     });
 }
 
@@ -246,6 +250,7 @@ function getReviews(){
 }
 
 function getMarkers(){
+    generateMarkerData();
     return markers;
 }
 

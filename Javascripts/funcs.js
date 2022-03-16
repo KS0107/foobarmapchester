@@ -50,6 +50,18 @@ const addReview = (ev) => {
     document.forms[0].reset();
 }
 
+function getLocation(){
+    const xhttp = new XMLHttpRequest();
+    xhttp.onload = function(){
+        text = JSON.parse(this.responseText);
+        // alert(typeof(text));
+        alert(text.LocationName);
+    }
+    LocationName = document.getElementById("locationName").textContent;
+    xhttp.open("GET","testing.php?LocationName=" + LocationName);
+    xhttp.send();
+}
+
 function loadReviews(){
     let reviews = localStorage.getItem('reviews');
     if(reviews != getReviews()){
@@ -307,7 +319,7 @@ function goToPage(page){
             if(pathSections[pathSections.length-1] == "manchester"){
                 pathSections.push("webpages");
             }
-            pathSections.push("map.html");
+            pathSections.push("map.php");
             break;
         case "S":
             pathSections.pop();

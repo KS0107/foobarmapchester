@@ -3,7 +3,6 @@
   margin: 0;
   padding: 0;
   font-family: Montserrat;
-  background-color: black;;
 }
    
   body {
@@ -11,10 +10,10 @@
     font-weight: 300;
     width: 100%;
     height: 100%;
+    background-color: rgb(14, 14, 14);;
   }
    
   .mainContainer{
-
     position: relative;
     top: 5ex;
     width: 100%;
@@ -24,7 +23,11 @@
   a:hover {
     text-decoration: underline;
   }
-   
+  h2 {
+    text-align: center;
+    color: white;
+
+  }
    
   #chatbox {
     text-align: left;
@@ -42,6 +45,7 @@
 button {
   background-color: rgb(28, 28, 28);
   color: white;
+  border-radius: 10px;
 }
 
 #usermsg {
@@ -50,22 +54,21 @@ button {
   border: 1px solid #ffffff;
 
 }
+#submitmsg{
+  background-color: #929292;
+  border: 2px solid #ffffff;
+  color: white;
+  padding: 4px 10px;
+  font-weight: bold;
+  border-radius: 14px;
+}
 
-  #submitmsg{
-    background-color: #929292;
-    border: 2px solid #ffffff;
-    color: white;
-    padding: 4px 10px;
-    font-weight: bold;
-    border-radius: 14px;
-  }
-
-  #friendbox{
-    height: 80%;
-    width: 40%;
-    position: absolute;
-    top: 80px;
-    left: 30%;
-    background-color: #ecd6d6;
-  }
-   
+#friendbox{
+  height: 80%;
+  width: 40%;
+  position: absolute;
+  top: 80px;
+  left: 30%;
+  background-color: #ecd6d6;
+}
+  

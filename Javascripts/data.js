@@ -243,6 +243,7 @@ function generateLocations(){
 }
 
 function generateMarkerData(){
+    generateLocations();
     defaultPlaceholderLocations.forEach(element =>{
         var blankLocation = {
             'type': 'Feature',

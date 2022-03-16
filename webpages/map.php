@@ -61,7 +61,7 @@
     //}
     
     //$stmt = $pdo->query('SELECT * FROM Location');
-    echo '<div id='.$row['Name'].' disabled="true">'.$row['Name']." ".$row['Coords'].'</div>';
+    echo '<div id='.$row['Name'].' .text_container.>'.$row['Name']." ".$row['Coords'].'</div>';
     foreach ($stmt as $row)
     {
         //echo $row['Name'] . "\n";
@@ -70,7 +70,7 @@
         //echo $row['Coords'] . "\n";
         //echo $row['AvgReview'] . "\n";
 
-        echo '<div id='.$row['Name'].' disabled="true">'.$row['Name']." ".$row['Coords'].'</div>';
+        echo '<div id='.$row['Name'].' .text_container.>'.$row['Name']." ".$row['Coords'].'</div>';
 
     }
 

@@ -130,9 +130,9 @@ button:hover {
   width: 37vw;
   background: black;
   border: 1px solid whitesmoke;
-  border-radius: 14px;
+  border-radius: 10px;
   padding: 5px;
 }
 #input:focus {
-  outline: 1px solid white;
+  outline: none;
 }

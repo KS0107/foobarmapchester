@@ -21,8 +21,8 @@
 
 		<div id="chatbox"></div>
 		
-		<form class="input"cname="message" method="post">
-			<input type="text" id="usermsg"></input>
+		<form name="message" method="post">
+			<input id="input" type="text" id="usermsg"></input>
 			<button id="send">Send</button>
 		</form>
 </body>

@@ -87,7 +87,7 @@ button:hover {
   background-color: #ecd6d6;
 }
   
-.input {
+#input {
   font-family: Montserrat;
   font-size: 14px;
   color: white;
@@ -98,6 +98,6 @@ button:hover {
   background: black;
   border: 1px solid whitesmoke;
 }
-.input:focus {
+#input:focus {
   outline: 1px solid white;
 }

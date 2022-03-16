@@ -32,7 +32,7 @@
         <button class="logout" id="exit">Exit</button>
 
 		<div id="chatbox"></div>
-		<iframe id="friendbox" src="friend.html"  title=""></iframe>
+		<!-- <iframe id="friendbox" src="friend.html"  title=""></iframe> -->
 		<form name="message" method="post">
 			<input id="input" type="text" id="usermsg"></input>
 			<button id="send">Send</button>

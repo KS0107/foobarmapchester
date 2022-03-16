@@ -84,6 +84,7 @@ button {
   text-decoration: none;
   cursor: pointer;
   min-width: 5vw;
+  left: 80vw;
 }
 button:hover {
   background-color: rgba(14, 14, 14, 0.692);

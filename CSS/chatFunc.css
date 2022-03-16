@@ -12,7 +12,38 @@
     height: 100%;
     background-color: rgb(14, 14, 14);;
   }
-   
+  .topBar{
+    left: 0;
+    top: 10px;
+    height: 0%;
+    width: 100%;
+    position: fixed;
+    background-color: rgb(0, 0, 0);
+}
+#msg {
+    max-width: 10%;
+}
+.topBar #buttonLinks{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}    
+.topBar button{
+    margin-left: 2%;
+    margin-right: 2%;
+    width: 20%;
+    height: 0%;
+}
+label {
+    margin-bottom: 15px;
+}
+#btnSR {
+    margin-top: 125px;
+    padding: 15px;
+}
+#btnAR {
+    margin-top: 20px;
+}
   .mainContainer{
     position: relative;
     top: 5ex;

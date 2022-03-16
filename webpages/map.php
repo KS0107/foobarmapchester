@@ -42,13 +42,18 @@
 </html>
 
 <?php
-    //open connection to mysql db
-    $connection = mysqli_connect('mysql:host=dbhost.cs.man.ac.uk; dbname=2021_comp10120_z19', 'y02478jh', 'i7JLzgM-z5zv9T') or die("Error " . mysqli_error($connection));
-
     //fetch table rows from mysql db
     $sql = "SELECT *
-            FROM   Location";
-    $result = mysqli_query($connection, $sql) or die("Error in Selecting " . mysqli_error($connection));
+            FROM  Location";
+
+    $pdo = new pdo('mysql:host=dbhost.cs.man.ac.uk; dbname=2021_comp10120_z19', 'y02478jh', 'i7JLzgM-z5zv9T');
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
+    $stmt = $pdo->prepare($sql);
+	$stmt->execute([
+		'Username' => $UserID
+					]);
+	$stmt->setFetchMode(PDO::FETCH_ASSOC);
+	$row = $stmt->fetch();
 
     //create an array
     $emparray = array();
@@ -58,9 +63,9 @@
     }
     
     echo json_encode($emparray);
-    //$fp = fopen('empdata.json', 'w');
-    //fwrite($fp, json_encode($emparray));
-    //fclose($fp);
+    $fp = fopen('empdata.json', 'w');
+    fwrite($fp, json_encode($emparray));
+    fclose($fp);
 
     //close the db connection
     mysqli_close($connection);

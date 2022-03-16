@@ -65,6 +65,13 @@ function requestYes(friendname){
     xmlhttp.send("user=" + getCookie("username") + "&friendname=" + friendname);  
 }
 
+function requestNo(friendname){
+    const xmlhttp = new XMLHttpRequest();
+    xmlhttp.open("POST", "../restapi/index.php/user/requestNo");
+    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlhttp.send("user=" + getCookie("username") + "&friendname=" + friendname); 
+}
+
 function getCookie(cname) {
     let name = cname + "=";
     let decodedCookie = decodeURIComponent(document.cookie);

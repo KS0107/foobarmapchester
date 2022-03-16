@@ -64,6 +64,10 @@
     foreach ($stmt as $row)
     {
         echo $row['Name'] . "\n";
+        echo $row['LocationID'] . "\n";
+        echo $row['Address'] . "\n";
+        echo $row['Coords'] . "\n";
+        echo $row['AvgReview'] . "\n";
     }
 
     //echo json_encode($emparray);

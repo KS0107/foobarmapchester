@@ -51,6 +51,7 @@ button {
   padding: 10px;
   text-decoration: none;
   cursor: pointer;
+  min-width: 5vw;
 }
 button:hover {
   background-color: rgba(14, 14, 14, 0.692);
@@ -66,7 +67,7 @@ button:hover {
 }
 
 #textsend {
-  left: 45vw;
+  margin-left: 45vw;
 }
 #submitmsg{
   background-color: #929292;

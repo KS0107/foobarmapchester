@@ -224,6 +224,24 @@ var locations = [];
 var markers = {'type': 'FeatureCollection',
 'features': []
 };
+
+function generateLocations(){
+    for (let i = 1; i <= 20; i++) {
+        locationObj = document.getElementById(i);
+        locationData = locationObj.textContent.split(" ");
+        console.log(locationData);
+        locationJSON = {
+            "ID": 0,
+            "Name": "Turing Tap",
+            "Address": "",
+            "Coords": [-2.22935, 53.46252],
+            "AvgReview": 0.0
+        }
+        locationJSON.ID = i;
+        locationJSON.Name = locationData[0];
+    }
+}
+
 function generateMarkerData(){
     defaultPlaceholderLocations.forEach(element =>{
         var blankLocation = {

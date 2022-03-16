@@ -140,6 +140,16 @@ class UserModel extends Database{
                 WHERE RequesterID = :fid AND TargetID = :uid";
         return $this->executeQuery($sql, ["fid"=>$friendnameID, "uid"=>$usernameID]);
    }
+
+   public function showReviews($locationName){
+       $sql = "SELECT review 
+               FROM Reviews
+               WHERE LocationID IN 
+               (SELECT LocationID
+               FROM Location
+               WHERE Name = :locationName)";
+        return $this->executeFetchQuert($sql, ["locationName"=>$locationName]);
+   }
 }
 
 ?>

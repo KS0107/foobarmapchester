@@ -26,11 +26,11 @@ class UserController extends BaseController{
             $this->strErrorDesc = 'Method not supported';
             $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
         }
-
         $this->errorHandler($this->strErrorDesc, $respondData, $this->strErrorHeader);
     }
 
     public function authenAction(){
+        $redirectBool = true;
         if(strtoupper($this->requestMethod) == "GET"){
             try{
                 $userModel = new UserModel();
@@ -38,15 +38,18 @@ class UserController extends BaseController{
                 if($userModel->verifyUser($this->arrQueryStringParams["username"])){
                     $redirectBool = $userModel->authentication($this->arrQueryStringParams["username"], $this->arrQueryStringParams["password"]);
                     if($redirectBool){
+                        $URL = "../../../webpages/home.html";
                         $respondData = "";
                     }else{
+                        $URL = "../../../webpages/loginPage.php";
                         $respondData = json_decode("Password is wrong!");
                     }
                 }else{
+                    $URL = "../../../webpages/loginPage.php";
                     $respondData = json_decode("Username is not valid!");
                 }
  
-                $URL = "../../../webpages/map.html";
+                
             }catch(Error $e){
                 $this->strErrorDesc = $e->getMessage();
                 $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
@@ -104,7 +107,7 @@ class UserController extends BaseController{
     public function getFriendAction(){
         try{
             if(strtoupper($this->requestMethod) == "GET"){
-                $userModel = new userModel();
+                $userModel = new UserModel();
                 $respondData = $userModel->getFriend($this->arrQueryStringParams["username"]);
                 $respondData = json_encode($respondData);
             }else{
@@ -122,7 +125,7 @@ class UserController extends BaseController{
     public function getMessageAction(){
         try{
             if(strtoupper($this->requestMethod) == "GET"){
-                $userModel = new userModel();
+                $userModel = new UserModel();
                 $additionalInfo = array("Sender"=>$userModel->getID($_COOKIE['username']), "Reciver"=>$userModel->getID($this->arrQueryStringParams["receiver"]));
                 $respondData = $userModel->getMessage($_COOKIE['username'], $this->arrQueryStringParams["receiver"]);
                 $respondData = json_encode(array($additionalInfo, $respondData));
@@ -136,6 +139,101 @@ class UserController extends BaseController{
         }
 
         $this->errorHandler($this->strErrorDesc, $respondData, $this->strErrorHeader);
+    }
+
+    public function msgInAction(){
+        try{
+            if(strtoupper($this->requestMethod) == "POST"){
+                    $msg = $_POST["text"];
+                    $receiver = $_POST["receiver"];
+                    $sender = $_POST["sender"];
+                    $userModel = new UserModel();
+                    $userModel->storeMessage($msg, $userModel->getID($sender), $userModel->getID($receiver));
+            }else{
+                $this->strErrorDesc = 'Method not supported';
+                $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
+            }
+
+        }catch(Error $e){
+            $this->strErrorDesc = $e->getMessage();
+            $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
+        }
+    }
+
+    public function getUserByAction(){
+        try{
+            if(strtoupper($this->requestMethod) == "POST"){
+                $segment = $_POST["segment"];
+                $userModel = new UserModel();
+                $res = $userModel->getUsersByInput($segment);
+                $respondData = json_encode($res);
+            }else{
+                $this->strErrorDesc = 'Method not supported';
+                $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
+            }
+        }catch(Error $e){
+            $this->strErrorDesc = $e->getMessage();
+            $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
+        }
+        $this->errorHandler($this->strErrorDesc, $respondData, $this->strErrorHeader);
+    }
+
+    public function friendRequestAction(){
+        try{
+            if(strtoupper($this->requestMethod) == "POST"){
+                $requester = $_POST["requester"];
+                $target = $_POST["target"];
+                $userModel = new UserModel;
+                $requester = $userModel->getID($requester);
+                $target = $userModel->getID($target);
+                $userModel->sendRequest($requester, $target);
+            }else{
+                $this->strErrorDesc = 'Method not supported';
+                $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
+            }
+        }catch(Erroe $e){
+            $this->strErrorDesc = $e->getMessage();
+            $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
+        }
+        $this->errorHandler($this->strErrorDesc, "", $this->strErrorHeader);
+    }
+
+    public function retrieveRequestAction(){
+        try{
+            if(strtoupper($this->requestMethod) == "GET"){
+                $userModel = new UserModel;
+                $res = $userModel->retrieveRequest($userModel->getID($_COOKIE["username"]));
+                $respondData = json_encode($res);
+            }else{
+                $this->strErrorDesc = 'Method not supported';
+                $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
+            }
+        }catch(Error $e){
+            $this->strErrorDesc = $e->getMessage();
+            $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
+        }
+        $this->errorHandler($this->strErrorDesc, $respondData, $this->strErrorHeader);
+    }
+
+    public function requestYesAction(){
+        if(strtoupper($this->requestMethod) == "POST"){
+            try{
+                $userModel = new UserModel;
+                $usernameID = $userModel->getID($_POST["user"]);
+                $friendnameID = $userModel->getID($_POST["friendname"]);
+                //friendship process
+                $userModel->requestYes($usernameID, $friendnameID);
+                //request deletion
+                $userModel->requestDel($usernameID, $friendnameID);
+            }catch(Error $e){
+                $this->strErrorDesc = $e->getMessage();
+                $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
+            }
+        }else{
+            $this->strErrorDesc = 'Method not supported';
+            $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
+        }
+        $this->errorHandler($this->strErrorDesc, "", $this->strErrorHeader);
     }
 }
 ?>

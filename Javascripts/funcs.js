@@ -61,12 +61,13 @@ function loadReviews(){
 function loadTimetable(){
     const pageName = window.location.pathname.split("/").pop()
     console.log(pageName)
-    if (pageName == "timetable.html"){
+    if (pageName == "timetable.php"){
         let timetable = getTimetable();
         console.log(timetable);
         var timetableObj = document.getElementById("timetable");
         timetable.forEach(element => {
             var newRow = timetableObj.insertRow();
+            newRow.id = element[0];
             var newCell = newRow.insertCell();
             newCell.textContent = element[0];
             for (let i = 0; i < 7; i++) {
@@ -77,6 +78,8 @@ function loadTimetable(){
                 }else{
                     newCell.textContent = "Free";
                     newCell.style.backgroundColor = "rgb(117, 117, 117)";
+                }newCell.onclick = function(){
+                    flipCell(this, element[1][i]);
                 }
             }
         });
@@ -182,7 +185,67 @@ document.addEventListener("DOMContentLoaded", () => {   //Otherwise the onclick 
     }else{
         console.log("slide function not found");
     }
+    const editTimetableButton = document.getElementById("btnET");
+    if(editTimetableButton != null){
+        editTimetableButton.onclick = editTimetable;
+    }else{
+        console.log("edit timetable function not found");
+    }
+    const saveTimetableButton = document.getElementById("btnST");
+    if(saveTimetableButton != null){
+        saveTimetableButton.onclick = saveTimetable;
+    }else{
+        console.log("save timetable function not found");
+    }
 })
+
+function saveTimetable(){
+    if(editing){
+        editing = false;
+        var timetable = [["10am-2pm", "1110011"], ["2pm-6pm", "1101100"], ["6pm-11pm", "0110011"], ["11pm-10am", "1001011"]];
+        var timetableObj = document.getElementById("timetable");
+        timetable.forEach(element => {
+            endStringifiedData = "";
+            var timetableRow = document.getElementById(element[0]);
+            for (let i = 1; i < 8; i++) {
+                if(timetableRow.childNodes[i].textContent == "Busy"){
+                    endStringifiedData += "1";
+                }else{
+                    endStringifiedData += "0";
+                }
+            }
+            element[1] = endStringifiedData;
+        });
+        console.log(timetable);
+    }
+}
+
+var editing = false;
+function editTimetable(){
+    if(editing){
+        editing = false;
+    }else{
+        editing = true;
+    }
+}
+
+function flipCell(cell, status){
+    if(editing){
+        if(status == 0){
+            cell.textContent = "Busy";
+            cell.style.backgroundColor = "rgb(31, 31, 31)";
+            cell.onclick = function(){
+                flipCell(cell, 1);
+            }
+        }else{
+            cell.textContent = "Free";
+            cell.style.backgroundColor = "rgb(117, 117, 117)";
+            cell.onclick = function(){
+                flipCell(cell, 0);
+            }
+        }
+    }
+}
 
 let i = 1;
 function LightFunction() {

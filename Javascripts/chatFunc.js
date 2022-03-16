@@ -7,23 +7,17 @@ $(document).ready(function(){
         }
     })
 
-    $("#submitmsg").click(function(){
+    $("#send").click(function(){
         var clientmsg = $("#usermsg").val();
-        $.post("post.php", {text: clientmsg});
+        $.post("../restapi/index.php/user/msgIn", {text: clientmsg, receiver: receiver, sender: getCookie("username")});
         $("#usermsg").val("");
         return false;
     });
 
     $("#delete").click(function(){
-            $.get("https://web.cs.manchester.ac.uk/y02478jh/restapi/index.php/user/delete");
+            // $.get("https://web.cs.manchester.ac.uk/y02478jh/restapi/index.php/user/delete");
     });
 
-    $("#f1").click(function(){
-        $("#f1").html("yes");
-    });
-
-
-    
 
     function loadFriend(){
         const xhttp = new XMLHttpRequest();
@@ -35,7 +29,7 @@ $(document).ready(function(){
         }
         document.getElementById("friends").innerHTML = friendsList;
         }   
-        xhttp.open("GET", "https://web.cs.manchester.ac.uk/y02478jh/restapi/index.php/user/getFriend?username=" + getCookie("username"));
+        xhttp.open("GET", "../restapi/index.php/user/getFriend?username=" + getCookie("username"));
         xhttp.send();
     }
     setInterval(loadFriend, 1000);
@@ -61,20 +55,26 @@ function chatHandler(friend){
     if(typeof(intervalID) !== "undefined"){
         clearInterval(intervalID);
     }
+    receiver = friend;
     intervalID = setInterval(loadLog, 500, friend);
 }
 
 function loadLog(friend){
+    var oldscrollHeight = $("#chatbox")[0].scrollHeight - 20;
     const xhttp = new XMLHttpRequest();
     xhttp.onload = function() {
-    var text = JSON.parse(this.responseText);
+    let text = JSON.parse(this.responseText);
     let message="";
-    // for(let i = 0; i < text.length; i++){
-    //     message += "<div>" + text[i].Date + "<br>" + text[i].Content + "</div>"; 
-    // }
-    document.getElementById("chatbox").innerHTML = this.responseText;
+    for(let i = 0; i < text[1].length; i++){
+        if(text[1][i].UserID == text[0].Sender){
+            message += "<div style=\"text-align: right;\">" + text[1][i].CreateDate + "<br>" + text[1][i].MessageBody + "</div>";
+        }else{
+            message += "<div style=\"text-align: left;\">" + text[1][i].CreateDate + "<br>" + text[1][i].MessageBody + "</div>";
+        }      
+    }
+    document.getElementById("chatbox").innerHTML = message;
     }   
-    xhttp.open("GET", "https://web.cs.manchester.ac.uk/y02478jh/restapi/index.php/user/getMessage?receiver=" + friend);
+    xhttp.open("GET", "../restapi/index.php/user/getMessage?receiver=" + friend);
     xhttp.send();
 
     var newscrollHeight = $("#chatbox")[0].scrollHeight - 20; //Scroll height after the request

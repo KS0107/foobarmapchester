@@ -44,7 +44,7 @@ class UserModel extends Database{
         
         if(password_verify($password, $result[0]["Password"])){
             $this->setCookie($username, time() + 86400);
-            echo "successfully loged in";
+            echo "successfully logged in";
             return true;
         }else{
             return false;
@@ -64,13 +64,14 @@ class UserModel extends Database{
         }
     }
 
+    // ################# functionalities #####################
     public function setCookie($cookieValue, $duration){
-        if(!isset($_COOKIE["username"])){
+        // if(!isset($_COOKIE["username"])){
             setcookie("username", $cookieValue, $duration, "/");
             return true;
-        }else{
-            return false;
-        }
+        // }else{
+        //     return false;
+        // }
     }
 
     public function addUser($firstname, $lastname, $username, $password){
@@ -100,9 +101,42 @@ class UserModel extends Database{
         return $this->executeFetchQuery($sql, ["username"=>$username])[0]["UserID"];
     }
 
-    
+   public function getUsersByInput($seg){
+       $sql = "SELECT Username
+                FROM User
+                WHERE Username LIKE :seg";
+                $seg .= "%";
+        return $this->executeFetchQuery($sql, ["seg"=>$seg]);
+   } 
 
+   public function sendRequest($requester, $target){
+       $sql = "INSERT INTO Request (RequesterID, TargetID)
+                VALUES (:requesterid, :targetid)";
+        return $this->executeQuery($sql, ["requesterid"=>$requester, "targetid"=>$target]);
+   }
     
+   public function retrieveRequest($userid){
+       $sql = "SELECT User.Username, Request.CreateDate
+               FROM Request
+               LEFT JOIN User ON Request.RequesterID = User.UserID
+               WHERE Request.TargetID = :userid";
+       
+        return $this->executeFetchQuery($sql, ["userid"=>$userid]);
+   }
+
+   public function requestYes($usernameID, $friendnameID){
+        $sql = "INSERT INTO Friendship (FriendID, UserID)
+                VALUES 
+                (:fid, :uid),
+                (:uid, :fid)";
+        return $this->executeQuery($sql, ["fid"=>$friendnameID, "uid"=>$usernameID]);
+   }
+
+   public function requestDel($usernameID, $friendnameID){
+       $sql = "DELETE FROM Request
+                WHERE RequesterID = :fid AND TargetID = :uid";
+        return $this->executeQuery($sql, ["fid"=>$friendnameID, "uid"=>$usernameID]);
+   }
 }
 
 ?>

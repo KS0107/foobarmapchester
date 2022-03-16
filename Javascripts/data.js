@@ -239,7 +239,9 @@ function generateMarkerData(){
         }
         blankLocation.properties.message = element.Name;
         blankLocation.geometry.coordinates = element.Coords;
+        console.log(blankLocation)
         markers.features.push(blankLocation);
+        console.log(markers);
     });
 }
 

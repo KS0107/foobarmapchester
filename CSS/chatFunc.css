@@ -10,7 +10,7 @@
     font-weight: 300;
     width: 100%;
     height: 100%;
-    background-color: rgb(14, 14, 14);;
+    background-image: url(../images/map.png);
   }
   .topBar{
     left: 0;
@@ -58,6 +58,7 @@ label {
     text-align: center;
     color: white;
     margin-bottom: 5vh;
+    margin-top: 13vh;
   }
    
   #chatbox {
@@ -65,10 +66,10 @@ label {
     margin: 0 auto;
     margin-bottom: 25px;
     padding: 10px;
-    background-color: rgb(28, 28, 28);
+    background-color: rgb(7, 7, 7);
     color: white;
     height: 300px;
-    width: 530px;
+    width: 48vw;
     overflow: auto;
     border-radius: 14px;
 
@@ -82,7 +83,8 @@ button {
   padding: 10px;
   text-decoration: none;
   cursor: pointer;
-  min-width: 5vw;
+  min-width: 100px;
+  margin: 20px;
 }
 button:hover {
   background-color: rgba(14, 14, 14, 0.692);
@@ -125,11 +127,12 @@ button:hover {
   line-height: 1.2;
   margin: 0 auto;
   display: block;
-  width: 20%;
+  width: 48vw;
   background: black;
   border: 1px solid whitesmoke;
-  border-radius: 14px;
+  border-radius: 10px;
+  padding: 5px;
 }
 #input:focus {
-  outline: 1px solid white;
+  outline: none;
 }

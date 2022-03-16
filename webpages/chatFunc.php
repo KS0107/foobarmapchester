@@ -10,13 +10,15 @@
 	<link rel="stylesheet" type="text/css" href="../CSS/chatFunc.css">
 </head>
 <body>
-<div class="topBar">
+    <div class="topBar">
         <div id="buttonLinks">
             <button id="btnHP">Home Page</button>
             <button id="btnMP">Map Page</button>
             <button id="btnRP">Review Page</button>
+            <button id="btnCP">Chat</button>
             <button id="btnTP">Timetable</button>
             <button id="btnSP">Sign Out</button>
+            <!-- <button id="slider">Collapse Reviews</button> -->
         </div>
     </div>
 	<div class="friendList">
@@ -30,10 +32,11 @@
         <button class="logout" id="exit">Exit</button>
 
 		<div id="chatbox"></div>
-		
+		<iframe id="friendbox" src="friend.html"  title=""></iframe>
 		<form name="message" method="post">
 			<input id="input" type="text" id="usermsg"></input>
 			<button id="send">Send</button>
 		</form>
+
 </body>
 </html>

@@ -237,7 +237,7 @@ class UserController extends BaseController{
         $this->errorHandler($this->strErrorDesc, "", $this->strErrorHeader);
     }
 
-    public function requestNoRequest(){
+    public function requestNoAction(){
         if(strtoupper($this->requestMethod) == "POST"){
             try{
                 $userModel = new UserModel;
@@ -254,6 +254,24 @@ class UserController extends BaseController{
             $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
         }
         $this->errorHandler($this->strErrorDesc, "", $this->strErrorHeader);
+    }
+
+    public function showReviewsAction(){
+        if(strtoupper($this->requestMethod) == "POST"){
+            try{
+                $location = $_POST["LocationName"];
+                $userModel = new UserModel;
+                $res = $userModel->showReiews($location);
+                $respondData = json_encode($res);
+            }catch(Error $e){
+                $this->strErrorDesc = $e->getMessage();
+                $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
+            }
+        }else{
+            $this->strErrorDesc = 'Method not supported';
+            $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
+        }
+        $this->errorHandler($this->strErrorDesc, $respondData, $this->strErrorHeader);
     }
 }
 ?>

@@ -250,6 +250,7 @@ function getReviews(){
 }
 
 function getMarkers(){
+    generateMarkerData();
     return markers;
 }
 

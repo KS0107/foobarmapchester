@@ -209,7 +209,7 @@ const defaultPlaceholderLocations = [
         "Name": "Turing Tap",
         "Address": "",
         "Coords": "",
-        "": 0.0
+        "AvgReview": 0.0
     }
 ]
 
@@ -220,8 +220,24 @@ const defaultPlaceholderTimetable = [
     ["11pm-10am", "1001011"]
 ];
 
+var markers = defaultPlaceholderMarkers;
 function generateMarkerData(){
-
+    defaultPlaceholderLocations.forEach(element =>{
+        blankLocation = {
+            'type': 'Feature',
+            'properties': {
+                'message': '',
+                'iconSize': [40, 40]
+            },
+            'geometry': {
+                'type': 'Point',
+                'coordinates': [0, 0]
+            }
+        }
+        blankLocation.properties.message = element.Name;
+        blankLocation.geometry.coordinates = element.Coords;
+        markers.features.push();
+    });
 }
 
 function getReviews(){
@@ -229,7 +245,7 @@ function getReviews(){
 }
 
 function getMarkers(){
-    return defaultPlaceholderMarkers;
+    return markers;
 }
 
 function getTimetable(){

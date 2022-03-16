@@ -5,8 +5,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-	<script type="text/javascript" src="chatFunc.js"></script>
-	<script type="text/javascript"src="funcs.js"></script>
+	<script type="text/javascript" src="../Javascripts/chatFunc.js"></script>
+	<script type="text/javascript"src="../Javascripts/funcs.js"></script>
 	<link rel="stylesheet" type="text/css" href="../CSS/chatFunc.css">
 </head>
 <body>

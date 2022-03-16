@@ -21,7 +21,7 @@
 
 		<div id="chatbox"></div>
 		
-		<form name="message" method="post">
+		<form id="textsend"cname="message" method="post">
 			<input type="text" id="usermsg"></input>
 			<button id="send">Send</button>
 		</form>

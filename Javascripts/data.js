@@ -226,7 +226,7 @@ var markers = {'type': 'FeatureCollection',
 };
 function generateMarkerData(){
     defaultPlaceholderLocations.forEach(element =>{
-        blankLocation = {
+        var blankLocation = {
             'type': 'Feature',
             'properties': {
                 'message': '',
@@ -239,7 +239,7 @@ function generateMarkerData(){
         }
         blankLocation.properties.message = element.Name;
         blankLocation.geometry.coordinates = element.Coords;
-        markers.features.push();
+        markers.features.push(blankLocation);
     });
 }
 

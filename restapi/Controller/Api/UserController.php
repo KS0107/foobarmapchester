@@ -237,7 +237,7 @@ class UserController extends BaseController{
         $this->errorHandler($this->strErrorDesc, "", $this->strErrorHeader);
     }
 
-    public function requestNoRequest(){
+    public function requestNoAction(){
         if(strtoupper($this->requestMethod) == "POST"){
             try{
                 $userModel = new UserModel;

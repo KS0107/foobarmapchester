@@ -43,19 +43,19 @@ echo "yes";
 
 
 
-$filename = "/home/csimage/Documents/Team Project/data.json";
+//$filename = "/home/csimage/Documents/Team Project/data.json";
 
 
-$data = file_get_contents($filename);
+//$data = file_get_contents($filename);
 
 
-$array = json_decode($data,true);
+//$array = json_decode($data,true);
 
 
-foreach ($array as $value) {
+//foreach ($array as $value) {
 
-	$query = "INSERT INTO `jsoninsert` (`id`, `location`, `date`, `rating`, `review`) VALUES ('".$value['id']."', '".$value['location']."', '".$value['date']."', '".$value['rating']."', '".$value['review']."')";
-	mysqli_query($con,$query);
-}
+//	$query = "INSERT INTO `jsoninsert` (`id`, `location`, `date`, `rating`, `review`) VALUES ('".$value['id']."', '".$value['location']."', '".$value['date']."', '".$value['rating']."', '".$value['review']."')";
+//	mysqli_query($con,$query);
+//}
 
-echo "Data Inserted Successfully"
+//echo "Data Inserted Successfully"

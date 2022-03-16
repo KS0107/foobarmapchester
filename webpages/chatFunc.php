@@ -6,7 +6,7 @@
 	<title>Document</title>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script type="text/javascript" src="chatFunc.js"></script>
-	<link rel="stylesheet" type="text/css" href="mainstyle.css">
+	<link rel="stylesheet" type="text/css" href="chatFunc.css">
 </head>
 <body>
 	<div class="friendList">

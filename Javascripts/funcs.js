@@ -58,7 +58,7 @@ function getLocation(){
         alert(text.LocationName);
     }
     LocationName = document.getElementById("locationName").textContent;
-    xhttp.open("GET","testing.php?LocationName=" + LocationName);
+    xhttp.open("GET","reviewPage.php?LocationName=" + LocationName);
     xhttp.send();
 }
 

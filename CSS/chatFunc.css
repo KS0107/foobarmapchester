@@ -87,3 +87,17 @@ button:hover {
   background-color: #ecd6d6;
 }
   
+.input {
+  font-family: Montserrat;
+  font-size: 14px;
+  color: white;
+  line-height: 1.2;
+  margin: 0 auto;
+  display: block;
+  width: 20%;
+  background: black;
+  border: 1px solid whitesmoke;
+}
+.input:focus {
+  outline: 1px solid white;
+}

@@ -83,8 +83,8 @@ button {
   padding: 10px;
   text-decoration: none;
   cursor: pointer;
-  min-width: 5vw;
-  margin-left: 80vw;
+  min-width: 100px;
+  margin: 20px;
 }
 button:hover {
   background-color: rgba(14, 14, 14, 0.692);

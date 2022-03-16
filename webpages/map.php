@@ -61,6 +61,7 @@
     //}
     
     //$stmt = $pdo->query('SELECT * FROM Location');
+    echo '<div id='.$row['Name'].'>'.$row['Name'].'</div>';
     foreach ($stmt as $row)
     {
         //echo $row['Name'] . "\n";

@@ -63,11 +63,14 @@
     //$stmt = $pdo->query('SELECT * FROM Location');
     foreach ($stmt as $row)
     {
-        echo $row['Name'] . "\n";
-        echo $row['LocationID'] . "\n";
-        echo $row['Address'] . "\n";
-        echo $row['Coords'] . "\n";
-        echo $row['AvgReview'] . "\n";
+        //echo $row['Name'] . "\n";
+        //echo $row['LocationID'] . "\n";
+        //echo $row['Address'] . "\n";
+        //echo $row['Coords'] . "\n";
+        //echo $row['AvgReview'] . "\n";
+
+        echo '<div id='.$Name.'>'.$row.'</div>';
+
     }
 
     //echo json_encode($emparray);

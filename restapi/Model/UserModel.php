@@ -101,12 +101,15 @@ class UserModel extends Database{
         return $this->executeFetchQuery($sql, ["username"=>$username])[0]["UserID"];
     }
 
-   public function getUsersByInput($seg){
+   public function getUsersByInput($userID, $seg){
        $sql = "SELECT Username
                 FROM User
-                WHERE Username LIKE :seg";
+                WHERE Username LIKE :seg AND UserID NOT IN 
+                (SELECT FriendID
+                 FROM Friendship
+                 WHERE UserID = :userid) AND UserID <> :userid";
                 $seg .= "%";
-        return $this->executeFetchQuery($sql, ["seg"=>$seg]);
+        return $this->executeFetchQuery($sql, ["seg"=>$seg, "userid"=>$userID]);
    } 
 
    public function sendRequest($requester, $target){

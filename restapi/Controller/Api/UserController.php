@@ -165,7 +165,8 @@ class UserController extends BaseController{
             if(strtoupper($this->requestMethod) == "POST"){
                 $segment = $_POST["segment"];
                 $userModel = new UserModel();
-                $res = $userModel->getUsersByInput($segment);
+                $userID = $userModel->getID($_COOKIE["username"]);
+                $res = $userModel->getUsersByInput($userID, $segment);
                 $respondData = json_encode($res);
             }else{
                 $this->strErrorDesc = 'Method not supported';

@@ -69,7 +69,7 @@ label {
     background-color: rgb(7, 7, 7);
     color: white;
     height: 300px;
-    width: 530px;
+    width: 37vw;
     overflow: auto;
     border-radius: 14px;
 
@@ -127,7 +127,7 @@ button:hover {
   line-height: 1.2;
   margin: 0 auto;
   display: block;
-  width: 40%;
+  width: 37vw;
   background: black;
   border: 1px solid whitesmoke;
   border-radius: 14px;

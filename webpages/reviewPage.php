@@ -67,7 +67,11 @@ function getLocID($LocationName)
 	$stmt = $pdo->prepare($sql);
 	$stmt->execute(['locationName' => $LocationName]);
 	$LocationID = $stmt->fetch(PDO::FETCH_ASSOC);
-	return $LocationID['LocationID'];
+    if(gettype($LocationID)=="array"){
+        return $LocationID['LocationID'];
+    }else{
+        return NULL;
+    }
 }
 function addReview($UserID, $LocationID)
 {	
@@ -80,9 +84,9 @@ function addReview($UserID, $LocationID)
 	$stmt->execute(["UserID"=>$UserID, "LocationID"=>$LocationID, "date"=>date("Y-m-d"), "rating"=>$rating, "review"=> $review]);
 }
 $UserID = getUserID($_COOKIE["username"]);
-$LocationID = getLocID($_POST["location"]);
 if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submit']))
 {
+    $LocationID = getLocID($_POST["location"]);
     addReview($UserID, $LocationID);
 }
 ?>

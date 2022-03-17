@@ -85,10 +85,10 @@ function loadTimetable(){
                 var newCell = newRow.insertCell();
                 if(element[1][i] == 1){
                     newCell.textContent = "Busy";
-                    newCell.style.backgroundColor = "rgb(31, 31, 31)";
+                    newCell.style.backgroundColor = "rgba(31, 31, 31, 0.6)";
                 }else{
                     newCell.textContent = "Free";
-                    newCell.style.backgroundColor = "rgb(117, 117, 117)";
+                    newCell.style.backgroundColor = "rgba(117, 117, 117, 0.6)";
                 }newCell.onclick = function(){
                     flipCell(this, element[1][i]);
                 }
@@ -245,13 +245,13 @@ function flipCell(cell, status){
     if(editing){
         if(status == 0){
             cell.textContent = "Busy";
-            cell.style.backgroundColor = "rgb(31, 31, 31)";
+            cell.style.backgroundColor = "rgba(31, 31, 31, 0.6)";
             cell.onclick = function(){
                 flipCell(cell, 1);
             }
         }else{
             cell.textContent = "Free";
-            cell.style.backgroundColor = "rgb(117, 117, 117)";
+            cell.style.backgroundColor = "rgba(117, 117, 117, 0.6)";
             cell.onclick = function(){
                 flipCell(cell, 0);
             }

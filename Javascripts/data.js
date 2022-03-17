@@ -214,10 +214,10 @@ const defaultPlaceholderLocations = [
 ]
 
 const defaultPlaceholderTimetable = [
-    ["10am-2pm", "1110011"],
-    ["2pm-6pm", "1101100"],
-    ["6pm-11pm", "0110011"],
-    ["11pm-10am", "1001011"]
+    ["10am-2pm", "1111111"],
+    ["2pm-6pm", "0011100"],
+    ["6pm-11pm", "0011100"],
+    ["11pm-10am", "0011100"]
 ];
 
 var locations = [];
@@ -242,7 +242,6 @@ function generateLocations(){
         locationJSON.Coords = CoordList;
         locations.push(locationJSON);
     }
-    console.log(locations);
 }
 
 function generateMarkerData(){
@@ -277,6 +276,7 @@ function getMarkers(){
 function getTimetable(){
     let timetable = defaultPlaceholderTimetable;
     for (let i = 0; i < 4; i++) {
+        console.log(timetable[i][0]);
         let cookieValue = document.cookie.split('; ').find(row => row.startsWith(timetable[i][0]+'='));
         if(cookieValue != undefined){
             cookieValueSplit = cookieValue.split('=')[1];

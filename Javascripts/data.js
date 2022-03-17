@@ -239,7 +239,6 @@ function generateLocations(){
         }
         locationJSON.ID = i;
         locationJSON.Name = locationData[0];
-        console.log(location)
         CoordList = [~~locationData[1], ~~locationData[2]]
         console.log(CoordList)
         locationJSON.Coords = CoordList;

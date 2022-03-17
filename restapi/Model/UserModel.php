@@ -142,14 +142,14 @@ class UserModel extends Database{
    }
 
    public function showReviews($locationName){
-       $sql = "SELECT review 
+       $sql = "SELECT date,rating,review
                FROM Reviews
                WHERE LocationID IN 
                (SELECT LocationID
                FROM Location
                WHERE Name = :locationName)";
-        return $this->executeFetchQuert($sql, ["locationName"=>$locationName]);
+   
+        return $this->executeFetchQuery($sql, ["locationName"=>$locationName]);
    }
 }
-
 ?>

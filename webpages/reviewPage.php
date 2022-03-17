@@ -1,14 +1,14 @@
 <?php
-// function addReview($id, $location, $date, $rating, $review)
-// {	 
-//     $servername = "mysql:host=dbhost.cs.man.ac.uk";
-//     $username = "y02478jh";
-//     $password = "i7JLzgM-z5zv9T";
-//     $dbname = "2021_comp10120_z19";
+function addReview($id, $location, $date, $rating, $review)
+{	 
+    $servername = "mysql:host=dbhost.cs.man.ac.uk";
+    $username = "y02478jh";
+    $password = "i7JLzgM-z5zv9T";
+    $dbname = "2021_comp10120_z19";
 
-//     $conn = new mysqli($servername, $username, $password, $dbname);
-// 	$sql = "INSERT INTO `Reviews` (`id`, `location`, `date`, `rating`, `review`) VALUES ('".$value['id']."', '".$value['location']."', '".$value['date']."', '".$value['rating']."', '".$value['review']."')";
-// }
+    $conn = new mysqli($servername, $username, $password, $dbname);
+	$sql = "INSERT INTO `Reviews` (`id`, `location`, `date`, `rating`, `review`) VALUES ('".$value['id']."', '".$value['location']."', '".$value['date']."', '".$value['rating']."', '".$value['review']."')";
+}
 // function showReviews(){
 //     parse_str($_SERVER["QUERY_STRING"], $query);
 //     $servername = "dbhost.cs.man.ac.uk";
@@ -32,13 +32,10 @@
 //     $stmt->setFetchMode(PDO::FETCH_ASSOC);
 //     $row= $stmt->fetch();
 
-    
 //     header('Content-Type:application/json');
 //     header('HTTP/1.1 200 OK');
 //     echo json_encode($row["LocationID"]);
 // }
-// showReviews();
-echo "yes";
 ?>
 
 

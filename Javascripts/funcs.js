@@ -40,12 +40,11 @@ function getLocation(MarkerLocation){
     const xhttp = new XMLHttpRequest();
     xhttp.onload = function(){
         text = JSON.parse(this.responseText);
-        console.log(text)
         displayReviews(text);
     }
     xhttp.open("POST","../restapi/index.php/user/showReviews");
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send("LocationName=" + "G-A-Y" );
+    xhttp.send("LocationName=" + MarkerLocation);
 }
 
 function loadReviews(){

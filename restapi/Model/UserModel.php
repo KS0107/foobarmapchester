@@ -144,7 +144,7 @@ class UserModel extends Database{
    public function showReviews($locationName){
        $sql = "SELECT date,rating,review
                FROM Reviews
-               WHERE LocationID = 
+               WHERE LocationID IN 
                (SELECT LocationID
                FROM Location
                WHERE Name = :locationName)";

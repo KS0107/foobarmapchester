@@ -6,7 +6,6 @@
 	<title>Document</title>
 	<link rel="stylesheet" href="../CSS/mainstyle.css">
 	<link rel="stylesheet" href="../CSS/timetable.css">
-	<link rel="stylesheet" href="../CSS/landingstyle.css">
     <script src="../Javascripts/funcs.js"></script>
 	<script src="../Javascripts/data.js"></script>
 </head>

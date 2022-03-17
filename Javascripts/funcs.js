@@ -15,7 +15,8 @@ function seeReviews(){
     //         filteredReviews.push(reviewsLocal[i])
     //     }
     // }
-    var filteredReviews = JSON.parse(getLocation(location));
+    var filteredReviews = getLocation(location);
+    console.log(filteredReviews);
 
     let reviewTextBlockOut = ""
     let totalRating = 0;

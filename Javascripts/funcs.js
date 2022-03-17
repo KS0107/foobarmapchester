@@ -211,26 +211,22 @@ document.addEventListener("DOMContentLoaded", () => {   //Otherwise the onclick 
 })
 
 function saveTimetable(){
-    if(editing){
-        editing = false;
-        var timetable = [["10am-2pm", "1110011"], ["2pm-6pm", "1101100"], ["6pm-11pm", "0110011"], ["11pm-10am", "1001011"]];
-        var timetableObj = document.getElementById("timetable");
-        timetable.forEach(element => {
-            endStringifiedData = "";
-            var timetableRow = document.getElementById(element[0]);
-            for (let i = 1; i < 8; i++) {
-                if(timetableRow.childNodes[i].textContent == "Busy"){
-                    endStringifiedData += "1";
-                }else{
-                    endStringifiedData += "0";
-                }
+    editing = false;
+    var timetable = [["10am-2pm", "1110011"], ["2pm-6pm", "1101100"], ["6pm-11pm", "0110011"], ["11pm-10am", "1001011"]];
+    var timetableObj = document.getElementById("timetable");
+    timetable.forEach(element => {
+        endStringifiedData = "";
+        var timetableRow = document.getElementById(element[0]);
+        for (let i = 1; i < 8; i++) {
+            if(timetableRow.childNodes[i].textContent == "Busy"){
+                endStringifiedData += "1";
+            }else{
+                endStringifiedData += "0";
             }
-            element[1] = endStringifiedData;
-            document.cookie = element[0].replace("-", "")+"="+element[1];
-        });
-        console.log(timetable);
-        //document.cookie = "10am-2pm="+;
-    }
+        }
+        element[1] = endStringifiedData;
+        document.cookie = element[0].replace("-", "")+"="+element[1];
+    });
 }
 
 var editing = false;

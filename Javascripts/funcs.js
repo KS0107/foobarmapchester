@@ -1,20 +1,22 @@
 function seeReviews(){
     var location = document.getElementById("locationName").textContent;
 
-    var reviewsString = localStorage.getItem('reviews');
-    var reviewsLocal = JSON.parse(reviewsString);
-    if(reviewsLocal == null){
-        loadReviews();
-        reviewsString = localStorage.getItem('reviews');
-        reviewsLocal = JSON.parse(reviewsString);
-    }
+    // var reviewsString = localStorage.getItem('reviews');
+    // var reviewsLocal = JSON.parse(reviewsString);
+    // if(reviewsLocal == null){
+    //     loadReviews();
+    //     reviewsString = localStorage.getItem('reviews');
+    //     reviewsLocal = JSON.parse(reviewsString);
+    // }
 
+    // var filteredReviews = []
+    // for (let i = 0; i < reviewsLocal.length; i++) {
+    //     if(reviewsLocal[i].location == location){
+    //         filteredReviews.push(reviewsLocal[i])
+    //     }
+    // }
     var filteredReviews = []
-    for (let i = 0; i < reviewsLocal.length; i++) {
-        if(reviewsLocal[i].location == location){
-            filteredReviews.push(reviewsLocal[i])
-        }
-    }
+    getLocation(location);
 
     let reviewTextBlockOut = ""
     let totalRating = 0;
@@ -54,7 +56,7 @@ function getLocation(MarkerLocation){
     const xhttp = new XMLHttpRequest();
     xhttp.onload = function(){
         text = this.responseText;
-        alert(text.review);
+        console.log(text.review);
     }
     xhttp.open("POST","../restapi/index.php/user/showReviews");
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");

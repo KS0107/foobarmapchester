@@ -240,7 +240,7 @@ function generateLocations(){
         locationJSON.ID = i;
         locationJSON.Name = locationData[0];
         CoordList = [Number(locations[1]), Number(locations[2])]
-        locationJSON.Coords = locationData[1];
+        locationJSON.Coords = CoordList;
         locations.push(locationJSON);
     }
     console.log(locations);

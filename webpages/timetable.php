@@ -82,7 +82,7 @@ function getTimetable($UserID)
 }
 function setTimetable($UserID)
 {	
-	if(!isset($_COOKIE["10am2pm"])) {
+	if(isset($_COOKIE["10am2pm"])) {
 		$time1 = $_COOKIE["10am2pm"];
 		$time2 = $_COOKIE["2pm6pm"];
 		$time3 = $_COOKIE["6pm11pm"];

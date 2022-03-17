@@ -95,7 +95,7 @@ function setTimetable($UserID)
 	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
 	$stmt = $pdo->prepare($sql);
 	$stmt->execute(["UserID"=>$UserID, "time1"=>$time1, "time2"=>$time2, "time3"=>$time3, "time4"=>$time4]);
-	$times = $stmt->fetch(PDO::FETCH_ASSOC);
+	getTimetable($UserID);
 }
 $UserID = getUserID($_COOKIE["username"]);
 getTimetable($UserID);

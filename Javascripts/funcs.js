@@ -298,7 +298,7 @@ function goToPage(page){
             if(pathSections[pathSections.length-1] == "manchester"){
                 pathSections.push("webpages");
             }
-            pathSections.push("reviewPage.html");
+            pathSections.push("reviewPage.php");
             break;
         case "M":
             pathSections.pop();

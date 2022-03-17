@@ -265,6 +265,7 @@ function generateMarkerData(){
 }
 
 function getLocations(){
+    generateLocations();
     return locations;
 }
 

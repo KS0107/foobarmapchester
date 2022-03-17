@@ -24,18 +24,18 @@
         <form action="reviewPage.php" method="post">
             <div class="formBox">
                 <p>Location</p>
-                <input type="text" id="location" placeholder="Location" />
+                <input type="text" id="location" placeholder="Location" name="location"/>
             </div>
             <div class="formBox">
                 <p>Rating</p>
-                <input type="range" id="rating" max="5" min="1" step="1" />
+                <input type="range" id="rating" max="5" min="1" step="1" name="rating"/>
             </div>
             <div class="formBox">
                 <p>Review</p>
-                <textarea style="resize:none" type="text" id="review" placeholder="Write your review!" ></textarea>
+                <textarea style="resize:none" type="text" id="review" placeholder="Write your review!" name="review"></textarea>
             </div>
             <div class="formBox">
-                <input id="btnRP" type="submit" name="save" value="Save" />
+                <input id="btnRP" type="submit" name="submit" value="Submit" />
             </div>
     		
             
@@ -45,18 +45,44 @@
 </html>
 
 <?php
-function addReview($id, $location, $date, $rating, $review)
-{	 
-    $servername = "mysql:host=dbhost.cs.man.ac.uk";
-    $username = "y02478jh";
-    $password = "i7JLzgM-z5zv9T";
-    $dbname = "2021_comp10120_z19";
-
-    $conn = new mysqli($servername, $username, $password, $dbname);
-	$sql = "INSERT INTO `Reviews` (`id`, `location`, `date`, `rating`, `review`) VALUES ('".$value['id']."', '".$value['location']."', '".$value['date']."', '".$value['rating']."', '".$value['review']."')";
+function getUserID($Username)
+{	
+	$sql = "SELECT UserID
+			FROM   User
+			WHERE  Username = :Username";
+	$pdo = new pdo('mysql:host=dbhost.cs.man.ac.uk; dbname=2021_comp10120_z19', 'y02478jh', 'i7JLzgM-z5zv9T');
+	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
+	$stmt = $pdo->prepare($sql);
+	$stmt->execute(['Username' => $Username]);
+	$UserID = $stmt->fetch(PDO::FETCH_ASSOC);
+	return $UserID['UserID'];
 }
-if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['save']))
+function getLocID($LocationName)
+{	
+	$sql = "SELECT LocationID
+            FROM Location
+            WHERE Name = :locationName";
+	$pdo = new pdo('mysql:host=dbhost.cs.man.ac.uk; dbname=2021_comp10120_z19', 'y02478jh', 'i7JLzgM-z5zv9T');
+	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
+	$stmt = $pdo->prepare($sql);
+	$stmt->execute(['locationName' => $LocationName]);
+	$LocationID = $stmt->fetch(PDO::FETCH_ASSOC);
+	return $LocationID['LocationID'];
+}
+function addReview($UserID, $LocationID)
+{	
+    $rating = $_POST["rating"];
+    $review = $_POST["review"]
+	$sql = "INSERT INTO Reviews (UserID, LocationID, date, rating, review) VALUES (:UserID, :LocationID :date ,:rating ,:review )";
+    $pdo = new pdo('mysql:host=dbhost.cs.man.ac.uk; dbname=2021_comp10120_z19', 'y02478jh', 'i7JLzgM-z5zv9T');
+	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
+	$stmt = $pdo->prepare($sql);
+	$stmt->execute(["UserID"=>$UserID, "LocationID"=>$LocationID, "date"=>date("Y-m-d"), "rating"=>$rating, "review"=> $review]);
+}
+$UserID = getUserID($_COOKIE["username"]);
+$LocationID = getLocID($_POST["location"]);
+if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submit']))
 {
-    addR($UserID);
+    addReview($UserID, $LocationID);
 }
 ?>

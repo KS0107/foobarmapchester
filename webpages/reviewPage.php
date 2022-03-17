@@ -24,7 +24,7 @@
         <form action="reviewPage.php" method="post">
             <div class="formBox">
                 <p>Location</p>
-                <select id="locations" name="locations">
+                <select id="locations" name="location">
                 </select>
             </div>
             <div class="formBox">

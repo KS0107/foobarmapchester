@@ -89,7 +89,7 @@ function setTimetable($UserID)
 		$time4 = $_COOKIE["11pm10am"];
 	}
 	$sql = "UPDATE Timetable
-			SET 10am2pm = :time1, 2pm6pm = :time3, 6pm11pm = :time3, 11pm10am = :time4
+			SET 10am2pm = :time1, 2pm6pm = :time2, 6pm11pm = :time3, 11pm10am = :time4
 			WHERE TimetableID = :UserID";
 	$pdo = new pdo('mysql:host=dbhost.cs.man.ac.uk; dbname=2021_comp10120_z19', 'y02478jh', 'i7JLzgM-z5zv9T');
 	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);

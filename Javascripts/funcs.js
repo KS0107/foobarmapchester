@@ -56,6 +56,7 @@ function getLocation(MarkerLocation){
     const xhttp = new XMLHttpRequest();
     xhttp.onload = function(){
         text = this.responseText;
+        console.log(text);
         console.log(text.review);
     }
     xhttp.open("POST","../restapi/index.php/user/showReviews");

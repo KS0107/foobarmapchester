@@ -239,6 +239,7 @@ function generateLocations(){
         }
         locationJSON.ID = i;
         locationJSON.Name = locationData[0];
+        locationJSON.Coords = locationData[1];
         locations.push(locationJSON);
     }
     console.log(locations);

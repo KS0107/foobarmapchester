@@ -82,30 +82,25 @@ function getTimetable($UserID)
 }
 function setTimetable($UserID)
 {	
-	$sql = "SELECT 10am2pm, 2pm6pm, 6pm11pm, 11pm10am
-			FROM   Timetable
-			WHERE  TimetableID = :UserID";
+	if(!isset($_COOKIE["10am2pm"])) {
+		$time1 = $_COOKIE["10am2pm"]
+		$time2 = $_COOKIE["2pm6pm"]
+		$time3 = $_COOKIE["6pm11pm"]
+		$time4 = $_COOKIE["11pm10am"]
+	}
+	$sql = "UPDATE Timetable
+			SET 10am2pm = :time1, 2pm6pm = :time3, 6pm11pm = :time3, 11pm10am = :time4
+			WHERE TimetableID = :UserID";;
 	$pdo = new pdo('mysql:host=dbhost.cs.man.ac.uk; dbname=2021_comp10120_z19', 'y02478jh', 'i7JLzgM-z5zv9T');
 	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
 	$stmt = $pdo->prepare($sql);
-	$stmt->execute(["UserID"=>$UserID]);
+	$stmt->execute(["UserID"=>$UserID, "time1"=>$time1, "time2"=>$time2, "time3"=>$time3, "time4"=>$time4]);
 	$times = $stmt->fetch(PDO::FETCH_ASSOC);
-	if(gettype($times) == "array"){
-		setcookie("time1", $times["10am2pm"]);
-		setcookie("time2", $times["2pm6pm"]);
-		setcookie("time3", $times["6pm11pm"]);
-		setcookie("time4", $times["11pm10am"]);
-	}else{
-		setcookie("time1", "1110011");
-		setcookie("time2", "1101100");
-		setcookie("time3", "0110011");
-		setcookie("time4", "1001011");
-	}
 }
 $UserID = getUserID($_COOKIE["username"]);
 getTimetable($UserID);
 if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['save']))
 {
-    //setTimetable($UserID);
+    setTimetable($UserID);
 }
 ?>

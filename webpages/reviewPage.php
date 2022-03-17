@@ -24,7 +24,8 @@
         <form action="reviewPage.php" method="post">
             <div class="formBox">
                 <p>Location</p>
-                <input type="text" id="location" placeholder="Location" name="location"/>
+                <select id="locations" name="locations">
+                </select>
             </div>
             <div class="formBox">
                 <p>Rating</p>

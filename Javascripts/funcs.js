@@ -83,6 +83,19 @@ function loadTimetable(){
     }
 }
 
+function loadReviewLocations(){
+    console.log("Loading Review Drop Down")
+    let reviewDropDown = document.getElementById("locations")
+    if(reviewDropDown != null){
+        var locations = getLocations();
+        locations.forEach(element => {
+            var option = document.createElement("option");
+            option.text = element;
+            reviewDropDown.add(option);
+        });
+    }
+}
+
 function loadText(){
     console.log("Loading text")
     let reviewBox = document.getElementById("review")

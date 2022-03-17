@@ -264,6 +264,10 @@ function generateMarkerData(){
     });
 }
 
+function getLocations(){
+    return locations;
+}
+
 function getReviews(){
     return defaultPlaceholderReviews;
 }

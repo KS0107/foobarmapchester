@@ -228,7 +228,7 @@ var markers = {'type': 'FeatureCollection',
 function generateLocations(){
     for (let i = 1; i <= 12; i++) {
         locationObj = document.getElementById(i);
-        locationData = locationObj.textContent.split(".");
+        locationData = locationObj.textContent.split(",");
         console.log(locationData);
         locationJSON = {
             "ID": 0,
@@ -239,6 +239,7 @@ function generateLocations(){
         }
         locationJSON.ID = i;
         locationJSON.Name = locationData[0];
+        CoordList = [Number(locations[1]), Number(locations[2])]
         locationJSON.Coords = locationData[1];
         locations.push(locationJSON);
     }

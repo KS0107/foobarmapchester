@@ -39,7 +39,7 @@
 		<button id="btnET">Edit</button>
 		<!-- <button id="btnST">Save</button> -->
 		<form action="timetable.php" method="post">
-    		<input type="submit" name="save" value="Save" />
+    		<input id="btnST" type="submit" name="save" value="Save" />
 		</form>
 	</div>
 

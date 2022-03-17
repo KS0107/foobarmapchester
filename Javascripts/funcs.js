@@ -51,16 +51,14 @@ const addReview = (ev) => {
 }
 
 function getLocation(MarkerLocation){
-    alert(MarkerLocation);
     const xhttp = new XMLHttpRequest();
     xhttp.onload = function(){
-        text = JSON.parse(this.responseText);
-        // alert(typeof(text));
-        alert(text);
+        text = this.responseText;
+        alert(text.review);
     }
     xhttp.open("POST","../restapi/index.php/user/showReviews");
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send("LocationName=" + MarkerLocation );
+    xhttp.send("LocationName=" + "G-A-Y" );
 }
 
 function loadReviews(){

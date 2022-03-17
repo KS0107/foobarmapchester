@@ -261,7 +261,7 @@ class UserController extends BaseController{
             try{
                 $location = $_POST["LocationName"];
                 $userModel = new UserModel;
-                $res = $userModel->showReiews($location);
+                $res = $userModel->showReviews($location);
                 $respondData = json_encode($res);
             }catch(Error $e){
                 $this->strErrorDesc = $e->getMessage();

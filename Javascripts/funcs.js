@@ -88,6 +88,7 @@ function loadReviewLocations(){
     let reviewDropDown = document.getElementById("locations")
     if(reviewDropDown != null){
         var locations = getLocations();
+        console.log(locations)
         locations.forEach(element => {
             var option = document.createElement("option");
             option.text = element;

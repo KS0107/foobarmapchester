@@ -87,6 +87,7 @@ $UserID = getUserID($_COOKIE["username"]);
 if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submit']))
 {
     $LocationID = getLocID($_POST["location"]);
+    echo $LocationID;
     addReview($UserID, $LocationID);
 }
 ?>

@@ -78,6 +78,7 @@ function addReview($UserID, $LocationID)
     $rating = $_POST["rating"];
     $review = $_POST["review"];
     $date = date("Y-m-d");
+    echo $date;
 	$sql = "INSERT INTO Reviews (UserID, LocationID, date, rating, review) VALUES (:UserID, :LocationID :date ,:rating ,:review )";
     $pdo = new pdo('mysql:host=dbhost.cs.man.ac.uk; dbname=2021_comp10120_z19', 'y02478jh', 'i7JLzgM-z5zv9T');
 	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);

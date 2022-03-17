@@ -235,10 +235,13 @@ function saveTimetable(){
 
 var editing = false;
 function editTimetable(){
+    const editTimetableButton = document.getElementById("btnET");
     if(editing){
         editing = false;
+        editTimetableButton.style.backgroundColor = "rgb(0, 0, 0)";
     }else{
         editing = true;
+        editTimetableButton.style.backgroundColor = "rgb(28, 28, 28)";
     }
 }
 

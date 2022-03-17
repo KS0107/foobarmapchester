@@ -8,9 +8,9 @@ $(document).ready(function(){
     })
 
     $("#send").click(function(){
-        var clientmsg = $("#usermsg").val();
+        var clientmsg = $("#input").val();
         $.post("../restapi/index.php/user/msgIn", {text: clientmsg, receiver: receiver, sender: getCookie("username")});
-        $("#usermsg").val("");
+        $("#input").val("");
         return false;
     });
 

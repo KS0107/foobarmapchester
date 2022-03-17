@@ -226,9 +226,9 @@ var markers = {'type': 'FeatureCollection',
 };
 
 function generateLocations(){
-    for (let i = 1; i <= 20; i++) {
+    for (let i = 1; i <= 12; i++) {
         locationObj = document.getElementById(i);
-        locationData = locationObj.textContent.split(" ");
+        locationData = locationObj.textContent.split(",");
         console.log(locationData);
         locationJSON = {
             "ID": 0,
@@ -239,12 +239,17 @@ function generateLocations(){
         }
         locationJSON.ID = i;
         locationJSON.Name = locationData[0];
+        CoordList = [parseFloat(locations[1]), parseFloat(locations[2])]
+        console.log(CoordList)
+        locationJSON.Coords = CoordList;
+        locations.push(locationJSON);
     }
+    console.log(locations);
 }
 
 function generateMarkerData(){
     generateLocations();
-    defaultPlaceholderLocations.forEach(element =>{
+    locations.forEach(element =>{
         var blankLocation = {
             'type': 'Feature',
             'properties': {

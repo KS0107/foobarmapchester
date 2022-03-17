@@ -35,7 +35,7 @@
 		<div id="chatbox"></div>
 		<!-- <iframe id="friendbox" src="friend.html"  title=""></iframe> -->
 		<form autocomplete="off" name="message" method="post">
-			<input autocomplete="false" id="input" type="text" id="usermsg"></input>
+			<input autocomplete="false" id="input" type="text"></input>
 			<button id="send">Send</button>
 		</form>
 

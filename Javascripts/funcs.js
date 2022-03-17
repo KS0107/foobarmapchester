@@ -108,6 +108,7 @@ function loadPageContent(){
     loadReviews();
     loadText();
     loadTimetable();
+    loadReviewLocations();
 }
 
 document.addEventListener("DOMContentLoaded", () => {   //Otherwise the onclick is assigned before the DOM is loaded

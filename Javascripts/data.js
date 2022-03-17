@@ -226,7 +226,7 @@ var markers = {'type': 'FeatureCollection',
 };
 
 function generateLocations(){
-    for (let i = 1; i <= 20; i++) {
+    for (let i = 1; i <= 12; i++) {
         locationObj = document.getElementById(i);
         locationData = locationObj.textContent.split(",");
         console.log(locationData);

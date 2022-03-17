@@ -93,9 +93,26 @@ function addReview($UserID, $LocationID)
     ]);
 }
 $UserID = getUserID($_COOKIE["username"]);
+loadLocations();
 if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submit']))
 {
     $LocationID = getLocID($_POST["location"]);
     addReview($UserID, $LocationID);
+}
+function loadLocations(){
+    $sql = "SELECT *
+            FROM  Location";
+
+    $pdo = new pdo('mysql:host=dbhost.cs.man.ac.uk; dbname=2021_comp10120_z19', 'y02478jh', 'i7JLzgM-z5zv9T');
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
+    $stmt = $pdo->prepare($sql);
+	$stmt->execute();
+	$stmt->setFetchMode(PDO::FETCH_ASSOC);
+	$row = $stmt->fetch();
+    echo '<div id='.$row['LocationID'].' style="display:none">'.$row['Name'].",".$row['Coords'].'</div>';
+    foreach ($stmt as $row)
+    {
+        echo '<div id='.$row['LocationID'].' style="display:none">'.$row['Name'].",".$row['Coords'].'</div>';
+    }
 }
 ?>

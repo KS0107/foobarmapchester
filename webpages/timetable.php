@@ -68,6 +68,7 @@ function getTimetable($UserID)
 	$stmt = $pdo->prepare($sql);
 	$stmt->execute(["UserID"=>$UserID]);
 	$times = $stmt->fetch(PDO::FETCH_ASSOC);
+	echo gettype($times);
 	if(gettype($times) == "array"){
 		setcookie("10am2pm", $times["10am2pm"]);
 		setcookie("2pm6pm", $times["2pm6pm"]);
@@ -106,6 +107,6 @@ $UserID = getUserID($_COOKIE["username"]);
 getTimetable($UserID);
 if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['save']))
 {
-    setTimetable($UserID);
+    //setTimetable($UserID);
 }
 ?>

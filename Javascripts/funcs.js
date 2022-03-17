@@ -39,7 +39,7 @@ const addReview = (ev) => {
 function getLocation(MarkerLocation){
     const xhttp = new XMLHttpRequest();
     xhttp.onload = function(){
-        text = this.responseText;
+        text = JSON.parse(this.responseText);
         console.log(text)
         displayReviews(text);
     }

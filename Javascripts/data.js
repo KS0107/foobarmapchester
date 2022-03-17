@@ -229,7 +229,6 @@ function generateLocations(){
     for (let i = 1; i <= 12; i++) {
         locationObj = document.getElementById(i);
         locationData = locationObj.textContent.split(",");
-        console.log(locationData);
         locationJSON = {
             "ID": 0,
             "Name": "Turing Tap",
@@ -240,9 +239,6 @@ function generateLocations(){
         locationJSON.ID = i;
         locationJSON.Name = locationData[0];
         CoordList = [parseFloat(locationData[1]), parseFloat(locationData[2])]
-        console.log(locationData[1])
-        console.log(parseFloat(locationData[1]))
-        console.log(CoordList)
         locationJSON.Coords = CoordList;
         locations.push(locationJSON);
     }
@@ -265,9 +261,7 @@ function generateMarkerData(){
         }
         blankLocation.properties.message = element.Name;
         blankLocation.geometry.coordinates = element.Coords;
-        console.log(blankLocation)
         markers.features.push(blankLocation);
-        console.log(markers);
     });
 }
 

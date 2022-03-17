@@ -76,7 +76,7 @@ label {
     width: 48vw;
     overflow: auto;
     border-radius: 14px;
-    border: 1px solid white;
+    border: 1px white;
 }
 .friendList {
   color: white;

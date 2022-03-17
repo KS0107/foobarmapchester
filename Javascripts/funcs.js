@@ -91,7 +91,7 @@ function loadReviewLocations(){
         console.log(locations)
         locations.forEach(element => {
             var option = document.createElement("option");
-            option.text = element;
+            option.text = element.Name;
             reviewDropDown.add(option);
         });
     }

@@ -77,17 +77,23 @@ function addReview($UserID, $LocationID)
 {	
     $rating = $_POST["rating"];
     $review = $_POST["review"];
+    $date = date("Y-m-d");
 	$sql = "INSERT INTO Reviews (UserID, LocationID, date, rating, review) VALUES (:UserID, :LocationID :date ,:rating ,:review )";
     $pdo = new pdo('mysql:host=dbhost.cs.man.ac.uk; dbname=2021_comp10120_z19', 'y02478jh', 'i7JLzgM-z5zv9T');
 	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
 	$stmt = $pdo->prepare($sql);
-	$stmt->execute(["UserID"=>$UserID, "LocationID"=>$LocationID, "date"=>date("Y-m-d"), "rating"=>$rating, "review"=> $review]);
+	$stmt->execute([
+        "UserID" => $UserID, 
+        "LocationID" => $LocationID, 
+        "date" => $date,
+        "rating" => $rating, 
+        "review" => $review
+    ]);
 }
 $UserID = getUserID($_COOKIE["username"]);
 if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['submit']))
 {
     $LocationID = getLocID($_POST["location"]);
-    echo $LocationID;
     addReview($UserID, $LocationID);
 }
 ?>

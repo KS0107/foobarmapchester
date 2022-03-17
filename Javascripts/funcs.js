@@ -226,8 +226,10 @@ function saveTimetable(){
                 }
             }
             element[1] = endStringifiedData;
+            document.cookie = element[0]+"="+element[1];
         });
         console.log(timetable);
+        //document.cookie = "10am-2pm="+;
     }
 }
 

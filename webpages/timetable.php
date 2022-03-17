@@ -37,8 +37,10 @@
 			</tr>
 		</table>
 		<button id="btnET">Edit</button>
-		<button id="btnST">Save</button>
-		<div id="timetableSave" disabled="true"></div>
+		<!-- <button id="btnST">Save</button> -->
+		<form action="timetable.php" method="post">
+    		<input type="submit" name="save" value="Save" />
+		</form>
 	</div>
 
 </body>
@@ -78,6 +80,32 @@ function getTimetable($UserID)
 		setcookie("time4", "1001011");
 	}
 }
+function setTimetable($UserID)
+{	
+	$sql = "SELECT 10am2pm, 2pm6pm, 6pm11pm, 11pm10am
+			FROM   Timetable
+			WHERE  TimetableID = :UserID";
+	$pdo = new pdo('mysql:host=dbhost.cs.man.ac.uk; dbname=2021_comp10120_z19', 'y02478jh', 'i7JLzgM-z5zv9T');
+	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_WARNING);
+	$stmt = $pdo->prepare($sql);
+	$stmt->execute(["UserID"=>$UserID]);
+	$times = $stmt->fetch(PDO::FETCH_ASSOC);
+	if(gettype($times) == "array"){
+		setcookie("time1", $times["10am2pm"]);
+		setcookie("time2", $times["2pm6pm"]);
+		setcookie("time3", $times["6pm11pm"]);
+		setcookie("time4", $times["11pm10am"]);
+	}else{
+		setcookie("time1", "1110011");
+		setcookie("time2", "1101100");
+		setcookie("time3", "0110011");
+		setcookie("time4", "1001011");
+	}
+}
 $UserID = getUserID($_COOKIE["username"]);
 getTimetable($UserID);
+if($_SERVER['REQUEST_METHOD'] == "POST" and isset($_POST['save']))
+{
+    setTimetable($UserID);
+}
 ?>

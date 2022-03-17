@@ -1,35 +1,19 @@
-function seeReviews(){
+function displayReviews(reviews){
     var location = document.getElementById("locationName").textContent;
-
-    // var reviewsString = localStorage.getItem('reviews');
-    // var reviewsLocal = JSON.parse(reviewsString);
-    // if(reviewsLocal == null){
-    //     loadReviews();
-    //     reviewsString = localStorage.getItem('reviews');
-    //     reviewsLocal = JSON.parse(reviewsString);
-    // }
-
-    // var filteredReviews = []
-    // for (let i = 0; i < reviewsLocal.length; i++) {
-    //     if(reviewsLocal[i].location == location){
-    //         filteredReviews.push(reviewsLocal[i])
-    //     }
-    // }
-    var filteredReviews = getLocation(location);
-    console.log(filteredReviews);
+    console.log(reviews);
 
     let reviewTextBlockOut = ""
     let totalRating = 0;
-    for (let i = 0; i < filteredReviews.length; i++) {
-        totalRating += parseInt(filteredReviews[i].rating);
+    for (let i = 0; i < reviews.length; i++) {
+        totalRating += parseInt(reviews[i].rating);
     }
-    finalRating = totalRating / filteredReviews.length
+    finalRating = totalRating / reviews.length
     finalRating = Math.round(finalRating * 100)/100
     reviewTextBlockOut += "Rating of: " + finalRating + "\n\n\n";
-    for (let i = 0; i < filteredReviews.length; i++) {
-        reviewTextBlockOut += ("Reviewed On: " + filteredReviews[i].date + "\n");
-        reviewTextBlockOut += ("Given A Score Of: " + filteredReviews[i].rating + " Out Of 5" + "\n");
-        reviewTextBlockOut += ("Review: " + filteredReviews[i].review + "\n\n");
+    for (let i = 0; i < reviews.length; i++) {
+        reviewTextBlockOut += ("Reviewed On: " + reviews[i].date + "\n");
+        reviewTextBlockOut += ("Given A Score Of: " + reviews[i].rating + " Out Of 5" + "\n");
+        reviewTextBlockOut += ("Review: " + reviews[i].review + "\n\n");
     }
     let pre = document.querySelector("#msg pre");
     pre.textContent = reviewTextBlockOut;
@@ -57,7 +41,7 @@ function getLocation(MarkerLocation){
     xhttp.onload = function(){
         text = this.responseText;
         console.log(text)
-        return text;
+        displayReviews(text);
     }
     xhttp.open("POST","../restapi/index.php/user/showReviews");
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");

@@ -15,8 +15,7 @@ function seeReviews(){
     //         filteredReviews.push(reviewsLocal[i])
     //     }
     // }
-    var filteredReviews = []
-    getLocation(location);
+    var filteredReviews = getLocation(location);
 
     let reviewTextBlockOut = ""
     let totalRating = 0;
@@ -56,8 +55,7 @@ function getLocation(MarkerLocation){
     const xhttp = new XMLHttpRequest();
     xhttp.onload = function(){
         text = this.responseText;
-        console.log(text);
-        console.log(text.review);
+        return text;
     }
     xhttp.open("POST","../restapi/index.php/user/showReviews");
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");

@@ -277,7 +277,7 @@ function getMarkers(){
 function getTimetable(){
     let timetable = defaultPlaceholderTimetable;
     for (let i = 0; i < 4; i++) {
-        let cookieValue = document.cookie.split('; ').find(row => row.startsWith('time'+(i+1)+'='));
+        let cookieValue = document.cookie.split('; ').find(row => row.startsWith(timetable[i][0]+'='));
         if(cookieValue != undefined){
             cookieValueSplit = cookieValue.split('=')[1];
             timetable[i][1] = cookieValueSplit;

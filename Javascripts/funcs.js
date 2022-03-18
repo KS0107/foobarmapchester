@@ -13,7 +13,7 @@ function displayReviews(reviews){
         reviewTextBlockOut += ("Reviewed On: " + reviews[i].date + "\n");
         reviewTextBlockOut += ("Given A Score Of: " + reviews[i].rating + " Out Of 5" + "\n");
         reviewActualText = reviews[i].review
-        for (let i = 0; i < Math.floor(reviewActualText.length / 30); i++) {
+        for (let i = 1; i <= Math.floor(reviewActualText.length / 30); i++) {
             foundSpace = false;
             decrement = 0;
             console.log(reviewActualText[30*i-decrement])

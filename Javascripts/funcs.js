@@ -20,7 +20,7 @@ function displayReviews(reviews){
             while(!foundSpace){
                 console.log(reviewActualText[30*i-decrement])
                 if(reviewActualText[30*i-decrement] == " "){
-                    reviewActualText = reviewActualText.slice(30*(i-1)-decrement, 30*i-decrement) + "\n" + reviewActualText.slice(30*i-decrement);
+                    reviewActualText = reviewActualText.slice((30*(i-1))-decrement, (30*i)-decrement) + "\n" + reviewActualText.slice((30*i)-decrement);
                     foundSpace = true;
                 }else{
                     decrement ++;

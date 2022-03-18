@@ -20,7 +20,7 @@ function displayReviews(reviews){
         }else if(Math.floor(reviewActualText.length / 30) == 3){
             reviewActualText = reviewActualText.slice(0, 30) + "\n" + reviewActualText.slice(30, 60) + "\n" + reviewActualText.slice(60, 90) + "\n" + reviewActualText.slice(90)
         }
-        reviewTextBlockOut += ("Review: " + reviews[i].review + "\n\n");
+        reviewTextBlockOut += ("Review: " + reviewActualText + "\n\n");
     }
     let pre = document.querySelector("#msg pre");
     pre.textContent = reviewTextBlockOut;

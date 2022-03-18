@@ -16,7 +16,9 @@ function displayReviews(reviews){
         for (let i = 0; i < Math.floor(reviewActualText.length / 30); i++) {
             foundSpace = false;
             decrement = 0;
+            console.log(reviewActualText[30*i-decrement])
             while(!foundSpace){
+                console.log(reviewActualText[30*i-decrement])
                 if(reviewActualText[30*i-decrement] == " "){
                     reviewActualText = reviewActualText.slice(30*(i-1)-decrement, 30*i-decrement) + "\n" + reviewActualText.slice(30*i-decrement);
                     foundSpace = true;

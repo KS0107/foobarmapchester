@@ -13,20 +13,24 @@ function displayReviews(reviews){
         reviewTextBlockOut += ("Reviewed On: " + reviews[i].date + "\n");
         reviewTextBlockOut += ("Given A Score Of: " + reviews[i].rating + " Out Of 5" + "\n");
         reviewActualText = reviews[i].review
-        for (let i = 1; i <= Math.floor(reviewActualText.length / 30); i++) {
+        for (let i = 0; i < Math.floor(reviewActualText.length / 30); i++) {
+            reviewLineByLine = reviewActualText.split("\n");
             foundSpace = false;
             decrement = 0;
-            console.log(reviewActualText[30*i-decrement])
             while(!foundSpace){
-                console.log(reviewActualText[30*i-decrement])
-                if(reviewActualText[30*i-decrement] == " "){
-                    console.log(reviewActualText.slice((30*(i-1))-decrement, (30*i)-decrement))
-                    reviewActualText = reviewActualText.slice((30*(i-1))-decrement, (30*i)-decrement) + "\n" + reviewActualText.slice((30*i)-1-decrement);
+                if(reviewLineByLine[i][30-decrement] == " "){
+                    console.log(reviewLineByLine[i][30-decrement])
+                    reviewActualText = reviewLineByLine[i].slice(0, 30-decrement) + "\n" + reviewLineByLine[i].slice(30-decrement);
                     foundSpace = true;
                 }else{
                     decrement ++;
                 }
             }
+            reviewTextTemp = ""
+            reviewLineByLine.forEach(element => {
+                reviewTextTemp += element + "\n"
+            });
+            reviewActualText = reviewTextTemp;
         }
         // if(Math.floor(reviewActualText.length / 30) == 1){
         //     reviewActualText = reviewActualText.slice(0, 30) + "\n" + reviewActualText.slice(30)

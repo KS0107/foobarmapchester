@@ -1,6 +1,5 @@
 function displayReviews(reviews){
     var location = document.getElementById("locationName").textContent;
-    console.log(reviews);
 
     let reviewTextBlockOut = ""
     let totalRating = 0;
@@ -13,6 +12,14 @@ function displayReviews(reviews){
     for (let i = 0; i < reviews.length; i++) {
         reviewTextBlockOut += ("Reviewed On: " + reviews[i].date + "\n");
         reviewTextBlockOut += ("Given A Score Of: " + reviews[i].rating + " Out Of 5" + "\n");
+        reviewActualText = reviews[i].review
+        if(Math.floor(reviewActualText.length / 30) == 1){
+            reviewActualText = reviewActualText.slice(0, 30) + "\n" + reviewActualText.slice(30)
+        }else if(Math.floor(reviewActualText.length / 30) == 2){
+            reviewActualText = reviewActualText.slice(0, 30) + "\n" + reviewActualText.slice(30, 60) + "\n" + reviewActualText.slice(60)
+        }else if(Math.floor(reviewActualText.length / 30) == 3){
+            reviewActualText = reviewActualText.slice(0, 30) + "\n" + reviewActualText.slice(30, 60) + "\n" + reviewActualText.slice(60, 90) + "\n" + reviewActualText.slice(90)
+        }
         reviewTextBlockOut += ("Review: " + reviews[i].review + "\n\n");
     }
     let pre = document.querySelector("#msg pre");

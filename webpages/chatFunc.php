@@ -36,6 +36,7 @@
 		</div>
 
 		<div id="chatbox-wrapper">
+			<button id="request">Make a request</button>
 			<div id="chatbox"></div>
 			<form autocomplete="off" name="message" method="post" style="display: flex;">
 				<span><input autocomplete="false" id="input" type="text"></input></span>
@@ -46,15 +47,28 @@
 	
 	<div id="friendbox-container">
 		<iframe id="friendbox" src="friend.html"  title=""></iframe>
-		<div id="close"></div>
-	<div>
+		<div id="close1"></div>
+	</div>
+
+	<div id="requestbox-container">
+		<iframe id="requestbox" src="requestForm.html"></iframe>
+		<div id="close2"></div>
+	</div>
 	<script>
 		document.getElementById("add-friend").addEventListener("click", function(){
 			document.getElementById("friendbox-container").style.display = "block";
 		});
 
-		document.getElementById("close").addEventListener("click", function(){
+		document.getElementById("close1").addEventListener("click", function(){
 			document.getElementById("friendbox-container").style.display = "none";
+		});
+
+		document.getElementById("request").addEventListener("click", function(){
+			document.getElementById("requestbox-container").style.display = "block";
+		});
+
+		document.getElementById("close2").addEventListener("click", function(){
+			document.getElementById("requestbox-container").style.display = "none";
 		});
 	</script>
 </body>

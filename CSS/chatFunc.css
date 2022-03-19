@@ -73,6 +73,12 @@ label {
     width: 90%;
 }
 
+#request{
+  position: absolute;
+  left: -11em;
+  top: 21.6em;
+}
+
 .flex-container > div{
   margin: 30px;
 }
@@ -81,7 +87,9 @@ label {
   flex-grow: 5;
   width: 100%;
   text-align: left;
+  position: relative;
 }
+
 
 #chatbox {
     text-align: left;
@@ -104,22 +112,22 @@ label {
   flex-grow: 1;
 }
 
-#friendbox-container{
+#friendbox-container, #requestbox-container{
   display: none;
-  height: 80%;
+  height: 40%;
   width: 40%;
   position: absolute;
-  top: 80px;
+  top: 150px;
   left: 30%;
   background-color: #ecd6d6;
 }
 
-#friendbox{
+#friendbox, #requestbox{
   width: 99%;
   height: 99%;
 }
 
-#close{
+#close1, #close2{
   position: absolute;
   right: 0;
   top: 0;
@@ -129,7 +137,6 @@ label {
   width: 30px;
   height: 30px;
 }
-
 
 #friend-bar{
   text-align: center;

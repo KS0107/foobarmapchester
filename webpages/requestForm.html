@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="../CSS/requestForm.css">
+</head>
+<body>
+    <div class="wrapper">
+        <form action="">
+            <label for="type">Types</label><br>
+            <select id="type" onchange="typeHandlerf()">
+                <option value="public">public</option>
+                <option value="private" selected>private</option>
+            </select>
+
+            <br><label for="place">Choose a place</label>
+            <br><select name="place" id="place">
+
+            </select>
+
+            <br><label for="date">Choose a date</label>
+            <br><select name="date" id="date">
+
+            </select>
+
+            <br><label for="friendList" id="choose-label">Send the request to</label>
+            <br><select name="friends" id="friendList">
+
+            </select>
+
+            <br><input type="submit" value="submit">
+        </form>
+    </div>
+</body>
+
+<script>
+    let typeHandler = document.getElementById("type");
+    let friendHandler = document.getElementById("friendList");
+    let label = document.getElementById("choose-label");
+    function typeHandlerf(){
+        switch(typeHandler.value){
+            case "private":
+                label.style.display = "inline";
+                friendHandler.style.display = "inline";
+                
+                break;
+            case "public":
+                friendHandler.style.display = "none";
+                label.style.display = "none";
+                break;
+        }
+    }
+    
+</script>
+</html>

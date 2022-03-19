@@ -82,3 +82,4 @@ function loadLog(friend){
         $("#chatbox").animate({ scrollTop: newscrollHeight }, 'normal'); 
     }
 }
+

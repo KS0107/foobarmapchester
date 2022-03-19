@@ -27,6 +27,7 @@ body {
 #msg {
     max-width: 10%;
 }
+
 .topBar #buttonLinks{
     display: flex;
     justify-content: space-between;
@@ -48,6 +49,8 @@ label {
 #btnAR {
     margin-top: 20px;
 }
+
+
   .mainContainer{
     position: relative;
     top: 5ex;
@@ -64,23 +67,91 @@ label {
     margin-bottom: 5vh;
     margin-top: 13vh;
   }
-   
-  #chatbox {
+
+.flex-container{
+    display: flex;
+    width: 90%;
+}
+
+.flex-container > div{
+  margin: 30px;
+}
+
+#chatbox-wrapper{
+  flex-grow: 5;
+  width: 100%;
+  text-align: left;
+}
+
+#chatbox {
     text-align: left;
     margin: 0 auto;
+    margin-left: 0;
     margin-bottom: 25px;
     padding: 10px;
     background-color: rgb(9, 9, 9);
     color: white;
     height: 300px;
-    width: 48vw;
+    width: 45vw;
     overflow: auto;
     border-radius: 14px;
     border: 1px white;
+
 }
+
 .friendList {
   color: white;
+  flex-grow: 1;
 }
+
+#friendbox-container{
+  display: none;
+  height: 80%;
+  width: 40%;
+  position: absolute;
+  top: 80px;
+  left: 30%;
+  background-color: #ecd6d6;
+}
+
+#friendbox{
+  width: 99%;
+  height: 99%;
+}
+
+#close{
+  position: absolute;
+  right: 0;
+  top: 0;
+  display: inline-block;
+  background-image: url(../images/close_icon.png);
+  background-size: cover;
+  width: 30px;
+  height: 30px;
+}
+
+
+#friend-bar{
+  text-align: center;
+}
+
+#friend-tag{
+  display: inline-block; 
+  height: 35px;
+  margin-left: 30%;
+  margin-right: 10%;
+}
+
+#add-friend{
+  margin-bottom: -13px;
+  display: inline-block;
+  width: 35px;
+  height: 35px;
+  background-image: url(../images/add-friend-icon.png);
+  background-size: cover;
+}
+
+
 button {
   background-color: rgb(0, 0, 0);
   border-radius: 10px;
@@ -118,14 +189,7 @@ button:hover {
   border-radius: 14px;
 }
 
-#friendbox{
-  height: 80%;
-  width: 40%;
-  position: absolute;
-  top: 80px;
-  left: 30%;
-  background-color: #ecd6d6;
-}
+
   
 #input {
   font-family: Montserrat;
@@ -133,13 +197,21 @@ button:hover {
   color: white;
   line-height: 1.2;
   margin: 0 auto;
-  display: block;
-  width: 48vw;
+  display: inline;
+  width: 45vw;
   background: black;
   border: 1px solid whitesmoke;
   border-radius: 10px;
   padding: 5px;
+  height: 25px;
+  
 }
+
+#send{
+  margin-top: 0;
+  height: 38px;
+}
+
 #input:focus {
   outline: none;
 }

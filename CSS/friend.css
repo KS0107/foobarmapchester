@@ -1,5 +1,7 @@
 .topbar{
+    padding-top: 20px;
     text-align: center;
+    position: relative;
 }
 
 #friendsBox, #requestsBox{
@@ -12,4 +14,15 @@
 
 #requestsBox{
     display: none;
+}
+
+#close{
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: inline-block;
+    background-image: url(../images/close_icon.png);
+    background-size: cover;
+    width: 30px;
+    height: 30px;
 }

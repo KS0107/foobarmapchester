@@ -21,23 +21,41 @@
             <!-- <button id="slider">Collapse Reviews</button> -->
         </div>
     </div>
+
 	<h2 id="title">Chatbox</h2>
-	<div class="friendList">
-		<h2>Friends</h2>
-		<div id="friends">
-			
+
+	<div class="flex-container">
+		<div class="friendList">
+			<div id="friend-bar">
+				<div id="friend-tag"><h2>Friends</h2></div>
+				<div id="add-friend"><a id="ibtn"></a></div>
+			</div>
+			<!-- <button class="deletemsg" id="delete">Delete</button>
+			<button class="logout" id="exit">Exit</button> -->
+			<div id="friends"></div>
+		</div>
+
+		<div id="chatbox-wrapper">
+			<div id="chatbox"></div>
+			<form autocomplete="off" name="message" method="post" style="display: flex;">
+				<span><input autocomplete="false" id="input" type="text"></input></span>
+				<div><button id="send">Send</button></div>
+			</form>
 		</div>
 	</div>
+	
+	<div id="friendbox-container">
+		<iframe id="friendbox" src="friend.html"  title=""></iframe>
+		<div id="close"></div>
+	<div>
+	<script>
+		document.getElementById("add-friend").addEventListener("click", function(){
+			document.getElementById("friendbox-container").style.display = "block";
+		});
 
-		<button class="deletemsg" id="delete">Delete</button>
-        <button class="logout" id="exit">Exit</button>
-
-		<div id="chatbox"></div>
-		<!-- <iframe id="friendbox" src="friend.html"  title=""></iframe> -->
-		<form autocomplete="off" name="message" method="post">
-			<input autocomplete="false" id="input" type="text"></input>
-			<button id="send">Send</button>
-		</form>
-
+		document.getElementById("close").addEventListener("click", function(){
+			document.getElementById("friendbox-container").style.display = "none";
+		});
+	</script>
 </body>
 </html>

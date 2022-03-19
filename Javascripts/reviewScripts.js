@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {   //Otherwise the onclick 
 });
 
 function loadReviewLocations(){
-    console.warning("Loading Review Drop Down")
+    console.log("Loading Review Drop Down")
     let reviewDropDown = document.getElementById("locations")
     if(reviewDropDown != null){
         var locations = getLocations();

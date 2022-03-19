@@ -62,6 +62,7 @@ function saveTimetable(){
     });
 }
 
+var editing = false;
 function flipCell(cell, status){
     if(editing){
         if(status == 0){
@@ -80,7 +81,6 @@ function flipCell(cell, status){
     }
 }
 
-var editing = false;
 function editTimetable(){
     const editTimetableButton = document.getElementById("btnET");
     if(editing){

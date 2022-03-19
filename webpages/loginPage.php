@@ -24,7 +24,7 @@ if (!isset($_SESSION['login']))
         </div>
     </div>
 		<div class="mainBody">
-			<form class="form" action="../restapi/index.php/user/authen" method="get">
+			<form class="form" action="../restapi/index.php/user/authen" method="post">
 			<span class="label-input">Username</span>
 				<div class="wrap-input">
 			

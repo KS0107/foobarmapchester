@@ -31,12 +31,13 @@ class UserController extends BaseController{
 
     public function authenAction(){
         $redirectBool = true;
-        if(strtoupper($this->requestMethod) == "GET"){
+        if(strtoupper($this->requestMethod) == "POST"){
             try{
+                $username = $_POST["username"];
+                $passwrod = $_POST["password"];
                 $userModel = new UserModel();
-
-                if($userModel->verifyUser($this->arrQueryStringParams["username"])){
-                    $redirectBool = $userModel->authentication($this->arrQueryStringParams["username"], $this->arrQueryStringParams["password"]);
+                if($userModel->verifyUser($username)){
+                    $redirectBool = $userModel->authentication($username, $passwrod);
                     if($redirectBool){
                         $URL = "../../../webpages/home.html";
                         $respondData = "";

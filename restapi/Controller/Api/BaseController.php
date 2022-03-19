@@ -37,7 +37,7 @@ class BaseController{
     protected function errorHandler($strErrorDesc, $respondData, $strErrorHeader, $redirect=false, $redirectValue=""){
         if(!$strErrorDesc){
             $this->sendOutput($respondData,
-            array('Content-Type: application/json', 'HTTP/1.1 200 OK'), $redirect, $redirectValue);
+            array('Content-Type: application/json', 'HTTP/1.1 200 OK', 'Cache-Control: no-cache', 'Pragma: no-cache'), $redirect, $redirectValue);
         }else{
             $this->sendOutput(json_encode(array('error' => $strErrorDesc)),
             array('Content-Type: application/json', $strErrorHeader));

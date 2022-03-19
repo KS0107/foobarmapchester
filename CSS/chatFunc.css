@@ -70,7 +70,6 @@ label {
 
 .flex-container{
     display: flex;
-    width: 90%;
 }
 
 #request{
@@ -90,6 +89,15 @@ label {
   position: relative;
 }
 
+.friendList {
+  width: 35%;
+  color: white;
+  flex-grow: 1;
+}
+
+#friend-name{
+  color: white;
+}
 
 #chatbox {
     text-align: left;
@@ -107,10 +115,10 @@ label {
 
 }
 
-.friendList {
-  color: white;
-  flex-grow: 1;
+#friend-bar{
+  width: 100%;
 }
+
 
 #friendbox-container, #requestbox-container{
   display: none;

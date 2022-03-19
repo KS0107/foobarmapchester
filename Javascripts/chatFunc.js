@@ -56,7 +56,9 @@ function chatHandler(friend){
         clearInterval(intervalID);
     }
     receiver = friend;
-    intervalID = setInterval(loadLog, 500, friend);
+    document.getElementById("friend-name").innerHTML = friend;
+    intervalID = setInterval(loadLog, 300, friend);
+    
 }
 
 function loadLog(friend){

@@ -5,7 +5,8 @@
     <meta charset="utf-8" />
     <title>Review Page</title>
     <link rel="stylesheet" href="../CSS/mainstyle.css">
-    <script src="../Javascripts/funcs.js"></script>
+    <script src="../Javascripts/generalScripts.js"></script>
+    <script src="../Javascripts/reviewScripts.js"></script>
     <script src="../Javascripts/data.js"></script>
 </head>
 <body>

@@ -14,7 +14,7 @@ if (!isset($_SESSION['login']))
 	<title>Document</title>
 	<link rel="stylesheet" href="../CSS/mainstyle.css">
 	<link rel="stylesheet" href="../CSS/loginPage.css">
-	<script src="../Javascripts/funcs.js"></script>
+	<script src="../Javascripts/generalScripts.js"></script>
 </head>
 <body>
 	<div class="topBar">

@@ -6,7 +6,7 @@
     <title>Main Page</title>
     <link rel="stylesheet" href="../CSS/mainstyle.css">
     <link rel="stylesheet" href="../CSS/mapstyle.css">
-    <script src="../Javascripts/funcs.js"></script>
+    <script src="../Javascripts/generalScripts.js"></script>
     <script src="../Javascripts/data.js"></script>
     <script src="../Javascripts/mapScripts.js" defer></script>
     <link href='https://api.mapbox.com/mapbox-gl-js/v2.7.0/mapbox-gl.css' rel='stylesheet' />

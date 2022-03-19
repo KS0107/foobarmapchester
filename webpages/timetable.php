@@ -6,7 +6,8 @@
 	<title>Document</title>
 	<link rel="stylesheet" href="../CSS/mainstyle.css">
 	<link rel="stylesheet" href="../CSS/timetable.css">
-    <script src="../Javascripts/funcs.js"></script>
+    <script src="../Javascripts/generalScripts.js"></script>
+	<script src="../Javascripts/timetableScripts.js"></script>
 	<script src="../Javascripts/data.js"></script>
 </head>
 <body>

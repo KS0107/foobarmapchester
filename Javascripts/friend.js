@@ -1,15 +1,4 @@
-$(document).ready(function(){
-    $("#friendsbtn").click(function(){
-        $("#requestsBox").css("display", "none");
-        $("#friendsBox").css("display", "block");
-    });
 
-    $("#requestsbtn").click(function(){
-        $("#friendsBox").css("display", "none");
-        $("#requestsBox").css("display", "block");
-    });
-    
-});
 
 function showUsers(segment){
     const xmlhttp = new XMLHttpRequest();
@@ -87,3 +76,40 @@ function getCookie(cname) {
     }
     return "";
   }
+
+  function loadPlaces(){
+    const xhttp = new XMLHttpRequest();
+    xhttp.onload = function() {
+    
+    places = JSON.parse(this.responseText);
+    placesList = "";
+    for(let i = 0; i < places.length; i++){
+        placesList += "<option value=\'" + places[i].Name + "\'>" + places[i].Name + "</option>";
+    }
+    document.getElementById("place").innerHTML =  placesList;
+    }   
+    xhttp.open("GET", "../restapi/index.php/user/getPlaces");
+    xhttp.send();
+}
+loadPlaces();
+
+$(document).ready(function(){
+    $("#friendsbtn").click(function(){
+        $("#publicbox").css("display", "none");
+        $("#requestsBox").css("display", "none");
+        $("#friendsBox").css("display", "block");
+    });
+
+    $("#requestsbtn").click(function(){
+        $("#publicbox").css("display", "none");
+        $("#friendsBox").css("display", "none");
+        $("#requestsBox").css("display", "block");
+    });
+
+    $("#publicbtn").click(function(){
+        $("#friendsBox").css("display", "none");
+        $("#requestsBox").css("display", "none");
+        $("#publicbox").css("display", "block");
+    });
+    
+});

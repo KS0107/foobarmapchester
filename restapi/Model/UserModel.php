@@ -35,6 +35,39 @@ class UserModel extends Database{
         return $this->executeQuery($sql, ["message"=>$message, "userid"=>$userID, "receiverid"=>$receiverID]);
     }
 
+    public function verifyRequestmsgP($type, $place, $date){
+        $sql = "SELECT RequestmsgID
+                FROM Requestmsg
+                WHERE 
+                Type = :type AND
+                Place = :place AND
+                Date = :date";
+        return $this->executeFetchQuery($sql, ["type"=>$type, "place"=>$place, "date"=>$date]);
+    }
+
+    public function verifyRequestmsg($type, $place, $date, $targetid, $requesterid){
+        //verify the request and return its status //for private request
+        $sql = "SELECT RequestmsgID
+                FROM Requestmsg
+                WHERE 
+                Type = :type AND
+                Place = :place AND
+                Date = :date AND
+                (TargetID = :targetid AND
+                RequesterID = :requesterid) OR
+                (TargetID = :requesterid AND
+                RequesterID = :targetid)";
+        return $this->executeFetchQuery($sql, ["type"=>$type, "place"=>$place, "date"=>$date, 
+        "targetid"=>$targetid, "requesterid"=>$requesterid]);
+    }
+
+    public function storeRequestmsg($type, $place, $date, $targetid, $requesterid){
+        $sql = "INSERT INTO Requestmsg (Type, Place, Date, TargetID, RequesterID)
+                VALUES (:type, :place, :date, :targetid, :requesterid)";
+        return $this->executeQuery($sql, ["type"=>$type, "place"=>$place, "date"=>$date, 
+        "targetid"=>$targetid, "requesterid"=>$requesterid]);
+    }
+
     // ########### Authentication #############
     public function authentication($username, $password){
         $sql = "SELECT Password
@@ -101,6 +134,13 @@ class UserModel extends Database{
         return $this->executeFetchQuery($sql, ["username"=>$username])[0]["UserID"];
     }
 
+    public function getUsernameById($id){
+        $sql = "SELECT Username
+                FROM User
+                Where UserID = :id";
+        return $this->executeFetchQuery($sql, ["id"=>$id]);
+    } 
+
    public function getUsersByInput($userID, $seg){
        $sql = "SELECT Username
                 FROM User
@@ -117,7 +157,8 @@ class UserModel extends Database{
                 VALUES (:requesterid, :targetid)";
         return $this->executeQuery($sql, ["requesterid"=>$requester, "targetid"=>$target]);
    }
-    
+
+
    public function retrieveRequest($userid){
        $sql = "SELECT User.Username, Request.CreateDate
                FROM Request
@@ -151,5 +192,12 @@ class UserModel extends Database{
    
         return $this->executeFetchQuery($sql, ["locationName"=>$locationName]);
    }
+
+   public function showPlaces(){
+        $sql = "SELECT Name
+               FROM Location";
+        return $this->executeFetchQuery($sql);
+   }
+
 }
 ?>

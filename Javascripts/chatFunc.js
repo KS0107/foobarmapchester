@@ -55,11 +55,12 @@ function chatHandler(friend){
     if(typeof(intervalID) !== "undefined"){
         clearInterval(intervalID);
     }
-    receiver = friend;
+    receiver = friend; 
     document.getElementById("friend-name").innerHTML = friend;
-    intervalID = setInterval(loadLog, 300, friend);
+    intervalID = setInterval(loadLog, 420, friend);
     
 }
+
 
 function loadLog(friend){
     var oldscrollHeight = $("#chatbox")[0].scrollHeight - 20;

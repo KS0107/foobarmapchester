@@ -9,11 +9,12 @@
 </head>
 <body>
     <div class="wrapper">
-        <form action="">
-            <label for="type">Types</label><br>
-            <select id="type" onchange="typeHandlerf()">
-                <option value="public">public</option>
+        <form name="myForm" action="" method="post" onsubmit="return false;"> 
+
+            <label for="type">Types</label>
+            <br><select name="type" id="type" onchange="typeHandlerf()">
                 <option value="private" selected>private</option>
+                <option value="public">public</option>
             </select>
 
             <br><label for="place">Choose a place</label>
@@ -23,20 +24,46 @@
 
             <br><label for="date">Choose a date</label>
             <br><select name="date" id="date">
-
+                <option value="10am-2pm" selected>10am-2pm</option>
+                <option value="2pm-6pm" >2pm-6pm</option>
+                <option value="6pm-11pm" >6pm-11pm</option>
+                <option value="11pm-10am" >11pm-10am</option>
             </select>
 
-            <br><label for="friendList" id="choose-label">Send the request to</label>
-            <br><select name="friends" id="friendList">
+            <br><label for="friendList" id="choose-label" >Send the request to</label>
+            <br><select name="friends" id="friendList" multiple></select>
 
-            </select>
-
-            <br><input type="submit" value="submit">
+            <br><div><button id="formbtn">submit</button></div>
         </form>
     </div>
 </body>
 
 <script>
+    formbtn = document.getElementById("formbtn");
+    formbtn.addEventListener("click", function(){
+        var type = document.getElementById("type").value;
+        var place = document.getElementById("place").value;
+        var date = document.getElementById("date").value;
+        var friends = [];
+        for(var option of document.getElementById("friendList").options){
+            if(option.selected){
+                friends.push(option.value);
+            }
+        }
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = function() {
+            alert(JSON.parse(this.responseText));
+        }   
+        xhttp.open("POST", "../restapi/index.php/user/sendRequest");
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send("type=" + type + "&place=" + place + "&date=" + date + "&friends=" + friends);
+    });
+
+
+
+
+
+
     let typeHandler = document.getElementById("type");
     let friendHandler = document.getElementById("friendList");
     let label = document.getElementById("choose-label");
@@ -53,6 +80,53 @@
                 break;
         }
     }
-    
+
+    function loadPlaces(){
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = function() {
+        
+        places = JSON.parse(this.responseText);
+        placesList = "";
+        for(let i = 0; i < places.length; i++){
+            placesList += "<option value=\'" + places[i].Name + "\'>" + places[i].Name + "</option>";
+        }
+        document.getElementById("place").innerHTML =  placesList;
+        }   
+        xhttp.open("GET", "../restapi/index.php/user/getPlaces");
+        xhttp.send();
+    }
+    loadPlaces();
+
+    function loadFriend(){
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = function() {
+        friends = JSON.parse(this.responseText);
+        friendsList = "";
+        for(let i = 0; i < friends.length; i++){
+            friendsList +=  "<option value=\'" + friends[i].Username + "\'>" + friends[i].Username + "</option>";
+        }
+        document.getElementById("friendList").innerHTML = friendsList;
+        }   
+        xhttp.open("GET", "../restapi/index.php/user/getFriend?username=" + getCookie("username"));
+        xhttp.send();
+    }
+    loadFriend();
+
+
+    function getCookie(cname) {
+        let name = cname + "=";
+        let decodedCookie = decodeURIComponent(document.cookie);
+        let ca = decodedCookie.split(';');
+        for(let i = 0; i <ca.length; i++) {
+          let c = ca[i];
+          while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+          }
+          if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+          }
+        }
+        return "";
+    }
 </script>
 </html>

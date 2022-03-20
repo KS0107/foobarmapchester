@@ -13,6 +13,7 @@
     <div class="topbar">
         <button id="friendsbtn">users</button>
         <button id="requestsbtn">friend requests</button>
+        <button id="privatebtn">private requests</button>
         <button id="publicbtn">public requests</button>
     </div>
 
@@ -27,12 +28,30 @@
 
     <div id="requestsBox"></div>
 
-    <div id="publicbox">
-        <form action="">
-            <select name="place" id="place">
-                
+    <div id="privatebox">
+        <form>
+            <select name="place" id="place1"></select>
+            <br><select name="date" class="date">
+                <option value="10am-2pm" selected>10am-2pm</option>
+                <option value="2pm-6pm" >2pm-6pm</option>
+                <option value="6pm-11pm" >6pm-11pm</option>
+                <option value="11pm-10am" >11pm-10am</option>
             </select>
         </form>
+        <div id="privateRequest"></div>
+    </div>
+
+    <div id="publicbox">
+        <form action="">
+            <select name="place" id="place2"></select>
+            <br><select name="date" class="date">
+                <option value="10am-2pm" selected>10am-2pm</option>
+                <option value="2pm-6pm" >2pm-6pm</option>
+                <option value="6pm-11pm" >6pm-11pm</option>
+                <option value="11pm-10am" >11pm-10am</option>
+            </select>
+        </form>
+        <div id="PublicRequest "></div>
     </div>
 
 </body>

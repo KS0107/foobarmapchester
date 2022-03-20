@@ -4,18 +4,20 @@
     position: relative;
 }
 
-#friendsBox, #requestsBox{
+#friendsBox{
+    display: block;
+    text-align: center;
+}
+
+#requestsBox, #privatebox, #publicbox{
+    display: none;
+}
+
+#friendsBox, #requestsBox, #privatebox, #publicbox{
+    text-align: center;
     border: solid;
 }
 
-#friendsBox{
-    display: block;
-}
-
-#requestsBox{
-    display: none;
-}
-
-#publicbox{
-    display: none;
+#privatebox > div{
+    text-align: center;
 }

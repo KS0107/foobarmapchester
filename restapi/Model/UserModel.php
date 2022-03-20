@@ -45,6 +45,20 @@ class UserModel extends Database{
         return $this->executeFetchQuery($sql, ["type"=>$type, "place"=>$place, "date"=>$date]);
     }
 
+    public function pullingEventRequest($userid){
+        $sql = "SELECT r.RequestmsgID, r.CreatedDate, r.Type, r.Place, r.Date, User.Username, r.requesterID, r.Status
+                FROM Requestmsg as r
+                LEFT JOIN User on r.TargetID = User.UserID
+                WHERE r.RequesterID = :userid
+                UNION
+                SELECT r.RequestmsgID, r.CreatedDate, r.Type, r.Place, r.Date, User.Username, r.requesterID, r.Status
+                FROM Requestmsg as r
+                LEFT JOIN User on r.RequesterID = User.UserID
+                WHERE r.TargetID = :userid
+                ORDER BY CreatedDate DESC";
+        return $this->executeFetchQuery($sql, ["userid"=>$userid]);
+    }
+
     public function verifyRequestmsg($type, $place, $date, $targetid, $requesterid){
         //verify the request and return its status //for private request
         $sql = "SELECT RequestmsgID

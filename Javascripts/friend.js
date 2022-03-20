@@ -86,30 +86,108 @@ function getCookie(cname) {
     for(let i = 0; i < places.length; i++){
         placesList += "<option value=\'" + places[i].Name + "\'>" + places[i].Name + "</option>";
     }
-    document.getElementById("place").innerHTML =  placesList;
+    document.getElementById("place1").innerHTML =  placesList;
+    document.getElementById("place2").innerHTML =  placesList;
     }   
     xhttp.open("GET", "../restapi/index.php/user/getPlaces");
     xhttp.send();
 }
 loadPlaces();
 
+// Private and Public requests
+function retrieveEventRequest(){
+    const xhttp = new XMLHttpRequest();
+    xhttp.onload = function() {
+        response = JSON.parse(this.responseText);
+        privateRequests = "";
+        publicRequests = "";
+        for(let i = 0; i < response[1].length; i++){
+            if(response[1][i].Type == "private"){
+                if(response[0] == response[1][i].requesterID){
+                    privateRequests += 
+                    "<div>" +
+                        "<table>" +
+                            "<tr>" +
+                                "<th>" + "Date" + "</th>" +
+                                "<th>" + "Place" + "</th>" +
+                                "<th>" + "Friend" + "</th>"+
+                                "<th>" + "Status" + "</th>"+
+                            "</tr>" +
+                            "<tr>" +
+                                "<td>" + response[1][i].Date + "</td>" +
+                                "<td>" + response[1][i].Place + "</td>" +
+                                "<td>" + response[1][i].Username + "</td>"+
+                                "<td>" + response[1][i].Status + "</td>"+
+                            "</tr>" +
+                        "</table>" +
+                    "</div>";
+                }else{ // user is recipient
+                    privateRequests += 
+                    "<div>" +
+                        "<table>" +
+                            "<tr>" +
+                                "<th>" + "Date" + "</th>" +
+                                "<th>" + "Place" + "</th>" +
+                                "<th>" + "Status" + "</th>"+
+                                "<th>" + "Response" + "</th>"+
+                            "</tr>" +
+                            "<tr>" +
+                                "<td>" + response[1][i].Date + "</td>" +
+                                "<td>" + response[1][i].Place + "</td>" +
+                                "<td>" + response[1][i].Status + "</td>"+
+                                "<td>" + 
+                                    "<div id=" + response[1][i].RequestmsgID + ">" +
+                                        "<div>" + "<button onclick=\'eventYes(" + response[1][i].RequestmsgID+ ")\'>Accept</button>" + "</div>" +
+                                        "<div>" + "<button onclick=\'eventNo(" + response[1][i].RequestmsgID+ ")\'>Decline</button>" + "</div>" +
+                                    "</div>" +
+                                "</td>"+
+                            "</tr>" +
+                        "</table>" +
+                    "</div>";
+                }
+            }else{ //public case
+                if(response[0] == response[1].requesterID){
+
+                }
+            }
+        }
+        document.getElementById("privateRequest").innerHTML = privateRequests;
+    }   
+    xhttp.open("GET", "../restapi/index.php/user/getEventRequest");
+    xhttp.send();
+}
+
+retrieveEventRequest();
+
+
 $(document).ready(function(){
     $("#friendsbtn").click(function(){
         $("#publicbox").css("display", "none");
         $("#requestsBox").css("display", "none");
+        $("#privatebox").css("display", "none");
         $("#friendsBox").css("display", "block");
     });
 
     $("#requestsbtn").click(function(){
         $("#publicbox").css("display", "none");
         $("#friendsBox").css("display", "none");
+        $("#privatebox").css("display", "none");
         $("#requestsBox").css("display", "block");
+    });
+
+    $("#privatebtn").click(function(){
+        $("#friendsBox").css("display", "none");
+        $("#requestsBox").css("display", "none");
+        $("#publicbox").css("display", "none");
+        $("#privatebox").css("display", "block");
     });
 
     $("#publicbtn").click(function(){
         $("#friendsBox").css("display", "none");
         $("#requestsBox").css("display", "none");
+        $("#privatebox").css("display", "none");
         $("#publicbox").css("display", "block");
     });
-    
+
+
 });

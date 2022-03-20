@@ -110,7 +110,7 @@ function retrieveEventRequest(){
                             "<tr>" +
                                 "<th>" + "Date" + "</th>" +
                                 "<th>" + "Place" + "</th>" +
-                                "<th>" + "Friend" + "</th>"+
+                                "<th>" + "To Friend" + "</th>"+
                                 "<th>" + "Status" + "</th>"+
                             "</tr>" +
                             "<tr>" +
@@ -128,12 +128,14 @@ function retrieveEventRequest(){
                             "<tr>" +
                                 "<th>" + "Date" + "</th>" +
                                 "<th>" + "Place" + "</th>" +
+                                "<th>" + "From Friend" + "</th>" +
                                 "<th>" + "Status" + "</th>"+
                                 "<th>" + "Response" + "</th>"+
                             "</tr>" +
                             "<tr>" +
                                 "<td>" + response[1][i].Date + "</td>" +
                                 "<td>" + response[1][i].Place + "</td>" +
+                                "<td>" + response[1][i].Username + "</td>" +
                                 "<td>" + response[1][i].Status + "</td>"+
                                 "<td>" + 
                                     "<div id=" + response[1][i].RequestmsgID + ">" +
@@ -146,12 +148,34 @@ function retrieveEventRequest(){
                     "</div>";
                 }
             }else{ //public case
-                if(response[0] == response[1].requesterID){
-
+                if(response[0] != response[1][i].requesterID){
+                    publicRequests +=
+                    "<div>" +
+                        "<table>" +
+                            "<tr>" +
+                                "<th>" + "Date" + "</th>" +
+                                "<th>" + "Place" + "</th>" +
+                                "<th>" + "Host" + "</th>" +
+                                "<th>" + "Group Chat" + "</th>"+
+                            "</tr>" +
+                            "<tr>" +
+                                "<td>" + response[1][i].Date + "</td>" +
+                                "<td>" + response[1][i].Place + "</td>" +
+                                "<td>" + response[1][i].Username + "</td>" +
+                                "<td>" + 
+                                    "<div id=" + response[1][i].RequestmsgID + ">" +
+                                        "<div>" + "<button onclick=\'eventJoin(" + response[1][i].RequestmsgID+ ")\'>Join</button>" + "</div>" +
+                                        "<div>" + "<button onclick=\'eventNo(" + response[1][i].RequestmsgID+ ")\'>Decline</button>" + "</div>" +
+                                    "</div>" +
+                                "</td>"+
+                            "</tr>" +
+                        "</table>" +
+                    "</div>";
                 }
             }
         }
         document.getElementById("privateRequest").innerHTML = privateRequests;
+        document.getElementById("PublicRequest").innerHTML = publicRequests;
     }   
     xhttp.open("GET", "../restapi/index.php/user/getEventRequest");
     xhttp.send();

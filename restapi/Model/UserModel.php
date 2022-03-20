@@ -49,12 +49,17 @@ class UserModel extends Database{
         $sql = "SELECT r.RequestmsgID, r.CreatedDate, r.Type, r.Place, r.Date, User.Username, r.requesterID, r.Status
                 FROM Requestmsg as r
                 LEFT JOIN User on r.TargetID = User.UserID
-                WHERE r.RequesterID = :userid
+                WHERE r.RequesterID = :userid AND r.Type = 'private'
                 UNION
                 SELECT r.RequestmsgID, r.CreatedDate, r.Type, r.Place, r.Date, User.Username, r.requesterID, r.Status
                 FROM Requestmsg as r
                 LEFT JOIN User on r.RequesterID = User.UserID
-                WHERE r.TargetID = :userid
+                WHERE r.TargetID = :userid AND r.Type = 'private'
+                UNION
+                SELECT r.RequestmsgID, r.CreatedDate, r.Type, r.Place, r.Date, User.Username, r.requesterID, r.Status
+                FROM Requestmsg as r
+                LEFT JOIN User on r.RequesterID = User.UserID
+                WHERE r.Type = 'public'
                 ORDER BY CreatedDate DESC";
         return $this->executeFetchQuery($sql, ["userid"=>$userid]);
     }

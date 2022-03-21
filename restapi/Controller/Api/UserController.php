@@ -324,8 +324,8 @@ class UserController extends BaseController{
                         $userModel->storeRequestmsg($type, $place, $date, 0, $requesterid);
                     }
                 }
-                if(empty($respondData2)){$respondData = "made successfully for " . $respondData2;}
-                if(empty($respondData1)){$respondData = $respondData . " the request already exists for " . $respondData1;}
+                if(!empty($respondData2)){$respondData = "made successfully for " . $respondData2;}
+                if(!empty($respondData1)){$respondData = $respondData . " the request already exists for " . $respondData1;}
                 $respondData = json_encode($respondData);
             }catch(Error $e){
                 $this->strErrorDesc = $e->getMessage();

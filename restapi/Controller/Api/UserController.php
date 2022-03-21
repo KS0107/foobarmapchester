@@ -301,6 +301,8 @@ class UserController extends BaseController{
                 $userModel = new UserModel;
                 $respondData = "";
                 $requesterid = $userModel->getID($_COOKIE["username"]);
+                $respondData1 = "";
+                $respondData2 = "";
                 if($type == "private"){// if public, default $friends to all users
                     $friends = explode(",", $_POST["friends"]);
                     for($i = 0; $i < sizeof($friends); $i++){
@@ -322,8 +324,8 @@ class UserController extends BaseController{
                         $userModel->storeRequestmsg($type, $place, $date, 0, $requesterid);
                     }
                 }
-                if($respondData2){$respondData = "made successfully for " . $respondData2;}
-                if($respondData1){$respondData = $respondData . " the request already exists for " . $respondData1;}
+                if(empty($respondData2)){$respondData = "made successfully for " . $respondData2;}
+                if(empty($respondData1)){$respondData = $respondData . " the request already exists for " . $respondData1;}
                 $respondData = json_encode($respondData);
             }catch(Error $e){
                 $this->strErrorDesc = $e->getMessage();

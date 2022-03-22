@@ -83,11 +83,16 @@ class UserController extends BaseController{
     }
 
     public function addUserAction(){
-        if(strtoupper($this->requestMethod) == "GET"){
+        if(strtoupper($this->requestMethod) == "POST"){
             try{
+                $firstname = $_POST['firstname'];
+                $lastname = $_POST['lastname'];
+                $username = $_POST['username'];
+                $passwrod = $_POST['password'];
                 $userModel = new userModel();
-                $bool = $userModel->addUser($this->arrQueryStringParams["firstname"], $this->arrQueryStringParams["lastname"], $this->arrQueryStringParams["username"], $this->arrQueryStringParams["password"]
-            );
+                $bool = $userModel->addUser($firstname, $lastname, $username, $passwrod);
+                $userID = $userModel->getID($username);
+                $userModel->initTimetable($userID);
                 if($bool){
                     $redirectBool = true;
                     $URL = "../../../webpages/loginPage.php";
@@ -298,6 +303,7 @@ class UserController extends BaseController{
                 $type = $_POST["type"];
                 $place = $_POST["place"];
                 $date = $_POST["date"];
+                $day = $_POST["day"];
                 $userModel = new UserModel;
                 $respondData = "";
                 $requesterid = $userModel->getID($_COOKIE["username"]);
@@ -307,21 +313,21 @@ class UserController extends BaseController{
                     $friends = explode(",", $_POST["friends"]);
                     for($i = 0; $i < sizeof($friends); $i++){
                         $targetid = $userModel->getID($friends[$i]);
-                        if(!empty($userModel->verifyRequestmsg($type, $place, $date, $targetid, $requesterid))){
+                        if(!empty($userModel->verifyRequestmsg($type, $place, $date, $day, $targetid, $requesterid))){
                             // the request already exists
                             $respondData1 .= $friends[$i] . " ";
                         }else{
                             $respondData2 .= $friends[$i] . " ";
-                            $userModel->storeRequestmsg($type, $place, $date, $targetid, $requesterid);
+                            $userModel->storeRequestmsg($type, $place, $date, $day, $targetid, $requesterid);
                         }
                     }
                 }else{
-                    if(!empty($userModel->verifyRequestmsgP($type, $place, $date))){
+                    if(!empty($userModel->verifyRequestmsgP($type, $place, $date, $day))){
                         // the request already exists
                         $respondData = "the public request has been already made by someone, go to public request box to join the group chat!!";
                     }else{
                         $respondData = "the public request has just been created by you!!";
-                        $userModel->storeRequestmsg($type, $place, $date, 0, $requesterid);
+                        $userModel->storeRequestmsg($type, $place, $date, $day, 0, $requesterid);
                     }
                 }
                 if(!empty($respondData2)){$respondData = "made successfully for " . $respondData2;}
@@ -358,5 +364,41 @@ class UserController extends BaseController{
         $this->errorHandler($this->strErrorDesc, $respondData, $this->strErrorHeader);
     }
 
+    public function addEventAction(){
+        
+        if(strtoupper($this->requestMethod) == "POST"){
+            try{
+                $userModel = new UserModel;
+                $requestmsgID = $_POST["requestmsgID"];
+                $userID = $userModel->getID($_COOKIE["username"]);
+                $place = $_POST["palce"];
+                $time = $_POST["time"];
+                switch($time){
+                    case "10am-2pm": $time = 1; break;
+                    case "2pm-6pm": $time = 2; break;
+                    case "6pm-11pm": $time = 3; break;
+                    case "11am-10am": $time = 4; break;
+                }
+                $day = $_POST["day"];
+                if(!empty($userModel->verifyEvent($userID, $time, $day))){
+                    //event already hold for the time
+                }else{
+                    // add event to it
+                    $userModel->addEvent($userID, $place, $time, $day);
+                    //update other request with the same as decline response or busy status
+                    
+                }
+                
+                $respondData = json_encode($res);
+            }catch(Error $e){
+                $this->strErrorDesc = $e->getMessage();
+                $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
+            }
+        }else{
+            $this->strErrorDesc = 'Method not supported';
+            $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
+        }
+        $this->errorHandler($this->strErrorDesc, $respondData, $this->strErrorHeader);
+    }
 }
 ?>

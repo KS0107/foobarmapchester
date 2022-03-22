@@ -108,12 +108,14 @@ function retrieveEventRequest(){
                     "<div>" +
                         "<table>" +
                             "<tr>" +
+                                "<th>" + "Day" + "</th>" +
                                 "<th>" + "Date" + "</th>" +
                                 "<th>" + "Place" + "</th>" +
                                 "<th>" + "To Friend" + "</th>"+
                                 "<th>" + "Status" + "</th>"+
                             "</tr>" +
                             "<tr>" +
+                                "<td>" + response[1][i].Week + "</td>" +
                                 "<td>" + response[1][i].Date + "</td>" +
                                 "<td>" + response[1][i].Place + "</td>" +
                                 "<td>" + response[1][i].Username + "</td>"+
@@ -126,6 +128,7 @@ function retrieveEventRequest(){
                     "<div>" +
                         "<table>" +
                             "<tr>" +
+                                "<th>" + "Day" + "</th>" +
                                 "<th>" + "Date" + "</th>" +
                                 "<th>" + "Place" + "</th>" +
                                 "<th>" + "From Friend" + "</th>" +
@@ -133,14 +136,15 @@ function retrieveEventRequest(){
                                 "<th>" + "Response" + "</th>"+
                             "</tr>" +
                             "<tr>" +
+                                "<td>" + response[1][i].Week + "</td>" +
                                 "<td>" + response[1][i].Date + "</td>" +
                                 "<td>" + response[1][i].Place + "</td>" +
                                 "<td>" + response[1][i].Username + "</td>" +
                                 "<td>" + response[1][i].Status + "</td>"+
                                 "<td>" + 
                                     "<div id=" + response[1][i].RequestmsgID + ">" +
-                                        "<div>" + "<button onclick=\'eventYes(" + response[1][i].RequestmsgID+ ")\'>Accept</button>" + "</div>" +
-                                        "<div>" + "<button onclick=\'eventNo(" + response[1][i].RequestmsgID+ ")\'>Decline</button>" + "</div>" +
+                                        "<div>" + "<button onclick=\'eventYes(" + response[1][i].RequestmsgID + "," + response[1][i].Place + "," + response[1][i].Date + "," + response[1][i].Week + ")\'>Accept</button>" + "</div>" +
+                                        "<div>" + "<button onclick=\'eventNo(" + response[1][i].RequestmsgID + "," + response[1][i].Place + "," + response[1][i].Date + "," + response[1][i].Week + ")\'>Decline</button>" + "</div>" +
                                     "</div>" +
                                 "</td>"+
                             "</tr>" +
@@ -153,19 +157,21 @@ function retrieveEventRequest(){
                     "<div>" +
                         "<table>" +
                             "<tr>" +
+                                "<th>" + "Day" + "</th>" +
                                 "<th>" + "Date" + "</th>" +
                                 "<th>" + "Place" + "</th>" +
                                 "<th>" + "Host" + "</th>" +
                                 "<th>" + "Group Chat" + "</th>"+
                             "</tr>" +
                             "<tr>" +
+                                "<td>" + response[1][i].Week + "</td>" +
                                 "<td>" + response[1][i].Date + "</td>" +
                                 "<td>" + response[1][i].Place + "</td>" +
                                 "<td>" + response[1][i].Username + "</td>" +
                                 "<td>" + 
                                     "<div id=" + response[1][i].RequestmsgID + ">" +
-                                        "<div>" + "<button onclick=\'eventJoin(" + response[1][i].RequestmsgID+ ")\'>Join</button>" + "</div>" +
-                                        "<div>" + "<button onclick=\'eventNo(" + response[1][i].RequestmsgID+ ")\'>Decline</button>" + "</div>" +
+                                        "<div>" + "<button onclick=\'eventJoin(" + response[1][i].Place + "," + response[1][i].Date + "," + response[1][i].Week +  ")\'>Join</button>" + "</div>" +
+                                        "<div>" + "<button onclick=\'eventNo(" + response[1][i].Place + "," + response[1][i].Date + "," + response[1][i].Week +  ")\'>Decline</button>" + "</div>" +
                                     "</div>" +
                                 "</td>"+
                             "</tr>" +
@@ -180,9 +186,15 @@ function retrieveEventRequest(){
     xhttp.open("GET", "../restapi/index.php/user/getEventRequest");
     xhttp.send();
 }
-
 retrieveEventRequest();
 
+function eventYes(requestmsgID, place, date, day){
+    alert("debug");
+    const xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "../restapi/index.php/user/addEvent");
+    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("requestmsgID=" + requestmsgID + "&place=" + place + "&time=" + date + "&day=" + day);
+}
 
 $(document).ready(function(){
     $("#friendsbtn").click(function(){

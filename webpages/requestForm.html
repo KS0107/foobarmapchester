@@ -22,12 +22,23 @@
 
             </select>
 
-            <br><label for="date">Choose a date</label>
+            <br><label for="date">Choose a time</label>
             <br><select name="date" id="date">
                 <option value="10am-2pm" selected>10am-2pm</option>
                 <option value="2pm-6pm" >2pm-6pm</option>
                 <option value="6pm-11pm" >6pm-11pm</option>
                 <option value="11pm-10am" >11pm-10am</option>
+            </select>
+
+            <br><label for="week">Choose a day</label>
+            <br><select name="week" id="week">
+                <option value="Mon" selected>Mon</option>
+                <option value="Tue" >Tue</option>
+                <option value="Wed" >Wed</option>
+                <option value="Thu" >Thu</option>
+                <option value="Fri" >Fri</option>
+                <option value="Sat" >Sat</option>
+                <option value="Sun" >Sun</option>
             </select>
 
             <br><label for="friendList" id="choose-label" >Send the request to</label>
@@ -44,6 +55,7 @@
         var type = document.getElementById("type").value;
         var place = document.getElementById("place").value;
         var date = document.getElementById("date").value;
+        var day = document.getElementById("week").value;
         var friends = [];
         for(var option of document.getElementById("friendList").options){
             if(option.selected){
@@ -56,7 +68,7 @@
         }   
         xhttp.open("POST", "../restapi/index.php/user/sendRequest");
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xhttp.send("type=" + type + "&place=" + place + "&date=" + date + "&friends=" + friends);
+        xhttp.send("type=" + type + "&place=" + place + "&date=" + date + "&day=" + day + "&friends=" + friends);
     });
 
 

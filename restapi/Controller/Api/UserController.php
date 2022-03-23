@@ -303,6 +303,12 @@ class UserController extends BaseController{
                 $type = $_POST["type"];
                 $place = $_POST["place"];
                 $date = $_POST["date"];
+                switch($date){
+                    case "10am-2pm": $time = 1; break;
+                    case "2pm-6pm": $time = 2; break;
+                    case "6pm-11pm": $time = 3; break;
+                    case "11am-10am": $time = 4; break;
+                }
                 $day = $_POST["day"];
                 $userModel = new UserModel;
                 $respondData = "";
@@ -313,15 +319,21 @@ class UserController extends BaseController{
                     $friends = explode(",", $_POST["friends"]);
                     for($i = 0; $i < sizeof($friends); $i++){
                         $targetid = $userModel->getID($friends[$i]);
+                        // check if there is such a request
                         if(!empty($userModel->verifyRequestmsg($type, $place, $date, $day, $targetid, $requesterid))){
                             // the request already exists
                             $respondData1 .= $friends[$i] . " ";
-                        }else{
+                        // check if the target ID free on that date
+                        }elseif(is_null($userModel->verifyEvent($requesterid, $time, $day)[0][$day]) && is_null($userModel->verifyEvent($targetid, $time, $day)[0][$day])){
                             $respondData2 .= $friends[$i] . " ";
+                            // this stores requestmsg
                             $userModel->storeRequestmsg($type, $place, $date, $day, $targetid, $requesterid);
+                        }else{
+                            $respondData = "you or your friends are busy on the date";
+                            // case there is no such request and targetID are free
                         }
                     }
-                }else{
+                }else{ //public request 
                     if(!empty($userModel->verifyRequestmsgP($type, $place, $date, $day))){
                         // the request already exists
                         $respondData = "the public request has been already made by someone, go to public request box to join the group chat!!";

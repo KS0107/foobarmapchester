@@ -93,49 +93,49 @@ class UserModel extends Database{
         switch($day){
             case "Mon":
                 $sql = "SELECT Mon
-                FROM NewTimetable
+                FROM Timetable
                 WHERE 
                 UserID = :userid AND
                 Time = :time";
                 break;
             case "Tue":
                 $sql = "SELECT Tue
-                FROM NewTimetable
+                FROM Timetable
                 WHERE 
                 UserID = :userid AND
                 Time = :time";
                 break;
             case "Wed":
                 $sql = "SELECT Wed
-                FROM NewTimetable
+                FROM Timetable
                 WHERE 
                 UserID = :userid AND
                 Time = :time";
                 break;
             case "Thu":
                 $sql = "SELECT Thu
-                FROM NewTimetable
+                FROM Timetable
                 WHERE 
                 UserID = :userid AND
                 Time = :time";
                 break;
             case "Fri":
                 $sql = "SELECT Fri
-                FROM NewTimetable
+                FROM Timetable
                 WHERE 
                 UserID = :userid AND
                 Time = :time";
                 break;
             case "Sat":
                 $sql = "SELECT Sat
-                FROM NewTimetable
+                FROM Timetable
                 WHERE 
                 UserID = :userid AND
                 Time = :time";
                 break;
             case "Sun":
                 $sql = "SELECT Sun
-                FROM NewTimetable
+                FROM Timetable
                 WHERE 
                 UserID = :userid AND
                 Time = :time";
@@ -147,37 +147,37 @@ class UserModel extends Database{
     public function addEvent($userID, $place, $time, $day){
         switch($day){
             case "Mon":
-                $sql = "UPDATE NewTimetable
+                $sql = "UPDATE Timetable
                         SET Mon = :place
                         WHERE UserID = :userid AND Time = :time";
                 break;
             case "Tue":
-                $sql = "UPDATE NewTimetable
+                $sql = "UPDATE Timetable
                         SET Tue = :place
                         WHERE UserID = :userid AND Time = :time";
                 break;
             case "Wed":
-                $sql = "UPDATE NewTimetable
+                $sql = "UPDATE Timetable
                         SET Wed = :place
                         WHERE UserID = :userid AND Time = :time";
                 break;
             case "Thu":
-                $sql = "UPDATE NewTimetable
+                $sql = "UPDATE Timetable
                         SET Thu = :place
                         WHERE UserID = :userid AND Time = :time";
                 break;
             case "Fri":
-                $sql = "UPDATE NewTimetable
+                $sql = "UPDATE Timetable
                         SET Fri = :place
                         WHERE UserID = :userid AND Time = :time";
                 break;
             case "Sat":
-                $sql = "UPDATE NewTimetable
+                $sql = "UPDATE Timetable
                         SET Sat = :place
                         WHERE UserID = :userid AND Time = :time";
                 break;
             case "Sun":
-                $sql = "UPDATE NewTimetable
+                $sql = "UPDATE Timetable
                         SET Sun = :place
                         WHERE UserID = :userid AND Time = :time";
                 break;
@@ -232,12 +232,11 @@ class UserModel extends Database{
     }
 
     public function addUser($firstname, $lastname, $username, $password){
-        $sql = "INSERT INTO User(Firstname, Lastname, Username, Password)
+        $sql = "INSERT INTO User (Firstname, Lastname, Username, Password)
                 VALUES (:firstname, :lastname, :username, :password)";
         $password = password_hash($password, PASSWORD_DEFAULT);
         $this->executeQuery($sql, ["firstname"=>$firstname, "lastname"=>$lastname, "username"=>$username, "password"=>$password]);
         return true;
-
     }
 
     public function getFriend($username){

@@ -42,6 +42,7 @@
 		<form action="timetable.php" method="post">
     		<input id="btnST" type="submit" name="save" value="Save" />
 		</form>
+		<div id="showBox"></div>
 	</div>
 
 </body>
@@ -71,7 +72,7 @@ function getTimetable($UserID)
 	$times = $stmt->fetch(PDO::FETCH_ASSOC);
 	echo $times["Mon"];
 	if(gettype($times) == "array"){
-		setcookie("10am2pm", $times[0]);
+		setcookie("10am2pm", $times["Mon"]);
 		setcookie("2pm6pm", $times[1]);
 		setcookie("6pm11pm", $times[2]);
 		setcookie("11pm10am", $times[3]);

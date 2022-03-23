@@ -23,7 +23,4 @@ $firstname = $_POST['firstname'];
 $lastname = $_POST['lastname'];
 addUser($firstname, $lastname, $username, $password);
 
-
-
-
 ?>

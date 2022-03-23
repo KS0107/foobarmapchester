@@ -15,6 +15,27 @@ document.addEventListener("DOMContentLoaded", () => {   //Otherwise the onclick 
     }
 });
 
+function showTimetable(segment){
+    const xmlhttp = new XMLHttpRequest();
+    xmlhttp.onload = function() {
+        show = "";
+        for(i = 0; i < 9; i++){
+            show += 
+            "<div>" + 
+                " " +
+                "" +
+                    "+" +
+                "" +
+            "</div>";
+        } 
+        document.getElementById("showBox").innerHTML = show;
+    }
+    xmlhttp.open("POST", "../restapi/index.php/user/getUserBy");
+    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xmlhttp.send("segment=" + segment);
+}
+showUsers("");
+
 function loadTimetable(){
     const pageName = window.location.pathname.split("/").pop()
     console.log(pageName)

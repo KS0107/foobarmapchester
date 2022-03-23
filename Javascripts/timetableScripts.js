@@ -15,53 +15,28 @@ document.addEventListener("DOMContentLoaded", () => {   //Otherwise the onclick 
     }
 });
 
-function showTimetable(segment){
-    const xmlhttp = new XMLHttpRequest();
-    xmlhttp.onload = function() {
-        show = "";
-        for(i = 0; i < 9; i++){
-            show += 
-            "<div>" + 
-                " " +
-                "" +
-                    "+" +
-                "" +
-            "</div>";
-        } 
-        document.getElementById("showBox").innerHTML = show;
-    }
-    xmlhttp.open("POST", "../restapi/index.php/user/getUserBy");
-    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xmlhttp.send("segment=" + segment);
-}
-showUsers("");
-
 function loadTimetable(){
-    const pageName = window.location.pathname.split("/").pop()
-    console.log(pageName)
-    if (pageName == "timetable.php"){
-        let timetable = getTimetable();
-        console.log(timetable);
-        var timetableObj = document.getElementById("timetable");
-        timetable.forEach(element => {
-            var newRow = timetableObj.insertRow();
-            newRow.id = element[0];
+    let timetable = getTimetable();
+    console.log(timetable);
+    var timetableObj = document.getElementById("timetable");
+    timetable.forEach(element => {
+        var newRow = timetableObj.insertRow();
+        newRow.id = element[0];
+        var newCell = newRow.insertCell();
+        newCell.textContent = element[0];
+        for (let i = 0; i < 7; i++) {
             var newCell = newRow.insertCell();
-            newCell.textContent = element[0];
-            for (let i = 0; i < 7; i++) {
-                var newCell = newRow.insertCell();
-                if(element[1][i] == 1){
-                    newCell.textContent = "Busy";
-                    newCell.style.backgroundColor = "rgba(31, 31, 31, 0.6)";
-                }else{
-                    newCell.textContent = "Free";
-                    newCell.style.backgroundColor = "rgba(117, 117, 117, 0.6)";
-                }newCell.onclick = function(){
-                    flipCell(this, element[1][i]);
-                }
+            if(element[1][i] == 1){
+                newCell.textContent = "Busy";
+                newCell.style.backgroundColor = "rgba(31, 31, 31, 0.6)";
+            }else{
+                newCell.textContent = "Free";
+                newCell.style.backgroundColor = "rgba(117, 117, 117, 0.6)";
+            }newCell.onclick = function(){
+                flipCell(this, element[1][i]);
             }
-        });
-    }
+        }
+    });
 }
 
 function saveTimetable(){

@@ -322,6 +322,7 @@ class UserController extends BaseController{
                         // check if there is such a request
                         if(!empty($userModel->verifyRequestmsg($type, $place, $date, $day, $targetid, $requesterid))){
                             // the request already exists
+                            
                             $respondData1 .= $friends[$i] . " ";
                         // check if the target ID free on that date
                         }elseif(is_null($userModel->verifyEvent($requesterid, $time, $day)[0][$day]) && is_null($userModel->verifyEvent($targetid, $time, $day)[0][$day])){
@@ -342,7 +343,7 @@ class UserController extends BaseController{
                         $userModel->storeRequestmsg($type, $place, $date, $day, 0, $requesterid);
                     }
                 }
-                if(!empty($respondData2)){$respondData = "made successfully for " . $respondData2;}
+                if(!empty($respondData2)){$respondData = "made successfully for " . $respondData2 . $userModel->verifyRequestmsg($type, $place, $date, $day, $targetid, $requesterid)[0]["Status"];}
                 if(!empty($respondData1)){$respondData = $respondData . " the request already exists for " . $respondData1;}
                 $respondData = json_encode($respondData);
             }catch(Error $e){

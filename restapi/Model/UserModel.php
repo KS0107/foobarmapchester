@@ -67,7 +67,7 @@ class UserModel extends Database{
 
     public function verifyRequestmsg($type, $place, $date, $day, $targetid, $requesterid){
         //verify the request and return its status //for private request
-        $sql = "SELECT RequestmsgID
+        $sql = "SELECT RequestmsgID, Status
                 FROM Requestmsg
                 WHERE 
                 Type = :type AND
@@ -77,8 +77,10 @@ class UserModel extends Database{
                 (TargetID = :targetid AND
                 RequesterID = :requesterid) OR
                 (TargetID = :requesterid AND
-                RequesterID = :targetid)";
-        return $this->executeFetchQuery($sql, ["type"=>$type, "place"=>$place, "date"=>$date, "day"=>$day,
+                RequesterID = :targetid) AND
+                Status = :status";
+                $status = "No Response";
+        return $this->executeFetchQuery($sql, ["status"=>$status, "type"=>$type, "place"=>$place, "date"=>$date, "day"=>$day,
         "targetid"=>$targetid, "requesterid"=>$requesterid]);
     }
 

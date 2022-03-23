@@ -18,16 +18,14 @@ document.addEventListener("DOMContentLoaded", () => {   //Otherwise the onclick 
 function showTimetable(segment){
     const xmlhttp = new XMLHttpRequest();
     xmlhttp.onload = function() {
-        users = JSON.parse(this.responseText);
         show = "";
-        for(i = 0; i < users.length; i++){
+        for(i = 0; i < 9; i++){
             show += 
             "<div>" + 
-                users[i].Username + 
                 " " +
-                "<button onclick=\"friendRequest(\'" + users[i].Username +"\')\">" +
+                "" +
                     "+" +
-                "</button>" +
+                "" +
             "</div>";
         } 
         document.getElementById("showBox").innerHTML = show;

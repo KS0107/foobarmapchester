@@ -36,7 +36,7 @@ function getUserID($Username)
 }
 $newuser = getUserID($username)
 public function initTimetable($userID){
-	$sql = "INSERT INTO NewTimetable (UserID, Time)
+	$sql = "INSERT INTO Timetable (UserID, Time)
 			 VALUES 
 			 (:userid, 1),
 			 (:userid, 2),

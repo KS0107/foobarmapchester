@@ -115,8 +115,8 @@ function LightFunction() {
         changeMapStyle();
         i++;
     } else {
-        document.body.style.backgroundColor = "rgb(31, 31, 31)";
-        document.getElementById("reviewBar").style.backgroundColor = "rgb(31, 31, 31)";
+        document.body.style.backgroundColor = "rgb(7, 7, 7)";
+        document.getElementById("reviewBar").style.backgroundColor = "rgb(7, 7, 7)";
         document.body.style.color = "white";
         document.getElementById("lightD").innerText = "Light Mode"
         changeMapStyle();

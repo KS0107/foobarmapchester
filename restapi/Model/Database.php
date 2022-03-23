@@ -29,7 +29,7 @@ class Database{
             
             return $stmt;
         }catch(Exception $pe){
-            throw New Exception($e->getMessage());
+            throw New Exception($pe->getMessage());
         }
     }   
 

@@ -36,7 +36,7 @@ if (!isset($_SESSION['login']))
 	</div>
 
 	<?php
-		if(array_key_exists("button1", $_POST)){
+		if(array_key_exists("LogOut", $_POST)){
             LogOut();
         }
         function LogOut(){
@@ -44,6 +44,7 @@ if (!isset($_SESSION['login']))
 			if (isset($_COOKIE['username'])) {
 				//unset($_COOKIE['username']); 
 				setcookie("username", "", time()-1, "/");
+				echo "Hello";
 				//setcookie('username',"",time() - 86400); 
 			}
 			header("location: ../index.html");

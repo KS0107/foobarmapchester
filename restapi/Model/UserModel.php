@@ -93,42 +93,49 @@ class UserModel extends Database{
         switch($day){
             case "Mon":
                 $sql = "SELECT Mon
+                FROM NewTimetable
                 WHERE 
                 UserID = :userid AND
                 Time = :time";
                 break;
             case "Tue":
                 $sql = "SELECT Tue
+                FROM NewTimetable
                 WHERE 
                 UserID = :userid AND
                 Time = :time";
                 break;
             case "Wed":
                 $sql = "SELECT Wed
+                FROM NewTimetable
                 WHERE 
                 UserID = :userid AND
                 Time = :time";
                 break;
             case "Thu":
                 $sql = "SELECT Thu
+                FROM NewTimetable
                 WHERE 
                 UserID = :userid AND
                 Time = :time";
                 break;
             case "Fri":
                 $sql = "SELECT Fri
+                FROM NewTimetable
                 WHERE 
                 UserID = :userid AND
                 Time = :time";
                 break;
             case "Sat":
                 $sql = "SELECT Sat
+                FROM NewTimetable
                 WHERE 
                 UserID = :userid AND
                 Time = :time";
                 break;
             case "Sun":
                 $sql = "SELECT Sun
+                FROM NewTimetable
                 WHERE 
                 UserID = :userid AND
                 Time = :time";
@@ -140,42 +147,49 @@ class UserModel extends Database{
     public function addEvent($userID, $place, $time, $day){
         switch($day){
             case "Mon":
-                $sql = "UPDATE 
+                $sql = "UPDATE NewTimetable
                         SET Mon = :place
                         WHERE UserID = :userid AND Time = :time";
                 break;
             case "Tue":
-                $sql = "UPDATE 
+                $sql = "UPDATE NewTimetable
                         SET Tue = :place
                         WHERE UserID = :userid AND Time = :time";
                 break;
             case "Wed":
-                $sql = "UPDATE 
+                $sql = "UPDATE NewTimetable
                         SET Wed = :place
                         WHERE UserID = :userid AND Time = :time";
                 break;
             case "Thu":
-                $sql = "UPDATE 
+                $sql = "UPDATE NewTimetable
                         SET Thu = :place
                         WHERE UserID = :userid AND Time = :time";
                 break;
             case "Fri":
-                $sql = "UPDATE 
+                $sql = "UPDATE NewTimetable
                         SET Fri = :place
                         WHERE UserID = :userid AND Time = :time";
                 break;
             case "Sat":
-                $sql = "UPDATE 
+                $sql = "UPDATE NewTimetable
                         SET Sat = :place
                         WHERE UserID = :userid AND Time = :time";
                 break;
             case "Sun":
-                $sql = "UPDATE 
+                $sql = "UPDATE NewTimetable
                         SET Sun = :place
                         WHERE UserID = :userid AND Time = :time";
                 break;
         }
-        return $this->executeQuery($sql, ["userid"=>$userID, "time"=>$time]);
+        return $this->executeQuery($sql, ["place"=>$place, "userid"=>$userID, "time"=>$time]);
+    }
+
+    public function updateStatus($requestmsgID, $status){
+        $sql = "UPDATE Requestmsg
+                SET Status = :status
+                WHERE RequestmsgID = :requestmsgID";
+        $this->executeQuery($sql, ["status"=>$status, "requestmsgID"=>$requestmsgID]);
     }
 
     // ########### Authentication #############

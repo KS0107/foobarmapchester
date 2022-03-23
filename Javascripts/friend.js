@@ -95,6 +95,28 @@ function getCookie(cname) {
 loadPlaces();
 
 // Private and Public requests
+
+function eventYes(requestmsgID, place, date, day){
+    const xhttp = new XMLHttpRequest();
+    xhttp.onload = function(){
+        alert(this.responseText);
+    }
+    xhttp.open("POST", "../restapi/index.php/user/addEvent");
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("requestmsgID=" + requestmsgID + "&place=" + place + "&time=" + date + "&day=" + day);
+}
+
+function eventNo(requestmsgID){
+    const xhttp = new XMLHttpRequest();
+    xhttp.onload = function(){
+        alert(this.responseText);
+    }
+    xhttp.open("POST", "../restapi/index.php/user/declineRequest");
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("requestmsgID=" + requestmsgID);
+}
+
+
 function retrieveEventRequest(){
     const xhttp = new XMLHttpRequest();
     xhttp.onload = function() {
@@ -124,32 +146,54 @@ function retrieveEventRequest(){
                         "</table>" +
                     "</div>";
                 }else{ // user is recipient
-                    privateRequests += 
-                    "<div>" +
-                        "<table>" +
-                            "<tr>" +
-                                "<th>" + "Day" + "</th>" +
-                                "<th>" + "Date" + "</th>" +
-                                "<th>" + "Place" + "</th>" +
-                                "<th>" + "From Friend" + "</th>" +
-                                "<th>" + "Status" + "</th>"+
-                                "<th>" + "Response" + "</th>"+
-                            "</tr>" +
-                            "<tr>" +
-                                "<td>" + response[1][i].Week + "</td>" +
-                                "<td>" + response[1][i].Date + "</td>" +
-                                "<td>" + response[1][i].Place + "</td>" +
-                                "<td>" + response[1][i].Username + "</td>" +
-                                "<td>" + response[1][i].Status + "</td>"+
-                                "<td>" + 
-                                    "<div id=" + response[1][i].RequestmsgID + ">" +
-                                        "<div>" + "<button onclick=\'eventYes(" + response[1][i].RequestmsgID + "," + response[1][i].Place + "," + response[1][i].Date + "," + response[1][i].Week + ")\'>Accept</button>" + "</div>" +
-                                        "<div>" + "<button onclick=\'eventNo(" + response[1][i].RequestmsgID + "," + response[1][i].Place + "," + response[1][i].Date + "," + response[1][i].Week + ")\'>Decline</button>" + "</div>" +
-                                    "</div>" +
-                                "</td>"+
-                            "</tr>" +
-                        "</table>" +
-                    "</div>";
+                    if(response[1][i].Status == "No Response"){
+                        privateRequests += 
+                        "<div>" +
+                            "<table>" +
+                                "<tr>" +
+                                    "<th>" + "Day" + "</th>" +
+                                    "<th>" + "Date" + "</th>" +
+                                    "<th>" + "Place" + "</th>" +
+                                    "<th>" + "From Friend" + "</th>" +
+                                    "<th>" + "Status" + "</th>"+
+                                    "<th>" + "Response" + "</th>"+
+                                "</tr>" +
+                                "<tr>" +
+                                    "<td>" + response[1][i].Week + "</td>" +
+                                    "<td>" + response[1][i].Date + "</td>" +
+                                    "<td>" + response[1][i].Place + "</td>" +
+                                    "<td>" + response[1][i].Username + "</td>" +
+                                    "<td>" + response[1][i].Status + "</td>"+
+                                    "<td>" + 
+                                        "<div id=" + response[1][i].RequestmsgID + ">" +
+                                            "<div>" + "<button onclick=eventYes('"  +  response[1][i].RequestmsgID + "','" + response[1][i].Place + "','" + response[1][i].Date + "','" + response[1][i].Week + "')>Accept</button>" + "</div>" +
+                                            "<div>" + "<button onclick=eventNo('"  +  response[1][i].RequestmsgID + "')>Decline</button>" + "</div>" +
+                                        "</div>" +
+                                    "</td>"+
+                                "</tr>" +
+                            "</table>" +
+                        "</div>";
+                    }else{
+                        privateRequests += 
+                        "<div>" +
+                            "<table>" +
+                                "<tr>" +
+                                    "<th>" + "Day" + "</th>" +
+                                    "<th>" + "Date" + "</th>" +
+                                    "<th>" + "Place" + "</th>" +
+                                    "<th>" + "From Friend" + "</th>" +
+                                    "<th>" + "Status" + "</th>"+
+                                "</tr>" +
+                                "<tr>" +
+                                    "<td>" + response[1][i].Week + "</td>" +
+                                    "<td>" + response[1][i].Date + "</td>" +
+                                    "<td>" + response[1][i].Place + "</td>" +
+                                    "<td>" + response[1][i].Username + "</td>" +
+                                    "<td>" + response[1][i].Status + "</td>"+
+                                "</tr>" +
+                            "</table>" +
+                        "</div>";
+                    }
                 }
             }else{ //public case
                 if(response[0] != response[1][i].requesterID){
@@ -186,15 +230,8 @@ function retrieveEventRequest(){
     xhttp.open("GET", "../restapi/index.php/user/getEventRequest");
     xhttp.send();
 }
-retrieveEventRequest();
+setInterval(retrieveEventRequest, 2000);
 
-function eventYes(requestmsgID, place, date, day){
-    alert("debug");
-    const xhttp = new XMLHttpRequest();
-    xhttp.open("POST", "../restapi/index.php/user/addEvent");
-    xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send("requestmsgID=" + requestmsgID + "&place=" + place + "&time=" + date + "&day=" + day);
-}
 
 $(document).ready(function(){
     $("#friendsbtn").click(function(){

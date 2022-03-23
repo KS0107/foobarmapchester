@@ -371,7 +371,7 @@ class UserController extends BaseController{
                 $userModel = new UserModel;
                 $requestmsgID = $_POST["requestmsgID"];
                 $userID = $userModel->getID($_COOKIE["username"]);
-                $place = $_POST["palce"];
+                $place = $_POST["place"];
                 $time = $_POST["time"];
                 switch($time){
                     case "10am-2pm": $time = 1; break;
@@ -380,16 +380,39 @@ class UserController extends BaseController{
                     case "11am-10am": $time = 4; break;
                 }
                 $day = $_POST["day"];
-                if(!empty($userModel->verifyEvent($userID, $time, $day))){
+                if(!is_null($userModel->verifyEvent($userID, $time, $day)[0][$day])){
                     //event already hold for the time
+                    $respondData = "you already have an event at the time";
                 }else{
                     // add event to it
                     $userModel->addEvent($userID, $place, $time, $day);
                     //update other request with the same as decline response or busy status
+                    $userModel->updateStatus($requestmsgID, "accepted");
+                    $respondData = "you made an event to timetable!!";
                     
                 }
                 
-                $respondData = json_encode($res);
+                
+            }catch(Error $e){
+                $this->strErrorDesc = $e->getMessage();
+                $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
+            }
+        }else{
+            $this->strErrorDesc = 'Method not supported';
+            $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
+        }
+        $this->errorHandler($this->strErrorDesc, $respondData, $this->strErrorHeader);
+    }
+
+    public function declineRequestAction(){
+        
+        if(strtoupper($this->requestMethod) == "POST"){
+            try{
+                $userModel = new UserModel;
+                $requestmsgID = $_POST["requestmsgID"];
+                $status = "decline";
+                $userModel->updateStatus($requestmsgID, $status);
+                $respondData = "you have declined the request~~";
             }catch(Error $e){
                 $this->strErrorDesc = $e->getMessage();
                 $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';

@@ -44,7 +44,6 @@ if (!isset($_SESSION['login']))
 			if (isset($_COOKIE['username'])) {
 				//unset($_COOKIE['username']); 
 				setcookie("username", "", time()-1, "/");
-				echo "Hello";
 				//setcookie('username',"",time() - 86400); 
 			}
 			header("location: ../index.html");

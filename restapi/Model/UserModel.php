@@ -378,7 +378,7 @@ class UserModel extends Database{
         WHERE Username = :username";
             // WHERE  TimetableID IN (SELECT TimetableID
             // FROM Timetable
-    return $this->executeFetchQuery($sql, ["username"=>$username, "Row"=>$row, "Mon"=>$vals[0]]);
+    return $this->executeFetchQuery($sql, ["username"=>$username]);
     }
 
 }

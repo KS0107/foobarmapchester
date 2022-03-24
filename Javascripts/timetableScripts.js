@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {   //Otherwise the onclick is assigned before the DOM is loaded
-    window.onload = loadTimetable;
+    window.onload = getTimetable;
 
     const editTimetableButton = document.getElementById("btnET");
     if(editTimetableButton != null){

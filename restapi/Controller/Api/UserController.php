@@ -467,7 +467,9 @@ class UserController extends BaseController{
                     foreach ($value as &$value2){
                         if($value2 != null){
                             $receiver = $userModel->checkReceiver($userID, $value2, "10am-2pm", "Thu");
-                            $value2 = $value2+$receiver;
+                            if($receiver.is_array){
+                                $value2 = $value2+$receiver[0]["TargetID"];
+                            }
                         }
                     }
                 }

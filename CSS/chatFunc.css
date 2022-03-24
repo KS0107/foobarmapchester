@@ -169,6 +169,7 @@ iframe {
   width: 35px;
   height: 35px;
   background-image: url(../images/add-friend-icon.png);
+  filter: invert(100%);
   background-size: cover;
 }
 

@@ -121,13 +121,18 @@ label {
 
 
 #friendbox-container, #requestbox-container{
+  font-family: 'Montserrat';
+  border-radius: 13px;
   display: none;
   height: 40%;
   width: 40%;
   position: absolute;
   top: 150px;
   left: 30%;
-  background-color: #ecd6d6;
+  background-color: #0c0c0c;
+}
+iframe {
+  border-radius: 20px;
 }
 
 #friendbox, #requestbox{

@@ -381,9 +381,10 @@ class UserModel extends Database{
    
    public function updateTimetable($timetableid, $vals){
     $sql = "UPDATE Timetable 
-        SET Mon = :Mon
+        SET Mon = :Mon, Tue = :Tue, Wed = :Wed, Thu = :Thu, Fri = :Fri, Sat = :Sat, Sun = :Sun
         WHERE TimetableID = :timetableid";
-    return $this->executeFetchQuery($sql, ["timetableid"=>$timetableid, "Mon"=>$vals[0]]);
+    return $this->executeFetchQuery($sql, ["timetableid"=>$timetableid, "Mon"=>$vals["Mon"], "Tue"=>$vals["Tue"], "Wed"=>$vals["Wed"], "Thu"=>$vals["Thu"], 
+    "Fri"=>$vals["Fri"], "Sat"=>$vals["Sat"], "Sun"=>$vals["Sun"]);
     }
 
 }

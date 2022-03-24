@@ -480,7 +480,7 @@ class UserController extends BaseController{
                 $userModel = new UserModel;
                 $timetable = $_POST["timetable"];
                 $timetableids = $userModel->getTimetableIDs($_POST["username"]);
-                $userModel->updateTimetable($timetableids[2]["TimetableID"], ["TestLoc"]);
+                $userModel->updateTimetable($timetableids[0]["TimetableID"], $timetable[0]);
                 $respondData = json_encode($timetable);
             }catch(Error $e){
                 $this->strErrorDesc = $e->getMessage();

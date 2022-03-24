@@ -88,6 +88,7 @@ function postTimetable(Timetable){
     //     console.log(this.responseText);
     // }  
     $.post("../restapi/index.php/user/updateTimetable", {timetable: Timetable, username: getCookie("username")}, function(data) {
+        console.log(data)
         var response = jQuery.parseJSON(data);
         console.log(response);
     }, 'json');

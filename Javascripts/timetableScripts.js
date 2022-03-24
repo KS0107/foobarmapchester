@@ -25,6 +25,7 @@ function getTimetable(){
     }
     xhttp.open("POST","../restapi/index.php/user/pullTimetable");
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    console.log(document.cookie.split('; ').find(row => row.startsWith("username")));
     xhttp.send(document.cookie.split('; ').find(row => row.startsWith("username")));
 }
 

@@ -74,14 +74,41 @@ class UserModel extends Database{
                 Place = :place AND
                 Date = :date AND
                 Week = :day AND
-                (TargetID = :targetid AND
+                ((TargetID = :targetid AND
                 RequesterID = :requesterid) OR
                 (TargetID = :requesterid AND
-                RequesterID = :targetid) AND
+                RequesterID = :targetid)) AND
                 Status = :status";
                 $status = "No Response";
         return $this->executeFetchQuery($sql, ["status"=>$status, "type"=>$type, "place"=>$place, "date"=>$date, "day"=>$day,
         "targetid"=>$targetid, "requesterid"=>$requesterid]);
+    }
+    public function getRequestmsgIDByDP($type, $place, $time, $day, $userid, $status){
+        $sql = "SELECT RequestmsgID
+                FROM Requestmsg
+                WHERE
+                Type = :type AND
+                Place = :place AND
+                Date = :date AND
+                Week = :day AND
+                (TargetID = :userid OR
+                RequesterID = :userid) AND
+                Status = :status";
+        return $this->executeFetchQuery($sql, ["type"=>$type, "place"=>$place, "date"=>$time, "day"=>$day, "userid"=>$userid, "status"=>$status]);
+    }
+
+    public function getRequestmsgIDBySP($type,$place, $time, $day, $userid, $status){
+        $sql = "SELECT RequestmsgID
+                FROM Requestmsg
+                WHERE
+                Type = :type AND
+                Place = :place AND
+                Date = :date AND
+                Week = :day AND
+                (TargetID = :userid OR
+                RequesterID = :userid) AND
+                Status = :status";
+        return $this->executeFetchQuery($sql, ["type"=>$type, "place"=>$place, "date"=>$time, "day"=>$day, "userid"=>$userid, "status"=>$status]);
     }
 
     public function storeRequestmsg($type, $place, $date, $day, $targetid, $requesterid){

@@ -29,7 +29,7 @@ function getTimetable(){
         loadTimetable(text);
         console.log(text);
     }
-    xhttp.open("POST","../restapi/index.php/user/pullTimetable?username=" + getCookie("username"));
+    xhttp.open("GET","../restapi/index.php/user/pullTimetable?username=" + getCookie("username"));
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     console.log(document.cookie.split('; ')
     .find(row => row.startsWith("username"))

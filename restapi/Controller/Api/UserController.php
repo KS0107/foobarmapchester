@@ -478,9 +478,9 @@ class UserController extends BaseController{
         if(strtoupper($this->requestMethod) == "POST"){
             try{
                 $userModel = new UserModel;
-                $timetable = $_POST["Timetable"];
-                $timetableids = $userModel->getTimetableIDs($this->arrQueryStringParams["username"]);
-                $userModel->updateTimetable($timetableids[0]["TimetableID"], ["TestLoc"]);
+                $timetable = $_POST["timetable"];
+                $timetableids = $userModel->getTimetableIDs($_POST["username"]);
+                $userModel->updateTimetable($timetableids[3]["TimetableID"], ["TestLoc"]);
                 $respondData = json_encode($timetable);
             }catch(Error $e){
                 $this->strErrorDesc = $e->getMessage();

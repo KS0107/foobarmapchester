@@ -278,14 +278,14 @@ function getMarkers(){
     return markers;
 }
 
-// function getTimetable(){
-//     let timetable = defaultPlaceholderTimetable;
-//     for (let i = 0; i < 4; i++) {
-//         let cookieValue = document.cookie.split('; ').find(row => row.startsWith(timetable[i][0].replace("-", "")+'='));
-//         if(cookieValue != undefined){
-//             cookieValueSplit = cookieValue.split('=')[1];
-//             timetable[i][1] = cookieValueSplit;
-//         }
-//     }
-//     return timetable;
-// }
+function getTimetable(){
+    let timetable = defaultPlaceholderTimetable;
+    for (let i = 0; i < 4; i++) {
+        let cookieValue = document.cookie.split('; ').find(row => row.startsWith(timetable[i][0].replace("-", "")+'='));
+        if(cookieValue != undefined){
+            cookieValueSplit = cookieValue.split('=')[1];
+            timetable[i][1] = cookieValueSplit;
+        }
+    }
+    return timetable;
+}

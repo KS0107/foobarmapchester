@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {   //Otherwise the onclick 
 });
 
 $(document).ready(function(){
-    getTimetable();
+    pullTimetable();
 });
 
 function getCookie(cookieName){
@@ -24,7 +24,7 @@ function getCookie(cookieName){
     .split('=')[1];
 }
 
-function getTimetable(){
+function pullTimetable(){
     const xhttp = new XMLHttpRequest();
     xhttp.onload = function(){
                 console.log(this.responseText);

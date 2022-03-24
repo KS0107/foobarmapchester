@@ -43,7 +43,7 @@ function loadTimetable(timetable){
         var newRow = timetableObj.insertRow();
         newRow.id = "timePlaceHolder";
         var newCell = newRow.insertCell();
-        newCell.textContent = element[0];
+        newCell.textContent = "timePlaceHolder";
         for (let i = 0; i < 7; i++) {
             var newCell = newRow.insertCell();
             if(element[i] != null){

@@ -81,18 +81,19 @@ function saveTimetable(){
             }
         }
         console.log(timetable);
+        postTimetable(timetable);
     }
 }
 
 function postTimetable(timetable){
     const xhttp = new XMLHttpRequest();
     xhttp.onload = function(){
-                console.log(this.responseText);
-                text = JSON.parse(this.responseText);
-                loadTimetable(text);
-                console.log(text);
-            }  
-    xhttp.open("GET", "../restapi/index.php/user/getTimetable?UserID=9");
+        console.log(this.responseText);
+        text = JSON.parse(this.responseText);
+        loadTimetable(text);
+        console.log(text);
+    }  
+    xhttp.open("GET", "../restapi/index.php/user/updateTimetable?username="+getCookie("username"));
     xhttp.send();
 }
 

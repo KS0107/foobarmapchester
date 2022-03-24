@@ -348,7 +348,7 @@ class UserModel extends Database{
    }
 
    public function pullTimetable($username){
-       var $UserID = getID($username);
+       $UserID = getID($username);
        $sql = "SELECT Mon, Tue, Wed, Thu, Fri, Sat, Sun
                 FROM   Timetable
                 WHERE  UserID = :UserID";

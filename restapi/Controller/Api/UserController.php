@@ -478,7 +478,7 @@ class UserController extends BaseController{
         if(strtoupper($this->requestMethod) == "PATCH"){
             try{
                 $userModel = new UserModel;
-                $timetable = $_PATCH["Timetable"];
+                $timetable = $_POST["Timetable"];
                 $timetableids = $userModel->getTimetableIDs($this->arrQueryStringParams["username"]);
                 $userModel->updateTimetable($timetableids[0]["TimetableID"], ["TestLoc"]);
                 $respondData = json_encode($timetable);

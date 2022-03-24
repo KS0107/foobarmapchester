@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400&family=Poppins:wght@300;400;600&display=swap');
+
 .topbar{
     padding-top: 20px;
     text-align: center;
@@ -20,4 +22,10 @@
 
 #privateRequest div{
     text-align: center;
+}
+option {
+    border-radius: 2px;
+    background-color: rgb(31,31,31);
+    font-family: 'Montserrat';
+    color: white;
 }

@@ -375,7 +375,7 @@ class UserModel extends Database{
                 AND Place = :place
                 AND Date = :time
                 AND Week = :day
-                AND Status = accepted";
+                AND Status = 'accepted'";
         return $this->executeFetchQuery($sql, ["requesterid"=>$requesterid, "place"=>$place, "time"=>$time, "day"=>$day])[0]["TargetID"];
     }
 
@@ -386,7 +386,7 @@ class UserModel extends Database{
                 AND Place = :place
                 AND Date = :time
                 AND Week = :day
-                AND Status = accepted";
+                AND Status = 'accepted'";
         return $this->executeFetchQuery($sql, ["targetid"=>$targetid, "place"=>$place, "time"=>$time, "day"=>$day]);
     }
 

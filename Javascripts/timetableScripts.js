@@ -79,6 +79,7 @@ function saveTimetable(){
             }
         }
     }
+    console.log(timetable);
     postTimetable(timetable);
 }
 
@@ -87,11 +88,7 @@ function postTimetable(Timetable){
     // xhttp.onload = function(){
     //     console.log(this.responseText);
     // }  
-    $.post("../restapi/index.php/user/updateTimetable", {timetable: Timetable, username: getCookie("username")}, function(data) {
-        console.log(data)
-        var response = jQuery.parseJSON(data);
-        console.log(response);
-    }, 'json');
+    $.post("../restapi/index.php/user/updateTimetable", {timetable: Timetable, username: getCookie("username")});
     // xhttp.open("POST", "../restapi/index.php/user/updateTimetable?username="+getCookie("username"));
     // xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     // xhttp.send("Timetable=" + timetable);

@@ -479,6 +479,14 @@ class UserController extends BaseController{
             try{
                 $userModel = new UserModel;
                 $timetable = $_POST["timetable"];
+                foreach ($timetable as &$value) {
+                    foreach ($value as &$value2){
+                        if($value2 == ""){
+                            $value2 = null;
+                        }
+                    }
+                }
+                unset($value);
                 $timetableids = $userModel->getTimetableIDs($_POST["username"]);
                 $userModel->updateTimetable($timetableids[0]["TimetableID"], $timetable[0]);
                 $respondData = json_encode($timetable);

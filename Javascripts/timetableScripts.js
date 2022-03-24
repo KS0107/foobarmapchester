@@ -24,17 +24,26 @@ function getCookie(cookieName){
 function getTimetable(){
     const xhttp = new XMLHttpRequest();
     xhttp.onload = function(){
-        console.log(this.responseText);
-        text = JSON.parse(this.responseText);
-        loadTimetable(text);
-        console.log(text);
-    }
-    xhttp.open("GET","../restapi/index.php/user/pullTimetable?username=" + getCookie("username"));
-    //xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    console.log(document.cookie.split('; ')
-    .find(row => row.startsWith("username"))
-    .split('=')[1]);
+                console.log(this.responseText);
+                text = JSON.parse(this.responseText);
+                loadTimetable(text);
+                console.log(text);
+            }  
+    xhttp.open("GET", "../restapi/index.php/user/getFriend?username=" + getCookie("username"));
     xhttp.send();
+//     const xhttp = new XMLHttpRequest();
+//     xhttp.onload = function(){
+//         console.log(this.responseText);
+//         text = JSON.parse(this.responseText);
+//         loadTimetable(text);
+//         console.log(text);
+//     }
+//     xhttp.open("GET","../restapi/index.php/user/pullTimetable?username=" + getCookie("username"));
+//     //xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+//     console.log(document.cookie.split('; ')
+//     .find(row => row.startsWith("username"))
+//     .split('=')[1]);
+//     xhttp.send();
 }
 
 function loadTimetable(timetable){

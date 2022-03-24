@@ -375,7 +375,7 @@ class UserModel extends Database{
         SET Mon = :Mon
         WHERE  UserID IN (SELECT UserID 
         FROM User
-        WHERE Username = :username";
+        WHERE Username = :username)";
             // WHERE  TimetableID IN (SELECT TimetableID
             // FROM Timetable
     return $this->executeFetchQuery($sql, ["username"=>$username, "Mon"=>$vals[0]]);

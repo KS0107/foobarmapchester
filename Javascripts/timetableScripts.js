@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {   //Otherwise the onclick is assigned before the DOM is loaded
-    window.onload = getTimetable;
+    //window.onload = getTimetable;
 
     const editTimetableButton = document.getElementById("btnET");
     if(editTimetableButton != null){
@@ -13,6 +13,10 @@ document.addEventListener("DOMContentLoaded", () => {   //Otherwise the onclick 
     }else{
         console.log("save timetable function not found");
     }
+});
+
+$(document).ready(function(){
+    getTimetable();
 });
 
 function getCookie(cookieName){

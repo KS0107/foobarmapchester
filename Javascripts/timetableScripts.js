@@ -49,7 +49,7 @@ function loadTimetable(timetable){
             console.log(element[i]);
             var newCell = newRow.insertCell();
             if(element[i] != undefined){
-                newCell.textContent = element[i];
+                newCell.textContent = element[i][1];
                 newCell.style.backgroundColor = "rgba(31, 31, 31, 0.6)";
             }else{
                 newCell.textContent = "Free";

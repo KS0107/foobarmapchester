@@ -343,6 +343,13 @@ class UserModel extends Database{
         return "Footage";
     }
 
+    public function getTimetable($username){
+        $sql = "SELECT Mon, Tue, Wed, Thu, Fri, Sat, Sun
+                FROM   Timetable
+                WHERE  UserID = 9";
+        return $this->executeFetchQuery($sql, ["username"=>$username]);
+    }
+
 }
 
 ?>

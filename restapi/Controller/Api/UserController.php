@@ -468,6 +468,7 @@ class UserController extends BaseController{
                         if($value2 != null){
                             $receiver = $userModel->checkReceiver($userID, $value2, "10am-2pm", "Thu");
                             if(is_array($receiver)){
+                                echo $receiver;
                                 $value2 = $value2+$receiver["TargetID"];
                             }
                         }

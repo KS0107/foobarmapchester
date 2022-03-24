@@ -5,6 +5,9 @@
     text-align: center;
     position: relative;
 }
+body {
+    font-family: 'Montserrat';
+}
 
 #friendsBox{
     display: block;

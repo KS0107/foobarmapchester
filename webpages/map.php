@@ -32,7 +32,7 @@
                 <button id="lightD" type="button">Light Mode</button>
             </div>
             <div id="msg">
-                <pre></pre>
+                <pre id="reviewtext"></pre>
             </div>
         </form>
 

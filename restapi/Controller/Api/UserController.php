@@ -303,6 +303,12 @@ class UserController extends BaseController{
                 $type = $_POST["type"];
                 $place = $_POST["place"];
                 $date = $_POST["date"];
+                switch($date){
+                    case "10am-2pm": $time = 1; break;
+                    case "2pm-6pm": $time = 2; break;
+                    case "6pm-11pm": $time = 3; break;
+                    case "11am-10am": $time = 4; break;
+                }
                 $day = $_POST["day"];
                 $userModel = new UserModel;
                 $respondData = "";
@@ -313,15 +319,22 @@ class UserController extends BaseController{
                     $friends = explode(",", $_POST["friends"]);
                     for($i = 0; $i < sizeof($friends); $i++){
                         $targetid = $userModel->getID($friends[$i]);
+                        // check if there is such a request
                         if(!empty($userModel->verifyRequestmsg($type, $place, $date, $day, $targetid, $requesterid))){
                             // the request already exists
+                            
                             $respondData1 .= $friends[$i] . " ";
-                        }else{
+                        // check if the target ID free on that date
+                        }elseif(is_null($userModel->verifyEvent($requesterid, $time, $day)[0][$day]) && is_null($userModel->verifyEvent($targetid, $time, $day)[0][$day])){
                             $respondData2 .= $friends[$i] . " ";
+                            // this stores requestmsg
                             $userModel->storeRequestmsg($type, $place, $date, $day, $targetid, $requesterid);
+                        }else{
+                            $respondData = "you or your friends are busy on the date";
+                            // case there is no such request and targetID are free
                         }
                     }
-                }else{
+                }else{ //public request 
                     if(!empty($userModel->verifyRequestmsgP($type, $place, $date, $day))){
                         // the request already exists
                         $respondData = "the public request has been already made by someone, go to public request box to join the group chat!!";
@@ -369,27 +382,47 @@ class UserController extends BaseController{
         if(strtoupper($this->requestMethod) == "POST"){
             try{
                 $userModel = new UserModel;
+                $requesterID = $_POST["requesterID"];
                 $requestmsgID = $_POST["requestmsgID"];
                 $userID = $userModel->getID($_COOKIE["username"]);
                 $place = $_POST["place"];
-                $time = $_POST["time"];
-                switch($time){
+                $date = $_POST["time"];
+                switch($date){
                     case "10am-2pm": $time = 1; break;
                     case "2pm-6pm": $time = 2; break;
                     case "6pm-11pm": $time = 3; break;
                     case "11am-10am": $time = 4; break;
                 }
                 $day = $_POST["day"];
-                if(!is_null($userModel->verifyEvent($userID, $time, $day)[0][$day])){
+                if((!is_null($userModel->verifyEvent($userID, $time, $day)[0][$day]) && !is_null($userModel->verifyEvent($requesterID, $time, $day)[0][$day])) || ($userModel->verifyEvent($userID, $time, $day)[0][$day] != $place && $userModel->verifyEvent($requesterID, $time, $day)[0][$day] != $palce)){
                     //event already hold for the time
-                    $respondData = "you already have an event at the time";
+                    $respondData = "you or your friends already have an event at the time";
                 }else{
-                    // add event to it
-                    $userModel->addEvent($userID, $place, $time, $day);
-                    //update other request with the same as decline response or busy status
-                    $userModel->updateStatus($requestmsgID, "accepted");
-                    $respondData = "you made an event to timetable!!";
-                    
+                    if(is_null($userModel->verifyEvent($userID, $time, $day)[0][$day])){
+                        // add event to it
+                        $userModel->addEvent($userID, $place, $time, $day);
+                        $userModel->addEvent($requesterID, $place, $time, $day);
+                        //update other request with the same as decline response or busy status
+                        $userModel->updateStatus($requestmsgID, "accepted");
+                        $respondData = "you just made an event to timetable!!";
+
+                        // update other requests' status as busy for those having the same date
+                        // get the requestmsgID by userid
+                        $status = "No Response"; // get the requestmsg which not responded
+                        $requestmsg = $userModel->getRequestmsgIDByDP("private", $place, $date, $day, $userID, $status);
+                        for($i = 0; $i < sizeof($requestmsg); $i++){
+                            $userModel->updateStatus($requestmsg[$i]["RequestmsgID"], "busy");
+                        }
+                        $requestmsg = $userModel->getRequestmsgIDByDP("private", $place, $date, $day, $requesterID, $status);
+                        for($i = 0; $i < sizeof($requestmsg); $i++){
+                            $userModel->updateStatus($requestmsg[$i]["RequestmsgID"], "busy");
+                        }
+                    }else{
+                        $requestmsg = $userModel->getRequestmsgIDBySP("private", $place, $date, $day, $requesterID, $status);
+                        for($i = 0; $i < sizeof($requestmsg); $i++){
+                            $userModel->updateStatus($requestmsg[$i]["RequestmsgID"], "accepted");
+                        }
+                    }
                 }
                 
                 
@@ -413,6 +446,23 @@ class UserController extends BaseController{
                 $status = "decline";
                 $userModel->updateStatus($requestmsgID, $status);
                 $respondData = "you have declined the request~~";
+            }catch(Error $e){
+                $this->strErrorDesc = $e->getMessage();
+                $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
+            }
+        }else{
+            $this->strErrorDesc = 'Method not supported';
+            $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
+        }
+        $this->errorHandler($this->strErrorDesc, $respondData, $this->strErrorHeader);
+    }
+
+    public function getTimetableAction(){
+        if(strtoupper($this->requestMethod) == "GET"){
+            try{
+                $userModel = new UserModel;
+                $res = $userModel->getTimetable($this->arrQueryStringParams["UserID"]);
+                $respondData = json_encode($res);
             }catch(Error $e){
                 $this->strErrorDesc = $e->getMessage();
                 $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';

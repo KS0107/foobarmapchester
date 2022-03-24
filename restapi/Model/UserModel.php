@@ -67,19 +67,48 @@ class UserModel extends Database{
 
     public function verifyRequestmsg($type, $place, $date, $day, $targetid, $requesterid){
         //verify the request and return its status //for private request
-        $sql = "SELECT RequestmsgID
+        $sql = "SELECT RequestmsgID, Status
                 FROM Requestmsg
                 WHERE 
                 Type = :type AND
                 Place = :place AND
                 Date = :date AND
                 Week = :day AND
-                (TargetID = :targetid AND
+                ((TargetID = :targetid AND
                 RequesterID = :requesterid) OR
                 (TargetID = :requesterid AND
-                RequesterID = :targetid)";
-        return $this->executeFetchQuery($sql, ["type"=>$type, "place"=>$place, "date"=>$date, "day"=>$day,
+                RequesterID = :targetid)) AND
+                Status = :status";
+                $status = "No Response";
+        return $this->executeFetchQuery($sql, ["status"=>$status, "type"=>$type, "place"=>$place, "date"=>$date, "day"=>$day,
         "targetid"=>$targetid, "requesterid"=>$requesterid]);
+    }
+    public function getRequestmsgIDByDP($type, $place, $time, $day, $userid, $status){
+        $sql = "SELECT RequestmsgID
+                FROM Requestmsg
+                WHERE
+                Type = :type AND
+                Place <> :place AND
+                Date = :date AND
+                Week = :day AND
+                (TargetID = :userid OR
+                RequesterID = :userid) AND
+                Status = :status";
+        return $this->executeFetchQuery($sql, ["type"=>$type, "place"=>$place, "date"=>$time, "day"=>$day, "userid"=>$userid, "status"=>$status]);
+    }
+
+    public function getRequestmsgIDBySP($type,$place, $time, $day, $userid, $status){
+        $sql = "SELECT RequestmsgID
+                FROM Requestmsg
+                WHERE
+                Type = :type AND
+                Place = :place AND
+                Date = :date AND
+                Week = :day AND
+                (TargetID = :userid OR
+                RequesterID = :userid) AND
+                Status = :status";
+        return $this->executeFetchQuery($sql, ["type"=>$type, "place"=>$place, "date"=>$time, "day"=>$day, "userid"=>$userid, "status"=>$status]);
     }
 
     public function storeRequestmsg($type, $place, $date, $day, $targetid, $requesterid){
@@ -93,49 +122,49 @@ class UserModel extends Database{
         switch($day){
             case "Mon":
                 $sql = "SELECT Mon
-                FROM NewTimetable
+                FROM Timetable
                 WHERE 
                 UserID = :userid AND
                 Time = :time";
                 break;
             case "Tue":
                 $sql = "SELECT Tue
-                FROM NewTimetable
+                FROM Timetable
                 WHERE 
                 UserID = :userid AND
                 Time = :time";
                 break;
             case "Wed":
                 $sql = "SELECT Wed
-                FROM NewTimetable
+                FROM Timetable
                 WHERE 
                 UserID = :userid AND
                 Time = :time";
                 break;
             case "Thu":
                 $sql = "SELECT Thu
-                FROM NewTimetable
+                FROM Timetable
                 WHERE 
                 UserID = :userid AND
                 Time = :time";
                 break;
             case "Fri":
                 $sql = "SELECT Fri
-                FROM NewTimetable
+                FROM Timetable
                 WHERE 
                 UserID = :userid AND
                 Time = :time";
                 break;
             case "Sat":
                 $sql = "SELECT Sat
-                FROM NewTimetable
+                FROM Timetable
                 WHERE 
                 UserID = :userid AND
                 Time = :time";
                 break;
             case "Sun":
                 $sql = "SELECT Sun
-                FROM NewTimetable
+                FROM Timetable
                 WHERE 
                 UserID = :userid AND
                 Time = :time";
@@ -147,37 +176,37 @@ class UserModel extends Database{
     public function addEvent($userID, $place, $time, $day){
         switch($day){
             case "Mon":
-                $sql = "UPDATE NewTimetable
+                $sql = "UPDATE Timetable
                         SET Mon = :place
                         WHERE UserID = :userid AND Time = :time";
                 break;
             case "Tue":
-                $sql = "UPDATE NewTimetable
+                $sql = "UPDATE Timetable
                         SET Tue = :place
                         WHERE UserID = :userid AND Time = :time";
                 break;
             case "Wed":
-                $sql = "UPDATE NewTimetable
+                $sql = "UPDATE Timetable
                         SET Wed = :place
                         WHERE UserID = :userid AND Time = :time";
                 break;
             case "Thu":
-                $sql = "UPDATE NewTimetable
+                $sql = "UPDATE Timetable
                         SET Thu = :place
                         WHERE UserID = :userid AND Time = :time";
                 break;
             case "Fri":
-                $sql = "UPDATE NewTimetable
+                $sql = "UPDATE Timetable
                         SET Fri = :place
                         WHERE UserID = :userid AND Time = :time";
                 break;
             case "Sat":
-                $sql = "UPDATE NewTimetable
+                $sql = "UPDATE Timetable
                         SET Sat = :place
                         WHERE UserID = :userid AND Time = :time";
                 break;
             case "Sun":
-                $sql = "UPDATE NewTimetable
+                $sql = "UPDATE Timetable
                         SET Sun = :place
                         WHERE UserID = :userid AND Time = :time";
                 break;
@@ -232,12 +261,11 @@ class UserModel extends Database{
     }
 
     public function addUser($firstname, $lastname, $username, $password){
-        $sql = "INSERT INTO User(Firstname, Lastname, Username, Password)
+        $sql = "INSERT INTO User (Firstname, Lastname, Username, Password)
                 VALUES (:firstname, :lastname, :username, :password)";
         $password = password_hash($password, PASSWORD_DEFAULT);
         $this->executeQuery($sql, ["firstname"=>$firstname, "lastname"=>$lastname, "username"=>$username, "password"=>$password]);
         return true;
-
     }
 
     public function getFriend($username){
@@ -324,13 +352,20 @@ class UserModel extends Database{
    }
 
    public function initTimetable($userID){
-       $sql = "INSERT INTO NewTimetable (UserID, Time)
+       $sql = "INSERT INTO Timetable (UserID, Time)
                 VALUES 
                 (:userid, 1),
                 (:userid, 2),
                 (:userid, 3),
                 (:userid, 4)";
         return $this->executeQuery($sql, ["userid"=>$userID]);
+   }
+
+   public function getTimetable($UserID){
+        $sql = "SELECT Mon, Tue, Wed, Thu, Fri, Sat, Sun
+                FROM   Timetable
+                WHERE  UserID = :UserID";
+        return $this->executeFetchQuery($sql, ["UserID"=>9]);
    }
 
 }

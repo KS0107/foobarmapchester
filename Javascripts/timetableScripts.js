@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {   //Otherwise the onclick is assigned before the DOM is loaded
-    window.onload = loadTimetable;
 
     const editTimetableButton = document.getElementById("btnET");
     if(editTimetableButton != null){
@@ -15,32 +14,50 @@ document.addEventListener("DOMContentLoaded", () => {   //Otherwise the onclick 
     }
 });
 
-function loadTimetable(){
-    const pageName = window.location.pathname.split("/").pop()
-    console.log(pageName)
-    if (pageName == "timetable.php"){
-        let timetable = getTimetable();
-        console.log(timetable);
-        var timetableObj = document.getElementById("timetable");
-        timetable.forEach(element => {
-            var newRow = timetableObj.insertRow();
-            newRow.id = element[0];
+$(document).ready(function(){
+    getTimetable();
+});
+
+function getCookie(cookieName){
+    return document.cookie.split('; ')
+    .find(row => row.startsWith(cookieName))
+    .split('=')[1];
+}
+
+function getTimetable(){
+    const xhttp = new XMLHttpRequest();
+    xhttp.onload = function(){
+                console.log(this.responseText);
+                text = JSON.parse(this.responseText);
+                loadTimetable(text);
+                console.log(text);
+            }  
+    xhttp.open("GET", "../restapi/index.php/user/getTimetable?UserID=9");
+    xhttp.send();
+}
+
+function loadTimetable(timetable){
+    console.log(timetable);
+    var timetableObj = document.getElementById("timetable");
+    timetable.forEach(element => {
+        var newRow = timetableObj.insertRow();
+        newRow.id = "timePlaceHolder";
+        var newCell = newRow.insertCell();
+        newCell.textContent = "timePlaceHolder";
+        for (let i = 0; i < 7; i++) {
+            console.log(element[i]);
             var newCell = newRow.insertCell();
-            newCell.textContent = element[0];
-            for (let i = 0; i < 7; i++) {
-                var newCell = newRow.insertCell();
-                if(element[1][i] == 1){
-                    newCell.textContent = "Busy";
-                    newCell.style.backgroundColor = "rgba(31, 31, 31, 0.6)";
-                }else{
-                    newCell.textContent = "Free";
-                    newCell.style.backgroundColor = "rgba(117, 117, 117, 0.6)";
-                }newCell.onclick = function(){
-                    flipCell(this, element[1][i]);
-                }
+            if(element[i] != undefined){
+                newCell.textContent = element[i];
+                newCell.style.backgroundColor = "rgba(31, 31, 31, 0.6)";
+            }else{
+                newCell.textContent = "Free";
+                newCell.style.backgroundColor = "rgba(117, 117, 117, 0.6)";
+            }newCell.onclick = function(){
+                flipCell(this, element[1][i]);
             }
-        });
-    }
+        }
+    });
 }
 
 function saveTimetable(){

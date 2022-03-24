@@ -30,20 +30,21 @@ if (!isset($_SESSION['login']))
 
             <h1>Are you sure you want to log out?</h1>
 
-			<input type="submit" name="button1" class="button" value="Log out">
+			<input type="submit" name="LogOut" class="button" value="Log out">
 
 		</form>
 	</div>
 
 	<?php
-		if(array_key_exists("button1", $_POST)){
-            button1();
+		if(array_key_exists("LogOut", $_POST)){
+            LogOut();
         }
-        function button1(){
+        function LogOut(){
 			$_SESSION["login"] = true;
 			if (isset($_COOKIE['username'])) {
-				unset($_COOKIE['username']); 
-				setcookie('username', null, time() - 3600); 
+				//unset($_COOKIE['username']); 
+				setcookie("username", "", time()-1, "/");
+				//setcookie('username',"",time() - 86400); 
 			}
 			header("location: ../index.html");
 		}

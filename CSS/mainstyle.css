@@ -78,6 +78,25 @@ button:hover {
 #msg {
     max-width: 10%;
 }
+#reviewtext {
+    width: 1000%;
+    max-height: 400px;
+    white-space: pre-wrap;     
+    word-wrap: break-word; 
+    overflow-y: scroll;
+}
+/* width */
+#reviewtext::-webkit-scrollbar {
+    width: 10px;
+} 
+  /* Track */
+#reviewtext::-webkit-scrollbar-track {
+    background: rgb(7, 7, 7);
+} 
+  /* Handle */
+#reviewtext::-webkit-scrollbar-thumb {
+    background: #888;
+}
 .topBar #buttonLinks{
     display: flex;
     justify-content: space-between;

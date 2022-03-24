@@ -130,6 +130,7 @@ label {
   top: 150px;
   left: 30%;
   background-color: #0c0c0c;
+  color: white;
 }
 iframe {
   border-radius: 20px;
@@ -169,6 +170,7 @@ iframe {
   width: 35px;
   height: 35px;
   background-image: url(../images/add-friend-icon.png);
+  filter: invert(100%);
   background-size: cover;
 }
 

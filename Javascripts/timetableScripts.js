@@ -63,7 +63,7 @@ function loadTimetable(timetable){
 
 function saveTimetable(){
     editing = false;
-    var timetable = [{"Mon": null,"Tue": null,"Wed": "Cargo","Thu": null,"Fri": null,"Sat": null,"Sun": null},
+    var timetable = [{"Mon": null,"Tue": null,"Wed": null,"Thu": null,"Fri": null,"Sat": null,"Sun": null},
     {"Mon": null,"Tue": null,"Wed": "Cargo","Thu": null,"Fri": null,"Sat": null,"Sun": null},
     {"Mon": null,"Tue": null,"Wed": "Cargo","Thu": null,"Fri": null,"Sat": null,"Sun": null},
     {"Mon": null,"Tue": null,"Wed": "Cargo","Thu": null,"Fri": null,"Sat": null,"Sun": null}];
@@ -72,11 +72,12 @@ function saveTimetable(){
         element = timetable[i];
         console.log(element);
         var timetableRow = document.getElementById(timeSlots[i]);
+        console.log(timetableRow);
         for (let j = 0; j < 7; j++) {
             if(timetableRow.childNodes[j].textContent != "Free"){
-                timetable[daysOfWeek[j]] = timetableRow.childNodes[j].textContent;
+                timetable[i][daysOfWeek[j]] = timetableRow.childNodes[j].textContent;
             }else{
-                timetable[daysOfWeek[j]] = null;
+                timetable[i][daysOfWeek[j]] = null;
             }
         }
         console.log(timetable);

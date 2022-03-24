@@ -372,13 +372,13 @@ class UserModel extends Database{
 
    public function updateTimetable($username, $row, $vals){
     $sql = "UPDATE Timetable 
-        SET Mon = Cargo
+        SET Mon = :Mon
         WHERE  UserID IN (SELECT UserID 
         FROM User
         WHERE Username = :username";
             // WHERE  TimetableID IN (SELECT TimetableID
             // FROM Timetable
-    return $this->executeFetchQuery($sql, ["username"=>$username]);
+    return $this->executeFetchQuery($sql, ["username"=>$username, "Mon"=>$vals[0]]);
     }
 
 }

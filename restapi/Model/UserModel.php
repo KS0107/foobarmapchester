@@ -352,7 +352,11 @@ class UserModel extends Database{
        $sql = "SELECT Mon, Tue, Wed, Thu, Fri, Sat, Sun
                 FROM   Timetable
                 WHERE  UserID = 9";
-        return $this->executeFetchQuery($sql, ["UserID"=>$UserID]);
+        try{
+            return $this->executeFetchQuery($sql, ["UserID"=>$UserID]);
+        }catch{
+            return "Error";
+        }
    }
 
 }

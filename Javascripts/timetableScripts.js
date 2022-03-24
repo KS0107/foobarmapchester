@@ -49,7 +49,7 @@ function loadTimetable(timetable){
         for (let i = 0; i < 7; i++) {
             console.log(element[daysOfWeek[i]]);
             var newCell = newRow.insertCell();
-            if(element[i][1] != undefined){
+            if(element[daysOfWeek[i]] != undefined){
                 newCell.textContent = element[daysOfWeek[i]];
                 newCell.style.backgroundColor = "rgba(31, 31, 31, 0.6)";
             }else{

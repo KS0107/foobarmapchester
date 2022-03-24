@@ -384,7 +384,7 @@ class UserModel extends Database{
         SET Mon = :Mon, Tue = :Tue, Wed = :Wed, Thu = :Thu, Fri = :Fri, Sat = :Sat, Sun = :Sun
         WHERE TimetableID = :timetableid";
     return $this->executeFetchQuery($sql, ["timetableid"=>$timetableid, "Mon"=>$vals["Mon"], "Tue"=>$vals["Tue"], "Wed"=>$vals["Wed"], "Thu"=>$vals["Thu"], 
-    "Fri"=>$vals["Fri"], "Sat"=>$vals["Sat"], "Sun"=>$vals["Sun"]);
+    "Fri"=>$vals["Fri"], "Sat"=>$vals["Sat"], "Sun"=>$vals["Sun"]]);
     }
 
 }

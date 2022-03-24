@@ -456,5 +456,23 @@ class UserController extends BaseController{
         }
         $this->errorHandler($this->strErrorDesc, $respondData, $this->strErrorHeader);
     }
+
+    public function getTimetableAction(){
+        if(strtoupper($this->requestMethod) == "GET"){
+            try{
+                $username = $_POST["Username"];
+                $userModel = new UserModel;
+                $res = $userModel->getTimetable($username);
+                $respondData = json_encode($res);
+            }catch(Error $e){
+                $this->strErrorDesc = $e->getMessage();
+                $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
+            }
+        }else{
+            $this->strErrorDesc = 'Method not supported';
+            $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
+        }
+        $this->errorHandler($this->strErrorDesc, $respondData, $this->strErrorHeader);
+    }
 }
 ?>

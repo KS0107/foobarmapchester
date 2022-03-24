@@ -376,7 +376,7 @@ class UserModel extends Database{
                 AND Date = :time
                 AND Week = :day
                 AND Status = 'accepted'";
-        return $this->executeFetchQuery($sql, ["requesterid"=>$requesterid, "place"=>$place, "time"=>$time, "day"=>$day])[0]["TargetID"];
+        return $this->executeFetchQuery($sql, ["requesterid"=>$requesterid, "place"=>$place, "time"=>$time, "day"=>$day]);
     }
 
     public function checkRequester($targetid, $place, $time, $day){

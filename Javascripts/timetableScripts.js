@@ -33,7 +33,7 @@ function pullTimetable(){
                 console.log(text);
             }  
     xhttp.open("GET", "../restapi/index.php/user/getTimetable");
-    xhttp.send("Username=" + getCookie("username"));
+    xhttp.send("UserID=" + getCookie("username"));
 }
 
 function loadTimetable(timetable){

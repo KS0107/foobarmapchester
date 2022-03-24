@@ -461,7 +461,7 @@ class UserController extends BaseController{
         if(strtoupper($this->requestMethod) == "GET"){
             try{
                 $userModel = new UserModel;
-                $res = $userModel->getTimetable($this->arrQueryStringParams["UserID"]);
+                $res = $userModel->getTimetable($this->arrQueryStringParams["username"]);
                 $respondData = json_encode($res);
             }catch(Error $e){
                 $this->strErrorDesc = $e->getMessage();

@@ -361,12 +361,23 @@ class UserModel extends Database{
         return $this->executeQuery($sql, ["userid"=>$userID]);
    }
 
-   public function getTimetable($UserID){
+   public function getTimetable($username){
         $sql = "SELECT Mon, Tue, Wed, Thu, Fri, Sat, Sun
                 FROM   Timetable
-                WHERE  UserID = :UserID";
-        return $this->executeFetchQuery($sql, ["UserID"=>9]);
+                WHERE  UserID IN (SELECT UserID 
+                FROM User
+                WHERE Username = :username)";
+        return $this->executeFetchQuery($sql, ["username"=>$username]);
    }
+
+   public function updateTimetable($UserID, $row, $vals){
+    $sql = "UPDATE Timetable 
+            SET Mon = :Mon
+            WHERE  TimetableID + :Row IN (SELECT TimetableID
+               FROM Timetable
+               WHERE Name = :locationName)";
+    return $this->executeFetchQuery($sql, ["UserID"=>9, "Mon"=>$vals[0]], "Row"=>$row);
+}
 
 }
 

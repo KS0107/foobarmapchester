@@ -15,6 +15,12 @@ document.addEventListener("DOMContentLoaded", () => {   //Otherwise the onclick 
     }
 });
 
+function getCookie(cookieName){
+    return document.cookie.split('; ')
+    .find(row => row.startsWith(cookieName))
+    .split('=')[1];
+}
+
 function getTimetable(){
     const xhttp = new XMLHttpRequest();
     xhttp.onload = function(){

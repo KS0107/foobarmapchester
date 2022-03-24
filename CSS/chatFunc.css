@@ -131,6 +131,9 @@ label {
   left: 30%;
   background-color: #0c0c0c;
 }
+iframe {
+  border-radius: 20px;
+}
 
 #friendbox, #requestbox{
   width: 99%;

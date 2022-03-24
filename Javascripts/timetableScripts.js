@@ -36,16 +36,18 @@ function getTimetable(){
     xhttp.send();
 }
 
+let timeSlots = ["10am-2pm", "2pm-6pm", "6pm-11pm", "11pm-10am"];
+let daysOfWeek = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 function loadTimetable(timetable){
-    daysOfWeek = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
     console.log(timetable);
     var timetableObj = document.getElementById("timetable");
-    timetable.forEach(element => {
+    for (let i = 0; i < 4; i++) {
+        element = timetable[i];
         console.log(element);
         var newRow = timetableObj.insertRow();
-        newRow.id = "timePlaceHolder";
+        newRow.id = timeSlots[i];
         var newCell = newRow.insertCell();
-        newCell.textContent = "timePlaceHolder";
+        newCell.textContent = timeSlots[i];
         for (let i = 0; i < 7; i++) {
             console.log(element[daysOfWeek[i]]);
             var newCell = newRow.insertCell();
@@ -59,17 +61,19 @@ function loadTimetable(timetable){
                 flipCell(this, element[daysOfWeek[i]]);
             }
         }
-    });
+    }
 }
 
 function saveTimetable(){
     editing = false;
-    var timetable = [["10am-2pm", "1110011"], ["2pm-6pm", "1101100"], ["6pm-11pm", "0110011"], ["11pm-10am", "1001011"]];
+    var timetable = [{"Mon": null,"Tue": null,"Wed": "Cargo","Thu": null,"Fri": null,"Sat": null,"Sun": null},
+    {"Mon": null,"Tue": null,"Wed": "Cargo","Thu": null,"Fri": null,"Sat": null,"Sun": null},
+    {"Mon": null,"Tue": null,"Wed": "Cargo","Thu": null,"Fri": null,"Sat": null,"Sun": null},
+    {"Mon": null,"Tue": null,"Wed": "Cargo","Thu": null,"Fri": null,"Sat": null,"Sun": null}];
     var timetableObj = document.getElementById("timetable");
     timetable.forEach(element => {
-        endStringifiedData = "";
         var timetableRow = document.getElementById(element[0]);
-        for (let i = 1; i < 8; i++) {
+        for (let i = 0; i < 7; i++) {
             if(timetableRow.childNodes[i].textContent != "Free"){
                 endStringifiedData += "1";
             }else{
@@ -79,6 +83,18 @@ function saveTimetable(){
         element[1] = endStringifiedData;
         document.cookie = element[0].replace("-", "")+"="+element[1];
     });
+}
+
+function postTimetable(timetable){
+    const xhttp = new XMLHttpRequest();
+    xhttp.onload = function(){
+                console.log(this.responseText);
+                text = JSON.parse(this.responseText);
+                loadTimetable(text);
+                console.log(text);
+            }  
+    xhttp.open("GET", "../restapi/index.php/user/getTimetable?UserID=9");
+    xhttp.send();
 }
 
 var editing = false;

@@ -341,8 +341,8 @@ class UserModel extends Database{
                 WHERE  UserID = 9";
         try{
             return $this->executeFetchQuery($sql, ["UserID"=>$UserID]);
-        }catch(){
-            return "Error";
+        }catch(Error $e){
+            return $e;
         }
    }
 

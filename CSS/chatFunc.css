@@ -142,13 +142,14 @@ iframe {
 
 #close1, #close2{
   position: absolute;
-  right: 0;
-  top: 0;
+  right: 6px;
+  top: 6px;
   display: inline-block;
   background-image: url(../images/close_icon.png);
   background-size: cover;
   width: 30px;
   height: 30px;
+  filter: invert(100%)
 }
 
 #friend-bar{
@@ -168,6 +169,7 @@ iframe {
   width: 35px;
   height: 35px;
   background-image: url(../images/add-friend-icon.png);
+  filter: invert(100%);
   background-size: cover;
 }
 

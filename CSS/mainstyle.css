@@ -16,6 +16,12 @@ h1 {
     font-size: 60px;
     font-weight: 600;
 }
+option {
+    border-radius: 2px;
+    background-color: rgb(31,31,31);
+    font-family: 'Montserrat';
+    color: white;
+}
 button {
     background-color: rgb(0, 0, 0);
     border-radius: 10px;

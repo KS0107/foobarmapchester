@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {   //Otherwise the onclick is assigned before the DOM is loaded
-    //window.onload = getTimetable;
 
     const editTimetableButton = document.getElementById("btnET");
     if(editTimetableButton != null){
@@ -35,19 +34,6 @@ function getTimetable(){
             }  
     xhttp.open("GET", "../restapi/index.php/user/getTimetable?username=" + getCookie("username"));
     xhttp.send();
-//     const xhttp = new XMLHttpRequest();
-//     xhttp.onload = function(){
-//         console.log(this.responseText);
-//         text = JSON.parse(this.responseText);
-//         loadTimetable(text);
-//         console.log(text);
-//     }
-//     xhttp.open("GET","../restapi/index.php/user/pullTimetable?username=" + getCookie("username"));
-//     //xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-//     console.log(document.cookie.split('; ')
-//     .find(row => row.startsWith("username"))
-//     .split('=')[1]);
-//     xhttp.send();
 }
 
 function loadTimetable(timetable){

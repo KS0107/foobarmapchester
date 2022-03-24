@@ -394,7 +394,7 @@ class UserController extends BaseController{
                     case "11am-10am": $time = 4; break;
                 }
                 $day = $_POST["day"];
-                if((!is_null($userModel->verifyEvent($userID, $time, $day)[0][$day]) && !is_null($userModel->verifyEvent($requesterID, $time, $day)[0][$day])) || ($userModel->verifyEvent($userID, $time, $day)[0][$day] != $place && $userModel->verifyEvent($requesterID, $time, $day)[0][$day] != $place)){
+                if((!is_null($userModel->verifyEvent($userID, $time, $day)[0][$day]) && !is_null($userModel->verifyEvent($requesterID, $time, $day)[0][$day])) || ($userModel->verifyEvent($userID, $time, $day)[0][$day] != $place && $userModel->verifyEvent($requesterID, $time, $day)[0][$day] != $palce)){
                     //event already hold for the time
                     $respondData = "you or your friends already have an event at the time";
                 }else{

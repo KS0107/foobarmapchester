@@ -478,9 +478,10 @@ class UserController extends BaseController{
         if(strtoupper($this->requestMethod) == "PATCH"){
             try{
                 $userModel = new UserModel;
+                $timetable = $_PATCH["Timetable"];
                 $timetableids = $userModel->getTimetableIDs($this->arrQueryStringParams["username"]);
-                $userModel->updateTimetable(22, ["TestLoc"]);
-                $respondData = json_encode($timetableids[0]["TimetableID"]);
+                $userModel->updateTimetable($timetableids[0]["TimetableID"], ["TestLoc"]);
+                $respondData = json_encode($timetable);
             }catch(Error $e){
                 $this->strErrorDesc = $e->getMessage();
                 $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';

@@ -37,6 +37,7 @@ function getTimetable(){
 }
 
 function loadTimetable(timetable){
+    daysOfWeek = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
     console.log(timetable);
     var timetableObj = document.getElementById("timetable");
     timetable.forEach(element => {
@@ -46,10 +47,10 @@ function loadTimetable(timetable){
         var newCell = newRow.insertCell();
         newCell.textContent = "timePlaceHolder";
         for (let i = 0; i < 7; i++) {
-            console.log(element[i][1]);
+            console.log(element[daysOfWeek[i]]);
             var newCell = newRow.insertCell();
-            if(element[i][1] != undefined){
-                newCell.textContent = element[i][1];
+            if(element[daysOfWeek[i]] != undefined){
+                newCell.textContent = element[daysOfWeek[i]];
                 newCell.style.backgroundColor = "rgba(31, 31, 31, 0.6)";
             }else{
                 newCell.textContent = "Free";

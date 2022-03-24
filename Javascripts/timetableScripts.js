@@ -84,7 +84,7 @@ function saveTimetable(){
 var editing = false;
 function flipCell(cell, status){
     if(editing){
-        if(status != "null"){
+        if(status != null){
             cell.textContent = "Free";
             cell.style.backgroundColor = "rgba(117, 117, 117, 0.6)";
             cell.onclick = function(){

@@ -70,8 +70,9 @@ function saveTimetable(){
     var timetableObj = document.getElementById("timetable");
     for (let i = 0; i < 4; i++) {
         element = timetable[i];
+        console.log(element);
         var timetableRow = document.getElementById(timeSlots[i]);
-        for (let j = 0; i < 7; i++) {
+        for (let j = 0; j < 7; j++) {
             if(timetableRow.childNodes[j].textContent != "Free"){
                 timetable[daysOfWeek[j]] = timetableRow.childNodes[j].textContent;
             }else{

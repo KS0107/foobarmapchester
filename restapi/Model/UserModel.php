@@ -345,6 +345,17 @@ class UserModel extends Database{
         return $this->executeFetchQuery($sql, ["locationName"=>$locationName]);
    }
 
+   public function showReviews1($locationName){
+    $sql = "SELECT date,rating,review
+            FROM Reviews
+            WHERE LocationID IN 
+            (SELECT LocationID
+            FROM Location
+            WHERE Name = :locationName)";
+
+     return $this->executeFetchQuery($sql, ["locationName"=>$locationName]);
+}
+
    public function showPlaces(){
         $sql = "SELECT Name
                FROM Location";

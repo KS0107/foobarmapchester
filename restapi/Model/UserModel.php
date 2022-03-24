@@ -325,7 +325,7 @@ class UserModel extends Database{
    }
 
    public function initTimetable($userID){
-       $sql = "INSERT INTO NewTimetable (UserID, Time)
+       $sql = "INSERT INTO Timetable (UserID, Time)
                 VALUES 
                 (:userid, 1),
                 (:userid, 2),
@@ -338,7 +338,7 @@ class UserModel extends Database{
         $UserID = getID($username);
         $sql = "SELECT Mon, Tue, Wed, Thu, Fri, Sat, Sun
                 FROM   Timetable
-                WHERE  UserID = :username";
+                WHERE  UserID = :UserID";
         return $this->executeFetchQuery($sql, ["UserID"=>$UserID]);
     }
 

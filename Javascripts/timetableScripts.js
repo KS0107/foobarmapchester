@@ -15,8 +15,19 @@ document.addEventListener("DOMContentLoaded", () => {   //Otherwise the onclick 
     }
 });
 
-function loadTimetable(){
-    let timetable = getTimetable();
+function getTimetable(){
+    const xhttp = new XMLHttpRequest();
+    xhttp.onload = function(){
+        text = JSON.parse(this.responseText);
+        loadTimetable(text);
+        console.log(text);
+    }
+    xhttp.open("POST","../restapi/index.php/user/pullTimetable");
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send(document.cookie.split('; ').find(row => row.startsWith("username")));
+}
+
+function loadTimetable(timetable){
     console.log(timetable);
     var timetableObj = document.getElementById("timetable");
     timetable.forEach(element => {

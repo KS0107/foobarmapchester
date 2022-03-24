@@ -45,6 +45,7 @@ function loadTimetable(timetable){
         var newCell = newRow.insertCell();
         newCell.textContent = "timePlaceHolder";
         for (let i = 0; i < 7; i++) {
+            console.log(element[i]);
             var newCell = newRow.insertCell();
             if(element[i] != null){
                 newCell.textContent = element[i];

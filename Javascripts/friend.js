@@ -96,14 +96,14 @@ loadPlaces();
 
 // Private and Public requests
 
-function eventYes(requestmsgID, place, date, day){
+function eventYes(requesterID, requestmsgID, place, time, day){
     const xhttp = new XMLHttpRequest();
     xhttp.onload = function(){
         alert(this.responseText);
     }
     xhttp.open("POST", "../restapi/index.php/user/addEvent");
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send("requestmsgID=" + requestmsgID + "&place=" + place + "&time=" + date + "&day=" + day);
+    xhttp.send("requesterID=" + requesterID + "&requestmsgID=" + requestmsgID + "&place=" + place + "&time=" + time + "&day=" + day);
 }
 
 function eventNo(requestmsgID){
@@ -166,7 +166,7 @@ function retrieveEventRequest(){
                                     "<td>" + response[1][i].Status + "</td>"+
                                     "<td>" + 
                                         "<div id=" + response[1][i].RequestmsgID + ">" +
-                                            "<div>" + "<button onclick=eventYes('"  +  response[1][i].RequestmsgID + "','" + response[1][i].Place + "','" + response[1][i].Date + "','" + response[1][i].Week + "')>Accept</button>" + "</div>" +
+                                            "<div>" + "<button onclick=eventYes(\'"  + response[1][i].requesterID + "','" + response[1][i].RequestmsgID + "','" + encodeURIComponent(response[1][i].Place) + "','" + response[1][i].Date + "','" + response[1][i].Week +  "')>Accept</button>" + "</div>" +
                                             "<div>" + "<button onclick=eventNo('"  +  response[1][i].RequestmsgID + "')>Decline</button>" + "</div>" +
                                         "</div>" +
                                     "</td>"+

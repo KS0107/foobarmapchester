@@ -1,3 +1,9 @@
 .wrapper{
     text-align: center;
 }
+body {
+    color: white;
+}
+label {
+    color: white;
+}

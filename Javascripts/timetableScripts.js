@@ -74,7 +74,7 @@ function saveTimetable(){
         var timetableRow = document.getElementById(timeSlots[i]);
         console.log(timetableRow);
         for (let j = 0; j < 7; j++) {
-            if(timetableRow.childNodes[j].textContent != "Free"){
+            if(timetableRow.childNodes[j+1].textContent != "Free"){
                 timetable[i][daysOfWeek[j]] = timetableRow.childNodes[j+1].textContent;
             }else{
                 timetable[i][daysOfWeek[j]] = null;

@@ -39,26 +39,23 @@ function getTimetable(){
 let timeSlots = ["10am-2pm", "2pm-6pm", "6pm-11pm", "11pm-10am"];
 let daysOfWeek = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 function loadTimetable(timetable){
-    console.log(timetable);
     var timetableObj = document.getElementById("timetable");
     for (let i = 0; i < 4; i++) {
         element = timetable[i];
-        console.log(element);
         var newRow = timetableObj.insertRow();
         newRow.id = timeSlots[i];
         var newCell = newRow.insertCell();
         newCell.textContent = timeSlots[i];
-        for (let i = 0; i < 7; i++) {
-            console.log(element[daysOfWeek[i]]);
+        for (let j = 0; j < 7; j++) {
             var newCell = newRow.insertCell();
-            if(element[daysOfWeek[i]] != undefined){
-                newCell.textContent = element[daysOfWeek[i]];
+            if(element[daysOfWeek[j]] != null){
+                newCell.textContent = element[daysOfWeek[j]];
                 newCell.style.backgroundColor = "rgba(31, 31, 31, 0.6)";
             }else{
                 newCell.textContent = "Free";
                 newCell.style.backgroundColor = "rgba(117, 117, 117, 0.6)";
             }newCell.onclick = function(){
-                flipCell(this, element[daysOfWeek[i]]);
+                flipCell(this, element[daysOfWeek[j]]);
             }
         }
     }
@@ -71,18 +68,18 @@ function saveTimetable(){
     {"Mon": null,"Tue": null,"Wed": "Cargo","Thu": null,"Fri": null,"Sat": null,"Sun": null},
     {"Mon": null,"Tue": null,"Wed": "Cargo","Thu": null,"Fri": null,"Sat": null,"Sun": null}];
     var timetableObj = document.getElementById("timetable");
-    timetable.forEach(element => {
-        var timetableRow = document.getElementById(element[0]);
-        for (let i = 0; i < 7; i++) {
-            if(timetableRow.childNodes[i].textContent != "Free"){
-                endStringifiedData += "1";
+    for (let i = 0; i < 4; i++) {
+        element = timetable[i];
+        var timetableRow = document.getElementById(timeSlots[i]);
+        for (let j = 0; i < 7; i++) {
+            if(timetableRow.childNodes[j].textContent != "Free"){
+                timetable[daysOfWeek[j]] = timetableRow.childNodes[j].textContent;
             }else{
-                endStringifiedData += "0";
+                timetable[daysOfWeek[j]] = null;
             }
         }
-        element[1] = endStringifiedData;
-        document.cookie = element[0].replace("-", "")+"="+element[1];
-    });
+        console.log(timetable);
+    }
 }
 
 function postTimetable(timetable){

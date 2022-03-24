@@ -29,7 +29,7 @@ function getTimetable(){
                 loadTimetable(text);
                 console.log(text);
             }  
-    xhttp.open("GET", "../restapi/index.php/user/getFriend?username=" + getCookie("username"));
+    xhttp.open("GET", "../restapi/index.php/user/pullTimetable?username=" + getCookie("username"));
     xhttp.send();
 //     const xhttp = new XMLHttpRequest();
 //     xhttp.onload = function(){

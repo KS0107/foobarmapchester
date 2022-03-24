@@ -70,9 +70,7 @@ function saveTimetable(){
     var timetableObj = document.getElementById("timetable");
     for (let i = 0; i < 4; i++) {
         element = timetable[i];
-        console.log(element);
         var timetableRow = document.getElementById(timeSlots[i]);
-        console.log(timetableRow);
         for (let j = 0; j < 7; j++) {
             if(timetableRow.childNodes[j+1].textContent != "Free"){
                 timetable[i][daysOfWeek[j]] = timetableRow.childNodes[j+1].textContent;
@@ -80,9 +78,8 @@ function saveTimetable(){
                 timetable[i][daysOfWeek[j]] = null;
             }
         }
-        console.log(timetable);
-        postTimetable(timetable);
     }
+    postTimetable(timetable);
 }
 
 function postTimetable(timetable){
@@ -93,7 +90,7 @@ function postTimetable(timetable){
         loadTimetable(text);
         console.log(text);
     }  
-    xhttp.open("GET", "../restapi/index.php/user/updateTimetable?username="+getCookie("username"));
+    xhttp.open("PATCH", "../restapi/index.php/user/updateTimetable?username="+getCookie("username"));
     xhttp.send();
 }
 

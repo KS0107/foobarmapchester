@@ -361,14 +361,34 @@ class UserModel extends Database{
         return $this->executeQuery($sql, ["userid"=>$userID]);
    }
 
-   public function getTimetable($username){
+   public function getTimetable($userID){
         $sql = "SELECT Mon, Tue, Wed, Thu, Fri, Sat, Sun
                 FROM   Timetable
-                WHERE  UserID IN (SELECT UserID 
-                FROM User
-                WHERE Username = :username)";
-        return $this->executeFetchQuery($sql, ["username"=>$username]);
+                WHERE  UserID = :userID";
+        return $this->executeFetchQuery($sql, ["userID"=>$userID]);
    }
+
+   public function checkReceiver($requesterid, $place, $time, $day){
+        $sql = "SELECT TargetID 
+                FROM Requestmsg 
+                WHERE RequesterID = :requesterid
+                AND Place = :place
+                AND Date = :time
+                AND Week = :day
+                AND Status = accepted";
+        return $this->executeFetchQuery($sql, ["requesterid"=>$requesterid, "place"=>$place, "time"=>$time, "day"=>$day])[0]["TargetID"];
+    }
+
+    public function checkRequester($targetid, $place, $time, $day){
+        $sql = "SELECT RequesterID 
+                FROM Requestmsg 
+                WHERE TargetID = :targetid
+                AND Place = :place
+                AND Date = :time
+                AND Week = :day
+                AND Status = accepted";
+        return $this->executeFetchQuery($sql, ["targetid"=>$targetid, "place"=>$place, "time"=>$time, "day"=>$day]);
+    }
 
    public function getTimetableIDs($username){
     $sql = "SELECT TimetableID

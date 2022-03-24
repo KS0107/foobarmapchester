@@ -461,8 +461,17 @@ class UserController extends BaseController{
         if(strtoupper($this->requestMethod) == "GET"){
             try{
                 $userModel = new UserModel;
-                $res = $userModel->getTimetable($this->arrQueryStringParams["username"]);
-                $respondData = json_encode($res);
+                $userID = $userModel->getID($this->arrQueryStringParams["username"])
+                $timetable = $userModel->getTimetable($userID);
+                foreach ($timetable as &$value) {
+                    foreach ($value as &$value2){
+                        if($value2 != null){
+                            $receiver = $userModel->checkReceiver($userID, $value2, "10am-2pm", "Thu")
+                            $value2 = $value2+$receiver;
+                        }
+                    }
+                }
+                $respondData = json_encode($timetable);
             }catch(Error $e){
                 $this->strErrorDesc = $e->getMessage();
                 $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';

@@ -40,6 +40,7 @@ function loadTimetable(timetable){
     console.log(timetable);
     var timetableObj = document.getElementById("timetable");
     timetable.forEach(element => {
+        console.log(element);
         var newRow = timetableObj.insertRow();
         newRow.id = "timePlaceHolder";
         var newCell = newRow.insertCell();

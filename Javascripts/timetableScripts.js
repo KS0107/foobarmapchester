@@ -1,5 +1,4 @@
 document.addEventListener("DOMContentLoaded", () => {   //Otherwise the onclick is assigned before the DOM is loaded
-    window.onload = loadTimetable;
 
     const editTimetableButton = document.getElementById("btnET");
     if(editTimetableButton != null){
@@ -16,7 +15,7 @@ document.addEventListener("DOMContentLoaded", () => {   //Otherwise the onclick 
 });
 
 $(document).ready(function(){
-    //getTimetable();
+    getTimetable();
 });
 
 function getCookie(cookieName){
@@ -37,8 +36,7 @@ function getTimetable(){
     xhttp.send();
 }
 
-function loadTimetable(){
-    let timetable = getTimetable();
+function loadTimetable(timetable){
     console.log(timetable);
     var timetableObj = document.getElementById("timetable");
     timetable.forEach(element => {

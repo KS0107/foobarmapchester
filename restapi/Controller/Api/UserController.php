@@ -478,7 +478,7 @@ class UserController extends BaseController{
         if(strtoupper($this->requestMethod) == "PATCH"){
             try{
                 $userModel = new UserModel;
-                $timetableids = $userModel->getTimetableIDs($this->arrQueryStringParams["username"])
+                $timetableids = $userModel->getTimetableIDs($this->arrQueryStringParams["username"]);
                 $userModel->updateTimetable($timetableids[0], 0, ["Cargo"]);
                 $respondData = "Successful";
             }catch(Error $e){

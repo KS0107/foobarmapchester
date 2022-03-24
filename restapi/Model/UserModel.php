@@ -370,15 +370,20 @@ class UserModel extends Database{
         return $this->executeFetchQuery($sql, ["username"=>$username]);
    }
 
-   public function updateTimetable($username, $row, $vals){
+   public function getTimetableIDs($username){
+    $sql = "SELECT TimetableID
+            FROM   Timetable
+            WHERE  UserID IN (SELECT UserID 
+            FROM User
+            WHERE Username = :username)";
+    return $this->executeFetchQuery($sql, ["username"=>$username]);
+    }
+   
+   public function updateTimetable($timetableid, $vals){
     $sql = "UPDATE Timetable 
         SET Mon = :Mon
-        WHERE  UserID IN (SELECT UserID 
-        FROM User
-        WHERE Username = :username)";
-            // WHERE  TimetableID IN (SELECT TimetableID
-            // FROM Timetable
-    return $this->executeFetchQuery($sql, ["username"=>$username, "Mon"=>$vals[0]]);
+        WHERE TimetableID = :timetableid";
+    return $this->executeFetchQuery($sql, ["timetableid"=>$timetableid, "Mon"=>$vals[0]]);
     }
 
 }

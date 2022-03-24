@@ -39,10 +39,10 @@
 			</tr>
 		</table>
 		<button id="btnET">Edit</button>
-		<!-- <button id="btnST">Save</button> -->
-		<form action="timetable.php" method="post">
+		<button id="btnST">Save</button>
+		<!-- <form action="timetable.php" method="post">
     		<input id="btnST" type="submit" name="save" value="Save" />
-		</form>
+		</form> -->
 		<div id="showBox"></div>
 	</div>
 

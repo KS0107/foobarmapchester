@@ -18,6 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {   //Otherwise the onclick 
 function getTimetable(){
     const xhttp = new XMLHttpRequest();
     xhttp.onload = function(){
+        console.log(text);
         text = JSON.parse(this.responseText);
         loadTimetable(text);
         console.log(text);

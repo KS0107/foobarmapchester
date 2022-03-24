@@ -361,12 +361,11 @@ class UserModel extends Database{
         return $this->executeQuery($sql, ["userid"=>$userID]);
    }
 
-   public function getTimetable($username){
-        $UserID = getID($username);
+   public function getTimetable($UserID){
         $sql = "SELECT Mon, Tue, Wed, Thu, Fri, Sat, Sun
                 FROM   Timetable
                 WHERE  UserID = :UserID";
-        return $this->executeFetchQuery($sql, ["UserID"=>$UserID]);
+        return $this->executeFetchQuery($sql, ["UserID"=>9]);
    }
 
 }

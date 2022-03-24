@@ -460,9 +460,9 @@ class UserController extends BaseController{
     public function getTimetableAction(){
         if(strtoupper($this->requestMethod) == "GET"){
             try{
-                $username = $_POST["Username"];
+                $userID = $_POST["UserID"];
                 $userModel = new UserModel;
-                $res = $userModel->getTimetable($username);
+                $res = $userModel->getTimetable($userID);
                 $respondData = json_encode($res);
             }catch(Error $e){
                 $this->strErrorDesc = $e->getMessage();

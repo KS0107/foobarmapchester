@@ -479,7 +479,7 @@ class UserController extends BaseController{
             try{
                 $userModel = new UserModel;
                 $timetableids = $userModel->getTimetableIDs($this->arrQueryStringParams["username"]);
-                $userModel->updateTimetable($timetableids[0], 0, ["Cargo"]);
+                $userModel->updateTimetable($timetableids[0], ["Cargo"]);
                 $respondData = $timetableids;
             }catch(Error $e){
                 $this->strErrorDesc = $e->getMessage();

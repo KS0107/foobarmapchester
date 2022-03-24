@@ -278,17 +278,6 @@ function getMarkers(){
     return markers;
 }
 
-function getTimetable(){
-    const xhttp = new XMLHttpRequest();
-    xhttp.onload = function(){
-        text = JSON.parse(this.responseText);
-        console.log(text);
-    }
-    xhttp.open("POST","../restapi/index.php/user/pullTimetable");
-    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send(document.cookie.split('; ').find(row => row.startsWith("username")));
-}
-
 // function getTimetable(){
 //     let timetable = defaultPlaceholderTimetable;
 //     for (let i = 0; i < 4; i++) {

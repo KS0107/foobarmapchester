@@ -373,11 +373,11 @@ class UserModel extends Database{
    public function updateTimetable($username, $row, $vals){
     $sql = "UPDATE Timetable 
             SET Mon = :Mon
-            WHERE  TimetableID + :Row IN (SELECT TimetableID
+            WHERE  TimetableID IN (SELECT TimetableID
             FROM Timetable
             WHERE  UserID IN (SELECT UserID 
             FROM User
-            WHERE Username = :username))";
+            WHERE Username = :username)) + :Row";
     return $this->executeFetchQuery($sql, ["username"=>$username, "Row"=>$row, "Mon"=>$vals[0]]);
 }
 

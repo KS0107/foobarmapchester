@@ -46,8 +46,8 @@ function loadTimetable(timetable){
         newCell.textContent = element[0];
         for (let i = 0; i < 7; i++) {
             var newCell = newRow.insertCell();
-            if(element[1][i] == 1){
-                newCell.textContent = "Busy";
+            if(element[i] != null){
+                newCell.textContent = element[i];
                 newCell.style.backgroundColor = "rgba(31, 31, 31, 0.6)";
             }else{
                 newCell.textContent = "Free";

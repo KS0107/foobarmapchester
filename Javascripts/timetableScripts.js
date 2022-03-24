@@ -87,7 +87,7 @@ function postTimetable(timetable){
     xhttp.onload = function(){
         console.log(this.responseText);
     }  
-    xhttp.open("PATCH", "../restapi/index.php/user/updateTimetable?username="+getCookie("username"));
+    xhttp.open("POST", "../restapi/index.php/user/updateTimetable?username="+getCookie("username"));
     xhttp.send("Timetable=" + timetable);
 }
 

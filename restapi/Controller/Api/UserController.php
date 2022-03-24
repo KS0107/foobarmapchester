@@ -475,7 +475,7 @@ class UserController extends BaseController{
     }
 
     public function updateTimetableAction(){
-        if(strtoupper($this->requestMethod) == "PATCH"){
+        if(strtoupper($this->requestMethod) == "POST"){
             try{
                 $userModel = new UserModel;
                 $timetable = $_POST["Timetable"];

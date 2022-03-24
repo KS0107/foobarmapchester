@@ -279,13 +279,24 @@ function getMarkers(){
 }
 
 function getTimetable(){
-    let timetable = defaultPlaceholderTimetable;
-    for (let i = 0; i < 4; i++) {
-        let cookieValue = document.cookie.split('; ').find(row => row.startsWith(timetable[i][0].replace("-", "")+'='));
-        if(cookieValue != undefined){
-            cookieValueSplit = cookieValue.split('=')[1];
-            timetable[i][1] = cookieValueSplit;
-        }
+    const xhttp = new XMLHttpRequest();
+    xhttp.onload = function(){
+        text = JSON.parse(this.responseText);
+        console.log(text);
     }
-    return timetable;
+    xhttp.open("POST","../restapi/index.php/user/pullTimetable");
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send(document.cookie.split('; ').find(row => row.startsWith("username")));
 }
+
+// function getTimetable(){
+//     let timetable = defaultPlaceholderTimetable;
+//     for (let i = 0; i < 4; i++) {
+//         let cookieValue = document.cookie.split('; ').find(row => row.startsWith(timetable[i][0].replace("-", "")+'='));
+//         if(cookieValue != undefined){
+//             cookieValueSplit = cookieValue.split('=')[1];
+//             timetable[i][1] = cookieValueSplit;
+//         }
+//     }
+//     return timetable;
+// }

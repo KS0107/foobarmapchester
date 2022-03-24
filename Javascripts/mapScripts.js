@@ -72,15 +72,15 @@ function displayReviews(reviews){
             console.log(reviewLineByLine)
             foundSpace = false;
             decrement = 0;
-            while(!foundSpace){
-                if(reviewLineByLine[i][30-decrement] == " "){
-                    console.log(reviewLineByLine[i][30-decrement])
-                    reviewLineByLine[i] = reviewLineByLine[i].slice(0, 30-decrement) + "\n" + reviewLineByLine[i].slice(30-decrement);
-                    foundSpace = true;
-                }else{
-                    decrement ++;
-                }
-            }
+            // while(!foundSpace){
+            //     if(reviewLineByLine[i][30-decrement] == " "){
+            //         console.log(reviewLineByLine[i][30-decrement])
+            //         reviewLineByLine[i] = reviewLineByLine[i].slice(0, 30-decrement) + "\n" + reviewLineByLine[i].slice(30-decrement);
+            //         foundSpace = true;
+            //     }else{
+            //         decrement ++;
+            //     }
+            // }
             console.log(reviewLineByLine)
             reviewTextTemp = ""
             reviewLineByLine.forEach(element => {

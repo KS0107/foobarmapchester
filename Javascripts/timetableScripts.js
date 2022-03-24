@@ -56,7 +56,7 @@ function loadTimetable(timetable){
                 newCell.textContent = "Free";
                 newCell.style.backgroundColor = "rgba(117, 117, 117, 0.6)";
             }newCell.onclick = function(){
-                flipCell(this, element[1][i]);
+                flipCell(this, element[daysOfWeek[i]]);
             }
         }
     });
@@ -70,7 +70,7 @@ function saveTimetable(){
         endStringifiedData = "";
         var timetableRow = document.getElementById(element[0]);
         for (let i = 1; i < 8; i++) {
-            if(timetableRow.childNodes[i].textContent == "Busy"){
+            if(timetableRow.childNodes[i].textContent != "Free"){
                 endStringifiedData += "1";
             }else{
                 endStringifiedData += "0";
@@ -84,17 +84,17 @@ function saveTimetable(){
 var editing = false;
 function flipCell(cell, status){
     if(editing){
-        if(status == 0){
-            cell.textContent = "Busy";
-            cell.style.backgroundColor = "rgba(31, 31, 31, 0.6)";
-            cell.onclick = function(){
-                flipCell(cell, 1);
-            }
-        }else{
+        if(status != "null"){
             cell.textContent = "Free";
             cell.style.backgroundColor = "rgba(117, 117, 117, 0.6)";
             cell.onclick = function(){
-                flipCell(cell, 0);
+                flipCell(cell, null);
+            }
+        }else{
+            cell.textContent = "Other";
+            cell.style.backgroundColor = "rgba(31, 31, 31, 0.6)";
+            cell.onclick = function(){
+                flipCell(cell, "Other");
             }
         }
     }

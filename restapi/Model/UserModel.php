@@ -88,7 +88,7 @@ class UserModel extends Database{
                 FROM Requestmsg
                 WHERE
                 Type = :type AND
-                Place = :place AND
+                Place <> :place AND
                 Date = :date AND
                 Week = :day AND
                 (TargetID = :userid OR

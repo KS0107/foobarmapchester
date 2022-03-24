@@ -40,8 +40,9 @@
 			<form autocomplete="off" name="message" method="post" style="display: flex;">
 				<span><input autocomplete="false" id="input" type="text"></input></span>
 				<div><button id="send">Send</button></div>
-				<button id="request">Make a request</button>
+				
 			</form>
+			<button id="request">Make a request</button>
 		</div>
 	</div>
 	

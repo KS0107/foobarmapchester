@@ -376,7 +376,7 @@ class UserModel extends Database{
             WHERE  TimetableID + :Row IN (SELECT TimetableID
                FROM Timetable
                WHERE Name = :locationName)";
-    return $this->executeFetchQuery($sql, ["UserID"=>9, "Mon"=>$vals[0]], "Row"=>$row);
+    return $this->executeFetchQuery($sql, ["UserID"=>9]);
 }
 
 }

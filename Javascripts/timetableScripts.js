@@ -41,7 +41,7 @@ function loadTimetable(timetable){
     var timetableObj = document.getElementById("timetable");
     timetable.forEach(element => {
         var newRow = timetableObj.insertRow();
-        newRow.id = element[0];
+        newRow.id = "timePlaceHolder";
         var newCell = newRow.insertCell();
         newCell.textContent = element[0];
         for (let i = 0; i < 7; i++) {

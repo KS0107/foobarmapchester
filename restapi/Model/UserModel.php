@@ -351,7 +351,7 @@ class UserModel extends Database{
        $UserID = getID($username);
        $sql = "SELECT Mon, Tue, Wed, Thu, Fri, Sat, Sun
                 FROM   Timetable
-                WHERE  UserID = :UserID";
+                WHERE  UserID = 9";
         return $this->executeFetchQuery($sql, ["UserID"=>$UserID]);
    }
 

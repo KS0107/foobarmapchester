@@ -142,8 +142,8 @@ iframe {
 
 #close1, #close2{
   position: absolute;
-  right: 3px;
-  top: 3px;
+  right: 6px;
+  top: 6px;
   display: inline-block;
   background-image: url(../images/close_icon.png);
   background-size: cover;

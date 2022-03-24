@@ -343,7 +343,7 @@ class UserController extends BaseController{
                         $userModel->storeRequestmsg($type, $place, $date, $day, 0, $requesterid);
                     }
                 }
-                if(!empty($respondData2)){$respondData = "made successfully for " . $respondData2;}
+                if(!empty($respondData2)){$respondData = "made successfully for " . $respondData2 . $userModel->verifyRequestmsg($type, $place, $date, $day, $targetid, $requesterid)[0]["Status"];}
                 if(!empty($respondData1)){$respondData = $respondData . " the request already exists for " . $respondData1;}
                 $respondData = json_encode($respondData);
             }catch(Error $e){
@@ -382,40 +382,27 @@ class UserController extends BaseController{
         if(strtoupper($this->requestMethod) == "POST"){
             try{
                 $userModel = new UserModel;
-                $requesterID = $_POST["requesterID"];
                 $requestmsgID = $_POST["requestmsgID"];
                 $userID = $userModel->getID($_COOKIE["username"]);
                 $place = $_POST["place"];
-                $date = $_POST["time"];
-                switch($date){
+                $time = $_POST["time"];
+                switch($time){
                     case "10am-2pm": $time = 1; break;
                     case "2pm-6pm": $time = 2; break;
                     case "6pm-11pm": $time = 3; break;
                     case "11am-10am": $time = 4; break;
                 }
                 $day = $_POST["day"];
-                if(!is_null($userModel->verifyEvent($userID, $time, $day)[0][$day]) && !is_null($userModel->verifyEvent($requesterID, $time, $day)[0][$day])){
+                if(!is_null($userModel->verifyEvent($userID, $time, $day)[0][$day])){
                     //event already hold for the time
-                    $respondData = "you or your friend already have an event at the time";
+                    $respondData = "you already have an event at the time";
                 }else{
                     // add event to it
                     $userModel->addEvent($userID, $place, $time, $day);
-                    $userModel->addEvent($requesterID, $place, $time, $day);
                     //update other request with the same as decline response or busy status
                     $userModel->updateStatus($requestmsgID, "accepted");
-                    $respondData = "you just made an event to timetable!!";
-
-                    // update other requests' status as busy for those having the same date
-                    // get the requestmsgID by userid
-                    $status = "No Response"; // get the requestmsg which not responded
-                    $requestmsg = $userModel->getRequestmsgID("private", $date, $day, $userID, $status);
-                    for($i = 0; $i < sizeof($requestmsg); $i++){
-                        $userModel->updateStatus($requestmsg[$i]["RequestmsgID"], "busy");
-                    }
-                    $requestmsg = $userModel->getRequestmsgID("private", $date, $day, $requesterID, $status);
-                    for($i = 0; $i < sizeof($requestmsg); $i++){
-                        $userModel->updateStatus($requestmsg[$i]["RequestmsgID"], "busy");
-                    }
+                    $respondData = "you made an event to timetable!!";
+                    
                 }
                 
                 

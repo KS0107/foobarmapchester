@@ -481,7 +481,7 @@ class UserController extends BaseController{
                 $timetableids = $userModel->getTimetableIDs($this->arrQueryStringParams["username"]);
                 $timetableids = json_encode($timetableids);
                 $userModel->updateTimetable(22, ["TestLoc"]);
-                $respondData = $timetableids[0];
+                $respondData = $timetableids;
             }catch(Error $e){
                 $this->strErrorDesc = $e->getMessage();
                 $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';

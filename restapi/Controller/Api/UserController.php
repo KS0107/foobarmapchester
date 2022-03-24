@@ -489,6 +489,9 @@ class UserController extends BaseController{
                 unset($value);
                 $timetableids = $userModel->getTimetableIDs($_POST["username"]);
                 $userModel->updateTimetable($timetableids[0]["TimetableID"], $timetable[0]);
+                $userModel->updateTimetable($timetableids[1]["TimetableID"], $timetable[1]);
+                $userModel->updateTimetable($timetableids[2]["TimetableID"], $timetable[2]);
+                $userModel->updateTimetable($timetableids[3]["TimetableID"], $timetable[3]);
                 $respondData = json_encode($timetable);
             }catch(Error $e){
                 $this->strErrorDesc = $e->getMessage();

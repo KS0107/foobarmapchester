@@ -6,6 +6,7 @@
 	<title>Document</title>
 	<link rel="stylesheet" href="../CSS/mainstyle.css">
 	<link rel="stylesheet" href="../CSS/timetable.css">
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="../Javascripts/generalScripts.js"></script>
 	<script src="../Javascripts/timetableScripts.js"></script>
 	<script src="../Javascripts/data.js"></script>

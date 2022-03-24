@@ -76,6 +76,7 @@ label {
   position: absolute;
   left: 0em;
   top: 21.6em;
+  margin-top: 50px;
 }
 
 .flex-container > div{

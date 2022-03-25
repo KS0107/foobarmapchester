@@ -469,7 +469,7 @@ class UserController extends BaseController{
                             $receiver = $userModel->checkReceiver($userID, $value2, "10am-2pm", "Thu");
                             try{
                                 $value2 = $value2 . json_encode($receiver[0]["TargetID"]);
-                            }catch{
+                            }catch(){
                                 $value2 = $value2;
                             }
                         }

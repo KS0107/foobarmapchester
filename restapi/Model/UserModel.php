@@ -250,6 +250,13 @@ class UserModel extends Database{
         }
     }
 
+    public function updateUserStatus($userid, $status){
+        $sql = "UPDATE User
+                SET Status = :status
+                WHERE UserID = :userid";
+        return $this->executeQuery($sql, ["status"=>$status, "userid"=>$userid]);
+    }
+
     // ################# functionalities #####################
     public function setCookie($cookieValue, $duration){
         // if(!isset($_COOKIE["username"])){

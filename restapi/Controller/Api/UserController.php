@@ -39,6 +39,7 @@ class UserController extends BaseController{
                 if($userModel->verifyUser($username)){
                     $redirectBool = $userModel->authentication($username, $passwrod);
                     if($redirectBool){
+                        $userModel->updateUserStatus($userModel->getID($username), "online");
                         $URL = "../../../webpages/home.html";
                         $respondData = "";
                     }else{

@@ -66,7 +66,7 @@ function loadTimetable(timetable){
                         cellTextOut += "\n" + cellTextFriend1 + " and " + cellTextFriend2;
                     }
                 }
-                newCell.textContent = cellTextLocation + "With" + cellTextFriend1 + cellTextFriend2;
+                newCell.textContent = cellTextOut;
                 newCell.style.backgroundColor = "rgba(31, 31, 31, 0.6)";
             }else{
                 newCell.textContent = "Free";

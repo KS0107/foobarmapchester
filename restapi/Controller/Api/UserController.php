@@ -468,7 +468,7 @@ class UserController extends BaseController{
                         if($value2 != null){
                             $receiver = $userModel->checkReceiver($userID, $value2, "10am-2pm", "Thu");
                             if(is_array($receiver)){
-                                $value2 = $value2 . json_encode($receiver[0]);
+                                $value2 = $value2 . json_encode($receiver["TargetID"]);
                             }
                         }
                     }

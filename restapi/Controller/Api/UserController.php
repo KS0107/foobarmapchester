@@ -472,11 +472,11 @@ class UserController extends BaseController{
                         if($value2 != null){
                             $receiver = $userModel->checkReceiver($userID, $value2, $times[$counterTimes], $days[$counter]);
                             if(count($receiver)>0){
-                                $receiverName = getUsernameById($receiver);
+                                $receiverName = $userModel->getUsernameById($receiver);
                             }
                             $requester = $userModel->checkRequester($userID, $value2, $times[$counterTimes], $days[$counter]);
                             if(count($requester)>0){
-                                $requesterName = getUsernameById($requester);
+                                $requesterName = $userModel->getUsernameById($requester);
                             }
                             $value2 = $value2 . "|" . json_encode($receiverName) . "|" . json_encode($requesterName);
                         }

@@ -276,7 +276,7 @@ class UserModel extends Database{
     }
 
     public function getFriend($username){
-        $sql = "SELECT Username
+        $sql = "SELECT Username, Status
                 FROM User
                 WHERE UserID IN (             
                 SELECT FriendID

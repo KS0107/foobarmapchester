@@ -25,7 +25,11 @@ $(document).ready(function(){
         friends = JSON.parse(this.responseText);
         friendsList = "";
         for(let i = 0; i < friends.length; i++){
-            friendsList +=  "<button type=\"button\" style=\"width: 100%; border: solid;\" onclick=\"chatHandler(\'"+ friends[i].Username +"\')\">" + friends[i].Username + "</button>";
+            if(friends[i].Status == "online"){
+                friendsList +=  "<div style=\"position: relative;\"><button type=\"button\" style=\"width: 100%; border: solid;\" onclick=\"chatHandler(\'"+ friends[i].Username +"\')\">" + friends[i].Username + "</button>" + "<div style=\"position: absolute; bottom: 12px; right: 0; width: 30px; height: 30px; background-image: url(../images/online.png); background-size: cover; \"></div>" + "</div>";
+            }else{
+                friendsList +=  "<div style=\"position: relative;\"><button type=\"button\" style=\"width: 100%; border: solid;\" onclick=\"chatHandler(\'"+ friends[i].Username +"\')\">" + friends[i].Username + "</button>" + "<div style=\"position: absolute; bottom: 12px; right: 0; width: 30px; height: 30px; background-image: url(../images/offline.png); background-size: cover; \"></div>" + "</div>";
+            }
         }
         document.getElementById("friends").innerHTML = friendsList;
         }   

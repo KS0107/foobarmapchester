@@ -478,7 +478,7 @@ class UserController extends BaseController{
                             $requester = $userModel->checkRequester($userID, $value2, $times[$counterTimes], $days[$counter]);
                             $requesterName = null;
                             if(count($requester)>0){
-                                $requesterName = $userModel->getUsernameById($requester);
+                                $requesterName = $userModel->getUsernameById($requester[0]["RequesterID"]);
                             }
                             $value2 = $value2 . "|" . json_encode($receiverName) . "|" . json_encode($requesterName);
                         }

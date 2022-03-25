@@ -471,8 +471,14 @@ class UserController extends BaseController{
                     foreach ($value as &$value2){
                         if($value2 != null){
                             $receiver = $userModel->checkReceiver($userID, $value2, $times[$counterTimes], $days[$counter]);
+                            if(count($receiver)>0){
+                                $receiverName = getUsernameById($receiver);
+                            }
                             $requester = $userModel->checkRequester($userID, $value2, $times[$counterTimes], $days[$counter]);
-                            $value2 = $value2 . "|" . json_encode($receiver) . "|" . json_encode($requester);
+                            if(count($requester)>0){
+                                $requesterName = getUsernameById($requester);
+                            }
+                            $value2 = $value2 . "|" . json_encode($receiverName) . "|" . json_encode($requesterName);
                         }
                         $counter++;
                     }

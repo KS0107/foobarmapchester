@@ -463,15 +463,20 @@ class UserController extends BaseController{
                 $userModel = new UserModel;
                 $userID = $userModel->getID($this->arrQueryStringParams["username"]);
                 $timetable = $userModel->getTimetable($userID);
+                $times = ["10am-2pm", "2pm-6pm", "6pm-11pm", "11pm-10am"];
+                $days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+                $counterTimes = 0;
                 foreach ($timetable as &$value) {
+                    $counter = 0;
                     foreach ($value as &$value2){
                         if($value2 != null){
-                            $receiver = $userModel->checkReceiver($userID, $value2, "10am-2pm", "Thu");
-                            if($value2 != null){
-                                $value2 = $value2 . "|" . json_encode($receiver);
-                            }
+                            $receiver = $userModel->checkReceiver($userID, $value2, $times[$timeNum], $days[$counterTimes]);
+                            $requester = $userModel->checkRequester($userID, $value2, $times[$timeNum], $days[$counterTimes]);
+                            $value2 = $value2 . "|" . json_encode($receiver) . "|" . json_encode($requester);
                         }
+                        $counter++;
                     }
+                    $counterTimes++;
                 }
                 $respondData = json_encode($timetable);
             }catch(Error $e){

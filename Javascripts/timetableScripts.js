@@ -49,11 +49,23 @@ function loadTimetable(timetable){
         for (let j = 0; j < 7; j++) {
             var newCell = newRow.insertCell();
             if(element[daysOfWeek[j]] != null){
+                cellTextOut = ""
                 cellText = element[daysOfWeek[j]];
                 cellTextSplit = cellText.split("|");
                 cellTextLocation = cellTextSplit[0];
+                cellTextOut += cellTextLocation;
                 cellTextFriend1 = JSON.parse(cellTextSplit[1]);
                 cellTextFriend2 = JSON.parse(cellTextSplit[2]);
+                if(cellTextFriend1 != null || cellTextFriend2 != null){
+                    cellTextOut += "\n with";
+                    if(cellTextFriend1 != null){
+                        cellTextOut += "\n" + cellTextFriend1;
+                    }else if(cellTextFriend2 != null){
+                        cellTextOut += "\n" + cellTextFriend2;
+                    }else{
+                        cellTextOut += "\n" + cellTextFriend1 + " and " + cellTextFriend2;
+                    }
+                }
                 newCell.textContent = cellTextLocation + "With" + cellTextFriend1 + cellTextFriend2;
                 newCell.style.backgroundColor = "rgba(31, 31, 31, 0.6)";
             }else{

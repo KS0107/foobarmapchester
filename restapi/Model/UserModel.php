@@ -300,6 +300,18 @@ class UserModel extends Database{
         return $this->executeFetchQuery($sql, ["username"=>$username]);
     }
 
+    public function getFriendByFree($userid, $day, $time){
+        $sql = "SELECT Username
+                FROM User
+                WHERE UserID in 
+               (SELECT f.FriendID 
+                FROM Friendship as f
+                LEFT JOIN Timetable as t ON f.FriendID = t.UserID
+                WHERE f.UserID = :userid AND t.Time = :time AND t.$day IS NULL
+                )";
+        return $this->executeFetchQuery($sql, ["userid"=>$userid, "time"=>$time]);
+    }
+
     public function getID($username){
         $sql = "SELECT UserID 
                 FROM User

@@ -94,6 +94,7 @@
     }
 
     function loadPlaces(){
+        
         const xhttp = new XMLHttpRequest();
         xhttp.onload = function() {
         
@@ -109,7 +110,9 @@
     }
     loadPlaces();
 
-    function loadFriend(){
+    function loadFriendByAvailability(){
+        var date = document.getElementById("date").value;
+        var day = document.getElementById("week").value;
         const xhttp = new XMLHttpRequest();
         xhttp.onload = function() {
         friends = JSON.parse(this.responseText);
@@ -119,10 +122,10 @@
         }
         document.getElementById("friendList").innerHTML = friendsList;
         }   
-        xhttp.open("GET", "../restapi/index.php/user/getFriend?username=" + getCookie("username"));
+        xhttp.open("GET", "../restapi/index.php/user/getFriendByAvailability?time=" + date + "&day=" + day);
         xhttp.send();
     }
-    loadFriend();
+    setInterval(loadFriendByAvailability, 1000);
 
 
     function getCookie(cname) {

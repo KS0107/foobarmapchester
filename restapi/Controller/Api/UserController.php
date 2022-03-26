@@ -129,6 +129,33 @@ class UserController extends BaseController{
         $this->errorHandler($this->strErrorDesc, $respondData, $this->strErrorHeader);
     }
 
+    public function getFriendByAvailabilityAction(){
+        try{
+            if(strtoupper($this->requestMethod) == "GET"){
+                $userModel = new UserModel();
+                $userid = $userModel->getID($_COOKIE["username"]);
+                $time = $this->arrQueryStringParams["time"];
+                $day = $this->arrQueryStringParams["day"];
+                switch($time){
+                    case "10am-2pm": $time = 1; break;
+                    case "2pm-6pm": $time = 2; break;
+                    case "6pm-11pm": $time = 3; break;
+                    case "11pm-10am": $time = 4; break;
+                }
+                $respondData = $userModel->getFriendByFree($userid, $day, $time);
+                $respondData = json_encode($respondData);
+            }else{
+            $this->strErrorDesc = 'Method not supported';
+            $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
+        }
+        }catch(Error $e){
+            $this->strErrorDesc = $e->getMessage();
+            $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
+        }
+
+        $this->errorHandler($this->strErrorDesc, $respondData, $this->strErrorHeader);
+    }
+
     public function getMessageAction(){
         try{
             if(strtoupper($this->requestMethod) == "GET"){
@@ -308,7 +335,7 @@ class UserController extends BaseController{
                     case "10am-2pm": $time = 1; break;
                     case "2pm-6pm": $time = 2; break;
                     case "6pm-11pm": $time = 3; break;
-                    case "11am-10am": $time = 4; break;
+                    case "11pm-10am": $time = 4; break;
                 }
                 $day = $_POST["day"];
                 $userModel = new UserModel;
@@ -396,7 +423,7 @@ class UserController extends BaseController{
                     case "10am-2pm": $time = 1; break;
                     case "2pm-6pm": $time = 2; break;
                     case "6pm-11pm": $time = 3; break;
-                    case "11am-10am": $time = 4; break;
+                    case "11pm-10am": $time = 4; break;
                 }
                 $day = $_POST["day"];
                 if((!is_null($userModel->verifyEvent($userID, $time, $day)[0][$day]) && !is_null($userModel->verifyEvent($requesterID, $time, $day)[0][$day])) || ($userModel->verifyEvent($userID, $time, $day)[0][$day] != $place && $userModel->verifyEvent($requesterID, $time, $day)[0][$day] != $palce)){

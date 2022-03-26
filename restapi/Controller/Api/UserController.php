@@ -552,5 +552,26 @@ class UserController extends BaseController{
         }
         $this->errorHandler($this->strErrorDesc, $responseDate, $this->strErrorHeader);
     }
+    
+    public function updateReadForFriendRequestAction(){
+        if(strtoupper($this->requestMethod) == "GET"){
+            try{
+                $userModel = new UserModel;
+                $userid = $userModel->getID($_COOKIE["username"]);
+                $requestIDs = $userModel->getRequestID($userid);
+                for($i = 0; $i < sizeof($requestIDs); $i++){
+                    $userModel->updateReadForRequest($requestIDs[$i]["RequestID"], "read");
+                }
+                $responseDate = '';
+            }catch(Error $e){
+                $this->strErrorDesc = $e->getMessage();
+                $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
+            }
+        }else{
+            $this->strErrorDesc = 'Method not supported';
+            $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
+        }
+        $this->errorHandler($this->strErrorDesc, $responseDate, $this->strErrorHeader);
+    }
 }
 ?>

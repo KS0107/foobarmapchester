@@ -36,10 +36,21 @@ function retrieveRequest(){
     xmlhttp.onload = function(){
         res = JSON.parse(this.responseText);
         request = "";
+        counForFriendR = 0;
         for(i = 0; i < res.length; i++){
+            if(res[i].Noti == "unread"){
+                counForFriendR++;
+            }
             request += "<div>" + "Date: " +res[i].CreateDate + "<br>" + res[i].Username + " wants to add you!! " + "<button onclick=\"requestYes(\'" + res[i].Username + "\')\">" + "yes" + "</button> " + " <button onclick=\"requestNo(\'" + res[i].Username +"\')\">no</button>" + "</div>";
         }
         document.getElementById("requestsBox").innerHTML = request;
+        if(counForFriendR == 0){
+            document.getElementById("friendNoti").style.display = "none";
+        }else{
+            document.getElementById("friendNoti").innerHTML = "+" + counForFriendR;
+            document.getElementById("friendNoti").style.display = "block";
+        }
+
     }
     xmlhttp.open("GET", "../restapi/index.php/user/retrieveRequest");
     xmlhttp.send();
@@ -252,7 +263,7 @@ function retrieveEventRequest(){
     xhttp.open("GET", "../restapi/index.php/user/getEventRequest");
     xhttp.send();
 }
-setInterval(retrieveEventRequest, 2500);
+setInterval(retrieveEventRequest, 4000);
 
 
 $(document).ready(function(){
@@ -268,6 +279,8 @@ $(document).ready(function(){
         $("#friendsBox").css("display", "none");
         $("#privatebox").css("display", "none");
         $("#requestsBox").css("display", "block");
+        $("#friendNoti").css("display", "none");
+        $.get( "../restapi/index.php/user/updateReadForFriendRequest");
     });
 
     $("#privatebtn").click(function(){

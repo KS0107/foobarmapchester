@@ -333,12 +333,26 @@ class UserModel extends Database{
 
 
    public function retrieveRequest($userid){
-       $sql = "SELECT User.Username, Request.CreateDate
+       $sql = "SELECT User.Username, Request.CreateDate, Request.Noti
                FROM Request
                LEFT JOIN User ON Request.RequesterID = User.UserID
                WHERE Request.TargetID = :userid";
        
         return $this->executeFetchQuery($sql, ["userid"=>$userid]);
+   }
+
+   public function getRequestID($userid){
+       $sql = "SELECT RequestID
+                FROM Request
+                WHERE TargetID = :userid";
+        return $this->executeFetchQuery($sql, ["userid"=>$userid]);
+   }
+
+   public function updateReadForRequest($requestid){
+       $sql = "UPDATE Request
+                SET Noti = 'read'
+                WHERE RequestID = :requestid";
+        return $this->executeQuery($sql, ["requestid"=>$requestid]);
    }
 
    public function requestYes($usernameID, $friendnameID){

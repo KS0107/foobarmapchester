@@ -341,7 +341,11 @@ class UserController extends BaseController{
                         $respondData = "the public request has been already made by someone, go to public request box to join the group chat!!";
                     }else{
                         $respondData = "the public request has just been created by you!!";
-                        $userModel->storeRequestmsg($type, $place, $date, $day, 0, $requesterid);
+                        $allUsers = $userModel->getAllUser();
+                        for($i = 0; $i < sizeof($allUsers); $i++){
+                            $userModel->storeRequestmsg($type, $place, $date, $day, $allUsers[$i]["UserID"], $requesterid);
+                        }
+                        
                     }
                 }
                 if(!empty($respondData2)){$respondData = "made successfully for " . $respondData2;}
@@ -527,6 +531,26 @@ class UserController extends BaseController{
             $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
         }
         $this->errorHandler($this->strErrorDesc, $respondData, $this->strErrorHeader);
+    }
+    public function updateReadAction(){
+        if(strtoupper($this->requestMethod) == "GET"){
+            try{
+                $userModel = new UserModel;
+                $userid = $userModel->getID($_COOKIE["username"]);
+                $requestmsgIDs = $userModel->getRequestmsgIDByType($userid, $this->arrQueryStringParams["Type"]);
+                for($i = 0; $i < sizeof($requestmsgIDs); $i++){
+                    $userModel->updateRead($requestmsgIDs[$i]["RequestmsgID"], "read");
+                }
+                $responseDate = '';
+            }catch(Error $e){
+                $this->strErrorDesc = $e->getMessage();
+                $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
+            }
+        }else{
+            $this->strErrorDesc = 'Method not supported';
+            $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
+        }
+        $this->errorHandler($this->strErrorDesc, $responseDate, $this->strErrorHeader);
     }
 }
 ?>

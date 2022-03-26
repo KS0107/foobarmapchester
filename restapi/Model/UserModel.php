@@ -47,17 +47,17 @@ class UserModel extends Database{
     }
 
     public function pullingEventRequest($userid){
-        $sql = "SELECT r.RequestmsgID, r.CreatedDate, r.Type, r.Place, r.Date, r.Week, User.Username, r.requesterID, r.Status
+        $sql = "SELECT r.RequestmsgID, r.CreatedDate, r.Type, r.Place, r.Date, r.Week, User.Username, r.TargetID, r.requesterID, r.Status, r.Noti
                 FROM Requestmsg as r
                 LEFT JOIN User on r.TargetID = User.UserID
                 WHERE r.RequesterID = :userid AND r.Type = 'private'
                 UNION
-                SELECT r.RequestmsgID, r.CreatedDate, r.Type, r.Place, r.Date, r.Week, User.Username, r.requesterID, r.Status
+                SELECT r.RequestmsgID, r.CreatedDate, r.Type, r.Place, r.Date, r.Week, User.Username, r.TargetID, r.requesterID, r.Status, r.Noti
                 FROM Requestmsg as r
                 LEFT JOIN User on r.RequesterID = User.UserID
                 WHERE r.TargetID = :userid AND r.Type = 'private'
                 UNION
-                SELECT r.RequestmsgID, r.CreatedDate, r.Type, r.Place, r.Date, r.Week, User.Username, r.requesterID, r.Status
+                SELECT r.RequestmsgID, r.CreatedDate, r.Type, r.Place, r.Date, r.Week, User.Username, r.TargetID, r.requesterID, r.Status, r.Noti
                 FROM Requestmsg as r
                 LEFT JOIN User on r.RequesterID = User.UserID
                 WHERE r.Type = 'public'
@@ -109,6 +109,20 @@ class UserModel extends Database{
                 RequesterID = :userid) AND
                 Status = :status";
         return $this->executeFetchQuery($sql, ["type"=>$type, "place"=>$place, "date"=>$time, "day"=>$day, "userid"=>$userid, "status"=>$status]);
+    }
+
+    public function getRequestmsgIDByType($userid, $type){
+        $sql = "SELECT RequestmsgID
+                FROM Requestmsg
+                WHERE Type = :type AND TargetID = :userid";
+        return $this->executeFetchQuery($sql, ["userid"=>$userid, "type"=>$type]);
+    }
+
+    public function updateRead($requestmsgid, $val){
+        $sql = "UPDATE Requestmsg
+                SET Noti = :val
+                WHERE RequestmsgID = :requestmsgid";
+        return $this->executeQuery($sql, ["val"=>$val, "requestmsgid"=>$requestmsgid]);
     }
 
     public function storeRequestmsg($type, $place, $date, $day, $targetid, $requesterid){
@@ -373,6 +387,12 @@ class UserModel extends Database{
                 FROM   Timetable
                 WHERE  UserID = :userID";
         return $this->executeFetchQuery($sql, ["userID"=>$userID]);
+   }
+
+   public function getAllUser(){
+       $sql = "SELECT UserID
+                FROM User";
+        return $this->executeFetchQuery($sql);
    }
 
    public function checkReceiver($requesterid, $place, $time, $day){

@@ -124,8 +124,13 @@ function retrieveEventRequest(){
         response = JSON.parse(this.responseText);
         privateRequests = "";
         publicRequests = "";
+        countForPrivate = 0;
+        countForPublic = 0;
         for(let i = 0; i < response[1].length; i++){
             if(response[1][i].Type == "private"){
+                if(response[1][i].requesterID != response[0] && response[1][i].Noti == "unread"){
+                    countForPrivate++;
+                }
                 if(response[0] == response[1][i].requesterID){
                     privateRequests += 
                     "<div>" +
@@ -197,7 +202,10 @@ function retrieveEventRequest(){
                     }
                 }
             }else{ //public case
-                if(response[0] != response[1][i].requesterID){
+                if(response[0] != response[1][i].requesterID && response[0] == response[1][i].TargetID){
+                    if(response[1][i].Noti == "unread"){
+                        countForPublic++;
+                    }
                     publicRequests +=
                     "<div>" +
                         "<table>" +
@@ -227,11 +235,24 @@ function retrieveEventRequest(){
         }
         document.getElementById("privateRequest").innerHTML = privateRequests;
         document.getElementById("PublicRequest").innerHTML = publicRequests;
+        
+        if(countForPrivate == 0){
+            document.getElementById("privateNoti").style.display = "none";
+        }else{
+            document.getElementById("privateNoti").innerHTML = "+" + countForPrivate;
+            document.getElementById("privateNoti").style.display = "block";
+        }
+        if(countForPublic == 0){
+            document.getElementById("publicNoti").style.display = "none";
+        }else{
+            document.getElementById("publicNoti").innerHTML = "+" + countForPublic;
+            document.getElementById("publicNoti").style.display = "block";
+        }
     }   
     xhttp.open("GET", "../restapi/index.php/user/getEventRequest");
     xhttp.send();
 }
-setInterval(retrieveEventRequest, 2000);
+setInterval(retrieveEventRequest, 2500);
 
 
 $(document).ready(function(){
@@ -254,6 +275,9 @@ $(document).ready(function(){
         $("#requestsBox").css("display", "none");
         $("#publicbox").css("display", "none");
         $("#privatebox").css("display", "block");
+        $("#privateNoti").css("display", "none");
+        $.get( "../restapi/index.php/user/updateRead?Type=private");
+
     });
 
     $("#publicbtn").click(function(){
@@ -261,6 +285,8 @@ $(document).ready(function(){
         $("#requestsBox").css("display", "none");
         $("#privatebox").css("display", "none");
         $("#publicbox").css("display", "block");
+        $("#publicNoti").css("display", "none");
+        $.get( "../restapi/index.php/user/updateRead?Type=public");
     });
 
 

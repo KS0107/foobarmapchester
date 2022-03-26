@@ -10,11 +10,13 @@
     <script type="text/javascript" src="../Javascripts/friend.js"></script>
 </head>
 <body>
-    <div class="topbar">
-        <button id="friendsbtn">Users</button>
-        <button id="requestsbtn">Friend Requests</button>
-        <button id="privatebtn">Private Requests</button>
-        <button id="publicbtn">Public Requests</button>
+    <div class="topbar" style=" text-align: center; border: solid blue;">
+        <div class="flex-container" style="display: flex; border: solid yellow; justify-content: center;">
+            <div><button id="friendsbtn">Users</button></div>
+            <div><button id="requestsbtn">Friend Requests</button><div id="friendNoti"></div></div>
+            <div><button id="privatebtn">Private Requests<div id="privateNoti"></div></button></div>
+            <div><button id="publicbtn">Public Requests</button><div id="publicNoti"></div></div>
+        </div>
     </div>
 
     <div id="friendsBox">

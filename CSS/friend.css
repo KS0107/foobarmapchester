@@ -5,6 +5,27 @@
     text-align: center;
     position: relative;
 }
+
+.flex-container > div{
+    position: relative;
+}
+
+#friendNoti, #privateNoti, #publicNoti{
+    display: none;
+    position:absolute; 
+    top: -5px; 
+    right: 0; 
+    color: white; 
+    border: solid black; 
+    width: 14px; 
+    height: 8px; 
+    line-height: 10px; 
+    background-color: red;  
+    border-radius: 50px; 
+    text-align: center; 
+    font-size: 7px;
+}
+
 body {
     font-family: 'Montserrat';
 }
@@ -48,7 +69,7 @@ button {
     font-size: 15px;
     color: rgb(255, 255, 255);
     border: none;
-    padding: 10px;
+    /* padding: 10px; */
     text-decoration: none;
     cursor: pointer;
 }

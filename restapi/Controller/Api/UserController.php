@@ -363,14 +363,17 @@ class UserController extends BaseController{
                         }
                     }
                 }else{ //public request 
-                    if(!empty($userModel->verifyRequestmsgP($type, $place, $date, $day))){
+                    if(!empty($userModel->verifyRequestmsgP($type, $place, $date, $day))){ // needs to change
                         // the request already exists
                         $respondData = "the public request has been already made by someone, go to public request box to join the group chat!!";
                     }else{
                         $respondData = "the public request has just been created by you!!";
+                        // create a group chat
+                        $groupChatID = $userModel->createGroupChat($requesterid, $day, $time, $place);
+                        // send public requests to all users
                         $allUsers = $userModel->getAllUser();
                         for($i = 0; $i < sizeof($allUsers); $i++){
-                            $userModel->storeRequestmsg($type, $place, $date, $day, $allUsers[$i]["UserID"], $requesterid);
+                            $userModel->storeRequestmsg($type, $place, $date, $day, $allUsers[$i]["UserID"], $requesterid, $groupChatID);
                         }
                         
                     }
@@ -590,6 +593,46 @@ class UserController extends BaseController{
                     $userModel->updateReadForRequest($requestIDs[$i]["RequestID"], "read");
                 }
                 $responseDate = '';
+            }catch(Error $e){
+                $this->strErrorDesc = $e->getMessage();
+                $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
+            }
+        }else{
+            $this->strErrorDesc = 'Method not supported';
+            $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
+        }
+        $this->errorHandler($this->strErrorDesc, $responseDate, $this->strErrorHeader);
+    }
+
+    public function eventJoinAction(){
+        // update public request to accepted status
+        if(strtoupper($this->requestMethod) == "POST"){
+            try{
+                $groupChatID = $_POST["groupChatID"];
+                $userModel = new UserModel;
+                $userid = $userModel->getID($_COOKIE["username"]);
+                $userModel->updatePublicStatus($userid, $groupChatID);
+                
+                $responseDate = '';
+            }catch(Error $e){
+                $this->strErrorDesc = $e->getMessage();
+                $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
+            }
+        }else{
+            $this->strErrorDesc = 'Method not supported';
+            $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
+        }
+        $this->errorHandler($this->strErrorDesc, $responseDate, $this->strErrorHeader);
+    }
+
+    public function getGroupChatAction(){
+        // update public request to accepted status
+        if(strtoupper($this->requestMethod) == "GET"){
+            try{
+                $userModel = new UserModel;
+                $userid = $userModel->getID($_COOKIE["username"]);
+                $groupChats = $userModel->pullingGroupChat($userid);
+                $responseDate = json_encode($groupChats);
             }catch(Error $e){
                 $this->strErrorDesc = $e->getMessage();
                 $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';

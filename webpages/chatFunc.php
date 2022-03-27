@@ -26,12 +26,15 @@
 	<div class="flex-container">
 		<div class="friendList">
 			<div id="friend-bar">
-				<div id="friend-tag"><h2>Friends</h2></div>
+				<div><button id="privateChat">friends</button></div>
+				<div><button id="publicChat">group chat</button></div>
+				<!-- <div id="friend-tag"><h2>Friends</h2></div> -->
 				<div id="add-friend"><a id="ibtn"></a></div>
 			</div>
 			<!-- <button class="deletemsg" id="delete">Delete</button>
 			<button class="logout" id="exit">Exit</button> -->
 			<div id="friends"></div>
+			<div id="groupChat"></div>
 		</div>
 		<div id="chatbox-wrapper">
 		<div id="friend-name"></div>
@@ -69,6 +72,16 @@
 
 		document.getElementById("close2").addEventListener("click", function(){
 			document.getElementById("requestbox-container").style.display = "none";
+		});
+
+		document.getElementById("privateChat").addEventListener("click", function(){
+			document.getElementById("groupChat").style.display = "none";
+			document.getElementById("friends").style.display = "block";
+		});
+
+		document.getElementById("publicChat").addEventListener("click", function(){
+			document.getElementById("friends").style.display = "none";
+			document.getElementById("groupChat").style.display = "block";
 		});
 	</script>
 </body>

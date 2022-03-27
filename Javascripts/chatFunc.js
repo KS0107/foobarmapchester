@@ -18,6 +18,7 @@ $(document).ready(function(){
             // $.get("https://web.cs.manchester.ac.uk/y02478jh/restapi/index.php/user/delete");
     });
 
+    
 
     function loadFriend(){
         const xhttp = new XMLHttpRequest();
@@ -54,6 +55,21 @@ $(document).ready(function(){
         return "";
       }
 });
+
+function loadGroupChat(){
+    const xhttp = new XMLHttpRequest();
+    xhttp.onload = function(){
+        groupChatIDs = JSON.parse(this.responseText);
+        groupChatbtns = "";
+        for(let i = 0; i <groupChatIDs.length; i++){
+            groupChatbtns += "<div style=\"position: relative;\"><button type=\"button\" style=\"width: 100%; border: solid;\" onclick=\"chatHandler(\'"+ groupChatIDs[i].GroupChatID +"\')\">" + groupChatIDs[i].GroupChatID + "</button>" + "</div>"
+        }
+        document.getElementById("groupChat").innerHTML = groupChatbtns;
+    }
+    xhttp.open("GET", "../restapi/index.php/user/getGroupChat");
+    xhttp.send();
+}
+setInterval(loadGroupChat, 1000);
 
 function chatHandler(friend){
     if(typeof(intervalID) !== "undefined"){

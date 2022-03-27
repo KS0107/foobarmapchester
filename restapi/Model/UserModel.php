@@ -47,22 +47,36 @@ class UserModel extends Database{
     }
 
     public function pullingEventRequest($userid){
-        $sql = "SELECT r.RequestmsgID, r.CreatedDate, r.Type, r.Place, r.Date, r.Week, User.Username, r.TargetID, r.requesterID, r.Status, r.Noti
+        $sql = "SELECT r.RequestmsgID, r.CreatedDate, r.Type, r.Place, r.Date, r.Week, User.Username, r.TargetID, r.requesterID, r.Status, r.Noti, r.GroupChatID
                 FROM Requestmsg as r
                 LEFT JOIN User on r.TargetID = User.UserID
                 WHERE r.RequesterID = :userid AND r.Type = 'private'
                 UNION
-                SELECT r.RequestmsgID, r.CreatedDate, r.Type, r.Place, r.Date, r.Week, User.Username, r.TargetID, r.requesterID, r.Status, r.Noti
+                SELECT r.RequestmsgID, r.CreatedDate, r.Type, r.Place, r.Date, r.Week, User.Username, r.TargetID, r.requesterID, r.Status, r.Noti, r.GroupChatID
                 FROM Requestmsg as r
                 LEFT JOIN User on r.RequesterID = User.UserID
                 WHERE r.TargetID = :userid AND r.Type = 'private'
                 UNION
-                SELECT r.RequestmsgID, r.CreatedDate, r.Type, r.Place, r.Date, r.Week, User.Username, r.TargetID, r.requesterID, r.Status, r.Noti
+                SELECT r.RequestmsgID, r.CreatedDate, r.Type, r.Place, r.Date, r.Week, User.Username, r.TargetID, r.requesterID, r.Status, r.Noti, r.GroupChatID
                 FROM Requestmsg as r
                 LEFT JOIN User on r.RequesterID = User.UserID
                 WHERE r.Type = 'public'
                 ORDER BY CreatedDate DESC";
         return $this->executeFetchQuery($sql, ["userid"=>$userid]);
+    }
+
+    public function pullingGroupChat($userid){
+        $sql = "SELECT GroupChatID
+                FROM Requestmsg
+                WHERE Type = 'public' AND TargetID = :userid AND Status = 'accepted'";
+        return $this->executeFetchQuery($sql, ["userid"=>$userid]);
+    }
+
+    public function updatePublicStatus($userid, $groupChatID){
+        $sql = "UPDATE Requestmsg
+                SET Status = 'accepted'
+                WHERE TargetID = :userid AND GroupChatID = :groupid";
+        return $this->executeQuery($sql, ["userid"=>$userid, "groupid"=>$groupChatID]);
     }
 
     public function verifyRequestmsg($type, $place, $date, $day, $targetid, $requesterid){
@@ -125,106 +139,37 @@ class UserModel extends Database{
         return $this->executeQuery($sql, ["val"=>$val, "requestmsgid"=>$requestmsgid]);
     }
 
-    public function storeRequestmsg($type, $place, $date, $day, $targetid, $requesterid){
-        $sql = "INSERT INTO Requestmsg (Type, Place, Date, Week, TargetID, RequesterID)
+    public function storeRequestmsg($type, $place, $date, $day, $targetid, $requesterid, $groupid=''){
+        if($groupid){
+            $sql = "INSERT INTO Requestmsg (Type, Place, Date, Week, TargetID, RequesterID, GroupChatID)
+                VALUES (:type, :place, :date, :day, :targetid, :requesterid, :groupid)";
+        return $this->executeQuery($sql, ["type"=>$type, "place"=>$place, "date"=>$date, "day"=>$day,
+        "targetid"=>$targetid, "requesterid"=>$requesterid, "groupid"=>$groupid]);
+        }else{
+            $sql = "INSERT INTO Requestmsg (Type, Place, Date, Week, TargetID, RequesterID)
                 VALUES (:type, :place, :date, :day, :targetid, :requesterid)";
         return $this->executeQuery($sql, ["type"=>$type, "place"=>$place, "date"=>$date, "day"=>$day,
         "targetid"=>$targetid, "requesterid"=>$requesterid]);
+        }
+        
     }
 
     public function verifyEvent($userID, $time, $day){
-        switch($day){
-            case "Mon":
-                $sql = "SELECT Mon
+        $sql = "SELECT $day
                 FROM Timetable
                 WHERE 
                 UserID = :userid AND
                 Time = :time";
-                break;
-            case "Tue":
-                $sql = "SELECT Tue
-                FROM Timetable
-                WHERE 
-                UserID = :userid AND
-                Time = :time";
-                break;
-            case "Wed":
-                $sql = "SELECT Wed
-                FROM Timetable
-                WHERE 
-                UserID = :userid AND
-                Time = :time";
-                break;
-            case "Thu":
-                $sql = "SELECT Thu
-                FROM Timetable
-                WHERE 
-                UserID = :userid AND
-                Time = :time";
-                break;
-            case "Fri":
-                $sql = "SELECT Fri
-                FROM Timetable
-                WHERE 
-                UserID = :userid AND
-                Time = :time";
-                break;
-            case "Sat":
-                $sql = "SELECT Sat
-                FROM Timetable
-                WHERE 
-                UserID = :userid AND
-                Time = :time";
-                break;
-            case "Sun":
-                $sql = "SELECT Sun
-                FROM Timetable
-                WHERE 
-                UserID = :userid AND
-                Time = :time";
-                break;
-        }
+                
         return $this->executeFetchQuery($sql, ["userid"=>$userID, "time"=>$time]);
     }
 
     public function addEvent($userID, $place, $time, $day){
-        switch($day){
-            case "Mon":
-                $sql = "UPDATE Timetable
-                        SET Mon = :place
-                        WHERE UserID = :userid AND Time = :time";
-                break;
-            case "Tue":
-                $sql = "UPDATE Timetable
-                        SET Tue = :place
-                        WHERE UserID = :userid AND Time = :time";
-                break;
-            case "Wed":
-                $sql = "UPDATE Timetable
-                        SET Wed = :place
-                        WHERE UserID = :userid AND Time = :time";
-                break;
-            case "Thu":
-                $sql = "UPDATE Timetable
-                        SET Thu = :place
-                        WHERE UserID = :userid AND Time = :time";
-                break;
-            case "Fri":
-                $sql = "UPDATE Timetable
-                        SET Fri = :place
-                        WHERE UserID = :userid AND Time = :time";
-                break;
-            case "Sat":
-                $sql = "UPDATE Timetable
-                        SET Sat = :place
-                        WHERE UserID = :userid AND Time = :time";
-                break;
-            case "Sun":
-                $sql = "UPDATE Timetable
-                        SET Sun = :place
-                        WHERE UserID = :userid AND Time = :time";
-                break;
-        }
+        
+        $sql = "UPDATE Timetable
+                SET $day = :place
+                WHERE UserID = :userid AND Time = :time";
+
         return $this->executeQuery($sql, ["place"=>$place, "userid"=>$userID, "time"=>$time]);
     }
 
@@ -458,6 +403,14 @@ class UserModel extends Database{
         WHERE TimetableID = :timetableid";
     return $this->executeFetchQuery($sql, ["timetableid"=>$timetableid, "Mon"=>$vals["Mon"], "Tue"=>$vals["Tue"], "Wed"=>$vals["Wed"], "Thu"=>$vals["Thu"], 
     "Fri"=>$vals["Fri"], "Sat"=>$vals["Sat"], "Sun"=>$vals["Sun"]]);
+    }
+
+    public function createGroupChat($userid, $day, $time, $place){
+        $sql = "INSERT INTO GroupChat (CreatedBy, GuestID, Day, Time, Place)
+                VALUES (:userid, :userid, :day, :time, :place)";
+        $this->executeQuery($sql, ["userid"=>$userid, "day"=>$day, "time"=>$time, "place"=>$place]);
+        return $this->conn->lastInsertId();
+
     }
 
 }

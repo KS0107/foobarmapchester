@@ -128,6 +128,13 @@ function eventNo(requestmsgID){
     xhttp.send("requestmsgID=" + requestmsgID);
 }
 
+function eventJoin(groupChatID){
+    const xhttp = new XMLHttpRequest();
+    xhttp.open("POST", "../restapi/index.php/user/eventJoin");
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("groupChatID=" + groupChatID);
+}
+
 
 function retrieveEventRequest(){
     const xhttp = new XMLHttpRequest();
@@ -213,7 +220,7 @@ function retrieveEventRequest(){
                     }
                 }
             }else{ //public case
-                if(response[0] != response[1][i].requesterID && response[0] == response[1][i].TargetID){
+                if(response[0] != response[1][i].requesterID && response[0] == response[1][i].TargetID && response[1][i].Status == "No Reponse"){
                     if(response[1][i].Noti == "unread"){
                         countForPublic++;
                     }
@@ -234,8 +241,8 @@ function retrieveEventRequest(){
                                 "<td>" + response[1][i].Username + "</td>" +
                                 "<td>" + 
                                     "<div id=" + response[1][i].RequestmsgID + ">" +
-                                        "<div>" + "<button onclick=\'eventJoin(" + response[1][i].Place + "," + response[1][i].Date + "," + response[1][i].Week +  ")\'>Join</button>" + "</div>" +
-                                        "<div>" + "<button onclick=\'eventNo(" + response[1][i].Place + "," + response[1][i].Date + "," + response[1][i].Week +  ")\'>Decline</button>" + "</div>" +
+                                        "<div>" + "<button onclick=eventJoin('" + response[1][i].GroupChatID +  "')>Join</button>" + "</div>" +
+                                        "<div>" + "<button onclick=eventNo('" + response[1][i].GroupChatID +  "')>Decline</button>" + "</div>" +
                                     "</div>" +
                                 "</td>"+
                             "</tr>" +

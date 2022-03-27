@@ -160,7 +160,7 @@ class UserController extends BaseController{
         try{
             if(strtoupper($this->requestMethod) == "GET"){
                 $userModel = new UserModel();
-                $additionalInfo = array("Sender"=>$userModel->getID($_COOKIE['username']), "Reciver"=>$userModel->getID($this->arrQueryStringParams["receiver"]));
+                $additionalInfo = array("Sender"=>$userModel->getID($_COOKIE['username']), "Receiver"=>$userModel->getID($this->arrQueryStringParams["receiver"]));
                 $respondData = $userModel->getMessage($_COOKIE['username'], $this->arrQueryStringParams["receiver"]);
                 $respondData = json_encode(array($additionalInfo, $respondData));
             }else{
@@ -179,7 +179,7 @@ class UserController extends BaseController{
         try{
             if(strtoupper($this->requestMethod) == "GET"){
                 $userModel = new UserModel();
-                $additionalInfo = array("Sender"=>$userModel->getID($_COOKIE['username']), "Reciver"=>$this->arrQueryStringParams["receiver"]);
+                $additionalInfo = array("Sender"=>$userModel->getID($_COOKIE['username']), "Receiver"=>$this->arrQueryStringParams["receiver"]);
                 $respondData = $userModel->getMessageForGroupChat($this->arrQueryStringParams["receiver"]);
                 $respondData = json_encode(array($additionalInfo, $respondData));
             }else{
@@ -202,7 +202,7 @@ class UserController extends BaseController{
                     $sender = $_POST["sender"];
                     $userModel = new UserModel();
                     if(preg_match("/^\d+$/", $receiver)){
-                        $userModel->storeMessage($msg, $userModel->getID($sender), $receiver);
+                        $userModel->storeMessageForGroupChat($msg, $userModel->getID($sender), $receiver);
                     }else{
                         $userModel->storeMessage($msg, $userModel->getID($sender), $userModel->getID($receiver));
                     }

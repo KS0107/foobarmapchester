@@ -97,7 +97,7 @@ function loadLog(friend){
     }
     document.getElementById("chatbox").innerHTML = message;
     }
-    if(preg_match("/^\d+$/", friend)){
+    if(/^\d+$/.test(friend)){
         xhttp.open("GET", "../restapi/index.php/user/getMessageForGroupChat?receiver=" + friend);
         xhttp.send();
     }else{

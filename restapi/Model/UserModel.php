@@ -30,14 +30,20 @@ class UserModel extends Database{
     }
 
     public function getMessageForGroupChat($receiver){
-        $sql = "SELECT MessageBody, CreateDate, UserID, RecipientID
-                FROM Message
-                WHERE RecipientID = $receiver";
-        return $this->executeFetchQuery($sql);
+        $sql = "SELECT MessageBody, Sender as UserID, GroupChatID, CreatedDate
+                FROM MessageForGC
+                WHERE GroupChatID = :id";
+        return $this->executeFetchQuery($sql, ["id"=>$receiver]);
     }
 
     public function storeMessage($message, $userID, $receiverID){
         $sql = "INSERT INTO Message (MessageBody, UserID, RecipientID)
+                VALUES (:message, :userid, :receiverid)";
+        return $this->executeQuery($sql, ["message"=>$message, "userid"=>$userID, "receiverid"=>$receiverID]);
+    }
+
+    public function storeMessageForGroupChat($message, $userID, $receiverID){
+        $sql = "INSERT INTO MessageForGC (MessageBody, Sender, GroupChatID)
                 VALUES (:message, :userid, :receiverid)";
         return $this->executeQuery($sql, ["message"=>$message, "userid"=>$userID, "receiverid"=>$receiverID]);
     }
@@ -73,9 +79,10 @@ class UserModel extends Database{
     }
 
     public function pullingGroupChat($userid){
-        $sql = "SELECT GroupChatID
-                FROM Requestmsg
-                WHERE Type = 'public' AND TargetID = :userid AND Status = 'accepted'";
+        $sql = "SELECT r.GroupChatID
+                FROM Requestmsg as r
+                LEFT JOIN GroupChat as g ON r.GroupChatID = g.GroupChatID
+                WHERE r.Type = 'public' AND r.TargetID = :userid AND r.Status = 'accepted' AND g.Status = 'active'";
         return $this->executeFetchQuery($sql, ["userid"=>$userid]);
     }
 

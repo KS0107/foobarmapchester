@@ -62,7 +62,7 @@ function loadGroupChat(){
         groupChatIDs = JSON.parse(this.responseText);
         groupChatbtns = "";
         for(let i = 0; i <groupChatIDs.length; i++){
-            groupChatbtns += "<div style=\"position: relative;\"><button type=\"button\" style=\"width: 100%; border: solid;\" onclick=\"chatHandler(\'"+ groupChatIDs[i].GroupChatID +"\')\">" + groupChatIDs[i].GroupChatID + "</button>" + "</div>"
+            groupChatbtns += "<div style=\"position: relative;\"><button type=\"button\" style=\"width: 100%; border: solid;\" onclick=chatHandler('"+ groupChatIDs[i].GroupChatID +"')>" + groupChatIDs[i].GroupChatID + "</button>" + "</div>"
         }
         document.getElementById("groupChat").innerHTML = groupChatbtns;
     }
@@ -96,9 +96,14 @@ function loadLog(friend){
         }      
     }
     document.getElementById("chatbox").innerHTML = message;
-    }   
-    xhttp.open("GET", "../restapi/index.php/user/getMessage?receiver=" + friend);
-    xhttp.send();
+    }
+    if(preg_match("/^\d+$/", friend)){
+        xhttp.open("GET", "../restapi/index.php/user/getMessageForGroupChat?receiver=" + friend);
+        xhttp.send();
+    }else{
+        xhttp.open("GET", "../restapi/index.php/user/getMessage?receiver=" + friend);
+        xhttp.send();
+    }
 
     var newscrollHeight = $("#chatbox")[0].scrollHeight - 20; //Scroll height after the request
     if(newscrollHeight > oldscrollHeight){

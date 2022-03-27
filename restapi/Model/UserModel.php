@@ -29,6 +29,13 @@ class UserModel extends Database{
         return $this->executeFetchQuery($sql, ["userid"=>$this->getID($sender), "recipientid"=>$this->getID($receiver),"recipientid1"=>$this->getID($receiver), "userid1"=>$this->getID($sender)]);
     }
 
+    public function getMessageForGroupChat($receiver){
+        $sql = "SELECT MessageBody, CreateDate, UserID, RecipientID
+                FROM Message
+                WHERE RecipientID = $receiver";
+        return $this->executeFetchQuery($sql);
+    }
+
     public function storeMessage($message, $userID, $receiverID){
         $sql = "INSERT INTO Message (MessageBody, UserID, RecipientID)
                 VALUES (:message, :userid, :receiverid)";

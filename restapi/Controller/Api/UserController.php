@@ -175,6 +175,25 @@ class UserController extends BaseController{
         $this->errorHandler($this->strErrorDesc, $respondData, $this->strErrorHeader);
     }
 
+    public function getMessageForGroupChatAction(){
+        try{
+            if(strtoupper($this->requestMethod) == "GET"){
+                $userModel = new UserModel();
+                $additionalInfo = array("Sender"=>$userModel->getID($_COOKIE['username']), "Reciver"=>$this->arrQueryStringParams["receiver"]);
+                $respondData = $userModel->getMessageForGroupChat($this->arrQueryStringParams["receiver"]);
+                $respondData = json_encode(array($additionalInfo, $respondData));
+            }else{
+            $this->strErrorDesc = 'Method not supported';
+            $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
+        }
+        }catch(Error $e){
+            $this->strErrorDesc = $e->getMessage();
+            $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
+        }
+
+        $this->errorHandler($this->strErrorDesc, $respondData, $this->strErrorHeader);
+    }
+
     public function msgInAction(){
         try{
             if(strtoupper($this->requestMethod) == "POST"){
@@ -182,7 +201,11 @@ class UserController extends BaseController{
                     $receiver = $_POST["receiver"];
                     $sender = $_POST["sender"];
                     $userModel = new UserModel();
-                    $userModel->storeMessage($msg, $userModel->getID($sender), $userModel->getID($receiver));
+                    if(preg_match("/^\d+$/", $receiver)){
+                        $userModel->storeMessage($msg, $userModel->getID($sender), $receiver);
+                    }else{
+                        $userModel->storeMessage($msg, $userModel->getID($sender), $userModel->getID($receiver));
+                    }
             }else{
                 $this->strErrorDesc = 'Method not supported';
                 $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';

@@ -30,7 +30,7 @@ class UserModel extends Database{
     }
 
     public function getMessageForGroupChat($receiver){
-        $sql = "SELECT MessageBody, Sender as UserID, GroupChatID, CreatedDate
+        $sql = "SELECT MessageBody, Sender as UserID, GroupChatID, CreatedDate as CreateDate
                 FROM MessageForGC
                 WHERE GroupChatID = :id";
         return $this->executeFetchQuery($sql, ["id"=>$receiver]);

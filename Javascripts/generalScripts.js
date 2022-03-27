@@ -87,7 +87,7 @@ function goToPage(page){
 }
 // When close the page, it invoks logout function.
 window.onbeforeunload = function(){
-    if(!redirect){
+    if(typeof(redirect) == 'undefined'){
         const xmlhttp = new XMLHttpRequest();
         xmlhttp.open("GET", "../webpages/logoutMedium.php");
         xmlhttp.send(); 

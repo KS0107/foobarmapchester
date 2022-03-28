@@ -141,15 +141,31 @@ function retrieveEventRequest(){
     xhttp.onload = function() {
         response = JSON.parse(this.responseText);
         privateRequests = "";
+        privateRequestsAray = []
         publicRequests = "";
         countForPrivate = 0;
         countForPublic = 0;
         for(let i = 0; i < response[1].length; i++){
             if(response[1][i].Type == "private"){
+                tempRecord = 
+                {
+                    "Day": "",
+                    "Time": "",
+                    "Place": "",
+                    "Username": "",
+                    "Status": "",
+                    "Response": ""
+                };                
                 if(response[1][i].requesterID != response[0] && response[1][i].Noti == "unread"){
                     countForPrivate++;
                 }
-                if(response[0] == response[1][i].requesterID){
+                if(response[0] == response[1][i].requesterID){//User is sending request
+                    tempRecord.Day = response[1][i].Week;
+                    tempRecord.Time = response[1][i].Date;
+                    tempRecord.Place = response[1][i].Place;
+                    tempRecord.Username = response[1][i].Username;
+                    tempRecord.Status = response[1][i].Status;
+                    tempRecord.Response = null;
                     privateRequests += 
                     "<div>" +
                         "<table>" +
@@ -170,7 +186,17 @@ function retrieveEventRequest(){
                         "</table>" +
                     "</div>";
                 }else{ // user is recipient
-                    if(response[1][i].Status == "No Response"){
+                    if(response[1][i].Status == "No Response"){//User can respond
+                        tempRecord.Day = response[1][i].Week;
+                        tempRecord.Time = response[1][i].Date;
+                        tempRecord.Place = response[1][i].Place;
+                        tempRecord.Username = response[1][i].Username;
+                        tempRecord.Status = response[1][i].Status;
+                        tempRecord.Response = 
+                        "<div id=" + response[1][i].RequestmsgID + ">" +
+                            "<div>" + "<button onclick=eventYes('"  + response[1][i].requesterID + "','" + response[1][i].RequestmsgID + "','" + encodeURIComponent(response[1][i].Place) + "','" + response[1][i].Date + "','" + response[1][i].Week +  "')>Accept</button>" + "</div>" +
+                            "<div>" + "<button onclick=eventNo('"  +  response[1][i].RequestmsgID + "')>Decline</button>" + "</div>" +
+                        "</div>";
                         privateRequests += 
                         "<div>" +
                             "<table>" +
@@ -197,8 +223,14 @@ function retrieveEventRequest(){
                                 "</tr>" +
                             "</table>" +
                         "</div>";
-                    }else{
+                    }else{//User has already responded
                         privateRequests += 
+                        tempRecord.Day = response[1][i].Week;
+                        tempRecord.Time = response[1][i].Date;
+                        tempRecord.Place = response[1][i].Place;
+                        tempRecord.Username = response[1][i].Username;
+                        tempRecord.Status = response[1][i].Status;
+                        tempRecord.Response = null;
                         "<div>" +
                             "<table>" +
                                 "<tr>" +
@@ -219,6 +251,7 @@ function retrieveEventRequest(){
                         "</div>";
                     }
                 }
+                privateRequestsAray += tempRecord;
             }else{ //public case
                 if(response[0] != response[1][i].requesterID && response[0] == response[1][i].TargetID && response[1][i].Status == "No Reponse"){
                     if(response[1][i].Noti == "unread"){
@@ -251,7 +284,62 @@ function retrieveEventRequest(){
                 }
             }
         }
-        document.getElementById("privateRequest").innerHTML = privateRequests;
+        noResponseTable = 
+        "<div>" +
+            "<h1>No Response</h1>" +
+            "<table>" +
+                "<tr>" +
+                    "<th>Day</th><th>Date</th><th>Place</th><th>Friend</th><th>Status</th><th>Response</th>" + 
+                "</tr>";
+        acceptedTable = 
+        "<div>" +
+            "<h1>Accepted</h1>" +
+            "<table>" +
+                "<tr>" +
+                    "<th>Day</th><th>Date</th><th>Place</th><th>Friend</th><th>Status</th>" + 
+                "</tr>";
+        declinedTable = 
+        "<div>" +
+            "<h1>Declined</h1>" +
+            "<table>" +
+                "<tr>" +
+                    "<th>Day</th><th>Date</th><th>Place</th><th>Friend</th><th>Status</th>" + 
+                "</tr>";
+        privateRequestsAray.foreach(element=>{
+            if(element.Status == "No Response"){
+                noResponseTable += 
+                "<tr>" +
+                "<td>" + element.Week + "</td>" +
+                "<td>" + element.Date + "</td>" +
+                "<td>" + element.Place + "</td>" +
+                "<td>" + element.Username + "</td>"+
+                "<td>" + element.Status + "</td>"+
+                "<td>" + element.Response + "</td>"+
+                "</tr>";
+            }else if(element.Status == "accepted"){
+                acceptedTable += 
+                "<tr>" +
+                "<td>" + element.Week + "</td>" +
+                "<td>" + element.Date + "</td>" +
+                "<td>" + element.Place + "</td>" +
+                "<td>" + element.Username + "</td>"+
+                "<td>" + element.Status + "</td>"+
+                "</tr>";
+            }else{
+                declinedTable += 
+                "<tr>" +
+                "<td>" + element.Week + "</td>" +
+                "<td>" + element.Date + "</td>" +
+                "<td>" + element.Place + "</td>" +
+                "<td>" + element.Username + "</td>"+
+                "<td>" + element.Status + "</td>"+
+                "</tr>";
+            }
+        })
+        noResponseTable += "</table>" + "</div>";
+        acceptedTable += "</table>" + "</div>";
+        declinedTable += "</table>" + "</div>";
+        document.getElementById("privateRequest").innerHTML = noResponseTable + acceptedTable + declinedTable;
         document.getElementById("PublicRequest").innerHTML = publicRequests;
         
         if(countForPrivate == 0){

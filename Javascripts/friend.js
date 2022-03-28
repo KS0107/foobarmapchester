@@ -305,7 +305,7 @@ function retrieveEventRequest(){
                 "<tr>" +
                     "<th>Day</th><th>Date</th><th>Place</th><th>Friend</th><th>Status</th>" + 
                 "</tr>";
-        privateRequestsAray.foreach(element=>{
+        privateRequestsAray.forEach(element=>{
             if(element.Status == "No Response"){
                 noResponseTable += 
                 "<tr>" +

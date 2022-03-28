@@ -286,21 +286,21 @@ function retrieveEventRequest(){
         }
         noResponseTable = 
         "<div>" +
-            "<h1>No Response</h1>" +
+            "<p>No Response</p>" +
             "<table>" +
                 "<tr>" +
                     "<th>Day</th><th>Date</th><th>Place</th><th>Friend</th><th>Status</th><th>Response</th>" + 
                 "</tr>";
         acceptedTable = 
         "<div>" +
-            "<h1>Accepted</h1>" +
+            "<p>Accepted</p>" +
             "<table>" +
                 "<tr>" +
                     "<th>Day</th><th>Date</th><th>Place</th><th>Friend</th><th>Status</th>" + 
                 "</tr>";
         declinedTable = 
         "<div>" +
-            "<h1>Declined</h1>" +
+            "<p>Declined</p>" +
             "<table>" +
                 "<tr>" +
                     "<th>Day</th><th>Date</th><th>Place</th><th>Friend</th><th>Status</th>" + 
@@ -310,8 +310,8 @@ function retrieveEventRequest(){
             if(element.Status == "No Response"){
                 noResponseTable += 
                 "<tr>" +
-                "<td>" + element.Week + "</td>" +
-                "<td>" + element.Date + "</td>" +
+                "<td>" + element.Day + "</td>" +
+                "<td>" + element.Time + "</td>" +
                 "<td>" + element.Place + "</td>" +
                 "<td>" + element.Username + "</td>"+
                 "<td>" + element.Status + "</td>"+
@@ -320,8 +320,8 @@ function retrieveEventRequest(){
             }else if(element.Status == "accepted"){
                 acceptedTable += 
                 "<tr>" +
-                "<td>" + element.Week + "</td>" +
-                "<td>" + element.Date + "</td>" +
+                "<td>" + element.Day + "</td>" +
+                "<td>" + element.Time + "</td>" +
                 "<td>" + element.Place + "</td>" +
                 "<td>" + element.Username + "</td>"+
                 "<td>" + element.Status + "</td>"+
@@ -329,8 +329,8 @@ function retrieveEventRequest(){
             }else{
                 declinedTable += 
                 "<tr>" +
-                "<td>" + element.Week + "</td>" +
-                "<td>" + element.Date + "</td>" +
+                "<td>" + element.Day + "</td>" +
+                "<td>" + element.Time + "</td>" +
                 "<td>" + element.Place + "</td>" +
                 "<td>" + element.Username + "</td>"+
                 "<td>" + element.Status + "</td>"+

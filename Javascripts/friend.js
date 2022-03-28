@@ -141,7 +141,7 @@ function retrieveEventRequest(){
     xhttp.onload = function() {
         response = JSON.parse(this.responseText);
         privateRequests = "";
-        privateRequestsAray = []
+        privateRequestsArray = [];
         publicRequests = "";
         countForPrivate = 0;
         countForPublic = 0;
@@ -305,7 +305,7 @@ function retrieveEventRequest(){
                 "<tr>" +
                     "<th>Day</th><th>Date</th><th>Place</th><th>Friend</th><th>Status</th>" + 
                 "</tr>";
-        privateRequestsAray.forEach(element=>{
+        privateRequestsArray.forEach(element => {
             if(element.Status == "No Response"){
                 noResponseTable += 
                 "<tr>" +
@@ -335,7 +335,7 @@ function retrieveEventRequest(){
                 "<td>" + element.Status + "</td>"+
                 "</tr>";
             }
-        })
+        });
         noResponseTable += "</table>" + "</div>";
         acceptedTable += "</table>" + "</div>";
         declinedTable += "</table>" + "</div>";

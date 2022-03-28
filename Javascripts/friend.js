@@ -130,6 +130,9 @@ function eventNo(requestmsgID){
 
 function eventJoin(groupChatID){
     const xhttp = new XMLHttpRequest();
+    xhttp.onload = function(){
+        alert(this.responseText);
+    }
     xhttp.open("POST", "../restapi/index.php/user/eventJoin");
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send("groupChatID=" + groupChatID);
@@ -176,7 +179,7 @@ function retrieveEventRequest(search){
                     privateRequestsArray.push(tempRecord);
                 }
             }else{ //public case
-                if(response[0] != response[1][i].requesterID && response[0] == response[1][i].TargetID && response[1][i].Status == "No Reponse"){
+                if((response[0] != response[1][i].requesterID) && (response[0] == response[1][i].TargetID) && (response[1][i].Status == "No Response")){
                     if(response[1][i].Noti == "unread"){
                         countForPublic++;
                     }

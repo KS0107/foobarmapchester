@@ -453,7 +453,7 @@ class UserController extends BaseController{
                     case "11pm-10am": $time = 4; break;
                 }
                 $day = $_POST["day"];
-                if((!is_null($userModel->verifyEvent($userID, $time, $day)[0][$day]) && !is_null($userModel->verifyEvent($requesterID, $time, $day)[0][$day])) || ($userModel->verifyEvent($userID, $time, $day)[0][$day] != $place && $userModel->verifyEvent($requesterID, $time, $day)[0][$day] != $palce)){
+                if((!is_null($userModel->verifyEvent($userID, $time, $day)[0][$day]) && !is_null($userModel->verifyEvent($requesterID, $time, $day)[0][$day])) && ($userModel->verifyEvent($userID, $time, $day)[0][$day] != $place && $userModel->verifyEvent($requesterID, $time, $day)[0][$day] != $palce)){
                     //event already hold for the time
                     $respondData = "you  already have an event at the time";
                 }else{
@@ -644,7 +644,7 @@ class UserController extends BaseController{
                 $day = $infor[0]["Day"];
                 $time =  $infor[0]["Time"];
                 $place = $infor[0]["Place"];
-                if(!is_null($userModel->verifyEvent($userid, $time, $day)[0][$day]) || $userModel->verifyEvent($userid, $time, $day)[0][$day] != $place){
+                if(!is_null($userModel->verifyEvent($userid, $time, $day)[0][$day]) && $userModel->verifyEvent($userid, $time, $day)[0][$day] != $place){
                     //event already hold for the time
                     $respondData = "you already have an event at the time";
                 }else{

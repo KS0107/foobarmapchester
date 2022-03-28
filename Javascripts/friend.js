@@ -251,7 +251,7 @@ function retrieveEventRequest(){
                         "</div>";
                     }
                 }
-                privateRequestsArray += tempRecord;
+                privateRequestsArray.push(tempRecord);
             }else{ //public case
                 if(response[0] != response[1][i].requesterID && response[0] == response[1][i].TargetID && response[1][i].Status == "No Reponse"){
                     if(response[1][i].Noti == "unread"){

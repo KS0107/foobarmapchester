@@ -136,7 +136,7 @@ function eventJoin(groupChatID){
 }
 
 
-function retrieveEventRequest(){
+function retrieveEventRequest(search){
     const xhttp = new XMLHttpRequest();
     xhttp.onload = function() {
         response = JSON.parse(this.responseText);
@@ -172,7 +172,9 @@ function retrieveEventRequest(){
                         tempRecord.Response = null;
                     }
                 }
-                privateRequestsArray.push(tempRecord);
+                if(tempRecord.Place.contains(search)){
+                    privateRequestsArray.push(tempRecord);
+                }
             }else{ //public case
                 if(response[0] != response[1][i].requesterID && response[0] == response[1][i].TargetID && response[1][i].Status == "No Reponse"){
                     if(response[1][i].Noti == "unread"){
@@ -279,7 +281,7 @@ function retrieveEventRequest(){
     xhttp.open("GET", "../restapi/index.php/user/getEventRequest");
     xhttp.send();
 }
-setInterval(retrieveEventRequest, 4000);
+retrieveEventRequest("");
 
 
 $(document).ready(function(){

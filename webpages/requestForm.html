@@ -18,12 +18,12 @@
             </select>
 
             <br><label for="place">Choose a place</label>
-            <br><select name="place" id="place">
+            <br><select name="place" id="place" onchange="loadFriendByAvailability()">
 
             </select>
 
             <br><label for="date">Choose a time</label>
-            <br><select name="date" id="date">
+            <br><select name="date" id="date" onchange="loadFriendByAvailability()"> 
                 <option value="10am-2pm" selected>10am-2pm</option>
                 <option value="2pm-6pm" >2pm-6pm</option>
                 <option value="6pm-11pm" >6pm-11pm</option>
@@ -31,7 +31,7 @@
             </select>
 
             <br><label for="week">Choose a day</label>
-            <br><select name="week" id="week">
+            <br><select name="week" id="week" onchange="loadFriendByAvailability()">
                 <option value="Mon" selected>Mon</option>
                 <option value="Tue" >Tue</option>
                 <option value="Wed" >Wed</option>
@@ -42,7 +42,7 @@
             </select>
 
             <br><label for="friendList" id="choose-label" >Send the request to</label>
-            <br><select name="friends" id="friendList" multiple></select>
+            <br><select name="friends" id="friendList"></select>
 
             <br><div><button id="formbtn">Submit</buton></div>
         </form>
@@ -118,15 +118,14 @@
         friends = JSON.parse(this.responseText);
         friendsList = "";
         for(let i = 0; i < friends.length; i++){
-            friendsList +=  "<option value=\'" + friends[i].Username + "\'>" + friends[i].Username + "</option>";
+            friendsList +=  "<option value='" + friends[i].Username + "'>" + friends[i].Username + "</option>";
         }
         document.getElementById("friendList").innerHTML = friendsList;
         }   
         xhttp.open("GET", "../restapi/index.php/user/getFriendByAvailability?time=" + date + "&day=" + day);
         xhttp.send();
     }
-    setInterval(loadFriendByAvailability, 1000);
-
+    loadFriendByAvailability();
 
     function getCookie(cname) {
         let name = cname + "=";

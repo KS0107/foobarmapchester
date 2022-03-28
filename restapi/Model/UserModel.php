@@ -73,7 +73,7 @@ class UserModel extends Database{
                 SELECT r.RequestmsgID, r.CreatedDate, r.Type, r.Place, r.Date, r.Week, User.Username, r.TargetID, r.requesterID, r.Status, r.Noti, r.GroupChatID
                 FROM Requestmsg as r
                 LEFT JOIN User on r.RequesterID = User.UserID
-                WHERE r.Type = 'public'
+                WHERE r.TargetID = :userid AND r.Type = 'public'
                 ORDER BY CreatedDate DESC";
         return $this->executeFetchQuery($sql, ["userid"=>$userid]);
     }
@@ -187,6 +187,13 @@ class UserModel extends Database{
         return $this->executeQuery($sql, ["place"=>$place, "userid"=>$userID, "time"=>$time]);
     }
 
+    public function getInfoByGroupId($groupid){
+        $sql ="SELECT Day, Time, Place
+                FROM GroupChat
+                WHERE GroupChatID = :id";
+        return $this->executeFetchQuery($sql, ["id"=>$groupid]);
+    }
+
     public function updateStatus($requestmsgID, $status){
         $sql = "UPDATE Requestmsg
                 SET Status = :status
@@ -249,7 +256,7 @@ class UserModel extends Database{
     }
 
     public function getFriend($username){
-        $sql = "SELECT Username, Status
+        $sql = "SELECT UserID, Username, Status
                 FROM User
                 WHERE UserID IN (             
                 SELECT FriendID
@@ -425,6 +432,21 @@ class UserModel extends Database{
         $this->executeQuery($sql, ["userid"=>$userid, "day"=>$day, "time"=>$time, "place"=>$place]);
         return $this->conn->lastInsertId();
 
+    }
+
+    public function deleteFriend($userid, $targetid){
+        $sql = "DELETE FROM Friendship 
+                WHERE 
+                (UserID = :userid AND FriendID = :friendid) OR
+                (UserID = :friendid AND FriendID = :userid)";
+        return $this->executeQuery($sql, ["userid"=>$userid, "friendid"=>$targetid]);
+    }
+
+    public function removeGroupChat($userid, $targetid){
+        $sql = "UPDATE Requestmsg
+                SET Status = 'removed'
+                WHERE type = 'public' AND TargetID = :userid AND GroupChatID = :groupchatid";
+        return $this->executeQuery($sql, ["userid"=>$userid, "groupchatid"=>$targetid]);
     }
 
 }

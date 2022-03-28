@@ -27,9 +27,9 @@ $(document).ready(function(){
         friendsList = "";
         for(let i = 0; i < friends.length; i++){
             if(friends[i].Status == "online"){
-                friendsList +=  "<div style=\"position: relative;\"><button type=\"button\" style=\"width: 100%; border: solid;\" onclick=\"chatHandler(\'"+ friends[i].Username +"\')\">" + friends[i].Username + "</button>" + "<div style=\"position: absolute; bottom: 12px; right: 0; width: 30px; height: 30px; background-image: url(../images/online.png); background-size: cover; \"></div>" + "</div>";
+                friendsList +=  "<div style=\"position: relative;\">" + "<div style=\"position: absolute; bottom: 13px; left: 18px; width: 30px; height: 30px; background-image: url(../images/delete.png); background-size: cover; \"></div>" + "<button type=\"button\" style=\"width: 100%; border: solid;\" onclick=\"chatHandler(\'"+ friends[i].Username +"\')\">" + friends[i].Username + "</button>" + "<div style=\"position: absolute; bottom: 12px; right: 0; width: 30px; height: 30px; background-image: url(../images/online.png); background-size: cover; \"></div>" + "</div>";
             }else{
-                friendsList +=  "<div style=\"position: relative;\"><button type=\"button\" style=\"width: 100%; border: solid;\" onclick=\"chatHandler(\'"+ friends[i].Username +"\')\">" + friends[i].Username + "</button>" + "<div style=\"position: absolute; bottom: 12px; right: 0; width: 30px; height: 30px; background-image: url(../images/offline.png); background-size: cover; \"></div>" + "</div>";
+                friendsList +=  "<div style=\"position: relative;\">"  + "<div style=\"position: absolute; bottom: 13px; left: 18px; width: 30px; height: 30px; background-image: url(../images/delete.png); background-size: cover; \"></div>" + "<button type=\"button\" style=\"width: 100%; border: solid;\" onclick=\"chatHandler(\'"+ friends[i].Username +"\')\">" + friends[i].Username + "</button>" + "<div style=\"position: absolute; bottom: 12px; right: 0; width: 30px; height: 30px; background-image: url(../images/offline.png); background-size: cover; \"></div>" + "</div>";
             }
         }
         document.getElementById("friends").innerHTML = friendsList;
@@ -56,7 +56,7 @@ $(document).ready(function(){
       }
 });
 
-function loadGroupChat(){
+function loadGroupChat(){ // query stmt restricts that get groupids only when status is accepted and status is active 
     const xhttp = new XMLHttpRequest();
     xhttp.onload = function(){
         groupChatIDs = JSON.parse(this.responseText);
@@ -70,6 +70,17 @@ function loadGroupChat(){
     xhttp.send();
 }
 setInterval(loadGroupChat, 1000);
+
+function remove(id, type){ //delete friend or groupchat
+    const xhttp = new XMLHttpRequest();
+    if(type == "friend"){
+        xhttp.open("GET", "../restapi/index.php/user/deleteFriend?id=" + id);
+    }else{
+        xhttp.open("GET", "../restapi/index.php/user/removeGroupChat?id=" + id);
+    }
+    xhttp.send();
+}
+
 
 function chatHandler(friend){
     if(typeof(intervalID) !== "undefined"){

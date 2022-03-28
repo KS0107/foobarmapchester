@@ -21,7 +21,6 @@
             <!-- <button id="slider">Collapse Reviews</button> -->
         </div>
     </div>
-
 	<h2 id="title">Chatbox</h2>
 	<div class="flex-container">
 		<div class="friendList">
@@ -30,6 +29,7 @@
 				<div><button id="publicChat">group chat</button></div>
 				<!-- <div id="friend-tag"><h2>Friends</h2></div> -->
 				<div id="add-friend"><a id="ibtn"></a></div>
+				<div id="delete-friend"><a id="dbtn"></a></div>
 			</div>
 			<!-- <button class="deletemsg" id="delete">Delete</button>
 			<button class="logout" id="exit">Exit</button> -->

@@ -381,7 +381,7 @@ class UserController extends BaseController{
                             // this stores requestmsg
                             $userModel->storeRequestmsg($type, $place, $date, $day, $targetid, $requesterid);
                         }else{
-                            $respondData = "you or your friends are busy on the date";
+                            $respondData = "you are busy on the date";
                             // case there is no such request and targetID are free
                         }
                     }
@@ -398,7 +398,8 @@ class UserController extends BaseController{
                         for($i = 0; $i < sizeof($allUsers); $i++){
                             $userModel->storeRequestmsg($type, $place, $date, $day, $allUsers[$i]["UserID"], $requesterid, $groupChatID);
                         }
-                        
+                        // update the requester as accepted for loading the group chat
+                        $userModel->updatePublicStatus($requesterid, $groupChatID);
                     }
                 }
                 if(!empty($respondData2)){$respondData = "made successfully for " . $respondData2;}
@@ -454,7 +455,7 @@ class UserController extends BaseController{
                 $day = $_POST["day"];
                 if((!is_null($userModel->verifyEvent($userID, $time, $day)[0][$day]) && !is_null($userModel->verifyEvent($requesterID, $time, $day)[0][$day])) || ($userModel->verifyEvent($userID, $time, $day)[0][$day] != $place && $userModel->verifyEvent($requesterID, $time, $day)[0][$day] != $palce)){
                     //event already hold for the time
-                    $respondData = "you or your friends already have an event at the time";
+                    $respondData = "you  already have an event at the time";
                 }else{
                     if(is_null($userModel->verifyEvent($userID, $time, $day)[0][$day])){
                         // add event to it
@@ -475,7 +476,12 @@ class UserController extends BaseController{
                         for($i = 0; $i < sizeof($requestmsg); $i++){
                             $userModel->updateStatus($requestmsg[$i]["RequestmsgID"], "busy");
                         }
-                    }else{
+
+                        $requestmsg = $userModel->getRequestmsgIDBySP("private", $place, $date, $day, $userID, $status);
+                        for($i = 0; $i < sizeof($requestmsg); $i++){
+                            $userModel->updateStatus($requestmsg[$i]["RequestmsgID"], "accepted");
+                        }
+
                         $requestmsg = $userModel->getRequestmsgIDBySP("private", $place, $date, $day, $requesterID, $status);
                         for($i = 0; $i < sizeof($requestmsg); $i++){
                             $userModel->updateStatus($requestmsg[$i]["RequestmsgID"], "accepted");
@@ -634,9 +640,34 @@ class UserController extends BaseController{
                 $groupChatID = $_POST["groupChatID"];
                 $userModel = new UserModel;
                 $userid = $userModel->getID($_COOKIE["username"]);
-                $userModel->updatePublicStatus($userid, $groupChatID);
-                
-                $responseDate = '';
+                $infor = $userModel->getInfoByGroupId($groupChatID);
+                $day = $infor[0]["Day"];
+                $time =  $infor[0]["Time"];
+                $place = $infor[0]["Place"];
+                if(!is_null($userModel->verifyEvent($userid, $time, $day)[0][$day]) || $userModel->verifyEvent($userid, $time, $day)[0][$day] != $place){
+                    //event already hold for the time
+                    $respondData = "you already have an event at the time";
+                }else{
+                    if(is_null($userModel->verifyEvent($userID, $time, $day)[0][$day])){
+                        $userModel->updatePublicStatus($userid, $groupChatID);
+                        $userModel->addEvent($userid, $place, $time, $day);
+
+                        $respondData = "you just made an event to timetable!!";
+
+                        // update other requests' status as busy for those having the same date
+                        // get the requestmsgID by userid
+                        $status = "No Response"; // get the requestmsg which not responded
+                        $requestmsg = $userModel->getRequestmsgIDByDP("public", $place, $time, $day, $userid, $status);
+                        for($i = 0; $i < sizeof($requestmsg); $i++){
+                            $userModel->updateStatus($requestmsg[$i]["RequestmsgID"], "busy");
+                        }
+
+                        $requestmsg = $userModel->getRequestmsgIDBySP("public", $place, $time, $day, $userid, $status);
+                        for($i = 0; $i < sizeof($requestmsg); $i++){
+                            $userModel->updateStatus($requestmsg[$i]["RequestmsgID"], "accepted");
+                        }
+                    }
+                }
             }catch(Error $e){
                 $this->strErrorDesc = $e->getMessage();
                 $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
@@ -645,11 +676,10 @@ class UserController extends BaseController{
             $this->strErrorDesc = 'Method not supported';
             $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
         }
-        $this->errorHandler($this->strErrorDesc, $responseDate, $this->strErrorHeader);
+        $this->errorHandler($this->strErrorDesc, $respondData, $this->strErrorHeader);
     }
 
     public function getGroupChatAction(){
-        // update public request to accepted status
         if(strtoupper($this->requestMethod) == "GET"){
             try{
                 $userModel = new UserModel;
@@ -665,6 +695,42 @@ class UserController extends BaseController{
             $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
         }
         $this->errorHandler($this->strErrorDesc, $responseDate, $this->strErrorHeader);
+    }
+
+    public function deleteFriendAction(){
+        if(strtoupper($this->requestMethod) == "GET"){
+            try{
+                $userModel = new UserModel;
+                $userid = $userModel->getID($_COOKIE["username"]);
+                $targetid = $this->arrQueryStringParams["id"];
+                $groupChats = $userModel->deleteFriend($userid, $targetid);
+            }catch(Error $e){
+                $this->strErrorDesc = $e->getMessage();
+                $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
+            }
+        }else{
+            $this->strErrorDesc = 'Method not supported';
+            $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
+        }
+        $this->errorHandler($this->strErrorDesc, "", $this->strErrorHeader);
+    }
+
+    public function removeGroupChatAction(){
+        if(strtoupper($this->requestMethod) == "GET"){
+            try{
+                $userModel = new UserModel;
+                $userid = $userModel->getID($_COOKIE["username"]);
+                $targetid = $this->arrQueryStringParams["id"];
+                $groupChats = $userModel->removeGroupChat($userid, $targetid);
+            }catch(Error $e){
+                $this->strErrorDesc = $e->getMessage();
+                $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
+            }
+        }else{
+            $this->strErrorDesc = 'Method not supported';
+            $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
+        }
+        $this->errorHandler($this->strErrorDesc, "", $this->strErrorHeader);
     }
 }
 ?>

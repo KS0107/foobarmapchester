@@ -82,18 +82,18 @@ function goToPage(page){
     }
     newLink = reconstructLink(pathSections);
     // made by Jiaying: set a global variable for invoke logout function when close the broswer but not when redireting
-    redirect = true;
+    // redirect = true;
     window.location = newLink;
 }
 // When close the page, it invoks logout function.
-window.onbeforeunload = function(){
-    if(typeof(redirect) == 'undefined'){
-        const xmlhttp = new XMLHttpRequest();
-        xmlhttp.open("GET", "../webpages/logoutMedium.php");
-        xmlhttp.send(); 
-        return "are you sure to leave";
-    }
-}
+// window.onbeforeunload = function(){
+//     if(typeof(redirect) == 'undefined'){
+//         const xmlhttp = new XMLHttpRequest();
+//         xmlhttp.open("GET", "../webpages/logoutMedium.php");
+//         xmlhttp.send(); 
+//         return "are you sure to leave";
+//     }
+// }
 
 function reconstructLink(sections){
     outLink = "";

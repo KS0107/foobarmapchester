@@ -149,106 +149,27 @@ function retrieveEventRequest(){
             if(response[1][i].Type == "private"){
                 tempRecord = 
                 {
-                    "Day": "",
-                    "Time": "",
-                    "Place": "",
-                    "Username": "",
-                    "Status": "",
-                    "Response": ""
+                    "Day": response[1][i].Week,
+                    "Time": response[1][i].Date,
+                    "Place": response[1][i].Place,
+                    "Username": response[1][i].Username,
+                    "Status": response[1][i].Status,
+                    "Response": null
                 };                
                 if(response[1][i].requesterID != response[0] && response[1][i].Noti == "unread"){
                     countForPrivate++;
                 }
                 if(response[0] == response[1][i].requesterID){//User is sending request
-                    tempRecord.Day = response[1][i].Week;
-                    tempRecord.Time = response[1][i].Date;
-                    tempRecord.Place = response[1][i].Place;
-                    tempRecord.Username = response[1][i].Username;
-                    tempRecord.Status = response[1][i].Status;
                     tempRecord.Response = null;
-                    privateRequests += 
-                    "<div>" +
-                        "<table>" +
-                            "<tr>" +
-                                "<th>" + "Day" + "</th>" +
-                                "<th>" + "Date" + "</th>" +
-                                "<th>" + "Place" + "</th>" +
-                                "<th>" + "To Friend" + "</th>"+
-                                "<th>" + "Status" + "</th>"+
-                            "</tr>" +
-                            "<tr>" +
-                                "<td>" + response[1][i].Week + "</td>" +
-                                "<td>" + response[1][i].Date + "</td>" +
-                                "<td>" + response[1][i].Place + "</td>" +
-                                "<td>" + response[1][i].Username + "</td>"+
-                                "<td>" + response[1][i].Status + "</td>"+
-                            "</tr>" +
-                        "</table>" +
-                    "</div>";
                 }else{ // user is recipient
                     if(response[1][i].Status == "No Response"){//User can respond
-                        tempRecord.Day = response[1][i].Week;
-                        tempRecord.Time = response[1][i].Date;
-                        tempRecord.Place = response[1][i].Place;
-                        tempRecord.Username = response[1][i].Username;
-                        tempRecord.Status = response[1][i].Status;
                         tempRecord.Response = 
                         "<div id=" + response[1][i].RequestmsgID + ">" +
                             "<div>" + "<button onclick=eventYes('"  + response[1][i].requesterID + "','" + response[1][i].RequestmsgID + "','" + encodeURIComponent(response[1][i].Place) + "','" + response[1][i].Date + "','" + response[1][i].Week +  "')>Accept</button>" + "</div>" +
                             "<div>" + "<button onclick=eventNo('"  +  response[1][i].RequestmsgID + "')>Decline</button>" + "</div>" +
                         "</div>";
-                        privateRequests += 
-                        "<div>" +
-                            "<table>" +
-                                "<tr>" +
-                                    "<th>" + "Day" + "</th>" +
-                                    "<th>" + "Date" + "</th>" +
-                                    "<th>" + "Place" + "</th>" +
-                                    "<th>" + "From Friend" + "</th>" +
-                                    "<th>" + "Status" + "</th>"+
-                                    "<th>" + "Response" + "</th>"+
-                                "</tr>" +
-                                "<tr>" +
-                                    "<td>" + response[1][i].Week + "</td>" +
-                                    "<td>" + response[1][i].Date + "</td>" +
-                                    "<td>" + response[1][i].Place + "</td>" +
-                                    "<td>" + response[1][i].Username + "</td>" +
-                                    "<td>" + response[1][i].Status + "</td>"+
-                                    "<td>" + 
-                                        "<div id=" + response[1][i].RequestmsgID + ">" +
-                                            "<div>" + "<button onclick=eventYes('"  + response[1][i].requesterID + "','" + response[1][i].RequestmsgID + "','" + encodeURIComponent(response[1][i].Place) + "','" + response[1][i].Date + "','" + response[1][i].Week +  "')>Accept</button>" + "</div>" +
-                                            "<div>" + "<button onclick=eventNo('"  +  response[1][i].RequestmsgID + "')>Decline</button>" + "</div>" +
-                                        "</div>" +
-                                    "</td>"+
-                                "</tr>" +
-                            "</table>" +
-                        "</div>";
                     }else{//User has already responded
-                        privateRequests += 
-                        tempRecord.Day = response[1][i].Week;
-                        tempRecord.Time = response[1][i].Date;
-                        tempRecord.Place = response[1][i].Place;
-                        tempRecord.Username = response[1][i].Username;
-                        tempRecord.Status = response[1][i].Status;
                         tempRecord.Response = null;
-                        "<div>" +
-                            "<table>" +
-                                "<tr>" +
-                                    "<th>" + "Day" + "</th>" +
-                                    "<th>" + "Date" + "</th>" +
-                                    "<th>" + "Place" + "</th>" +
-                                    "<th>" + "From Friend" + "</th>" +
-                                    "<th>" + "Status" + "</th>"+
-                                "</tr>" +
-                                "<tr>" +
-                                    "<td>" + response[1][i].Week + "</td>" +
-                                    "<td>" + response[1][i].Date + "</td>" +
-                                    "<td>" + response[1][i].Place + "</td>" +
-                                    "<td>" + response[1][i].Username + "</td>" +
-                                    "<td>" + response[1][i].Status + "</td>"+
-                                "</tr>" +
-                            "</table>" +
-                        "</div>";
                     }
                 }
                 privateRequestsArray.push(tempRecord);
@@ -305,7 +226,6 @@ function retrieveEventRequest(){
                 "<tr>" +
                     "<th>Day</th><th>Date</th><th>Place</th><th>Friend</th><th>Status</th>" + 
                 "</tr>";
-        console.log(privateRequestsArray);
         privateRequestsArray.forEach(element => {
             if(element.Status == "No Response"){
                 noResponseTable += 

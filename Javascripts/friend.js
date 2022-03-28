@@ -251,7 +251,7 @@ function retrieveEventRequest(){
                         "</div>";
                     }
                 }
-                privateRequestsAray += tempRecord;
+                privateRequestsArray += tempRecord;
             }else{ //public case
                 if(response[0] != response[1][i].requesterID && response[0] == response[1][i].TargetID && response[1][i].Status == "No Reponse"){
                     if(response[1][i].Noti == "unread"){
@@ -305,6 +305,7 @@ function retrieveEventRequest(){
                 "<tr>" +
                     "<th>Day</th><th>Date</th><th>Place</th><th>Friend</th><th>Status</th>" + 
                 "</tr>";
+        console.log(privateRequestsArray);
         privateRequestsArray.forEach(element => {
             if(element.Status == "No Response"){
                 noResponseTable += 

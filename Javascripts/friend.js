@@ -172,7 +172,7 @@ function retrieveEventRequest(search){
                         tempRecord.Response = null;
                     }
                 }
-                if(tempRecord.Place.contains(search)){
+                if(tempRecord.Place.includes(search)){
                     privateRequestsArray.push(tempRecord);
                 }
             }else{ //public case

@@ -28,8 +28,9 @@ var map = new mapboxgl.Map({
     maxBounds: bounds
 });
 
+markers = getMarkers();
 function updateMarkers() {
-    for (const marker of getMarkers().features) {
+    for (const marker of markers.features) {
         // Create a DOM element for each marker.
         const el = document.createElement('div');
         const width = marker.properties.iconSize[0];
@@ -40,7 +41,7 @@ function updateMarkers() {
         el.style.height = `${height}px`;
         el.style.backgroundSize = '100%';
         
-        console.log(map.zoom);
+        console.log(map["zoom"]);
 
         el.addEventListener('click', () => {
             //window.alert(marker.properties.message);

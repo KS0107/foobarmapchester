@@ -34,7 +34,6 @@ markers = getMarkers();
 let markersOnScreen = [];
 
 function loadMarkers() {
-    console.log("Markers being loaded")
     for (const marker of markers.features) {
         // Create a DOM element for each marker.
         const el = document.createElement('div');
@@ -59,11 +58,9 @@ function loadMarkers() {
         .setLngLat(marker.geometry.coordinates)
         .addTo(map);
     }
-    console.log(markersOnScreen);
 }
 
 function updateMarkers(){
-    console.log(map.style.z);
     markersOnScreen.forEach(element=>{
         scaleFactor = (map.style.z)*(map.style.z)/200;
         element.style.width = 40*scaleFactor+"px";

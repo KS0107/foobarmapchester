@@ -391,7 +391,7 @@ class UserModel extends Database{
    }
 
    public function checkReceiver($requesterid, $place, $time, $day){
-        $sql = "SELECT TargetID 
+        $sql = "SELECT TargetID, GroupChatID 
                 FROM Requestmsg 
                 WHERE RequesterID = :requesterid
                 AND Place = :place
@@ -402,7 +402,7 @@ class UserModel extends Database{
     }
 
     public function checkRequester($targetid, $place, $time, $day){
-        $sql = "SELECT RequesterID 
+        $sql = "SELECT RequesterID, GroupChatID 
                 FROM Requestmsg 
                 WHERE TargetID = :targetid
                 AND Place = :place

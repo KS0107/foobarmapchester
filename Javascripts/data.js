@@ -257,17 +257,6 @@ function generateMarkerData(){
                 'type': 'Point',
                 'coordinates': [0, 0]
             },
-            'paint': {
-                'radius': [
-                    'interpolate',
-                    ['linear'],
-                    ['zoom'],
-                    10,
-                    10,
-                    15,
-                    20
-                    ]
-            }
         }
         blankLocation.properties.message = element.Name;
         blankLocation.geometry.coordinates = element.Coords;

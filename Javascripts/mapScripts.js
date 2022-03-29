@@ -1,7 +1,7 @@
 mapboxgl.accessToken = 'pk.eyJ1Ijoia3MwMTA3IiwiYSI6ImNrd3hpa2djNzBlYjYydnExYXJ3bXVqNW8ifQ.4eD36Q7KuGJIPegaAn37NQ';
 
 document.addEventListener("DOMContentLoaded", () => {   //Otherwise the onclick is assigned before the DOM is loaded
-    document.onload = loadMarkers;
+    window.onload = loadMarkers;
     
     const lightandDarkButton = document.getElementById("lightD");
     if(lightandDarkButton != null){

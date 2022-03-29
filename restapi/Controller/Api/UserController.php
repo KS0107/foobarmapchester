@@ -541,10 +541,10 @@ class UserController extends BaseController{
                             $groupchatName = null;
                             if(count($receiver)>0){
                                 $receiverName = $userModel->getUsernameById($receiver[0]["TargetID"])[0]["Username"];
-                                $groupchatName = $groupchat[0]["GroupChatID"];
+                                $groupchatName = $receiver[0]["GroupChatID"];
                             }elseif(count($requester)>0){
                                 $requesterName = $userModel->getUsernameById($requester[0]["RequesterID"])[0]["Username"];
-                                $groupchatName = $groupchat[0]["GroupChatID"];
+                                $groupchatName = $requester[0]["GroupChatID"];
                             }
                             $value2 = $value2 . "|" . json_encode($receiverName) . "|" . json_encode($requesterName);
                         }

@@ -40,7 +40,7 @@ for (const marker of getMarkers().features) {
         ['linear'],
         ['zoom'],
         5,
-        2,
+        10,
         15,
         40
         ];

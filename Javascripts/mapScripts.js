@@ -39,10 +39,10 @@ for (const marker of getMarkers().features) {
         'interpolate',
         ['linear'],
         ['zoom'],
-        10,
-        10,
+        5,
+        2,
         15,
-        20
+        40
         ];
     el.style.height = `${height}px`;
     el.style.backgroundSize = '100%';

@@ -29,7 +29,7 @@ var map = new mapboxgl.Map({
 });
 
 markers = getMarkers();
-let markersOnScreen = {};
+let markersOnScreen = [];
 
 function loadMarkers() {
     for (const marker of markers.features) {
@@ -43,7 +43,7 @@ function loadMarkers() {
         el.style.height = `${height}px`;
         el.style.backgroundSize = '100%';
         
-        console.log(map);
+        console.log(map.style.z);
 
         el.addEventListener('click', () => {
             //window.alert(marker.properties.message);
@@ -61,6 +61,7 @@ function loadMarkers() {
 }
 
 function updateMarkers(){
+    console.log(map.style.z);
     markersOnScreen.forEach(element=>{
         element.style.width = "200px";
     })

@@ -535,14 +535,16 @@ class UserController extends BaseController{
                     foreach ($value as &$value2){
                         if($value2 != null){
                             $receiver = $userModel->checkReceiver($userID, $value2, $times[$counterTimes], $days[$counter]);
-                            $receiverName = null;
-                            if(count($receiver)>0){
-                                $receiverName = $userModel->getUsernameById($receiver[0]["TargetID"])[0]["Username"];
-                            }
                             $requester = $userModel->checkRequester($userID, $value2, $times[$counterTimes], $days[$counter]);
                             $requesterName = null;
-                            if(count($requester)>0){
+                            $receiverName = null;
+                            $groupchatName = null;
+                            if(count($receiver)>0){
+                                $receiverName = $userModel->getUsernameById($receiver[0]["TargetID"])[0]["Username"];
+                                $groupchatName = $groupchat[0]["GroupChatID"]);
+                            }elseif(count($requester)>0){
                                 $requesterName = $userModel->getUsernameById($requester[0]["RequesterID"])[0]["Username"];
+                                $groupchatName = $groupchat[0]["GroupChatID"]);
                             }
                             $value2 = $value2 . "|" . json_encode($receiverName) . "|" . json_encode($requesterName);
                         }

@@ -66,9 +66,7 @@ function updateMarkers(){
     })
 }
 
-map.on('load', () => {
-    loadMarkers()
-});
+loadMarkers()
 
 map.on('render', () => {
     updateMarkers()

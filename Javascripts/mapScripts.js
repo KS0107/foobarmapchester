@@ -1,6 +1,8 @@
 mapboxgl.accessToken = 'pk.eyJ1Ijoia3MwMTA3IiwiYSI6ImNrd3hpa2djNzBlYjYydnExYXJ3bXVqNW8ifQ.4eD36Q7KuGJIPegaAn37NQ';
 
 document.addEventListener("DOMContentLoaded", () => {   //Otherwise the onclick is assigned before the DOM is loaded
+    document.onload = loadMarkers;
+    
     const lightandDarkButton = document.getElementById("lightD");
     if(lightandDarkButton != null){
         lightandDarkButton.onclick = LightFunction;
@@ -42,8 +44,6 @@ function loadMarkers() {
         el.style.width = `${height}px`;
         el.style.height = `${height}px`;
         el.style.backgroundSize = '100%';
-        
-        console.log(map.style.z);
 
         el.addEventListener('click', () => {
             //window.alert(marker.properties.message);
@@ -66,8 +66,6 @@ function updateMarkers(){
         element.style.width = "200px";
     })
 }
-
-loadMarkers()
 
 map.on('render', () => {
     updateMarkers()

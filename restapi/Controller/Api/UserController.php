@@ -732,5 +732,23 @@ class UserController extends BaseController{
         }
         $this->errorHandler($this->strErrorDesc, "", $this->strErrorHeader);
     }
+
+    public function updateCustomNameAction(){
+        if(strtoupper($this->requestMethod) == "POST"){
+            try{
+                $userModel = new UserModel;
+                $userid = $userModel->getID($_COOKIE["username"]);
+                $name = $_POST["CustomName"];
+                $groupChats = $userModel->updateCustomname($userid, $name);
+            }catch(Error $e){
+                $this->strErrorDesc = $e->getMessage();
+                $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
+            }
+        }else{
+            $this->strErrorDesc = 'Method not supported';
+            $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
+        }
+        $this->errorHandler($this->strErrorDesc, json_encode("you have successfully changed your custom name!!"), $this->strErrorHeader);
+    }
 }
 ?>

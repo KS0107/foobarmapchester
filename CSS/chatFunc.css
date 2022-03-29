@@ -184,6 +184,10 @@ iframe {
   margin-left: 5px;
 }
 
+.minusSign{
+  display: none;
+}
+
 #groupChat{
   display: none;
 }

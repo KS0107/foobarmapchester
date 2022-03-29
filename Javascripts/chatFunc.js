@@ -14,11 +14,36 @@ $(document).ready(function(){
         return false;
     });
 
-    $("#delete").click(function(){
-            // $.get("https://web.cs.manchester.ac.uk/y02478jh/restapi/index.php/user/delete");
+    $("#delete-friend").click(function(){
+        if($(".minusSign").css("display") == "none"){
+            clearInterval(loadFriendIntervalID);
+            clearInterval(loadGroupChatIntervalID);
+            $(".minusSign").css("display", "block");
+        }else{
+            $(".minusSign").css("display", "none");
+            loadFriendIntervalID = setInterval(loadFriend, 1000);
+            loadGroupChatIntervalID = setInterval(loadGroupChat, 1000);
+        }
+        
     });
 
+
+
+    // $("#delete").click(function(){
+    //         // $.get("https://web.cs.manchester.ac.uk/y02478jh/restapi/index.php/user/delete");
+    // }
     
+    $("#CustomNamebtn").click(function(){
+        customname = $("#CustomNameInput").val();
+        const xmlhttp = new XMLHttpRequest();
+        xmlhttp.onload = function(){
+            alert(JSON.parse(this.responseText));
+        }
+        xmlhttp.open("POST", "../restapi/index.php/user/updateCustomName");
+        xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xmlhttp.send("CustomName=" + customname);
+        $("#CustomNameInput").val("");
+    });
 
     function loadFriend(){
         const xhttp = new XMLHttpRequest();
@@ -27,9 +52,9 @@ $(document).ready(function(){
         friendsList = "";
         for(let i = 0; i < friends.length; i++){
             if(friends[i].Status == "online"){
-                friendsList +=  "<div style=\"position: relative;\">" + "<div style=\"position: absolute; bottom: 13px; left: 18px; width: 30px; height: 30px; background-image: url(../images/delete.png); background-size: cover; \"></div>" + "<button type=\"button\" style=\"width: 100%; border: solid;\" onclick=\"chatHandler(\'"+ friends[i].Username +"\')\">" + friends[i].Username + "</button>" + "<div style=\"position: absolute; bottom: 12px; right: 0; width: 30px; height: 30px; background-image: url(../images/online.png); background-size: cover; \"></div>" + "</div>";
+                friendsList +=  "<div onclick=remove('friend'" + ",'" + friends[i].UserID +"') style=\"position: relative;\">" + "<div class='minusSign' style=\"position: absolute; bottom: 13px; left: 18px; width: 30px; height: 30px; background-image: url(../images/delete.png); background-size: cover; \"></div>" + "<button type=\"button\" style=\"width: 100%; border: solid;\" onclick=\"chatHandler(\'"+ friends[i].Username +"\')\">" + friends[i].Username + "</button>" + "<div style=\"position: absolute; bottom: 12px; right: 0; width: 30px; height: 30px; background-image: url(../images/online.png); background-size: cover; \"></div>" + "</div>";
             }else{
-                friendsList +=  "<div style=\"position: relative;\">"  + "<div style=\"position: absolute; bottom: 13px; left: 18px; width: 30px; height: 30px; background-image: url(../images/delete.png); background-size: cover; \"></div>" + "<button type=\"button\" style=\"width: 100%; border: solid;\" onclick=\"chatHandler(\'"+ friends[i].Username +"\')\">" + friends[i].Username + "</button>" + "<div style=\"position: absolute; bottom: 12px; right: 0; width: 30px; height: 30px; background-image: url(../images/offline.png); background-size: cover; \"></div>" + "</div>";
+                friendsList +=  "<div onclick=remove('friend'" + ",'" + friends[i].UserID +"') style=\"position: relative;\">"  + "<div class='minusSign' style=\"position: absolute; bottom: 13px; left: 18px; width: 30px; height: 30px; background-image: url(../images/delete.png); background-size: cover; \"></div>" + "<button type=\"button\" style=\"width: 100%; border: solid;\" onclick=\"chatHandler(\'"+ friends[i].Username +"\')\">" + friends[i].Username + "</button>" + "<div style=\"position: absolute; bottom: 12px; right: 0; width: 30px; height: 30px; background-image: url(../images/offline.png); background-size: cover; \"></div>" + "</div>";
             }
         }
         document.getElementById("friends").innerHTML = friendsList;
@@ -37,7 +62,7 @@ $(document).ready(function(){
         xhttp.open("GET", "../restapi/index.php/user/getFriend?username=" + getCookie("username"));
         xhttp.send();
     }
-    setInterval(loadFriend, 1000);
+    loadFriendIntervalID = setInterval(loadFriend, 1000);
 
     function getCookie(cname) {
         let name = cname + "=";
@@ -62,23 +87,32 @@ function loadGroupChat(){ // query stmt restricts that get groupids only when st
         groupChatIDs = JSON.parse(this.responseText);
         groupChatbtns = "";
         for(let i = 0; i <groupChatIDs.length; i++){
-            groupChatbtns += "<div style=\"position: relative;\">" + "<div style=\"position: absolute; bottom: 13px; left: 18px; width: 30px; height: 30px; background-image: url(../images/delete.png); background-size: cover; \"></div>" + "<button type=\"button\" style=\"width: 100%; border: solid;\" onclick=chatHandler('"+ groupChatIDs[i].GroupChatID +"')>" + groupChatIDs[i].GroupChatID + "</button>" + "</div>"
+            groupChatbtns += "<div onclick=remove('"+ groupChatIDs[i].GroupChatID + "') style=\"position: relative;\">" + "<div class='minusSign' style=\"position: absolute; bottom: 13px; left: 18px; width: 30px; height: 30px; background-image: url(../images/delete.png); background-size: cover; \"></div>" + "<button type=\"button\" style=\"width: 100%; border: solid;\" onclick=chatHandler('"+ groupChatIDs[i].GroupChatID +"')>" + groupChatIDs[i].GroupChatID + "</button>" + "</div>"
         }
         document.getElementById("groupChat").innerHTML = groupChatbtns;
     }
     xhttp.open("GET", "../restapi/index.php/user/getGroupChat");
     xhttp.send();
 }
-setInterval(loadGroupChat, 1000);
+loadGroupChatIntervalID = setInterval(loadGroupChat, 1000);
 
-function remove(id, type){ //delete friend or groupchat
-    const xhttp = new XMLHttpRequest();
-    if(type == "friend"){
-        xhttp.open("GET", "../restapi/index.php/user/deleteFriend?id=" + id);
-    }else{
-        xhttp.open("GET", "../restapi/index.php/user/removeGroupChat?id=" + id);
+function remove(type, id){ //delete friend or groupchat
+    var exit = confirm("Are you sure?");
+    if(exit){
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = function(){
+            alert("done");
+            loadFriend();
+            loadGroupChat();
+        }
+        if(type == "friend"){
+         xhttp.open("GET", "../restapi/index.php/user/deleteFriend?id=" + id);
+         }else{
+            xhttp.open("GET", "../restapi/index.php/user/removeGroupChat?id=" + id);
+        }
+        xhttp.send();
     }
-    xhttp.send();
+    
 }
 
 
@@ -101,9 +135,17 @@ function loadLog(friend){
     let message="";
     for(let i = 0; i < text[1].length; i++){
         if(text[1][i].UserID == text[0].Sender){
-            message += "<div style=\"text-align: right;\">" + text[1][i].CreateDate + "<br>" + text[1][i].MessageBody + "</div>";
+            if(text[1][i].CustomName === null){
+                message += "<div style=\"text-align: right;\">" + text[1][i].CreateDate + "<br>"  + text[1][i].MessageBody + "</div>";
+            }else{
+             message += "<div style=\"text-align: right;\">" + text[1][i].CreateDate + "<br>"   + text[1][i].MessageBody + "</div>";
+            }
         }else{
-            message += "<div style=\"text-align: left;\">" + text[1][i].CreateDate + "<br>" + text[1][i].MessageBody + "</div>";
+            if(text[1][i].CustomName === null){
+                message += "<div style=\"text-align: left;\">" + text[1][i].CreateDate + "<br>"  + text[1][i].Username +":<br>" + text[1][i].MessageBody + "</div>";
+            }else{
+                message += "<div style=\"text-align: left;\">" + text[1][i].CreateDate + "<br>" + text[1][i].CustomName +":<br>" + text[1][i].MessageBody + "</div>";
+            }
         }      
     }
     document.getElementById("chatbox").innerHTML = message;

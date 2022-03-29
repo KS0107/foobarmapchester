@@ -17,22 +17,25 @@ class UserModel extends Database{
     }
 
     public function getMessage($sender, $receiver){
-        $sql = "SELECT MessageBody, CreateDate, UserID, RecipientID
+        $sql = "SELECT Message.MessageBody, Message.CreateDate, Message.UserID, Message.RecipientID, User.CustomName, User.Username
                 FROM Message
-                WHERE UserID = :userid AND RecipientID = :recipientid
+                LEFT JOIN User ON Message.RecipientID = User.UserID
+                WHERE Message.UserID = :userid AND Message.RecipientID = :recipientid
                 UNION
-                SELECT MessageBody, CreateDate, UserID, RecipientID
+                SELECT Message.MessageBody, Message.CreateDate, Message.UserID, Message.RecipientID, User.CustomName, User.Username
                 FROM Message
-                WHERE UserID = :recipientid1 AND RecipientID = :userid1
+                LEFT JOIN User ON Message.UserID = User.UserID
+                WHERE Message.UserID = :recipientid1 AND Message.RecipientID = :userid1
                 ORDER BY CreateDate ASC";
 
         return $this->executeFetchQuery($sql, ["userid"=>$this->getID($sender), "recipientid"=>$this->getID($receiver),"recipientid1"=>$this->getID($receiver), "userid1"=>$this->getID($sender)]);
     }
 
     public function getMessageForGroupChat($receiver){
-        $sql = "SELECT MessageBody, Sender as UserID, GroupChatID, CreatedDate as CreateDate
-                FROM MessageForGC
-                WHERE GroupChatID = :id";
+        $sql = "SELECT m.MessageBody, m.Sender as UserID, m.GroupChatID, m.CreatedDate as CreateDate, User.CustomName, User.Username
+                FROM MessageForGC as m
+                LEFT JOIN User ON m.Sender = User.UserID
+                WHERE m.GroupChatID = :id";
         return $this->executeFetchQuery($sql, ["id"=>$receiver]);
     }
 
@@ -256,7 +259,7 @@ class UserModel extends Database{
     }
 
     public function getFriend($username){
-        $sql = "SELECT UserID, Username, Status
+        $sql = "SELECT UserID, Username, Status, CustomName
                 FROM User
                 WHERE UserID IN (             
                 SELECT FriendID
@@ -447,6 +450,13 @@ class UserModel extends Database{
                 SET Status = 'removed'
                 WHERE type = 'public' AND TargetID = :userid AND GroupChatID = :groupchatid";
         return $this->executeQuery($sql, ["userid"=>$userid, "groupchatid"=>$targetid]);
+    }
+
+    public function updateCustomname($userid, $name){
+        $sql = "UPDATE User
+                SET CustomName = :name
+                WHERE UserID = :userid";
+        return $this->executeQuery($sql, ["name"=>$name, "userid"=>$userid]);
     }
 
 }

@@ -46,6 +46,13 @@
 			</form>
 			<button id="request">Make a request</button>
 		</div>
+		<div>
+			<form method="post" onsubmit="return false;"> 
+				<label for="customName" style="color: white;">custom name</label>
+				<input type="text" name="CustomName" id="CustomNameInput">
+				<input type="submit" id="CustomNamebtn">
+			</form>
+		</div>
 	</div>
 	
 	<div id="friendbox-container">

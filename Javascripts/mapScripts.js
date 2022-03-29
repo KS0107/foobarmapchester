@@ -28,37 +28,37 @@ var map = new mapboxgl.Map({
     maxBounds: bounds
 });
 
-for (const marker of getMarkers().features) {
-    // Create a DOM element for each marker.
-    const el = document.createElement('div');
-    const width = marker.properties.iconSize[0];
-    const height = marker.properties.iconSize[1];
-    el.className = 'marker';
-    el.id = "mapmarker";
-    el.style.width = [
-        'interpolate',
-        ['linear'],
-        ['zoom'],
-        5,
-        10,
-        15,
-        40
-        ];
-    el.style.height = `${height}px`;
-    el.style.backgroundSize = '100%';
-     
-    el.addEventListener('click', () => {
-        //window.alert(marker.properties.message);
-        let locationName = document.getElementById("locationName");
-        locationName.textContent = marker.properties.message;
-        getLocation(locationName.textContent);
-    });
-     
-    // Add markers to the map.
-    new mapboxgl.Marker(el)
-    .setLngLat(marker.geometry.coordinates)
-    .addTo(map);
+function updateMarkers() {
+    for (const marker of getMarkers().features) {
+        // Create a DOM element for each marker.
+        const el = document.createElement('div');
+        const width = marker.properties.iconSize[0];
+        const height = marker.properties.iconSize[1];
+        el.className = 'marker';
+        el.id = "mapmarker";
+        el.style.width = `${height}px`;
+        el.style.height = `${height}px`;
+        el.style.backgroundSize = '100%';
+        
+        console.log(map.zoom);
+
+        el.addEventListener('click', () => {
+            //window.alert(marker.properties.message);
+            let locationName = document.getElementById("locationName");
+            locationName.textContent = marker.properties.message;
+            getLocation(locationName.textContent);
+        });
+        
+        // Add markers to the map.
+        new mapboxgl.Marker(el)
+        .setLngLat(marker.geometry.coordinates)
+        .addTo(map);
+    }
 }
+
+map.on('render', () => {
+    updateMarkers()
+});
 
 function displayReviews(reviews){
     var location = document.getElementById("locationName").textContent;

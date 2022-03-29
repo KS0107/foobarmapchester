@@ -29,19 +29,21 @@ var map = new mapboxgl.Map({
 });
 
 markers = getMarkers();
-function updateMarkers() {
+let markersOnScreen = {};
+
+function loadMarkers() {
     for (const marker of markers.features) {
         // Create a DOM element for each marker.
         const el = document.createElement('div');
         const width = marker.properties.iconSize[0];
         const height = marker.properties.iconSize[1];
         el.className = 'marker';
-        el.id = "mapmarker";
+        el.id = "mapmarker"+marker.properties.message;
         el.style.width = `${height}px`;
         el.style.height = `${height}px`;
         el.style.backgroundSize = '100%';
         
-        console.log(map["zoom"]);
+        console.log(map);
 
         el.addEventListener('click', () => {
             //window.alert(marker.properties.message);
@@ -50,12 +52,23 @@ function updateMarkers() {
             getLocation(locationName.textContent);
         });
         
+        markersOnScreen.push(el);
         // Add markers to the map.
         new mapboxgl.Marker(el)
         .setLngLat(marker.geometry.coordinates)
         .addTo(map);
     }
 }
+
+function updateMarkers(){
+    markersOnScreen.forEach(element=>{
+        element.style.width = "200px";
+    })
+}
+
+map.on('load', () => {
+    loadMarkers()
+});
 
 map.on('render', () => {
     updateMarkers()

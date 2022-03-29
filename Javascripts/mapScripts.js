@@ -40,7 +40,7 @@ function loadMarkers() {
         const el = document.createElement('div');
         const width = marker.properties.iconSize[0];
         const height = marker.properties.iconSize[1];
-        el.className = 'marker';
+        el.className = 'mapmarker';
         el.id = "mapmarker"+marker.properties.message;
         el.style.width = `${height}px`;
         el.style.height = `${height}px`;

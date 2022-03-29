@@ -35,7 +35,15 @@ for (const marker of getMarkers().features) {
     const height = marker.properties.iconSize[1];
     el.className = 'marker';
     el.id = "mapmarker";
-    el.style.width = `${width}px`;
+    el.style.width = [
+        'interpolate',
+        ['linear'],
+        ['zoom'],
+        10,
+        10,
+        15,
+        20
+        ];
     el.style.height = `${height}px`;
     el.style.backgroundSize = '100%';
      

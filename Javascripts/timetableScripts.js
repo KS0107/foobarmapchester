@@ -54,9 +54,13 @@ function loadTimetable(timetable){
                 cellTextSplit = cellText.split("|");
                 cellTextLocation = cellTextSplit[0];
                 cellTextOut += cellTextLocation;
-                cellTextFriend1 = JSON.parse(cellTextSplit[1]);
-                cellTextFriend2 = JSON.parse(cellTextSplit[2]);
-                if(cellTextFriend1 != null || cellTextFriend2 != null){
+                cellTextGroupChat = JSON.parse(cellTextSplit[1]);
+                cellTextFriend1 = JSON.parse(cellTextSplit[2]);
+                cellTextFriend2 = JSON.parse(cellTextSplit[3]);
+                if(cellTextGroupChat != null){
+                    cellTextOut += "\n with";
+                    cellTextOut += "\n" + cellTextGroupChat;
+                }else if(cellTextFriend1 != null || cellTextFriend2 != null){
                     cellTextOut += "\n with";
                     if(cellTextFriend1 != null){
                         cellTextOut += "\n" + cellTextFriend1;

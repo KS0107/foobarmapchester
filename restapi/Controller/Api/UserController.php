@@ -546,7 +546,7 @@ class UserController extends BaseController{
                                 $requesterName = $userModel->getUsernameById($requester[0]["RequesterID"])[0]["Username"];
                                 $groupchatName = $requester[0]["GroupChatID"];
                             }
-                            $value2 = $value2 . "|" . json_encode($receiverName) . "|" . json_encode($requesterName);
+                            $value2 = $value2 . "|" . json_encode($groupchatName) . "|" . json_encode($receiverName) . "|" . json_encode($requesterName);
                         }
                         $counter++;
                     }

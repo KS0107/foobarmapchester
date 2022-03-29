@@ -65,8 +65,9 @@ function loadMarkers() {
 function updateMarkers(){
     console.log(map.style.z);
     markersOnScreen.forEach(element=>{
-        element.style.width = 40*map.style.z/10+"px";
-        element.style.height = 40*map.style.z/10+"px";
+        scaleFactor = (map.style.z)*(map.style.z)/200;
+        element.style.width = 40*scaleFactor+"px";
+        element.style.height = 40*scaleFactor+"px";
     })
 }
 

@@ -87,7 +87,7 @@ function loadGroupChat(){ // query stmt restricts that get groupids only when st
         groupChatIDs = JSON.parse(this.responseText);
         groupChatbtns = "";
         for(let i = 0; i <groupChatIDs.length; i++){
-            groupChatbtns += "<div onclick=remove('"+ groupChatIDs[i].GroupChatID + "') style=\"position: relative;\">" + "<div class='minusSign' style=\"position: absolute; bottom: 13px; left: 18px; width: 30px; height: 30px; background-image: url(../images/delete.png); background-size: cover; \"></div>" + "<button type=\"button\" style=\"width: 100%; border: solid;\" onclick=chatHandler('"+ groupChatIDs[i].GroupChatID +"')>" + groupChatIDs[i].GroupChatID + "</button>" + "</div>"
+            groupChatbtns += "<div style=\"position: relative;\">" + "<div  onclick=remove('"+ groupChatIDs[i].GroupChatID + "') class='minusSign' style=\"position: absolute; bottom: 13px; left: 18px; width: 30px; height: 30px; background-image: url(../images/delete.png); background-size: cover; \"></div>" + "<button type=\"button\" style=\"width: 100%; border: solid;\" onclick=chatHandler('"+ groupChatIDs[i].GroupChatID +"')>" + groupChatIDs[i].GroupChatID + "</button>" + "</div>"
         }
         document.getElementById("groupChat").innerHTML = groupChatbtns;
     }

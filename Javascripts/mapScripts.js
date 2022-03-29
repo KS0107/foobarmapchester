@@ -34,6 +34,7 @@ markers = getMarkers();
 let markersOnScreen = [];
 
 function loadMarkers() {
+    console.log("Markers being loaded")
     for (const marker of markers.features) {
         // Create a DOM element for each marker.
         const el = document.createElement('div');
@@ -58,6 +59,7 @@ function loadMarkers() {
         .setLngLat(marker.geometry.coordinates)
         .addTo(map);
     }
+    console.log(markersOnScreen);
 }
 
 function updateMarkers(){

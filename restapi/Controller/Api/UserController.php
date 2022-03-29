@@ -648,7 +648,7 @@ class UserController extends BaseController{
                     //event already hold for the time
                     $respondData = "you already have an event at the time";
                 }else{
-                    if(is_null($userModel->verifyEvent($userID, $time, $day)[0][$day])){
+                    if(is_null($userModel->verifyEvent($userid, $time, $day)[0][$day])){
                         $userModel->updatePublicStatus($userid, $groupChatID);
                         $userModel->addEvent($userid, $place, $time, $day);
 

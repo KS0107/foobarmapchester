@@ -14,6 +14,7 @@ body {
 }
 h1 {
   text-align: center;
+  top: -10vh;
   font-size: 60px;
   font-weight: 600;
   background-color: black;

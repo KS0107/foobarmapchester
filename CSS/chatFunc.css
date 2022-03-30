@@ -33,7 +33,6 @@ body {
 .topBar #buttonLinks{
     display: flex;
     justify-content: space-between;
-    margin-top: 10px;
 }    
 .topBar button{
     margin-left: 2%;

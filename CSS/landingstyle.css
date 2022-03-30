@@ -321,9 +321,11 @@ nav {
   }
   @keyframes no-hover-v {
     0% {
-        transform: scaleX(1.05);
+      transform: scaleX(1.05);
        }
-    45% {height: 4px;}
+    45% {
+      height: 4px;
+    }
     55% {   
         transform: scaleX(1.05);
         height: 4px;

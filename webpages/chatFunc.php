@@ -51,7 +51,6 @@
 				<label for="customName" style="color: white;">Custom Name</label>
 				<input type="text" name="CustomName" id="CustomNameInput">
 				<input type="submit" id="CustomNamebtn">
-				<button type="submit "id="CustomNamebtn">Submit</button>
 			</form>
 		</div>
 	</div>

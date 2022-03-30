@@ -28,7 +28,7 @@ if (!isset($_SESSION['login']))
 	<div id="pageBody">
 		<form method="post">
 
-            <h1>Are you sure you want to log out?</h1>
+            <h3>Are you sure you want to log out?</h3>
 
 			<input type="submit" name="LogOut" class="button" value="Log out">
 		</form>

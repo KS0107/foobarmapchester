@@ -34,6 +34,7 @@ body {
     display: flex;
     justify-content: space-between;
     margin-top: 10px;
+    height: 6vh;
 }    
 .topBar button{
     margin-left: 2%;

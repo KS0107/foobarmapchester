@@ -31,14 +31,15 @@ body {
 }
 
 .topBar #buttonLinks{
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
 }    
 .topBar button{
-    margin-left: 2%;
-    margin-right: 2%;
-    width: 20%;
-    height: 0%;
+  margin-left: 2%;
+  margin-right: 2%;
+  width: 20%;
+  height: 0%;
 }
 label {
     margin-bottom: 15px;

@@ -14,7 +14,7 @@ body {
 }
 .topBar{
   left: 0;
-  top: 0px;
+  top: 10px;
   height: 6%;
   width: 100%;
   position: fixed;
@@ -51,7 +51,6 @@ label {
 #btnAR {
     margin-top: 20px;
 }
-
 
   .mainContainer{
     position: relative;

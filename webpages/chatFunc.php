@@ -21,7 +21,7 @@
             <!-- <button id="slider">Collapse Reviews</button> -->
         </div>
     </div>
-	<h2 id="title">Chatbox</h2>
+	<h2 id="title">Chat</h2>
 	<div class="flex-container">
 		<div class="friendList">
 			<div id="friend-bar">

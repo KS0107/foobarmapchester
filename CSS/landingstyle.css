@@ -24,8 +24,8 @@ h1 {
 #bleg {
   background-color: black;
   border-radius: 25px;
-  height: 26vh;
-  padding: 2vh 2vh;
+  height: 24vh;
+  padding: 1.5vh 2vh 2vh;
 }
 #StartButton {
   background-color: rgb(0, 0, 0);
@@ -35,8 +35,8 @@ h1 {
 #StartButton:hover {
   background-color: rgb(1, 15, 61);
   color:rgb(255, 255, 255);
-  min-width: 200px;
-  padding: 20 100px;
+  min-width: 100px;
+  padding: 10px 70px;
 }
 #lenks {
   margin-top: 10vh;
@@ -327,13 +327,13 @@ nav {
     55% {   
         transform: scaleX(1.05);
         height: 4px;
-        opacity: 1;
+
        }
     
     100% {
         transform: scaleX(0);
         height: 4px;
-        opacity: .02;
+
 
        }
   }

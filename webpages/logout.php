@@ -30,7 +30,7 @@ if (!isset($_SESSION['login']))
 
             <h5>Are you sure you want to log out?</h5>
 
-			<input type="submit" name="LogOut" class="button" value="Log out">
+			<input id="log" type="submit" name="LogOut" class="button" value="Log out">
 		</form>
 	</div>
 

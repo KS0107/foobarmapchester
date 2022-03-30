@@ -181,7 +181,7 @@ input {
     height: 16px;
 
 }
-input[type=submit] {
+#log {
     background-color: rgb(0, 0, 0);
     color:white;
     border-radius: 12px;

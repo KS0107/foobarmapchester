@@ -164,7 +164,7 @@ a {
     grid-column: 16/20;
     grid-template-columns: 1fr 1fr;
     color: white;
-    background-color: rgb(18, 22, 31);
+    background-color: rgb(1, 10, 31);
     border-radius: 20px;
     padding: 50px;
     margin-top: 20px;

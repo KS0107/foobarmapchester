@@ -6,7 +6,10 @@
         <link rel="stylesheet" href="CSS/landingstyle.css">
         <script src="../Javascripts/generalScripts.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
         <script>
+          
           $(document).ready(function(){
             $("a").on('click', function(event) {
               if (this.hash !== "") {
@@ -41,10 +44,7 @@
         <header>
           <div id="bleg"> 
           <h1>FooBar.</h1> 
-          <a href="#us">About Us</a>
-          <a href="#topspots">Top Spots</a>
-          <a href="#faqs">FAQs</a>
-          <a href="#footer">Contact Us</a>
+          <a href="#us" id="StartButton">Start</a> 
           </div>
         </header>
         <section id="us">
@@ -61,6 +61,7 @@
               <b>Ollie</b> - Database Linking <br><br>
               <b>Masroor</b> - Review Linking <br><br>
               <b>Wenyu</b> - (Check GitLab for contributions) <br><br>
+              <a href="#topspots">Top Spots</a>
             </p>
         </section>
           <section id="topspots">
@@ -85,6 +86,7 @@
               <p>
                 Cool venue drawing gig-goers & students with beers, energetic music & a rooftop garden.
               </p>
+              <a href="#faqs">FAQs</a>
           </section>
           
           <section id="faqs">        
@@ -109,7 +111,7 @@
           </section>
     
           <section id="footer">
-            <p>+44 7958 402605 <br><br> z19.foobar@gmail.com <br><br> &#169 Group Z19 FooBar GmBH</p>
+            <p>+44 7958 402605 <br><br><em>z19.foobar@gmail.com</em>  <br><br> &#169 Group Z19 FooBar GmBH</p>
           </section>
           </main>
 </body>

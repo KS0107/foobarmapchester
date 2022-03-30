@@ -21,9 +21,9 @@ h1 {
 }
 #bleg {
   background-color: black;
-  border-radius: 35px;
-  height: 28vh;
-  padding: 4vh 0vh;
+  border-radius: 25px;
+  height: 26vh;
+  padding: 2vh 2vh;
 }
 #lenks {
   margin-top: 10vh;
@@ -101,6 +101,11 @@ button:hover {
     width: 20%;
     height: 0%;
 }
+#StartButton {
+  background-color: rgb(15, 1, 61);
+  color:rgb(255, 255, 255);
+  min-width: 200px;
+}
 label {
     margin-bottom: 15px;
 }
@@ -165,6 +170,7 @@ a {
  a:hover {
     background-color: rgba(14, 14, 14, 0.692);
     color: rgb(75, 75, 75);
+
   }
  a:visited {
     color: white;

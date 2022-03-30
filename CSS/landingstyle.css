@@ -19,10 +19,12 @@ h1 {
   position: relative;
 
 }
-/* #bleg {
+#bleg {
   background-color: black;
-  border-radius: 25px;
-} */
+  border-radius: 35px;
+  height: 35vh;
+  padding-top: 7vh;
+}
 #lenks {
   margin-top: 10vh;
 }
@@ -244,5 +246,5 @@ a {
   }
   #footer {
     height: 15vh;
-    padding-top: 10vh;
+    padding-top: 5vh;
   }

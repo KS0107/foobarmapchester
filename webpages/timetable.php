@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport">
-	<title>Document</title>
+	<title>Timetable</title>
 	<link rel="stylesheet" href="../CSS/mainstyle.css">
 	<link rel="stylesheet" href="../CSS/timetable.css">
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

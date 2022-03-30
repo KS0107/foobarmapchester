@@ -30,7 +30,7 @@ class UserController extends BaseController{
     }
 
     public function authenAction(){
-        $redirectBool = true;
+                $respondData = "";
         if(strtoupper($this->requestMethod) == "POST"){
             try{
                 $username = $_POST["username"];
@@ -43,6 +43,7 @@ class UserController extends BaseController{
                         $URL = "../../../webpages/home.html";
                         $respondData = "";
                     }else{
+                        $redirectBool = true;
                         $URL = "../../../webpages/loginPage.php";
                         $respondData = json_decode("Password is wrong!");
                     }

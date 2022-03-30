@@ -14,7 +14,7 @@ body {
 }
 .topBar{
   left: 0;
-  top: 10px;
+  top: 0px;
   height: 6%;
   width: 100%;
   position: fixed;

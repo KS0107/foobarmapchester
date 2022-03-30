@@ -36,11 +36,11 @@ if (!isset($_SESSION['login']))
 					<input class="input" type="password" name="password" placeholder="Input password">
 				</div>
 					
-				<div class="forget_password">
+				<!-- <div class="forget_password">
 					<a href="#">
 							Forgot password?
 					</a>
-				</div>
+				</div> -->
 
 				<div class="wrap-login-form-btn">
 					<input type="submit" class="login-form-btn" value="Log in">

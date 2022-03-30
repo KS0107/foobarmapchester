@@ -22,8 +22,8 @@ h1 {
 #bleg {
   background-color: black;
   border-radius: 35px;
-  height: 35vh;
-  padding-top: 7vh;
+  height: 28vh;
+  padding: 4vh 0vh;
 }
 #lenks {
   margin-top: 10vh;
@@ -91,7 +91,7 @@ button:hover {
 .topBar #buttonLinks{
     display: flex;
     justify-content: space-between;
-    margin-top: 0px;
+    margin-top: 5px;
     background-color: black;
     height: 6vh;
 }    

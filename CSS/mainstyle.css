@@ -88,7 +88,7 @@ button:hover {
 }
 h3 {
     font-size: 20px;
-    top: 30vh;
+    margin-top: 30vh;
 }
 .topBar #buttonLinks{
     display: flex;

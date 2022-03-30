@@ -294,13 +294,13 @@ nav {
     left: 40vw;
     border-radius: 4px;
     transform: scaleX(0);
-    animation: 1s forwards no-hover-v linear;
+    animation: .6s forwards no-hover-v linear;
     animation-fill-mode: forwards;
     z-index: -3;
   }
   h1 > span:hover:before,
   h1 > span:focus:before {
-    animation: 1s forwards hover-v linear;
+    animation: .6s forwards hover-v linear;
     animation-fill-mode: forwards;
     z-index: -3;
     color: black;

@@ -259,12 +259,12 @@ button:hover {
   line-height: 1.2;
   margin: 0 auto;
   display: inline;
-  width: 45vw;
+  width: 10vw;
   background: black;
   border: 1px solid whitesmoke;
   border-radius: 10px;
   padding: 5px;
-  height: 25px;
+  height: 2px;
 }
 
 #send{

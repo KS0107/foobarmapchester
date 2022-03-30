@@ -94,7 +94,15 @@ a{
     padding: 8px;
     width: 200px;
     height: 20px;
-
+  }
+  input[type=submit] {
+    background-color: rgba(109, 109, 109, 0.26);
+    color:white;
+    border-radius: 8px;
+    border-color: rgb(27, 27, 27);
+    padding: 8px;
+    width: 200px;
+    height: 20px;
   }
   
   

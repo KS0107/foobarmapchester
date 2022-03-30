@@ -25,8 +25,8 @@
 	<div class="flex-container">
 		<div class="friendList">
 			<div id="friend-bar">
-				<div><button id="privateChat">friends</button></div>
-				<div><button id="publicChat">group chat</button></div>
+				<div><button id="privateChat">Friends</button></div>
+				<div><button id="publicChat">Group Chat</button></div>
 				<!-- <div id="friend-tag"><h2>Friends</h2></div> -->
 				<div id="add-friend"><a id="ibtn"></a></div>
 				<div id="delete-friend"><a id="dbtn"></a></div>
@@ -48,7 +48,7 @@
 		</div>
 		<div>
 			<form method="post" onsubmit="return false;"> 
-				<label for="customName" style="color: white;">custom name</label>
+				<label for="customName" style="color: white;">Custom Name</label>
 				<input type="text" name="CustomName" id="CustomNameInput">
 				<input type="submit" id="CustomNamebtn">
 			</form>

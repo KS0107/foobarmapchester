@@ -21,8 +21,10 @@ body {
   background-color: rgb(0, 0, 0);
 }
 #friends{
+  position: relative;
   border-radius: 14px;
   background-color: black;;
+  width: 18em
 }
 #msg {
     max-width: 10%;
@@ -136,6 +138,11 @@ iframe {
 #friendbox, #requestbox{
   width: 99%;
   height: 99%;
+
+}
+
+#friendbox{
+  overflow: auto;
 }
 
 #close1, #close2{

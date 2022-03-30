@@ -16,6 +16,13 @@ class UserModel extends Database{
         return true;
     }
 
+    public function getCustomName($id){
+        $sql = "SELECT CustomName
+                FROM User
+                WHERE UserID = :id";
+        return $this->executeFetchQuery($sql, ["id"=>$id])[0]["CustomName"];
+    }
+
     public function getMessage($sender, $receiver){
         $sql = "SELECT Message.MessageBody, Message.CreateDate, Message.UserID, Message.RecipientID, User.CustomName, User.Username
                 FROM Message

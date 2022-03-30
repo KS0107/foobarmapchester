@@ -160,7 +160,7 @@ class UserController extends BaseController{
         try{
             if(strtoupper($this->requestMethod) == "GET"){
                 $userModel = new UserModel();
-                $additionalInfo = array("Sender"=>$userModel->getID($_COOKIE['username']), "Receiver"=>$userModel->getID($this->arrQueryStringParams["receiver"]));
+                $additionalInfo = array("Username"=> $_COOKIE['username'] ,"Sender"=>$userModel->getID($_COOKIE['username']), "Receiver"=>$userModel->getID($this->arrQueryStringParams["receiver"]), "CustomName"=>$userModel->getCustomName($userModel->getID($_COOKIE['username'])));
                 $respondData = $userModel->getMessage($_COOKIE['username'], $this->arrQueryStringParams["receiver"]);
                 $respondData = json_encode(array($additionalInfo, $respondData));
             }else{
@@ -179,7 +179,7 @@ class UserController extends BaseController{
         try{
             if(strtoupper($this->requestMethod) == "GET"){
                 $userModel = new UserModel();
-                $additionalInfo = array("Sender"=>$userModel->getID($_COOKIE['username']), "Receiver"=>$this->arrQueryStringParams["receiver"]);
+                $additionalInfo = array("Username"=> $_COOKIE['username'], "Sender"=>$userModel->getID($_COOKIE['username']), "Receiver"=>$this->arrQueryStringParams["receiver"], "CustomName"=>$userModel->getCustomName($userModel->getID($_COOKIE['username'])));
                 $respondData = $userModel->getMessageForGroupChat($this->arrQueryStringParams["receiver"]);
                 $respondData = json_encode(array($additionalInfo, $respondData));
             }else{

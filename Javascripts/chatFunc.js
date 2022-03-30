@@ -126,6 +126,54 @@ function chatHandler(friend){
     
 }
 
+function dateformatting(date, opt){
+    var daysNames = ['Sun', 'Mon', "Tue", 'Wed', 'Thu', 'Fri', 'Sat'];
+    var monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jum', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
+    //************************//
+    year = date.getFullYear();               //
+    // as 0-11 0=>Jan                        //
+    month = monthNames[date.getMonth()];     //  
+    day = date.getDate();
+    weekday = date.getDay();                    //   break the date down 
+    dayName = daysNames[weekday];                //
+    // hours:minutes:seconds                 //  
+    hours = date.getHours();                 //
+    minutes = date.getMinutes();             //
+    if(minutes<10){minutes = "0" + minutes;}
+    seconds = date.getSeconds();             //
+    //************************//
+    switch(opt){
+        case 1:  
+            return dayName + " " + hours + ":" + minutes;
+            break;
+        case 2:
+            return month + " " + day + " " +hours + ":" + minutes;
+            break;
+        case 3:
+            return hours + ":" + minutes;
+    }
+}
+
+const c = new Date();
+
+function compareDates(date1, date2="", interval){
+    if(date2){
+        var miliseconds = date1.getTime() - date2.getTime();
+        days = miliseconds / (1000 * 60 * 60 * 24);
+        if(days >= interval){
+            return true;
+        }else{
+            return false;
+        }
+    }else{
+        var days =   Math.floor(c.getTime() / (1000 * 60 * 60 * 24)) - Math.floor(date1.getTime() / (1000 * 60 * 60 * 24));
+        if(days >= interval){
+            return true;
+        }else{
+            return false;
+        }
+    }
+}
 
 function loadLog(friend){
     var oldscrollHeight = $("#chatbox")[0].scrollHeight - 20;
@@ -133,18 +181,60 @@ function loadLog(friend){
     xhttp.onload = function() {
     let text = JSON.parse(this.responseText);
     let message="";
+    let time = "";
     for(let i = 0; i < text[1].length; i++){
-        if(text[1][i].UserID == text[0].Sender){
-            if(text[1][i].CustomName === null){
-                message += "<div style=\"text-align: right;\">" + text[1][i].CreateDate + "<br>"  + text[1][i].MessageBody + "</div>";
+        if(i > 0){
+            date = new Date(text[1][i].CreateDate.replace(" ", "T") + "Z");
+            lastDate = new Date(text[1][i - 1].CreateDate.replace(" ", "T") + "Z");
+            if(compareDates(date, '', 6)){
+                if(compareDates(date, lastDate, 5/(24 * 60))){ // if the last message sent equal or greater than five minutes ago
+                    time = dateformatting(date, 2);
+                    message += "<div style=\"text-align: center;\">"   + time + "</div>";
+                }
+            }else if(compareDates(date, '', 2)){
+                if(compareDates(date, lastDate, 5/(24 * 60))){ // if the last message sent equal or greater than five minutes ago
+                    time = dateformatting(date, 1);
+                    message += "<div style=\"text-align: center;\">"   + time + "</div>";
+                }
+            }else if(compareDates(date, '', 1)){
+                if(compareDates(date, lastDate, 5/(24 * 60))){ // if the last message sent equal or greater than five minutes ago
+                    time = "yesterday " + dateformatting(date, 3);
+                    message += "<div style=\"text-align: center;\">"   + time + "</div>";
+                }
             }else{
-             message += "<div style=\"text-align: right;\">" + text[1][i].CreateDate + "<br>"   + text[1][i].MessageBody + "</div>";
+                if(compareDates(date, lastDate, 5/(24 * 60))){ // if the last message sent equal or greater than five minutes ago
+                    time = "today " + dateformatting(date, 3);
+                    message += "<div style=\"text-align: center;\">"   + time + "</div>";
+                }
+            }
+        }else{
+            date = new Date(text[1][i].CreateDate.replace(" ", "T") + "Z");
+            if(compareDates(date, '', 7)){
+                time = dateformatting(date, 2);
+                message += "<div style=\"text-align: center;\">"   + time + "</div>";
+            }else if(compareDates(date, '', 2)){
+                time = dateformatting(date, 1);
+                message += "<div style=\"text-align: center;\">"   + time + "</div>";
+            }else if(compareDates(date, '', 1)){
+                time = "yesterday " + dateformatting(date, 3);
+                message += "<div style=\"text-align: center;\">"   + time + "</div>";
+            }else{
+                time = "today " + dateformatting(date, 3);
+                message += "<div style=\"text-align: center;\">"   + time + "</div>";
+            }
+        }
+        
+        if(text[1][i].UserID == text[0].Sender){
+            if(text[0].CustomName === null){
+                message += "<div style=\"text-align: right; overflow-wrap: break-word; \">"  + text[0].Username + ":" + text[1][i].MessageBody + "</div>";
+            }else{
+             message += "<div style=\"text-align: right; overflow-wrap: break-word;  \">"  + text[0].CustomName + ":" +  "<br>"  + text[1][i].MessageBody + "</div>";
             }
         }else{
             if(text[1][i].CustomName === null){
-                message += "<div style=\"text-align: left;\">" + text[1][i].CreateDate + "<br>"  + text[1][i].Username +":<br>" + text[1][i].MessageBody + "</div>";
+                message += "<div style=\"text-align: left; overflow-wrap: break-word; \">"  + text[1][i].Username +":<br>" + text[1][i].MessageBody + "</div>";
             }else{
-                message += "<div style=\"text-align: left;\">" + text[1][i].CreateDate + "<br>" + text[1][i].CustomName +":<br>" + text[1][i].MessageBody + "</div>";
+                message += "<div style=\"text-align: left; overflow-wrap: break-word; \">" + text[1][i].CustomName +":<br>" + text[1][i].MessageBody + "</div>";
             }
         }      
     }

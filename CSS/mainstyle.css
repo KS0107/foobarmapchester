@@ -58,7 +58,7 @@ button:hover {
     background-color: rgb(7, 7, 7);
     text-align: center;
     height: 90%;
-    width: 30%;
+    width: 20%;
     position: fixed;
     right: 0;
     bottom: 0;
@@ -88,7 +88,7 @@ button:hover {
 }
 
 #reviewtext {
-    width: 10%;
+    width: 1000%;
     max-height: 400px;
     white-space: pre-wrap;     
     word-wrap: break-word; 

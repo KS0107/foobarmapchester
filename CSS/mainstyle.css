@@ -73,6 +73,7 @@ button:hover {
 #msg {
     box-sizing: border-box;
     font-size: 10px;
+    max-width: 200px;
 }
 .topBar{
     left: 0;

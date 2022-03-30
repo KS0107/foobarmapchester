@@ -19,6 +19,9 @@ h1 {
   position: relative;
 
 }
+#bleg {
+  background-color: black;
+}
 #lenks {
   margin-top: 10vh;
 }

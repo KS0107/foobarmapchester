@@ -45,6 +45,7 @@ body {
 }
 input {
   padding: 15px;
+  height: 28px;
 }
 label {
     margin-bottom: 15px;

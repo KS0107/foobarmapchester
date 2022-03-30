@@ -78,7 +78,8 @@ button:hover {
 }
 .topBar{
     left: 0;
-    height: 80px;
+    top: 10px;
+    height: 70px;
     width: 100%;
     position: fixed;
     background-color: rgb(0, 0, 0);

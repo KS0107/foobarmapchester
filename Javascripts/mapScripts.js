@@ -1,6 +1,8 @@
 mapboxgl.accessToken = 'pk.eyJ1Ijoia3MwMTA3IiwiYSI6ImNrd3hpa2djNzBlYjYydnExYXJ3bXVqNW8ifQ.4eD36Q7KuGJIPegaAn37NQ';
 
 document.addEventListener("DOMContentLoaded", () => {   //Otherwise the onclick is assigned before the DOM is loaded
+    window.onload = loadMarkers;
+    
     const lightandDarkButton = document.getElementById("lightD");
     if(lightandDarkButton != null){
         lightandDarkButton.onclick = LightFunction;
@@ -28,29 +30,47 @@ var map = new mapboxgl.Map({
     maxBounds: bounds
 });
 
-for (const marker of getMarkers().features) {
-    // Create a DOM element for each marker.
-    const el = document.createElement('div');
-    const width = marker.properties.iconSize[0];
-    const height = marker.properties.iconSize[1];
-    el.className = 'marker';
-    el.id = "mapmarker";
-    el.style.width = `${width}px`;
-    el.style.height = `${height}px`;
-    el.style.backgroundSize = '100%';
-     
-    el.addEventListener('click', () => {
-        //window.alert(marker.properties.message);
-        let locationName = document.getElementById("locationName");
-        locationName.textContent = marker.properties.message;
-        getLocation(locationName.textContent);
-    });
-     
-    // Add markers to the map.
-    new mapboxgl.Marker(el)
-    .setLngLat(marker.geometry.coordinates)
-    .addTo(map);
+markers = getMarkers();
+let markersOnScreen = [];
+
+function loadMarkers() {
+    for (const marker of markers.features) {
+        // Create a DOM element for each marker.
+        const el = document.createElement('div');
+        const width = marker.properties.iconSize[0];
+        const height = marker.properties.iconSize[1];
+        el.className = 'mapmarker';
+        el.id = "mapmarker"+marker.properties.message;
+        el.style.width = `${height}px`;
+        el.style.height = `${height}px`;
+        el.style.backgroundSize = '100%';
+
+        el.addEventListener('click', () => {
+            //window.alert(marker.properties.message);
+            let locationName = document.getElementById("locationName");
+            locationName.textContent = marker.properties.message;
+            getLocation(locationName.textContent);
+        });
+        
+        markersOnScreen.push(el);
+        // Add markers to the map.
+        new mapboxgl.Marker(el)
+        .setLngLat(marker.geometry.coordinates)
+        .addTo(map);
+    }
 }
+
+function updateMarkers(){
+    markersOnScreen.forEach(element=>{
+        scaleFactor = (map.style.z)*(map.style.z)/200;
+        element.style.width = 40*scaleFactor+"px";
+        element.style.height = 40*scaleFactor+"px";
+    })
+}
+
+map.on('render', () => {
+    updateMarkers()
+});
 
 function displayReviews(reviews){
     var location = document.getElementById("locationName").textContent;

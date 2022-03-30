@@ -21,17 +21,20 @@
             <!-- <button id="slider">Collapse Reviews</button> -->
         </div>
     </div>
-
 	<h2 id="title">Chatbox</h2>
 	<div class="flex-container">
 		<div class="friendList">
 			<div id="friend-bar">
-				<div id="friend-tag"><h2>Friends</h2></div>
+				<div><button id="privateChat">friends</button></div>
+				<div><button id="publicChat">group chat</button></div>
+				<!-- <div id="friend-tag"><h2>Friends</h2></div> -->
 				<div id="add-friend"><a id="ibtn"></a></div>
+				<div id="delete-friend"><a id="dbtn"></a></div>
 			</div>
 			<!-- <button class="deletemsg" id="delete">Delete</button>
 			<button class="logout" id="exit">Exit</button> -->
-			<div id="friends"></div>
+			<div id="friends" style="position: relative;"><img src="../images/Bean.gif" alt="" style="width: 130px; height: 130px; position: absolute; top: 4em; left: 40%;"><h3 style="position: absolute; top: 10em; left: 42%;">Loading . . .</h3></div>
+			<div id="groupChat"></div>
 		</div>
 		<div id="chatbox-wrapper">
 		<div id="friend-name"></div>
@@ -42,6 +45,13 @@
 				
 			</form>
 			<button id="request">Make a request</button>
+		</div>
+		<div>
+			<form method="post" onsubmit="return false;"> 
+				<label for="customName" style="color: white;">custom name</label>
+				<input type="text" name="CustomName" id="CustomNameInput">
+				<input type="submit" id="CustomNamebtn">
+			</form>
 		</div>
 	</div>
 	
@@ -69,6 +79,16 @@
 
 		document.getElementById("close2").addEventListener("click", function(){
 			document.getElementById("requestbox-container").style.display = "none";
+		});
+
+		document.getElementById("privateChat").addEventListener("click", function(){
+			document.getElementById("groupChat").style.display = "none";
+			document.getElementById("friends").style.display = "block";
+		});
+
+		document.getElementById("publicChat").addEventListener("click", function(){
+			document.getElementById("friends").style.display = "none";
+			document.getElementById("groupChat").style.display = "block";
 		});
 	</script>
 </body>

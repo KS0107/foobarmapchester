@@ -256,7 +256,7 @@ function generateMarkerData(){
             'geometry': {
                 'type': 'Point',
                 'coordinates': [0, 0]
-            }
+            },
         }
         blankLocation.properties.message = element.Name;
         blankLocation.geometry.coordinates = element.Coords;

@@ -10,11 +10,13 @@
     <script type="text/javascript" src="../Javascripts/friend.js"></script>
 </head>
 <body>
-    <div class="topbar">
-        <button id="friendsbtn">users</button>
-        <button id="requestsbtn">friend requests</button>
-        <button id="privatebtn">private requests</button>
-        <button id="publicbtn">public requests</button>
+    <div class="topbar" style=" text-align: center;">
+        <div class="flex-container" style="display: flex; justify-content: center;">
+            <div><button id="friendsbtn">Users</button></div>
+            <div><button id="requestsbtn">Friend Requests</button><div id="friendNoti"></div></div>
+            <div><button id="privatebtn">Private Requests<div id="privateNoti"></div></button></div>
+            <div><button id="publicbtn">Public Requests</button><div id="publicNoti"></div></div>
+        </div>
     </div>
 
     <div id="friendsBox">
@@ -30,13 +32,14 @@
 
     <div id="privatebox">
         <form>
-            <select name="place" id="place1"></select>
+            <input type="text" onkeyup="retrieveEventRequest(this.value)">
+            <!-- <select name="place" id="place1"></select>
             <br><select name="date" class="date">
                 <option value="10am-2pm" selected>10am-2pm</option>
                 <option value="2pm-6pm" >2pm-6pm</option>
                 <option value="6pm-11pm" >6pm-11pm</option>
                 <option value="11pm-10am" >11pm-10am</option>
-            </select>
+            </select> -->
         </form>
         <div id="privateRequest"></div>
     </div>

@@ -103,6 +103,7 @@ a{
     padding: 8px;
     width: 140px;
     height: 40px;
+    transition: 0.5s ease-in-out;
   }
   
   

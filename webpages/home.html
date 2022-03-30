@@ -126,3 +126,128 @@
                 </main>
     </body>
 </html>
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Main Page</title>
+        <link rel="stylesheet" href="CSS/landingstyle.css">
+        <script src="Javascripts/generalScripts.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script>
+          $(document).ready(function(){
+            $("a").on('click', function(event) {
+              if (this.hash !== "") {
+                event.preventDefault();
+                var hash = this.hash;
+
+                $('html, body').animate({
+                  scrollTop: $(hash).offset().top
+                }, 800, function(){
+
+                  window.location.hash = hash;
+                });
+              } 
+            });
+          });
+          </script>
+    </head>
+    <body>
+      <div class="header">
+        <div class="progress-container">
+            <div class="progress-bar" id="myBar"></div></div></div>
+            <div class="topBar">
+              <div id="buttonLinks">
+
+                  <button id="btnIP">Home Page</button>
+                  <button id="btnLP">Sign In</button>
+                  
+              </div>
+          </div>
+
+        <main>
+        <header>
+          <h1>FooBar.</h1>
+          <a href="#us">About Us</a>
+          <a href="#food">Top Spots</a>
+          <a href="#topspots">FAQs</a>
+          <a href="#footer">Contact Us</a>
+        </header>
+        <section id="us">
+          <h2>Who are we?</h2>
+  
+          <h3>What we believe in.</h3>
+          <p>
+            We're a team of first year students who came together to solve one key problem for students, streamlining the process of going out with friends. FooBar lets you create plans with friends with ease and makes the social side of the uni experience much simpler. We're seven first year Computer Science students from the University of Manchester who used this project to improve our HTML, JavaScript, CSS and PHP skills whilst also learning how to collaborate on a large scale web development group project.
+          </p>
+          <h3>Meet the Team</h3>
+          <p>
+            <b>Nathan</b> - Database Design <br><br>
+            <b>George</b> - Timetable and Map Development <br><br>
+            <b>Jiaying</b> - Chat Functionality <br><br>
+            <b>Kush</b> - Web Page Styling <br><br>
+            <b>Ollie</b> - Database Linking <br><br>
+            <b>Masroor</b> - Review Linking <br><br>
+            <b>Wenyu</b> - (Check GitLab for contributions) <br><br>
+          </p>
+          
+  
+        </section>
+          <section id="food">
+            <h2>Top Spots</h2>
+    
+            <h3>42s</h3>
+            <p>
+              Venue for alternative, non-chart music with a relaxed dress code and regular themed DJ nights.
+            </p>
+            <h3>Factory 251</h3>
+            <p>
+              Clubbing venue in the old Factory Records offices, playing sounds from indie to drum 'n' bass.
+            </p>
+            <h3>Cargo</h3>
+            <p>
+              Sprawling nightclub offering cocktails, gin masterclasses & weekend bottomless brunches.
+            </p>
+            <h3>Footage</h3>
+            <p>
+              Spacious pub in a former cinema, with big-screen sport, beer-and-burger deal, karaoke and dance floor.
+            </p>
+            <h3>Big Hands</h3>
+            <p>
+              Cool venue drawing gig-goers & students with beers, energetic music & a rooftop garden.
+            </p>
+    
+          </section>
+          
+          <section id="topspots">
+    
+            <h2>FAQs</h2>
+    
+            <p>
+              <h3>How do I make a plan? </h3>
+              Once you've signed in you can go to the chat page and send individual or group requests to make plans.
+            </p>
+            <p>
+              <h3>How do I know the best places to go?</h3>
+              The Top Spots section on the home page recommends the current highest rated locations or alternatively checking the map page allows you to browase all the locations in the area and see the average rating of each location to help you choose where you'll go.
+          
+            </p>
+            <p>
+              <h3>How do I see what people think of places?</h3>
+              Looking at the Map Page lets you see other honest reviews from users alongside an average review rating, letting you decide if that location is where you want to head.
+            </p>
+            <p>
+              <h3>How do I organise my day?</h3>
+              THe timetable page lets you have full view of all your upcoming personal and group plans for that week and slot in new events around your current schedule.
+            </p>
+    
+          </section>
+          <section id="footer"></section>
+            <p>+44 7958 402605</p>
+            <p>z19.foobar@gmail.com</p>
+            <p>&#169 Group Z19 FooBar GmBH</p>
+          </section>
+          </main>
+    </body>
+</html>

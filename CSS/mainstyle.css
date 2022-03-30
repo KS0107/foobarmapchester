@@ -86,8 +86,9 @@ button:hover {
 #msg {
     max-width: 10%;
 }
+
 #reviewtext {
-    width: 1000%;
+    width: 10%;
     max-height: 400px;
     white-space: pre-wrap;     
     word-wrap: break-word; 

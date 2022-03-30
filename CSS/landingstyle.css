@@ -14,11 +14,11 @@ body {
 }
 h1 {
   text-align: center;
-  top: -10vh;
   font-size: 60px;
   font-weight: 600;
+  border: 10vh 0vh;
   background-color: black;
-  height: 30vh;
+
 }
 #lenks {
   margin-top: 10vh;

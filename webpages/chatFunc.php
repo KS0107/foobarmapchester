@@ -8,6 +8,8 @@
 	<script type="text/javascript" src="../Javascripts/chatFunc.js"></script>
 	<script type="text/javascript"src="../Javascripts/generalScripts.js"></script>
 	<link rel="stylesheet" type="text/css" href="../CSS/chatFunc.css">
+	<link rel="stylesheet" type="text/css" href="../CSS/chatFunc.css">
+
 </head>
 <body>
     <div class="topBar">

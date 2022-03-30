@@ -36,10 +36,21 @@ function retrieveRequest(){
     xmlhttp.onload = function(){
         res = JSON.parse(this.responseText);
         request = "";
+        counForFriendR = 0;
         for(i = 0; i < res.length; i++){
+            if(res[i].Noti == "unread"){
+                counForFriendR++;
+            }
             request += "<div>" + "Date: " +res[i].CreateDate + "<br>" + res[i].Username + " wants to add you!! " + "<button onclick=\"requestYes(\'" + res[i].Username + "\')\">" + "yes" + "</button> " + " <button onclick=\"requestNo(\'" + res[i].Username +"\')\">no</button>" + "</div>";
         }
         document.getElementById("requestsBox").innerHTML = request;
+        if(counForFriendR == 0){
+            document.getElementById("friendNoti").style.display = "none";
+        }else{
+            document.getElementById("friendNoti").innerHTML = "+" + counForFriendR;
+            document.getElementById("friendNoti").style.display = "block";
+        }
+
     }
     xmlhttp.open("GET", "../restapi/index.php/user/retrieveRequest");
     xmlhttp.send();
@@ -117,87 +128,61 @@ function eventNo(requestmsgID){
     xhttp.send("requestmsgID=" + requestmsgID);
 }
 
+function eventJoin(groupChatID){
+    const xhttp = new XMLHttpRequest();
+    xhttp.onload = function(){
+        alert(this.responseText);
+    }
+    xhttp.open("POST", "../restapi/index.php/user/eventJoin");
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("groupChatID=" + groupChatID);
+}
 
-function retrieveEventRequest(){
+
+function retrieveEventRequest(search){
     const xhttp = new XMLHttpRequest();
     xhttp.onload = function() {
         response = JSON.parse(this.responseText);
         privateRequests = "";
+        privateRequestsArray = [];
         publicRequests = "";
+        countForPrivate = 0;
+        countForPublic = 0;
         for(let i = 0; i < response[1].length; i++){
             if(response[1][i].Type == "private"){
-                if(response[0] == response[1][i].requesterID){
-                    privateRequests += 
-                    "<div>" +
-                        "<table>" +
-                            "<tr>" +
-                                "<th>" + "Day" + "</th>" +
-                                "<th>" + "Date" + "</th>" +
-                                "<th>" + "Place" + "</th>" +
-                                "<th>" + "To Friend" + "</th>"+
-                                "<th>" + "Status" + "</th>"+
-                            "</tr>" +
-                            "<tr>" +
-                                "<td>" + response[1][i].Week + "</td>" +
-                                "<td>" + response[1][i].Date + "</td>" +
-                                "<td>" + response[1][i].Place + "</td>" +
-                                "<td>" + response[1][i].Username + "</td>"+
-                                "<td>" + response[1][i].Status + "</td>"+
-                            "</tr>" +
-                        "</table>" +
-                    "</div>";
+                tempRecord = 
+                {
+                    "Day": response[1][i].Week,
+                    "Time": response[1][i].Date,
+                    "Place": response[1][i].Place,
+                    "Username": response[1][i].Username,
+                    "Status": response[1][i].Status,
+                    "Response": null
+                };                
+                if(response[1][i].requesterID != response[0] && response[1][i].Noti == "unread"){
+                    countForPrivate++;
+                }
+                if(response[0] == response[1][i].requesterID){//User is sending request
+                    tempRecord.Response = null;
                 }else{ // user is recipient
-                    if(response[1][i].Status == "No Response"){
-                        privateRequests += 
-                        "<div>" +
-                            "<table>" +
-                                "<tr>" +
-                                    "<th>" + "Day" + "</th>" +
-                                    "<th>" + "Date" + "</th>" +
-                                    "<th>" + "Place" + "</th>" +
-                                    "<th>" + "From Friend" + "</th>" +
-                                    "<th>" + "Status" + "</th>"+
-                                    "<th>" + "Response" + "</th>"+
-                                "</tr>" +
-                                "<tr>" +
-                                    "<td>" + response[1][i].Week + "</td>" +
-                                    "<td>" + response[1][i].Date + "</td>" +
-                                    "<td>" + response[1][i].Place + "</td>" +
-                                    "<td>" + response[1][i].Username + "</td>" +
-                                    "<td>" + response[1][i].Status + "</td>"+
-                                    "<td>" + 
-                                        "<div id=" + response[1][i].RequestmsgID + ">" +
-                                            "<div>" + "<button onclick=eventYes('"  + response[1][i].requesterID + "','" + response[1][i].RequestmsgID + "','" + encodeURIComponent(response[1][i].Place) + "','" + response[1][i].Date + "','" + response[1][i].Week +  "')>Accept</button>" + "</div>" +
-                                            "<div>" + "<button onclick=eventNo('"  +  response[1][i].RequestmsgID + "')>Decline</button>" + "</div>" +
-                                        "</div>" +
-                                    "</td>"+
-                                "</tr>" +
-                            "</table>" +
+                    if(response[1][i].Status == "No Response"){//User can respond
+                        tempRecord.Response = 
+                        "<div id=" + response[1][i].RequestmsgID + ">" +
+                            "<div>" + "<button onclick=eventYes('"  + response[1][i].requesterID + "','" + response[1][i].RequestmsgID + "','" + encodeURIComponent(response[1][i].Place) + "','" + response[1][i].Date + "','" + response[1][i].Week +  "')>Accept</button>" + "</div>" +
+                            "<div>" + "<button onclick=eventNo('"  +  response[1][i].RequestmsgID + "')>Decline</button>" + "</div>" +
                         "</div>";
-                    }else{
-                        privateRequests += 
-                        "<div>" +
-                            "<table>" +
-                                "<tr>" +
-                                    "<th>" + "Day" + "</th>" +
-                                    "<th>" + "Date" + "</th>" +
-                                    "<th>" + "Place" + "</th>" +
-                                    "<th>" + "From Friend" + "</th>" +
-                                    "<th>" + "Status" + "</th>"+
-                                "</tr>" +
-                                "<tr>" +
-                                    "<td>" + response[1][i].Week + "</td>" +
-                                    "<td>" + response[1][i].Date + "</td>" +
-                                    "<td>" + response[1][i].Place + "</td>" +
-                                    "<td>" + response[1][i].Username + "</td>" +
-                                    "<td>" + response[1][i].Status + "</td>"+
-                                "</tr>" +
-                            "</table>" +
-                        "</div>";
+                    }else{//User has already responded
+                        tempRecord.Response = null;
                     }
                 }
+                if(tempRecord.Place.includes(search)){
+                    privateRequestsArray.push(tempRecord);
+                }
             }else{ //public case
-                if(response[0] != response[1][i].requesterID){
+                if((response[0] != response[1][i].requesterID) && (response[0] == response[1][i].TargetID) && (response[1][i].Status == "No Response")){
+                    if(response[1][i].Noti == "unread"){
+                        countForPublic++;
+                    }
                     publicRequests +=
                     "<div>" +
                         "<table>" +
@@ -215,8 +200,8 @@ function retrieveEventRequest(){
                                 "<td>" + response[1][i].Username + "</td>" +
                                 "<td>" + 
                                     "<div id=" + response[1][i].RequestmsgID + ">" +
-                                        "<div>" + "<button onclick=\'eventJoin(" + response[1][i].Place + "," + response[1][i].Date + "," + response[1][i].Week +  ")\'>Join</button>" + "</div>" +
-                                        "<div>" + "<button onclick=\'eventNo(" + response[1][i].Place + "," + response[1][i].Date + "," + response[1][i].Week +  ")\'>Decline</button>" + "</div>" +
+                                        "<div>" + "<button onclick=eventJoin('" + response[1][i].GroupChatID +  "')>Join</button>" + "</div>" +
+                                        "<div>" + "<button onclick=eventNo('" + response[1][i].GroupChatID +  "')>Decline</button>" + "</div>" +
                                     "</div>" +
                                 "</td>"+
                             "</tr>" +
@@ -225,13 +210,81 @@ function retrieveEventRequest(){
                 }
             }
         }
-        document.getElementById("privateRequest").innerHTML = privateRequests;
+        noResponseTable = 
+        "<div>" +
+            "<p>No Response</p>" +
+            "<table>" +
+                "<tr>" +
+                    "<th>Day</th><th>Date</th><th>Place</th><th>Friend</th><th>Status</th><th>Response</th>" + 
+                "</tr>";
+        acceptedTable = 
+        "<div>" +
+            "<p>Accepted</p>" +
+            "<table>" +
+                "<tr>" +
+                    "<th>Day</th><th>Date</th><th>Place</th><th>Friend</th><th>Status</th>" + 
+                "</tr>";
+        declinedTable = 
+        "<div>" +
+            "<p>Declined</p>" +
+            "<table>" +
+                "<tr>" +
+                    "<th>Day</th><th>Date</th><th>Place</th><th>Friend</th><th>Status</th>" + 
+                "</tr>";
+        privateRequestsArray.forEach(element => {
+            if(element.Status == "No Response"){
+                noResponseTable += 
+                "<tr>" +
+                "<td>" + element.Day + "</td>" +
+                "<td>" + element.Time + "</td>" +
+                "<td>" + element.Place + "</td>" +
+                "<td>" + element.Username + "</td>"+
+                "<td>" + element.Status + "</td>"+
+                "<td>" + element.Response + "</td>"+
+                "</tr>";
+            }else if(element.Status == "accepted"){
+                acceptedTable += 
+                "<tr>" +
+                "<td>" + element.Day + "</td>" +
+                "<td>" + element.Time + "</td>" +
+                "<td>" + element.Place + "</td>" +
+                "<td>" + element.Username + "</td>"+
+                "<td>" + element.Status + "</td>"+
+                "</tr>";
+            }else{
+                declinedTable += 
+                "<tr>" +
+                "<td>" + element.Day + "</td>" +
+                "<td>" + element.Time + "</td>" +
+                "<td>" + element.Place + "</td>" +
+                "<td>" + element.Username + "</td>"+
+                "<td>" + element.Status + "</td>"+
+                "</tr>";
+            }
+        });
+        noResponseTable += "</table>" + "</div>";
+        acceptedTable += "</table>" + "</div>";
+        declinedTable += "</table>" + "</div>";
+        document.getElementById("privateRequest").innerHTML = noResponseTable + acceptedTable + declinedTable;
         document.getElementById("PublicRequest").innerHTML = publicRequests;
+        
+        if(countForPrivate == 0){
+            document.getElementById("privateNoti").style.display = "none";
+        }else{
+            document.getElementById("privateNoti").innerHTML = "+" + countForPrivate;
+            document.getElementById("privateNoti").style.display = "block";
+        }
+        if(countForPublic == 0){
+            document.getElementById("publicNoti").style.display = "none";
+        }else{
+            document.getElementById("publicNoti").innerHTML = "+" + countForPublic;
+            document.getElementById("publicNoti").style.display = "block";
+        }
     }   
     xhttp.open("GET", "../restapi/index.php/user/getEventRequest");
     xhttp.send();
 }
-setInterval(retrieveEventRequest, 2000);
+retrieveEventRequest("");
 
 
 $(document).ready(function(){
@@ -247,6 +300,8 @@ $(document).ready(function(){
         $("#friendsBox").css("display", "none");
         $("#privatebox").css("display", "none");
         $("#requestsBox").css("display", "block");
+        $("#friendNoti").css("display", "none");
+        $.get( "../restapi/index.php/user/updateReadForFriendRequest");
     });
 
     $("#privatebtn").click(function(){
@@ -254,6 +309,9 @@ $(document).ready(function(){
         $("#requestsBox").css("display", "none");
         $("#publicbox").css("display", "none");
         $("#privatebox").css("display", "block");
+        $("#privateNoti").css("display", "none");
+        $.get( "../restapi/index.php/user/updateRead?Type=private");
+
     });
 
     $("#publicbtn").click(function(){
@@ -261,6 +319,8 @@ $(document).ready(function(){
         $("#requestsBox").css("display", "none");
         $("#privatebox").css("display", "none");
         $("#publicbox").css("display", "block");
+        $("#publicNoti").css("display", "none");
+        $.get( "../restapi/index.php/user/updateRead?Type=public");
     });
 
 

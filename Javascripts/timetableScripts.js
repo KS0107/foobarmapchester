@@ -32,69 +32,104 @@ function getTimetable(){
                 loadTimetable(text);
                 console.log(text);
             }  
-    xhttp.open("GET", "../restapi/index.php/user/getTimetable?UserID=9");
+    xhttp.open("GET", "../restapi/index.php/user/getTimetable?username="+getCookie("username"));
     xhttp.send();
 }
 
+let timeSlots = ["10am-2pm", "2pm-6pm", "6pm-11pm", "11pm-10am"];
+let daysOfWeek = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 function loadTimetable(timetable){
-    daysOfWeek = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
-    console.log(timetable);
     var timetableObj = document.getElementById("timetable");
-    timetable.forEach(element => {
-        console.log(element);
+    for (let i = 0; i < 4; i++) {
+        element = timetable[i];
         var newRow = timetableObj.insertRow();
-        newRow.id = "timePlaceHolder";
+        newRow.id = timeSlots[i];
         var newCell = newRow.insertCell();
-        newCell.textContent = "timePlaceHolder";
-        for (let i = 0; i < 7; i++) {
-            console.log(element[daysOfWeek[i]]);
+        newCell.textContent = timeSlots[i];
+        for (let j = 0; j < 7; j++) {
             var newCell = newRow.insertCell();
-            if(element[daysOfWeek[i]] != undefined){
-                newCell.textContent = element[daysOfWeek[i]];
+            if(element[daysOfWeek[j]] != null){
+                cellTextOut = ""
+                cellText = element[daysOfWeek[j]];
+                cellTextSplit = cellText.split("|");
+                cellTextLocation = cellTextSplit[0];
+                cellTextOut += cellTextLocation;
+                cellTextGroupChat = JSON.parse(cellTextSplit[1]);
+                cellTextFriend1 = JSON.parse(cellTextSplit[2]);
+                cellTextFriend2 = JSON.parse(cellTextSplit[3]);
+                if(cellTextGroupChat != null){
+                    cellTextOut += "\n with";
+                    cellTextOut += "\n" + cellTextGroupChat;
+                }else if(cellTextFriend1 != null || cellTextFriend2 != null){
+                    cellTextOut += "\n with";
+                    if(cellTextFriend1 != null){
+                        cellTextOut += "\n" + cellTextFriend1;
+                    }else if(cellTextFriend2 != null){
+                        cellTextOut += "\n" + cellTextFriend2;
+                    }else{
+                        cellTextOut += "\n" + cellTextFriend1 + " and " + cellTextFriend2;
+                    }
+                }
+                newCell.textContent = cellTextOut;
                 newCell.style.backgroundColor = "rgba(31, 31, 31, 0.6)";
             }else{
                 newCell.textContent = "Free";
                 newCell.style.backgroundColor = "rgba(117, 117, 117, 0.6)";
             }newCell.onclick = function(){
-                flipCell(this, element[1][i]);
+                flipCell(this, element[daysOfWeek[j]]);
             }
         }
-    });
+    }
 }
 
 function saveTimetable(){
     editing = false;
-    var timetable = [["10am-2pm", "1110011"], ["2pm-6pm", "1101100"], ["6pm-11pm", "0110011"], ["11pm-10am", "1001011"]];
+    var timetable = [{"Mon": null,"Tue": null,"Wed": null,"Thu": null,"Fri": null,"Sat": null,"Sun": null},
+    {"Mon": null,"Tue": null,"Wed": "Cargo","Thu": null,"Fri": null,"Sat": null,"Sun": null},
+    {"Mon": null,"Tue": null,"Wed": "Cargo","Thu": null,"Fri": null,"Sat": null,"Sun": null},
+    {"Mon": null,"Tue": null,"Wed": "Cargo","Thu": null,"Fri": null,"Sat": null,"Sun": null}];
     var timetableObj = document.getElementById("timetable");
-    timetable.forEach(element => {
-        endStringifiedData = "";
-        var timetableRow = document.getElementById(element[0]);
-        for (let i = 1; i < 8; i++) {
-            if(timetableRow.childNodes[i].textContent == "Busy"){
-                endStringifiedData += "1";
+    for (let i = 0; i < 4; i++) {
+        element = timetable[i];
+        var timetableRow = document.getElementById(timeSlots[i]);
+        for (let j = 0; j < 7; j++) {
+            if(timetableRow.childNodes[j+1].textContent != "Free"){
+                timetableContent = timetableRow.childNodes[j+1].textContent.split("\n")[0];
+                timetable[i][daysOfWeek[j]] = timetableContent;
             }else{
-                endStringifiedData += "0";
+                timetable[i][daysOfWeek[j]] = null;
             }
         }
-        element[1] = endStringifiedData;
-        document.cookie = element[0].replace("-", "")+"="+element[1];
-    });
+    }
+    console.log(timetable);
+    postTimetable(timetable);
+}
+
+function postTimetable(Timetable){
+    // const xhttp = new XMLHttpRequest();
+    // xhttp.onload = function(){
+    //     console.log(this.responseText);
+    // }  
+    $.post("../restapi/index.php/user/updateTimetable", {timetable: Timetable, username: getCookie("username")});
+    // xhttp.open("POST", "../restapi/index.php/user/updateTimetable?username="+getCookie("username"));
+    // xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    // xhttp.send("Timetable=" + timetable);
 }
 
 var editing = false;
 function flipCell(cell, status){
     if(editing){
-        if(status == 0){
-            cell.textContent = "Busy";
-            cell.style.backgroundColor = "rgba(31, 31, 31, 0.6)";
-            cell.onclick = function(){
-                flipCell(cell, 1);
-            }
-        }else{
+        if(status != null){
             cell.textContent = "Free";
             cell.style.backgroundColor = "rgba(117, 117, 117, 0.6)";
             cell.onclick = function(){
-                flipCell(cell, 0);
+                flipCell(cell, null);
+            }
+        }else{
+            cell.textContent = "Other";
+            cell.style.backgroundColor = "rgba(31, 31, 31, 0.6)";
+            cell.onclick = function(){
+                flipCell(cell, "Other");
             }
         }
     }

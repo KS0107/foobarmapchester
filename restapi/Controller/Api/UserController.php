@@ -39,6 +39,7 @@ class UserController extends BaseController{
                 if($userModel->verifyUser($username)){
                     $redirectBool = $userModel->authentication($username, $passwrod);
                     if($redirectBool){
+                        $userModel->updateUserStatus($userModel->getID($username), "online");
                         $URL = "../../../webpages/home.html";
                         $respondData = "";
                     }else{
@@ -128,12 +129,58 @@ class UserController extends BaseController{
         $this->errorHandler($this->strErrorDesc, $respondData, $this->strErrorHeader);
     }
 
+    public function getFriendByAvailabilityAction(){
+        try{
+            if(strtoupper($this->requestMethod) == "GET"){
+                $userModel = new UserModel();
+                $userid = $userModel->getID($_COOKIE["username"]);
+                $time = $this->arrQueryStringParams["time"];
+                $day = $this->arrQueryStringParams["day"];
+                switch($time){
+                    case "10am-2pm": $time = 1; break;
+                    case "2pm-6pm": $time = 2; break;
+                    case "6pm-11pm": $time = 3; break;
+                    case "11pm-10am": $time = 4; break;
+                }
+                $respondData = $userModel->getFriendByFree($userid, $day, $time);
+                $respondData = json_encode($respondData);
+            }else{
+            $this->strErrorDesc = 'Method not supported';
+            $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
+        }
+        }catch(Error $e){
+            $this->strErrorDesc = $e->getMessage();
+            $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
+        }
+
+        $this->errorHandler($this->strErrorDesc, $respondData, $this->strErrorHeader);
+    }
+
     public function getMessageAction(){
         try{
             if(strtoupper($this->requestMethod) == "GET"){
                 $userModel = new UserModel();
-                $additionalInfo = array("Sender"=>$userModel->getID($_COOKIE['username']), "Reciver"=>$userModel->getID($this->arrQueryStringParams["receiver"]));
+                $additionalInfo = array("Username"=> $_COOKIE['username'] ,"Sender"=>$userModel->getID($_COOKIE['username']), "Receiver"=>$userModel->getID($this->arrQueryStringParams["receiver"]), "CustomName"=>$userModel->getCustomName($userModel->getID($_COOKIE['username'])));
                 $respondData = $userModel->getMessage($_COOKIE['username'], $this->arrQueryStringParams["receiver"]);
+                $respondData = json_encode(array($additionalInfo, $respondData));
+            }else{
+            $this->strErrorDesc = 'Method not supported';
+            $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
+        }
+        }catch(Error $e){
+            $this->strErrorDesc = $e->getMessage();
+            $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
+        }
+
+        $this->errorHandler($this->strErrorDesc, $respondData, $this->strErrorHeader);
+    }
+
+    public function getMessageForGroupChatAction(){
+        try{
+            if(strtoupper($this->requestMethod) == "GET"){
+                $userModel = new UserModel();
+                $additionalInfo = array("Username"=> $_COOKIE['username'], "Sender"=>$userModel->getID($_COOKIE['username']), "Receiver"=>$this->arrQueryStringParams["receiver"], "CustomName"=>$userModel->getCustomName($userModel->getID($_COOKIE['username'])));
+                $respondData = $userModel->getMessageForGroupChat($this->arrQueryStringParams["receiver"]);
                 $respondData = json_encode(array($additionalInfo, $respondData));
             }else{
             $this->strErrorDesc = 'Method not supported';
@@ -154,7 +201,11 @@ class UserController extends BaseController{
                     $receiver = $_POST["receiver"];
                     $sender = $_POST["sender"];
                     $userModel = new UserModel();
-                    $userModel->storeMessage($msg, $userModel->getID($sender), $userModel->getID($receiver));
+                    if(preg_match("/^\d+$/", $receiver)){
+                        $userModel->storeMessageForGroupChat($msg, $userModel->getID($sender), $receiver);
+                    }else{
+                        $userModel->storeMessage($msg, $userModel->getID($sender), $userModel->getID($receiver));
+                    }
             }else{
                 $this->strErrorDesc = 'Method not supported';
                 $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
@@ -307,7 +358,7 @@ class UserController extends BaseController{
                     case "10am-2pm": $time = 1; break;
                     case "2pm-6pm": $time = 2; break;
                     case "6pm-11pm": $time = 3; break;
-                    case "11am-10am": $time = 4; break;
+                    case "11pm-10am": $time = 4; break;
                 }
                 $day = $_POST["day"];
                 $userModel = new UserModel;
@@ -330,17 +381,25 @@ class UserController extends BaseController{
                             // this stores requestmsg
                             $userModel->storeRequestmsg($type, $place, $date, $day, $targetid, $requesterid);
                         }else{
-                            $respondData = "you or your friends are busy on the date";
+                            $respondData = "you are busy on the date";
                             // case there is no such request and targetID are free
                         }
                     }
                 }else{ //public request 
-                    if(!empty($userModel->verifyRequestmsgP($type, $place, $date, $day))){
+                    if(!empty($userModel->verifyRequestmsgP($type, $place, $date, $day))){ // needs to change
                         // the request already exists
                         $respondData = "the public request has been already made by someone, go to public request box to join the group chat!!";
                     }else{
                         $respondData = "the public request has just been created by you!!";
-                        $userModel->storeRequestmsg($type, $place, $date, $day, 0, $requesterid);
+                        // create a group chat
+                        $groupChatID = $userModel->createGroupChat($requesterid, $day, $time, $place);
+                        // send public requests to all users
+                        $allUsers = $userModel->getAllUser();
+                        for($i = 0; $i < sizeof($allUsers); $i++){
+                            $userModel->storeRequestmsg($type, $place, $date, $day, $allUsers[$i]["UserID"], $requesterid, $groupChatID);
+                        }
+                        // update the requester as accepted for loading the group chat
+                        $userModel->updatePublicStatus($requesterid, $groupChatID);
                     }
                 }
                 if(!empty($respondData2)){$respondData = "made successfully for " . $respondData2;}
@@ -391,12 +450,12 @@ class UserController extends BaseController{
                     case "10am-2pm": $time = 1; break;
                     case "2pm-6pm": $time = 2; break;
                     case "6pm-11pm": $time = 3; break;
-                    case "11am-10am": $time = 4; break;
+                    case "11pm-10am": $time = 4; break;
                 }
                 $day = $_POST["day"];
-                if((!is_null($userModel->verifyEvent($userID, $time, $day)[0][$day]) && !is_null($userModel->verifyEvent($requesterID, $time, $day)[0][$day])) || ($userModel->verifyEvent($userID, $time, $day)[0][$day] != $place && $userModel->verifyEvent($requesterID, $time, $day)[0][$day] != $palce)){
+                if((!is_null($userModel->verifyEvent($userID, $time, $day)[0][$day]) && !is_null($userModel->verifyEvent($requesterID, $time, $day)[0][$day])) && ($userModel->verifyEvent($userID, $time, $day)[0][$day] != $place && $userModel->verifyEvent($requesterID, $time, $day)[0][$day] != $palce)){
                     //event already hold for the time
-                    $respondData = "you or your friends already have an event at the time";
+                    $respondData = "you  already have an event at the time";
                 }else{
                     if(is_null($userModel->verifyEvent($userID, $time, $day)[0][$day])){
                         // add event to it
@@ -417,7 +476,12 @@ class UserController extends BaseController{
                         for($i = 0; $i < sizeof($requestmsg); $i++){
                             $userModel->updateStatus($requestmsg[$i]["RequestmsgID"], "busy");
                         }
-                    }else{
+
+                        $requestmsg = $userModel->getRequestmsgIDBySP("private", $place, $date, $day, $userID, $status);
+                        for($i = 0; $i < sizeof($requestmsg); $i++){
+                            $userModel->updateStatus($requestmsg[$i]["RequestmsgID"], "accepted");
+                        }
+
                         $requestmsg = $userModel->getRequestmsgIDBySP("private", $place, $date, $day, $requesterID, $status);
                         for($i = 0; $i < sizeof($requestmsg); $i++){
                             $userModel->updateStatus($requestmsg[$i]["RequestmsgID"], "accepted");
@@ -461,8 +525,34 @@ class UserController extends BaseController{
         if(strtoupper($this->requestMethod) == "GET"){
             try{
                 $userModel = new UserModel;
-                $res = $userModel->getTimetable($this->arrQueryStringParams["UserID"]);
-                $respondData = json_encode($res);
+                $userID = $userModel->getID($this->arrQueryStringParams["username"]);
+                $timetable = $userModel->getTimetable($userID);
+                $times = ["10am-2pm", "2pm-6pm", "6pm-11pm", "11pm-10am"];
+                $days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+                $counterTimes = 0;
+                foreach ($timetable as &$value) {
+                    $counter = 0;
+                    foreach ($value as &$value2){
+                        if($value2 != null){
+                            $receiver = $userModel->checkReceiver($userID, $value2, $times[$counterTimes], $days[$counter]);
+                            $requester = $userModel->checkRequester($userID, $value2, $times[$counterTimes], $days[$counter]);
+                            $requesterName = null;
+                            $receiverName = null;
+                            $groupchatName = null;
+                            if(count($receiver)>0){
+                                $receiverName = $userModel->getUsernameById($receiver[0]["TargetID"])[0]["Username"];
+                                $groupchatName = $receiver[0]["GroupChatID"];
+                            }elseif(count($requester)>0){
+                                $requesterName = $userModel->getUsernameById($requester[0]["RequesterID"])[0]["Username"];
+                                $groupchatName = $requester[0]["GroupChatID"];
+                            }
+                            $value2 = $value2 . "|" . json_encode($groupchatName) . "|" . json_encode($receiverName) . "|" . json_encode($requesterName);
+                        }
+                        $counter++;
+                    }
+                    $counterTimes++;
+                }
+                $respondData = json_encode($timetable);
             }catch(Error $e){
                 $this->strErrorDesc = $e->getMessage();
                 $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
@@ -472,6 +562,195 @@ class UserController extends BaseController{
             $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
         }
         $this->errorHandler($this->strErrorDesc, $respondData, $this->strErrorHeader);
+    }
+
+    public function updateTimetableAction(){
+        if(strtoupper($this->requestMethod) == "POST"){
+            try{
+                $userModel = new UserModel;
+                $timetable = $_POST["timetable"];
+                foreach ($timetable as &$value) {
+                    foreach ($value as &$value2){
+                        if($value2 == ""){
+                            $value2 = null;
+                        }
+                    }
+                }
+                unset($value);
+                $timetableids = $userModel->getTimetableIDs($_POST["username"]);
+                $userModel->updateTimetable($timetableids[0]["TimetableID"], $timetable[0]);
+                $userModel->updateTimetable($timetableids[1]["TimetableID"], $timetable[1]);
+                $userModel->updateTimetable($timetableids[2]["TimetableID"], $timetable[2]);
+                $userModel->updateTimetable($timetableids[3]["TimetableID"], $timetable[3]);
+                $respondData = json_encode($timetable);
+            }catch(Error $e){
+                $this->strErrorDesc = $e->getMessage();
+                $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
+            }
+        }else{
+            $this->strErrorDesc = 'Method not supported';
+            $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
+        }
+        $this->errorHandler($this->strErrorDesc, $respondData, $this->strErrorHeader);
+    }
+    public function updateReadAction(){
+        if(strtoupper($this->requestMethod) == "GET"){
+            try{
+                $userModel = new UserModel;
+                $userid = $userModel->getID($_COOKIE["username"]);
+                $requestmsgIDs = $userModel->getRequestmsgIDByType($userid, $this->arrQueryStringParams["Type"]);
+                for($i = 0; $i < sizeof($requestmsgIDs); $i++){
+                    $userModel->updateRead($requestmsgIDs[$i]["RequestmsgID"], "read");
+                }
+                $responseDate = '';
+            }catch(Error $e){
+                $this->strErrorDesc = $e->getMessage();
+                $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
+            }
+        }else{
+            $this->strErrorDesc = 'Method not supported';
+            $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
+        }
+        $this->errorHandler($this->strErrorDesc, $responseDate, $this->strErrorHeader);
+    }
+    
+    public function updateReadForFriendRequestAction(){
+        if(strtoupper($this->requestMethod) == "GET"){
+            try{
+                $userModel = new UserModel;
+                $userid = $userModel->getID($_COOKIE["username"]);
+                $requestIDs = $userModel->getRequestID($userid);
+                for($i = 0; $i < sizeof($requestIDs); $i++){
+                    $userModel->updateReadForRequest($requestIDs[$i]["RequestID"], "read");
+                }
+                $responseDate = '';
+            }catch(Error $e){
+                $this->strErrorDesc = $e->getMessage();
+                $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
+            }
+        }else{
+            $this->strErrorDesc = 'Method not supported';
+            $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
+        }
+        $this->errorHandler($this->strErrorDesc, $responseDate, $this->strErrorHeader);
+    }
+
+    public function eventJoinAction(){
+        // update public request to accepted status
+        if(strtoupper($this->requestMethod) == "POST"){
+            try{
+                $groupChatID = $_POST["groupChatID"];
+                $userModel = new UserModel;
+                $userid = $userModel->getID($_COOKIE["username"]);
+                $infor = $userModel->getInfoByGroupId($groupChatID);
+                $day = $infor[0]["Day"];
+                $time =  $infor[0]["Time"];
+                $place = $infor[0]["Place"];
+                if(!is_null($userModel->verifyEvent($userid, $time, $day)[0][$day]) && $userModel->verifyEvent($userid, $time, $day)[0][$day] != $place){
+                    //event already hold for the time
+                    $respondData = "you already have an event at the time";
+                }else{
+                    if(is_null($userModel->verifyEvent($userid, $time, $day)[0][$day])){
+                        $userModel->updatePublicStatus($userid, $groupChatID);
+                        $userModel->addEvent($userid, $place, $time, $day);
+
+                        $respondData = "you just made an event to timetable!!";
+
+                        // update other requests' status as busy for those having the same date
+                        // get the requestmsgID by userid
+                        $status = "No Response"; // get the requestmsg which not responded
+                        $requestmsg = $userModel->getRequestmsgIDByDP("public", $place, $time, $day, $userid, $status);
+                        for($i = 0; $i < sizeof($requestmsg); $i++){
+                            $userModel->updateStatus($requestmsg[$i]["RequestmsgID"], "busy");
+                        }
+
+                        $requestmsg = $userModel->getRequestmsgIDBySP("public", $place, $time, $day, $userid, $status);
+                        for($i = 0; $i < sizeof($requestmsg); $i++){
+                            $userModel->updateStatus($requestmsg[$i]["RequestmsgID"], "accepted");
+                        }
+                    }
+                }
+            }catch(Error $e){
+                $this->strErrorDesc = $e->getMessage();
+                $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
+            }
+        }else{
+            $this->strErrorDesc = 'Method not supported';
+            $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
+        }
+        $this->errorHandler($this->strErrorDesc, $respondData, $this->strErrorHeader);
+    }
+
+    public function getGroupChatAction(){
+        if(strtoupper($this->requestMethod) == "GET"){
+            try{
+                $userModel = new UserModel;
+                $userid = $userModel->getID($_COOKIE["username"]);
+                $groupChats = $userModel->pullingGroupChat($userid);
+                $responseDate = json_encode($groupChats);
+            }catch(Error $e){
+                $this->strErrorDesc = $e->getMessage();
+                $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
+            }
+        }else{
+            $this->strErrorDesc = 'Method not supported';
+            $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
+        }
+        $this->errorHandler($this->strErrorDesc, $responseDate, $this->strErrorHeader);
+    }
+
+    public function deleteFriendAction(){
+        if(strtoupper($this->requestMethod) == "GET"){
+            try{
+                $userModel = new UserModel;
+                $userid = $userModel->getID($_COOKIE["username"]);
+                $targetid = $this->arrQueryStringParams["id"];
+                $groupChats = $userModel->deleteFriend($userid, $targetid);
+            }catch(Error $e){
+                $this->strErrorDesc = $e->getMessage();
+                $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
+            }
+        }else{
+            $this->strErrorDesc = 'Method not supported';
+            $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
+        }
+        $this->errorHandler($this->strErrorDesc, "", $this->strErrorHeader);
+    }
+
+    public function removeGroupChatAction(){
+        if(strtoupper($this->requestMethod) == "GET"){
+            try{
+                $userModel = new UserModel;
+                $userid = $userModel->getID($_COOKIE["username"]);
+                $targetid = $this->arrQueryStringParams["id"];
+                $groupChats = $userModel->removeGroupChat($userid, $targetid);
+            }catch(Error $e){
+                $this->strErrorDesc = $e->getMessage();
+                $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
+            }
+        }else{
+            $this->strErrorDesc = 'Method not supported';
+            $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
+        }
+        $this->errorHandler($this->strErrorDesc, "", $this->strErrorHeader);
+    }
+
+    public function updateCustomNameAction(){
+        if(strtoupper($this->requestMethod) == "POST"){
+            try{
+                $userModel = new UserModel;
+                $userid = $userModel->getID($_COOKIE["username"]);
+                $name = $_POST["CustomName"];
+                $groupChats = $userModel->updateCustomname($userid, $name);
+            }catch(Error $e){
+                $this->strErrorDesc = $e->getMessage();
+                $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
+            }
+        }else{
+            $this->strErrorDesc = 'Method not supported';
+            $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
+        }
+        $this->errorHandler($this->strErrorDesc, json_encode("you have successfully changed your custom name!!"), $this->strErrorHeader);
     }
 }
 ?>

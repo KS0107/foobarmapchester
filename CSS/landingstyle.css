@@ -25,6 +25,11 @@ h1 {
   height: 26vh;
   padding: 2vh 2vh;
 }
+#StartButton {
+  background-color: rgb(1, 15, 61);
+  color:rgb(255, 255, 255);
+  min-width: 200px;
+}
 #lenks {
   margin-top: 10vh;
 }
@@ -101,11 +106,7 @@ button:hover {
     width: 20%;
     height: 0%;
 }
-#StartButton {
-  background-color: rgb(15, 1, 61);
-  color:rgb(255, 255, 255);
-  min-width: 200px;
-}
+
 label {
     margin-bottom: 15px;
 }

@@ -17,8 +17,10 @@ h1 {
   font-size: 60px;
   font-weight: 600;
   position: relative;
+  z-index: 6;
 
-}
+} 
+
 #bleg {
   background-color: black;
   border-radius: 25px;
@@ -26,9 +28,15 @@ h1 {
   padding: 2vh 2vh;
 }
 #StartButton {
+  background-color: rgb(0, 0, 0);
+  color:rgb(255, 255, 255);
+  min-width: 200px;
+}
+#StartButton:hover {
   background-color: rgb(1, 15, 61);
   color:rgb(255, 255, 255);
   min-width: 200px;
+  padding: 20 100px;
 }
 #lenks {
   margin-top: 10vh;
@@ -154,7 +162,7 @@ nav {
     display: inline;
     align-items: center;
   }
-a {
+.link {
     justify-content: space-between;
     font-weight: 300;
     align-items: center;
@@ -168,10 +176,29 @@ a {
     transition: 0.5s;
     color: white;
   }
- a:hover {
+ .link:hover {
     background-color: rgba(14, 14, 14, 0.692);
     color: rgb(75, 75, 75);
 
+  }
+ .link:visited {
+    color: white;
+  }
+  a {
+    justify-content: space-between;
+    font-weight: 300;
+    align-items: center;
+    border-radius: 10px;
+    text-decoration: none;
+    padding: 12px 20px;
+    margin-right: 20px;
+    max-width: 80px;
+    min-width: 200px;
+    transition: 0.5s;
+    color: white;
+  }
+  a:hover {
+    color: black;
   }
  a:visited {
     color: white;
@@ -254,4 +281,59 @@ a {
   #footer {
     height: 15vh;
     padding-top: 5vh;
+  }
+  
+  
+  h1 > span:before {
+    content: "";
+    background: #ffffff;
+    position: absolute;
+    width: 18%;
+    height: 4px;
+    bottom: 0;
+    left: 40vw;
+    border-radius: 4px;
+    transform: scaleX(0);
+    animation: 1s forwards no-hover-v linear;
+    animation-fill-mode: forwards;
+    z-index: -3;
+  }
+  h1 > span:hover:before,
+  h1 > span:focus:before {
+    animation: 1s forwards hover-v linear;
+    animation-fill-mode: forwards;
+    z-index: -3;
+    color: black;
+  }
+  @keyframes hover-v {
+    0% {
+        transform: scaleX(0);
+        height: 4px;
+       }
+    45% {   
+        transform: scaleX(1.05);
+        height: 4px;
+       }
+    55% {height: 4px;}
+    100% {
+        transform: scaleX(1.05);
+       }
+  }
+  @keyframes no-hover-v {
+    0% {
+        transform: scaleX(1.05);
+       }
+    45% {height: 4px;}
+    55% {   
+        transform: scaleX(1.05);
+        height: 4px;
+        opacity: 1;
+       }
+    
+    100% {
+        transform: scaleX(0);
+        height: 4px;
+        opacity: .02;
+
+       }
   }

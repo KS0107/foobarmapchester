@@ -284,6 +284,7 @@ function retrieveEventRequest(search){
     xhttp.open("GET", "../restapi/index.php/user/getEventRequest");
     xhttp.send();
 }
+setInterval(function(){retrieveEventRequest("")}, 10000);
 retrieveEventRequest("");
 
 

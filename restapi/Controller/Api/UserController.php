@@ -30,7 +30,7 @@ class UserController extends BaseController{
     }
 
     public function authenAction(){
-                $respondData = "";
+        $redirectBool = true;
         if(strtoupper($this->requestMethod) == "POST"){
             try{
                 $username = $_POST["username"];
@@ -91,13 +91,19 @@ class UserController extends BaseController{
                 $lastname = $_POST['lastname'];
                 $username = $_POST['username'];
                 $passwrod = $_POST['password'];
-                $userModel = new userModel();
-                $bool = $userModel->addUser($firstname, $lastname, $username, $passwrod);
-                $userID = $userModel->getID($username);
-                $userModel->initTimetable($userID);
-                if($bool){
+                if(preg_match("/!#$%&'()*+-./:<=>?@[]^_`{|}~/", $username)){
+                    $userModel = new userModel();
+                    $bool = $userModel->addUser($firstname, $lastname, $username, $passwrod);
+                    $userID = $userModel->getID($username);
+                    $userModel->initTimetable($userID);
+                    if($bool){
+                        $redirectBool = true;
+                        $URL = "../../../webpages/loginPage.php";
+                        $this->errorHandler($this->strErrorDesc, "", $this->strErrorHeader, $redirectBool, $URL);
+                    }
+                }else{
                     $redirectBool = true;
-                    $URL = "../../../webpages/loginPage.php";
+                    $URL = "../../../webpages/signUpPage.html";
                     $this->errorHandler($this->strErrorDesc, "", $this->strErrorHeader, $redirectBool, $URL);
                 }
             }catch(Error $e){

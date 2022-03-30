@@ -123,17 +123,7 @@ pre {
 #reviewtext::-webkit-scrollbar-thumb {
     background: #888;
 }
-.topBar #buttonLinks{
-    display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
-}    
-.topBar button{
-    margin-left: 2%;
-    margin-right: 2%;
-    width: 20%;
-    height: 0%;
-}
+
 label {
     margin-bottom: 15px;
 }

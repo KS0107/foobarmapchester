@@ -26,7 +26,7 @@
 		<div class="friendList">
 			<div id="friend-bar">
 				<div><button id="privateChat">Friends</button></div>
-				<div><button id="publicChat">Group Chat</button></div>
+				<div><button id="publicChat">Group</button></div>
 				<!-- <div id="friend-tag"><h2>Friends</h2></div> -->
 				<div id="add-friend"><a id="ibtn"></a></div>
 				<div id="delete-friend"><a id="dbtn"></a></div>

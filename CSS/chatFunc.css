@@ -211,6 +211,18 @@ button {
   min-width: 50px;
   margin: 10px;
 }
+#CustomNamebtn {
+  background-color: rgb(0, 0, 0);
+  border-radius: 10px;
+  font-size: 15px;
+  color: rgb(255, 255, 255);
+  border: none;
+  padding: 8px;
+  text-decoration: none;
+  cursor: pointer;
+  min-width: 50px;
+  margin: 10px;
+}
 button:hover {
   background-color: rgba(14, 14, 14, 0.692);
   transition: 0.25s ease-in-out;
@@ -251,8 +263,22 @@ button:hover {
   border-radius: 10px;
   padding: 5px;
   height: 25px;
-  
 }
+#CustomNameInput {
+  font-family: Montserrat;
+  font-size: 14px;
+  color: white;
+  line-height: 1.2;
+  margin: 10 auto;
+  display: inline;
+  width: 10vw;
+  background: black;
+  border: 1px solid whitesmoke;
+  border-radius: 10px;
+  padding: 5px;
+  height: 15px;
+}
+
 
 #send{
   margin-top: 0;

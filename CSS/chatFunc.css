@@ -14,8 +14,8 @@ body {
 }
 .topBar{
   left: 0;
-  top: 10px;
-  height: 10%;
+  top: 0px;
+  height: 8%;
   width: 100%;
   position: fixed;
   background-color: rgb(0, 0, 0);

@@ -89,6 +89,7 @@ button:hover {
 }
 pre {
     max-width: 250px;
+    align-items: center;
     right: 0;
 }
 #reviewtext {

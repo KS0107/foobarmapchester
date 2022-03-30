@@ -80,7 +80,7 @@ button:hover {
 }
 .topBar{
     left: 0;
-    top: 10px;
+    top: 5px;
     height: 0%;
     width: 100%;
     position: fixed;

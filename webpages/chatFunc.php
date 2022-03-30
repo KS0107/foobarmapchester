@@ -8,6 +8,7 @@
 	<script type="text/javascript" src="../Javascripts/chatFunc.js"></script>
 	<script type="text/javascript"src="../Javascripts/generalScripts.js"></script>
 	<link rel="stylesheet" type="text/css" href="../CSS/chatFunc.css">
+
 </head>
 <body>
     <div class="topBar">
@@ -33,7 +34,7 @@
 			</div>
 			<!-- <button class="deletemsg" id="delete">Delete</button>
 			<button class="logout" id="exit">Exit</button> -->
-			<div id="friends" style="position: relative;"><img src="../images/Bean.gif" alt="" style="width: 130px; height: 130px; position: absolute; top: 4em; left: 40%;"><h3 style="position: absolute; top: 10em; left: 42%;">Loading . . .</h3></div>
+			<div id="friends" style="position: relative;"><img src="../images/Bean.gif" alt="" style="width: 165px; height: 120px; position: absolute; top: 4em; left: 40%;"><h3 style="position: absolute; top: 10em; left: 44%;">Loading . . .</h3></div>
 			<div id="groupChat"></div>
 		</div>
 		<div id="chatbox-wrapper">

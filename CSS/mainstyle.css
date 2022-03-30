@@ -51,13 +51,13 @@ button:hover {
     left: 0;
     bottom: 0;
     position: fixed;
-    height: 90%;
+    height: 93%;
     width: 100%;
 }
 #reviewBar{
     background-color: rgb(7, 7, 7);
     text-align: center;
-    height: 87%;
+    height: 90%;
     width: 22%;
     position: fixed;
     right: 0;
@@ -79,10 +79,23 @@ button:hover {
 .topBar{
     left: 0;
     top: 10px;
-    height: 70px;
+    height: 0%;
     width: 100%;
     position: fixed;
     background-color: rgb(0, 0, 0);
+}
+.topBar #buttonLinks{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0px;
+    background-color: black;
+    height: 6vh;
+}    
+.topBar button{
+    margin-left: 2%;
+    margin-right: 2%;
+    width: 20%;
+    height: 0%;
 }
 #msg {
     max-width: 10%;
@@ -110,17 +123,7 @@ pre {
 #reviewtext::-webkit-scrollbar-thumb {
     background: #888;
 }
-.topBar #buttonLinks{
-    display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
-}    
-.topBar button{
-    margin-left: 2%;
-    margin-right: 2%;
-    width: 20%;
-    height: 0%;
-}
+
 label {
     margin-bottom: 15px;
 }

@@ -1,5 +1,13 @@
 document.addEventListener("DOMContentLoaded", () => {   //Otherwise the onclick is assigned before the DOM is loaded
     window.onload = loadReviewLocations;
+
+    const ratingSlider = document.getElementById("rating");
+    const ratingDisplay = document.getElementById("ratingSlider");
+    if(ratingSlider != null){
+        ratingSlider.addEventListener('change', function(){
+            ratingDisplay.textContent = ratingSlider.value;
+        });
+    };
 });
 
 function loadReviewLocations(){

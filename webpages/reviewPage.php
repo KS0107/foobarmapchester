@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>Review Page</title>
+    <title>FooBar/Reviews</title>
     <link rel="stylesheet" href="../CSS/mainstyle.css">
     <script src="../Javascripts/generalScripts.js"></script>
     <script src="../Javascripts/reviewScripts.js"></script>
@@ -30,6 +30,7 @@
             </div>
             <div class="formBox">
                 <p>Rating</p>
+                <p id="ratingSlider">3</p>
                 <input type="range" id="rating" max="5" min="1" step="1" name="rating"/>
             </div>
             <div class="formBox">

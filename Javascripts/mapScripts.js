@@ -87,27 +87,27 @@ function displayReviews(reviews){
         reviewTextBlockOut += ("Reviewed On: " + reviews[i].date + "\n");
         reviewTextBlockOut += ("Given A Score Of: " + reviews[i].rating + " Out Of 5" + "\n");
         reviewActualText = reviews[i].review
-        for (let i = 0; i < Math.floor(reviewActualText.length / 30); i++) {
-            reviewLineByLine = reviewActualText.split("\n");
-            console.log(reviewLineByLine)
-            foundSpace = false;
-            decrement = 0;
-            // while(!foundSpace){
-            //     if(reviewLineByLine[i][30-decrement] == " "){
-            //         console.log(reviewLineByLine[i][30-decrement])
-            //         reviewLineByLine[i] = reviewLineByLine[i].slice(0, 30-decrement) + "\n" + reviewLineByLine[i].slice(30-decrement);
-            //         foundSpace = true;
-            //     }else{
-            //         decrement ++;
-            //     }
-            // }
-            console.log(reviewLineByLine)
-            reviewTextTemp = ""
-            reviewLineByLine.forEach(element => {
-                reviewTextTemp += element + "\n"
-            });
-            reviewActualText = reviewTextTemp;
-        }
+        // for (let i = 0; i < Math.floor(reviewActualText.length / 30); i++) {
+        //     reviewLineByLine = reviewActualText.split("\n");
+        //     console.log(reviewLineByLine)
+        //     foundSpace = false;
+        //     decrement = 0;
+        //     while(!foundSpace){
+        //         if(reviewLineByLine[i][30-decrement] == " "){
+        //             console.log(reviewLineByLine[i][30-decrement])
+        //             reviewLineByLine[i] = reviewLineByLine[i].slice(0, 30-decrement) + "\n" + reviewLineByLine[i].slice(30-decrement);
+        //             foundSpace = true;
+        //         }else{
+        //             decrement ++;
+        //         }
+        //     }
+        //     console.log(reviewLineByLine)
+        //     reviewTextTemp = ""
+        //     reviewLineByLine.forEach(element => {
+        //         reviewTextTemp += element + "\n"
+        //     });
+        //     reviewActualText = reviewTextTemp;
+        // }
         reviewTextBlockOut += ("Review: " + reviewActualText + "\n\n");
     }
     let pre = document.querySelector("#msg pre");

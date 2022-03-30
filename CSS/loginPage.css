@@ -98,7 +98,7 @@ a{
   input[type=submit] {
     background-color: rgb(0, 0, 0);
     color:white;
-    border-radius: 8px;
+    border-radius: 15px;
     border-color: rgb(27, 27, 27);
     padding: 8px;
     width: 140px;

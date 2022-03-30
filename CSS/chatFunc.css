@@ -43,6 +43,9 @@ body {
   width: 20%;
   height: 0%;
 }
+input {
+  padding: 15px;
+}
 label {
     margin-bottom: 15px;
 }

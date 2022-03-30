@@ -78,7 +78,7 @@ button:hover {
 }
 .topBar{
     left: 0;
-    top: 10px;
+    top: 15px;
     height: 70px;
     width: 100%;
     position: fixed;

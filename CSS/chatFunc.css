@@ -33,13 +33,19 @@ body {
 .topBar #buttonLinks{
   display: flex;
   justify-content: space-between;
-  margin-top: 10px;
+  margin-top: 0px;
+  background-color: black;
+  height: 6vh;
 }    
 .topBar button{
   margin-left: 2%;
   margin-right: 2%;
   width: 20%;
   height: 0%;
+}
+input {
+  padding: 15px;
+  height: 28px;
 }
 label {
     margin-bottom: 15px;
@@ -51,7 +57,6 @@ label {
 #btnAR {
     margin-top: 20px;
 }
-
 
   .mainContainer{
     position: relative;

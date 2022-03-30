@@ -51,13 +51,13 @@ button:hover {
     left: 0;
     bottom: 0;
     position: fixed;
-    height: 90%;
+    height: 93%;
     width: 100%;
 }
 #reviewBar{
     background-color: rgb(7, 7, 7);
     text-align: center;
-    height: 87%;
+    height: 90%;
     width: 22%;
     position: fixed;
     right: 0;
@@ -123,17 +123,7 @@ pre {
 #reviewtext::-webkit-scrollbar-thumb {
     background: #888;
 }
-.topBar #buttonLinks{
-    display: flex;
-    justify-content: space-between;
-    margin-top: 10px;
-}    
-.topBar button{
-    margin-left: 2%;
-    margin-right: 2%;
-    width: 20%;
-    height: 0%;
-}
+
 label {
     margin-bottom: 15px;
 }

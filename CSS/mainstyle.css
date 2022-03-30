@@ -181,6 +181,16 @@ input {
     height: 16px;
 
 }
+input[type=submit] {
+    background-color: rgb(0, 0, 0);
+    color:white;
+    border-radius: 12px;
+    border-color: rgb(27, 27, 27);
+    padding: 8px;
+    width: 200px;
+    height: 30px;
+
+}
 #review[type=text] {
 
     width: 500px;

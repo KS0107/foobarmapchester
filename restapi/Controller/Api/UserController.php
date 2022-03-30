@@ -91,7 +91,7 @@ class UserController extends BaseController{
                 $lastname = $_POST['lastname'];
                 $username = $_POST['username'];
                 $passwrod = $_POST['password'];
-                if(preg_match("/!#$%&'()*+-./:<=>?@[]^_`{|}~/", $username);)
+                if(preg_match("/!#$%&'()*+-./:<=>?@[]^_`{|}~/", $username)){
                     $userModel = new userModel();
                     $bool = $userModel->addUser($firstname, $lastname, $username, $passwrod);
                     $userID = $userModel->getID($username);
@@ -101,7 +101,7 @@ class UserController extends BaseController{
                         $URL = "../../../webpages/loginPage.php";
                         $this->errorHandler($this->strErrorDesc, "", $this->strErrorHeader, $redirectBool, $URL);
                     }
-                else{
+                }else{
                     $redirectBool = true;
                     $URL = "../../../webpages/signUpPage.html";
                     $this->errorHandler($this->strErrorDesc, "", $this->strErrorHeader, $redirectBool, $URL);

@@ -91,7 +91,7 @@ class UserController extends BaseController{
                 $lastname = $_POST['lastname'];
                 $username = $_POST['username'];
                 $passwrod = $_POST['password'];
-                if(preg_match("/!#$%&'()*+-./:<=>?@[]^_`{|}~/", $username)){
+                if(preg_match("/!#$%&'()*+-./:<=>?@[]^_`{|}~/", $username)==null){
                     $userModel = new userModel();
                     $bool = $userModel->addUser($firstname, $lastname, $username, $passwrod);
                     $userID = $userModel->getID($username);

@@ -13,9 +13,11 @@ body {
     overscroll-behavior: none;
 }
 h1 {
-    text-align: center;
-    font-size: 60px;
-    font-weight: 600;
+  text-align: center;
+  font-size: 60px;
+  font-weight: 600;
+  background-color: black;
+  height: 30vh;
 }
 #lenks {
   margin-top: 10vh;

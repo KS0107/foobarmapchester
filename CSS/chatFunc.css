@@ -251,7 +251,20 @@ button:hover {
   border-radius: 10px;
   padding: 5px;
   height: 25px;
-  
+}
+#CustomNameInput {
+  font-family: Montserrat;
+  font-size: 14px;
+  color: white;
+  line-height: 1.2;
+  margin: 0 auto;
+  display: inline;
+  width: 10vw;
+  background: black;
+  border: 1px solid whitesmoke;
+  border-radius: 10px;
+  padding: 5px;
+  height: 10px;
 }
 
 #send{

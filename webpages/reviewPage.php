@@ -38,7 +38,7 @@
                 <textarea style="resize:none" type="text" id="review" placeholder="Write your review!" name="review"></textarea>
             </div>
             <div class="formBox">
-                <button id="btnAR">Click to add review</button>
+                <input id="btnRP" type="submit" name="submit" value="Submit" />
             </div>
     		
             

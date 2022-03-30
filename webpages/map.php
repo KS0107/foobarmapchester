@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>Main Page</title>
+    <title>Map Page</title>
     <link rel="stylesheet" href="../CSS/mainstyle.css">
     <link rel="stylesheet" href="../CSS/mapstyle.css">
     <script src="../Javascripts/generalScripts.js"></script>

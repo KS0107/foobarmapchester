@@ -187,8 +187,7 @@ function retrieveEventRequest(search){
                     "Time": response[1][i].Date,
                     "Place": response[1][i].Place,
                     "Username": response[1][i].Username,
-                    "Status": response[1][i].Status,
-                    "Group": 
+                    "Response": 
                         "<div id=" + response[1][i].RequestmsgID + ">" +
                             "<div>" + "<button onclick=eventJoin('" + response[1][i].GroupChatID +  "')>Join</button>" + "</div>" +
                             "<div>" + "<button onclick=eventNo('" + response[1][i].GroupChatID +  "')>Decline</button>" + "</div>" +
@@ -300,7 +299,6 @@ function retrieveEventRequest(search){
                 "<td>" + element.Time + "</td>" +
                 "<td>" + element.Place + "</td>" +
                 "<td>" + element.Username + "</td>"+
-                "<td>" + element.Status + "</td>"+
                 "<td>" + element.Response + "</td>"+
             "</tr>";
         });

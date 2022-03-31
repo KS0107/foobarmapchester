@@ -176,7 +176,7 @@ function retrieveEventRequest(search){
                         tempRecord.Response = null;
                     }
                 }
-                if(tempRecord.Place.includes(search)){
+                if(tempRecord.Place.toLowerCase().includes(search.toLowerCase())){
                     privateRequestsArray.push(tempRecord);
                 }
             }else{ //public case
@@ -196,31 +196,7 @@ function retrieveEventRequest(search){
                     if(response[1][i].Noti == "unread"){
                         countForPublic++;
                     }
-                    // publicRequests +=
-                    // "<div>" +
-                    //     "<table>" +
-                    //         "<tr>" +
-                    //             "<th>" + "Day" + "</th>" +
-                    //             "<th>" + "Date" + "</th>" +
-                    //             "<th>" + "Place" + "</th>" +
-                    //             "<th>" + "Host" + "</th>" +
-                    //             "<th>" + "Group Chat" + "</th>"+
-                    //         "</tr>" +
-                    //         "<tr>" +
-                    //             "<td>" + response[1][i].Week + "</td>" +
-                    //             "<td>" + response[1][i].Date + "</td>" +
-                    //             "<td>" + response[1][i].Place + "</td>" +
-                    //             "<td>" + response[1][i].Username + "</td>" +
-                    //             "<td>" + 
-                    //                 "<div id=" + response[1][i].RequestmsgID + ">" +
-                    //                     "<div>" + "<button onclick=eventJoin('" + response[1][i].GroupChatID +  "')>Join</button>" + "</div>" +
-                    //                     "<div>" + "<button onclick=eventNo('" + response[1][i].GroupChatID +  "')>Decline</button>" + "</div>" +
-                    //                 "</div>" +
-                    //             "</td>"+
-                    //         "</tr>" +
-                    //     "</table>" +
-                    // "</div>";
-                    if(tempRecord.Place.includes(search)){
+                    if(tempRecord.Place.toLowerCase().includes(search.toLowerCase())){
                         publicRequestsArray.push(tempRecord);
                     }
                 }
@@ -247,8 +223,12 @@ function retrieveEventRequest(search){
                 "<tr>" +
                     "<th>Day</th><th>Date</th><th>Place</th><th>Friend</th><th>Status</th>" + 
                 "</tr>";
+        noResponse = false;
+        accepted = false;
+        declined = false;
         privateRequestsArray.forEach(element => {
             if(element.Status == "No Response"){
+                noResponse = true;
                 noResponseTable += 
                 "<tr>" +
                 "<td>" + element.Day + "</td>" +
@@ -259,6 +239,7 @@ function retrieveEventRequest(search){
                 "<td>" + element.Response + "</td>"+
                 "</tr>";
             }else if(element.Status == "accepted"){
+                accepted = true;
                 acceptedTable += 
                 "<tr>" +
                 "<td>" + element.Day + "</td>" +
@@ -268,6 +249,7 @@ function retrieveEventRequest(search){
                 "<td>" + element.Status + "</td>"+
                 "</tr>";
             }else{
+                declined = true;
                 declinedTable += 
                 "<tr>" +
                 "<td>" + element.Day + "</td>" +
@@ -281,7 +263,15 @@ function retrieveEventRequest(search){
         noResponseTable += "</table>" + "</div>";
         acceptedTable += "</table>" + "</div>";
         declinedTable += "</table>" + "</div>";
-        document.getElementById("privateRequest").innerHTML = noResponseTable + acceptedTable + declinedTable;
+        outText = ""
+        if(noResponse){
+            outText += noResponseTable;
+        }if(accepted){
+            outText += acceptedTable;
+        }if(declined){
+            outText += declinedTable;
+        }
+        document.getElementById("privateRequest").innerHTML = outText;
         publicRequests = 
         "<div>" +
             "<table>" +

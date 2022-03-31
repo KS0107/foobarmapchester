@@ -37,8 +37,8 @@
                 <p>Review</p>
                 <textarea style="resize:none" type="text" id="review" placeholder="Write your review!" name="review"></textarea>
             </div>
-            <div class="formBox">
-                <input id="btnRP" type="submit" name="submit" value="Submit" />
+            <div class="signOp">
+                <input id="btnRP" class="signOp" type="submit" name="submit" value="Submit" />
             </div>
     		
             

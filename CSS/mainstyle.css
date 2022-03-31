@@ -157,10 +157,8 @@ select:hover {
     border-color: rgb(27, 27, 27);
     padding: 8px;
     width: 140px;
-    width: 200px;
     height: 40px;
     transition: 0.3s ease-in-out;
-    width: 100%;
     display: block;
     z-index: 1;
     border-radius: 25px;

@@ -4,13 +4,13 @@
     font-family: 'Montserrat';
 }
 body {
-    background-image: url("../images/map.png");
-    background-attachment: fixed;
-    background-position: center bottom;
-    color: white;
-    transition: 0.35s ease-in-out;
-    overflow-x: hidden;
-    overscroll-behavior: none;
+  background-image: url(../images/map.png);
+  background-attachment: fixed;
+  background-position: center bottom;
+  color: white;
+  transition: 0.35s ease-in-out;
+  overflow-x: hidden;
+  overscroll-behavior: none;
 }
 h1 {
   text-align: center;

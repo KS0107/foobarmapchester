@@ -87,7 +87,7 @@ function loadGroupChat(){ // query stmt restricts that get groupids only when st
         groupChatIDs = JSON.parse(this.responseText);
         groupChatbtns = "";
         for(let i = 0; i <groupChatIDs.length; i++){
-            groupChatbtns += "<div style=\"position: relative;\">" + "<div  onclick=remove('"+ groupChatIDs[i].GroupChatID + "') class='minusSign' style=\"position: absolute; bottom: 13px; left: 18px; width: 30px; height: 30px; background-image: url(../images/delete.png); background-size: cover; \"></div>" + "<button type=\"button\" style=\"width: 100%; border: solid;\" onclick=chatHandler('"+ groupChatIDs[i].GroupChatID +"')>" + groupChatIDs[i].GroupChatID + "</button>" + "</div>"
+            groupChatbtns += "<div style=\"position: relative;\">" + "<div  onclick=remove('"+ groupChatIDs[i].GroupChatID + "') class='minusSign' style=\"position: absolute; bottom: 13px; left: 18px; width: 30px; height: 30px; background-image: url(../images/delete.png); background-size: cover; \"></div>" + "<button type=\"button\" style=\"width: 100%; border: solid;\" onclick=chatHandler('"+ groupChatIDs[i].GroupChatID + "','" + true + "','" + encodeURIComponent(groupChatIDs[i].Place + "-" + groupChatIDs[i].Week + "(" + groupChatIDs[i].Date + ")") + "')>" + groupChatIDs[i].Place + "-" + groupChatIDs[i].Week + "(" + groupChatIDs[i].Date + ")" + "</button>" + "</div>"
         }
         document.getElementById("groupChat").innerHTML = groupChatbtns;
     }
@@ -116,12 +116,17 @@ function remove(type, id){ //delete friend or groupchat
 }
 
 
-function chatHandler(friend){
+function chatHandler(friend, bool=false, text=""){
     if(typeof(intervalID) !== "undefined"){
         clearInterval(intervalID);
     }
+    if(bool){
+        document.getElementById("friend-name").innerHTML = decodeURIComponent(text);
+    }else{
+        document.getElementById("friend-name").innerHTML = friend;
+    }
     receiver = friend; 
-    document.getElementById("friend-name").innerHTML = friend;
+    
     intervalID = setInterval(loadLog, 420, friend);
     
 }

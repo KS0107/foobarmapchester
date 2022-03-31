@@ -41,7 +41,7 @@ h2 {
   min-width: 200px;
 }
 #StartButton:hover {
-  background-color: rgb(1, 15, 61);
+  background-color: rgb(15, 1, 61);
   color:rgb(255, 255, 255);
   min-width: 100px;
   padding: 10px 70px;

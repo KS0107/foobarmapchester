@@ -146,6 +146,7 @@ function retrieveEventRequest(search){
         privateRequests = "";
         privateRequestsArray = [];
         publicRequests = "";
+        publicRequestsArray = [];
         countForPrivate = 0;
         countForPublic = 0;
         for(let i = 0; i < response[1].length; i++){
@@ -180,6 +181,19 @@ function retrieveEventRequest(search){
                 }
             }else{ //public case
                 if((response[0] != response[1][i].requesterID) && (response[0] == response[1][i].TargetID) && (response[1][i].Status == "No Response")){
+                    tempRecord = 
+                    {
+                    "Day": response[1][i].Week,
+                    "Time": response[1][i].Date,
+                    "Place": response[1][i].Place,
+                    "Username": response[1][i].Username,
+                    "Status": response[1][i].Status,
+                    "Group": 
+                        "<div id=" + response[1][i].RequestmsgID + ">" +
+                            "<div>" + "<button onclick=eventJoin('" + response[1][i].GroupChatID +  "')>Join</button>" + "</div>" +
+                            "<div>" + "<button onclick=eventNo('" + response[1][i].GroupChatID +  "')>Decline</button>" + "</div>" +
+                        "</div>"
+                    };      
                     if(response[1][i].Noti == "unread"){
                         countForPublic++;
                     }
@@ -207,6 +221,9 @@ function retrieveEventRequest(search){
                             "</tr>" +
                         "</table>" +
                     "</div>";
+                    if(tempRecord.Place.includes(search)){
+                        publicRequestsArray.push(tempRecord);
+                    }
                 }
             }
         }
@@ -266,6 +283,28 @@ function retrieveEventRequest(search){
         acceptedTable += "</table>" + "</div>";
         declinedTable += "</table>" + "</div>";
         document.getElementById("privateRequest").innerHTML = noResponseTable + acceptedTable + declinedTable;
+        publicRequests = 
+        "<div>" +
+            "<table>" +
+                "<tr>" +
+                    "<th>" + "Day" + "</th>" +
+                    "<th>" + "Date" + "</th>" +
+                    "<th>" + "Place" + "</th>" +
+                    "<th>" + "Host" + "</th>" +
+                    "<th>" + "Group Chat" + "</th>"+
+                "</tr>"
+        publicRequestsArray.forEach(element => {
+        publicRequests += 
+            "<tr>" +
+                "<td>" + element.Day + "</td>" +
+                "<td>" + element.Time + "</td>" +
+                "<td>" + element.Place + "</td>" +
+                "<td>" + element.Username + "</td>"+
+                "<td>" + element.Status + "</td>"+
+                "<td>" + element.Response + "</td>"+
+            "</tr>";
+        });
+        publicRequests += "</table>" + "</div>";
         document.getElementById("PublicRequest").innerHTML = publicRequests;
         
         if(countForPrivate == 0){

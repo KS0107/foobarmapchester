@@ -89,7 +89,7 @@ class UserModel extends Database{
     }
 
     public function pullingGroupChat($userid){
-        $sql = "SELECT r.GroupChatID
+        $sql = "SELECT r.Place, r.Date, r.Week, r.GroupChatID
                 FROM Requestmsg as r
                 LEFT JOIN GroupChat as g ON r.GroupChatID = g.GroupChatID
                 WHERE r.Type = 'public' AND r.TargetID = :userid AND r.Status = 'accepted' AND g.Status = 'active'";

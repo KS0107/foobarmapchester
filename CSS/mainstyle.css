@@ -4,9 +4,11 @@
     font-family: 'Montserrat';
 }
 body {
-    background-image: url("../images/map.png");
-    background-attachment: fixed;
-    background-position: center;
+    background-image: url("../images/map.png") no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
     color: white;
     transition: 0.35s ease-in-out;
     overflow-x: hidden;

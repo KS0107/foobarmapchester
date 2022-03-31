@@ -35,7 +35,7 @@ button {
     cursor: pointer;
 }
 button:hover {
-    background-color: rgba(14, 14, 14, 0.692);
+    background-color: rgba(59, 59, 59, 0.692);
     transition: 0.25s ease-in-out;
     border-radius: 15px;
 }

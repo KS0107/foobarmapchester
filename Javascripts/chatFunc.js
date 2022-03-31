@@ -231,15 +231,15 @@ function loadLog(friend){
         
         if(text[1][i].UserID == text[0].Sender){
             if(text[0].CustomName === null){
-                message += "<div style=\"text-align: right; overflow-wrap: break-word; \">"  + text[0].Username + ":" + text[1][i].MessageBody + "</div>";
+                message += "<div style=\"text-align: right; overflow-wrap: break-word;  margin-top: 6px;\">" + "<div style=\" display: inline-block; border: solid white; border-radius: 6px; padding: 5px 5px 5px 5px;\">" + text[1][i].MessageBody   + "</div>" + "> " + "<div style=\" display: inline-block; font-size: 15px;\">" + text[0].Username + "</div></div>";
             }else{
-             message += "<div style=\"text-align: right; overflow-wrap: break-word;  \">"  + text[0].CustomName + ":" +  "<br>"  + text[1][i].MessageBody + "</div>";
+             message += "<div style=\"text-align: right; overflow-wrap: break-word; margin-top: 6px; \">"  + "<div style=\" display: inline-block; border: solid white; border-radius: 6px; padding: 5px 5px 5px 5px;\">" + text[1][i].MessageBody  + "</div>"  + "> " + "<div style=\" display: inline-block; font-size: 15px; \">" + text[0].CustomName + "</div></div>";
             }
         }else{
             if(text[1][i].CustomName === null){
-                message += "<div style=\"text-align: left; overflow-wrap: break-word; \">"  + text[1][i].Username +":<br>" + text[1][i].MessageBody + "</div>";
+                message += "<div style=\"text-align: left; overflow-wrap: break-word; margin-top: 6px;\">" + "<div style=\" display: inline-block; \">" + text[1][i].Username   + "</div>"+ " <" + "<div style=\" display: inline-block; font-size: 15px; border: solid white; border-radius: 6px; padding: 5px 5px 5px 5px;\">" + text[1][i].MessageBody + "</div></div>";
             }else{
-                message += "<div style=\"text-align: left; overflow-wrap: break-word; \">" + text[1][i].CustomName +":<br>" + text[1][i].MessageBody + "</div>";
+                message += "<div style=\"text-align: left; overflow-wrap: break-word; margin-top: 6px;\">" + "<div style=\" display: inline-block;\">" + text[1][i].CustomName   + "</div>"+ " <" + "<div style=\" display: inline-block; font-size: 15px; border: solid white; border-radius: 6px; padding: 5px 5px 5px 5px;\">" + text[1][i].MessageBody + "</div></div>";
             }
         }      
     }

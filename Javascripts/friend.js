@@ -196,30 +196,30 @@ function retrieveEventRequest(search){
                     if(response[1][i].Noti == "unread"){
                         countForPublic++;
                     }
-                    publicRequests +=
-                    "<div>" +
-                        "<table>" +
-                            "<tr>" +
-                                "<th>" + "Day" + "</th>" +
-                                "<th>" + "Date" + "</th>" +
-                                "<th>" + "Place" + "</th>" +
-                                "<th>" + "Host" + "</th>" +
-                                "<th>" + "Group Chat" + "</th>"+
-                            "</tr>" +
-                            "<tr>" +
-                                "<td>" + response[1][i].Week + "</td>" +
-                                "<td>" + response[1][i].Date + "</td>" +
-                                "<td>" + response[1][i].Place + "</td>" +
-                                "<td>" + response[1][i].Username + "</td>" +
-                                "<td>" + 
-                                    "<div id=" + response[1][i].RequestmsgID + ">" +
-                                        "<div>" + "<button onclick=eventJoin('" + response[1][i].GroupChatID +  "')>Join</button>" + "</div>" +
-                                        "<div>" + "<button onclick=eventNo('" + response[1][i].GroupChatID +  "')>Decline</button>" + "</div>" +
-                                    "</div>" +
-                                "</td>"+
-                            "</tr>" +
-                        "</table>" +
-                    "</div>";
+                    // publicRequests +=
+                    // "<div>" +
+                    //     "<table>" +
+                    //         "<tr>" +
+                    //             "<th>" + "Day" + "</th>" +
+                    //             "<th>" + "Date" + "</th>" +
+                    //             "<th>" + "Place" + "</th>" +
+                    //             "<th>" + "Host" + "</th>" +
+                    //             "<th>" + "Group Chat" + "</th>"+
+                    //         "</tr>" +
+                    //         "<tr>" +
+                    //             "<td>" + response[1][i].Week + "</td>" +
+                    //             "<td>" + response[1][i].Date + "</td>" +
+                    //             "<td>" + response[1][i].Place + "</td>" +
+                    //             "<td>" + response[1][i].Username + "</td>" +
+                    //             "<td>" + 
+                    //                 "<div id=" + response[1][i].RequestmsgID + ">" +
+                    //                     "<div>" + "<button onclick=eventJoin('" + response[1][i].GroupChatID +  "')>Join</button>" + "</div>" +
+                    //                     "<div>" + "<button onclick=eventNo('" + response[1][i].GroupChatID +  "')>Decline</button>" + "</div>" +
+                    //                 "</div>" +
+                    //             "</td>"+
+                    //         "</tr>" +
+                    //     "</table>" +
+                    // "</div>";
                     if(tempRecord.Place.includes(search)){
                         publicRequestsArray.push(tempRecord);
                     }
@@ -321,7 +321,7 @@ function retrieveEventRequest(search){
     xhttp.open("GET", "../restapi/index.php/user/getEventRequest");
     xhttp.send();
 }
-setInterval(function(){retrieveEventRequest("")}, 10000);
+setInterval(function(){retrieveEventRequest(document.getElementById("search").textContent)}, 1000);
 retrieveEventRequest("");
 
 

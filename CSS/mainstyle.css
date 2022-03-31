@@ -159,7 +159,7 @@ select:hover {
     text-align: center;
   }
 
-#btnRP {
+.signOp {
     background-color: rgba(109, 109, 109, 0.26);
     color:white;
     border-radius: 8px;
@@ -168,7 +168,7 @@ select:hover {
     width: 200px;
     height: 20px;
   }
-#btnRP {
+.signOp {
     background-color: rgb(0, 0, 0);
     color:white;
     font-family: 20px;

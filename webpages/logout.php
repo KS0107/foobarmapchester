@@ -21,6 +21,7 @@ if (!isset($_SESSION['login']))
             <button id="btnHP">Home Page</button>
             <button id="btnMP">Map Page</button>
             <button id="btnRP">Review Page</button>
+			<button id="btnCP">Chat</button>
             <button id="btnTP">Timetable</button>
             <button id="btnSP">Sign Out</button>
         </div>

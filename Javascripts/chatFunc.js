@@ -239,7 +239,7 @@ function loadLog(friend){
             if(text[1][i].CustomName === null){
                 message += "<div style=\"text-align: left; overflow-wrap: break-word; margin-top: 6px;\">" + "<div style=\" display: inline-block; \">" + text[1][i].Username   + "</div>"+ " <" + "<div style=\" display: inline-block; font-size: 15px; border: solid white; border-radius: 6px; padding: 5px 5px 5px 5px;\">" + text[0].MessageBody + "</div></div>";
             }else{
-                message += "<div style=\"text-align: left; overflow-wrap: break-word; margin-top: 6px;\">" + "<div style=\" display: inline-block;\">" + text[1][i].Username   + "</div>"+ " <" + "<div style=\" display: inline-block; font-size: 15px; border: solid white; border-radius: 6px; padding: 5px 5px 5px 5px;\">" + text[0].CustomName + "</div></div>";
+                message += "<div style=\"text-align: left; overflow-wrap: break-word; margin-top: 6px;\">" + "<div style=\" display: inline-block;\">" + text[1][i].CustomName   + "</div>"+ " <" + "<div style=\" display: inline-block; font-size: 15px; border: solid white; border-radius: 6px; padding: 5px 5px 5px 5px;\">" + text[0].MessageBody + "</div></div>";
             }
         }      
     }

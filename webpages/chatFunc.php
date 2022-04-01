@@ -48,7 +48,7 @@
 			<button id="request">Make a request</button>
 		</div>
 		<div id="setting-warapper">
-			<div id="setting">1</div>
+			<div id="setting"></div>
 			<div id="CustonNameField" style="display: none;">
 				<form method="post" onsubmit="return false;"> 
 					<label for="customName" style="color: white;">Custom Name</label>

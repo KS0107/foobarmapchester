@@ -203,7 +203,7 @@ function updateTimetable(){
         var xhttp = new XMLHttpRequest();
         xhttp.open("POST", "../restapi/index.php/user/deletingEventAndGroupChat");
         xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        xhttp.send("weekday=" + weekday + "&time" + time);
+        xhttp.send("weekday=" + weekday + "&time=" + time);
     }
 }
 

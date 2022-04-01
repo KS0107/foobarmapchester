@@ -479,6 +479,13 @@ class UserModel extends Database{
                 WHERE Day = :weekday AND Time = :time AND Status = 'active'";
         return $this->executeQuery($sql, ["weekday"=>$weekday, "time"=>$time]);
     }
+
+    public function verifyRequest($requester, $target){
+        $sql = "SELECT RequestID
+                FROM Request
+                WHERE (RequesterID = :requester AND TargetID = :target) OR (RequesterID = :target AND TargetID = :requester)";
+        return $this->executeFetchQuery($sql, ["requester"=>$requester, "target"=>$target]);
+    }
 }
 
 ?>

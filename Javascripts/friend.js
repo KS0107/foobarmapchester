@@ -22,10 +22,13 @@ function showUsers(segment){
     xmlhttp.send("segment=" + segment);
 }
 
-showUsers("");
+setInterval(showUsers, 1000, "");
 
 function friendRequest(username){
     const xmlhttp = new XMLHttpRequest();
+    xmlhttp.onload = function(){
+        alert(JSON.parse(this.responseText));
+    }
     xmlhttp.open("POST", "../restapi/index.php/user/friendRequest");
     xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xmlhttp.send("requester=" + getCookie("username") + "&target=" + username);

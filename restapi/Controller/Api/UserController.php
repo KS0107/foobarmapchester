@@ -251,7 +251,13 @@ class UserController extends BaseController{
                 $userModel = new UserModel;
                 $requester = $userModel->getID($requester);
                 $target = $userModel->getID($target);
-                $userModel->sendRequest($requester, $target);
+                if($userModel->verifyRequest($requester, $target)){
+                    $responseDate = "there exists such a request!";
+                }else{
+                    $userModel->sendRequest($requester, $target);
+                    $responseDate = "you have sent successfully!";
+                }
+                $responseDate = json_encode($responseDate);
             }else{
                 $this->strErrorDesc = 'Method not supported';
                 $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
@@ -260,7 +266,7 @@ class UserController extends BaseController{
             $this->strErrorDesc = $e->getMessage();
             $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
         }
-        $this->errorHandler($this->strErrorDesc, "", $this->strErrorHeader);
+        $this->errorHandler($this->strErrorDesc, $responseDate, $this->strErrorHeader);
     }
 
     public function retrieveRequestAction(){

@@ -10,7 +10,7 @@ $(document).ready(function(){
     $("#send").click(function(){
         var clientmsg = $("#input").val();
         $.post("../restapi/index.php/user/msgIn", {text: clientmsg, receiver: receiver, sender: getCookie("username")});
-        $("#CustonNameField").val("");
+        $("#input").val("");
         return false;
     });
 
@@ -47,7 +47,7 @@ $(document).ready(function(){
         xmlhttp.send("CustomName=" + customname);
         $("#CustomNameInput").val("");
     });
-
+});
     function loadFriend(){
         const xhttp = new XMLHttpRequest();
         xhttp.onload = function() {
@@ -82,7 +82,7 @@ $(document).ready(function(){
         }
         return "";
       }
-});
+
 
 function loadGroupChat(){ // query stmt restricts that get groupids only when status is accepted and status is active 
     const xhttp = new XMLHttpRequest();
@@ -99,6 +99,7 @@ function loadGroupChat(){ // query stmt restricts that get groupids only when st
 }
 loadGroupChatIntervalID = setInterval(loadGroupChat, 1000);
 
+
 function remove(type, id){ //delete friend or groupchat
     var exit = confirm("Are you sure?");
     if(exit){
@@ -114,26 +115,14 @@ function remove(type, id){ //delete friend or groupchat
             xhttp.open("GET", "../restapi/index.php/user/removeGroupChat?id=" + id);
         }
         xhttp.send();
+        loadFriend();
+        loadGroupChat();
     }
+    
     
 }
 
 
-function chatHandler(friend, bool=false, text=""){
-    if(typeof(intervalID) !== "undefined"){
-        clearInterval(intervalID);
-    }
-    if(bool){
-        document.getElementById("friend-name").innerHTML = decodeURIComponent(text);
-    }else{
-        document.getElementById("friend-name").innerHTML = friend;
-    }
-    receiver = friend; 
-    
-    
-    intervalID = setInterval(loadLog, 420, friend);
-    
-}
 
 function dateformatting(date, opt){
     var daysNames = ['Sun', 'Mon', "Tue", 'Wed', 'Thu', 'Fri', 'Sat'];
@@ -209,79 +198,97 @@ function updateTimetable(){
 
 setInterval(updateTimetable, 1000);
 
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+async function chatHandler(friend, bool=false, text=""){
+    if(typeof(intervalID) !== "undefined"){
+        clearInterval(intervalID);
+    }
+    if(bool){
+        document.getElementById("friend-name").innerHTML = decodeURIComponent(text);
+    }else{
+        document.getElementById("friend-name").innerHTML = friend;
+    }
+    receiver = friend;
+    intervalID = setInterval(loadLog, 420, friend);
+}
+
+
 function loadLog(friend){
-    var oldscrollHeight = $("#chatbox")[0].scrollHeight - 20;
-    const xhttp = new XMLHttpRequest();
-    xhttp.onload = function() {
-    let text = JSON.parse(this.responseText);
-    let message="";
-    let time = "";
-    for(let i = 0; i < text[1].length; i++){
-        if(i > 0){
-            date = new Date(text[1][i].CreateDate.replace(" ", "T") + "Z");
-            lastDate = new Date(text[1][i - 1].CreateDate.replace(" ", "T") + "Z");
-            if(compareDates(date, '', 6)){
-                if(compareDates(date, lastDate, 5/(24 * 60))){ // if the last message sent equal or greater than five minutes ago
-                    time = dateformatting(date, 2);
-                    message += "<div style=\"text-align: center;\">"   + time + "</div>";
+        const xhttp = new XMLHttpRequest();
+        xhttp.onload = function() {
+
+            oldscrollHeight = $("#chatbox")[0].scrollHeight - 20;
+            let text = JSON.parse(this.responseText);
+            message="";
+            let time = "";
+            for(let i = 0; i < text[1].length; i++){
+                if(i > 0){
+                    date = new Date(text[1][i].CreateDate.replace(" ", "T") + "Z");
+                    lastDate = new Date(text[1][i - 1].CreateDate.replace(" ", "T") + "Z");
+                    if(compareDates(date, '', 6)){
+                        if(compareDates(date, lastDate, 5/(24 * 60))){ // if the last message sent equal or greater than five minutes ago
+                            time = dateformatting(date, 2);
+                            message += "<div style=\"text-align: center;\">"   + time + "</div>";
+                        }
+                    }else if(compareDates(date, '', 2)){
+                        if(compareDates(date, lastDate, 5/(24 * 60))){ // if the last message sent equal or greater than five minutes ago
+                            time = dateformatting(date, 1);
+                            message += "<div style=\"text-align: center;\">"   + time + "</div>";
+                        }
+                    }else if(compareDates(date, '', 1)){
+                        if(compareDates(date, lastDate, 5/(24 * 60))){ // if the last message sent equal or greater than five minutes ago
+                            time = "yesterday " + dateformatting(date, 3);
+                            message += "<div style=\"text-align: center;\">"   + time + "</div>";
+                        }
+                    }else{
+                        if(compareDates(date, lastDate, 5/(24 * 60))){ // if the last message sent equal or greater than five minutes ago
+                            time = "today " + dateformatting(date, 3);
+                            message += "<div style=\"text-align: center;\">"   + time + "</div>";
+                        }
+                    }
+                }else{
+                    date = new Date(text[1][i].CreateDate.replace(" ", "T") + "Z");
+                    if(compareDates(date, '', 7)){
+                        time = dateformatting(date, 2);
+                        message += "<div style=\"text-align: center;\">"   + time + "</div>";
+                    }else if(compareDates(date, '', 2)){
+                        time = dateformatting(date, 1);
+                        message += "<div style=\"text-align: center;\">"   + time + "</div>";
+                    }else if(compareDates(date, '', 1)){
+                        time = "yesterday " + dateformatting(date, 3);
+                        message += "<div style=\"text-align: center;\">"   + time + "</div>";
+                    }else{
+                        time = "today " + dateformatting(date, 3);
+                        message += "<div style=\"text-align: center;\">"   + time + "</div>";
+                    }
                 }
-            }else if(compareDates(date, '', 2)){
-                if(compareDates(date, lastDate, 5/(24 * 60))){ // if the last message sent equal or greater than five minutes ago
-                    time = dateformatting(date, 1);
-                    message += "<div style=\"text-align: center;\">"   + time + "</div>";
-                }
-            }else if(compareDates(date, '', 1)){
-                if(compareDates(date, lastDate, 5/(24 * 60))){ // if the last message sent equal or greater than five minutes ago
-                    time = "yesterday " + dateformatting(date, 3);
-                    message += "<div style=\"text-align: center;\">"   + time + "</div>";
-                }
-            }else{
-                if(compareDates(date, lastDate, 5/(24 * 60))){ // if the last message sent equal or greater than five minutes ago
-                    time = "today " + dateformatting(date, 3);
-                    message += "<div style=\"text-align: center;\">"   + time + "</div>";
-                }
+                
+                if(text[1][i].UserID == text[0].Sender){
+                    if(text[0].CustomName === null){
+                        message += "<div style=\"text-align: right; overflow-wrap: break-word;  margin-top: 6px;\">" + "<div style=\" display: inline-block; border: solid white; border-radius: 6px; padding: 5px 5px 5px 5px;\">" + text[1][i].MessageBody   + "</div>" + "> " + "<div style=\" display: inline-block; font-size: 15px; max-width: 100%;\">" + text[0].Username + "</div></div>";
+                    }else{
+                    message += "<div style=\"text-align: right; overflow-wrap: break-word; margin-top: 6px; \">"  + "<div style=\" display: inline-block; border: solid white; border-radius: 6px; padding: 5px 5px 5px 5px;\">" + text[1][i].MessageBody  + "</div>"  + "> " + "<div style=\" display: inline-block; font-size: 15px; max-width: 100%;\">" + text[0].CustomName + "</div></div>";
+                    }
+                }else{
+                    if(text[1][i].CustomName === null){
+                        message += "<div style=\"text-align: left; overflow-wrap: break-word; margin-top: 6px;\">" + "<div style=\" display: inline-block; \">" + text[1][i].Username   + "</div>"+ " <" + "<div style=\" display: inline-block; font-size: 15px; border: solid white; border-radius: 6px; padding: 5px 5px 5px 5px; overflow-wrap: break-word; max-width: 100%;\">" + text[1][i].MessageBody + "</div></div>";
+                    }else{
+                        message += "<div style=\"text-align: left; overflow-wrap: break-word; margin-top: 6px; width:100%\">" + "<div style=\" display: inline-block;\">" + text[1][i].CustomName   + "</div>"+ " <" + "<div style=\" display: inline-block; font-size: 15px; border: solid white; border-radius: 6px; padding: 5px 5px 5px 5px; overflow-wrap: break-word; max-width: 100%;\">" + text[1][i].MessageBody + "</div></div>";
+                    }
+                }      
             }
-        }else{
-            date = new Date(text[1][i].CreateDate.replace(" ", "T") + "Z");
-            if(compareDates(date, '', 7)){
-                time = dateformatting(date, 2);
-                message += "<div style=\"text-align: center;\">"   + time + "</div>";
-            }else if(compareDates(date, '', 2)){
-                time = dateformatting(date, 1);
-                message += "<div style=\"text-align: center;\">"   + time + "</div>";
-            }else if(compareDates(date, '', 1)){
-                time = "yesterday " + dateformatting(date, 3);
-                message += "<div style=\"text-align: center;\">"   + time + "</div>";
-            }else{
-                time = "today " + dateformatting(date, 3);
-                message += "<div style=\"text-align: center;\">"   + time + "</div>";
-            }
-        }
-        
-        if(text[1][i].UserID == text[0].Sender){
-            if(text[0].CustomName === null){
-                message += "<div style=\"text-align: right; overflow-wrap: break-word;  margin-top: 6px;\">" + "<div style=\" display: inline-block; border: solid white; border-radius: 6px; padding: 5px 5px 5px 5px;\">" + text[1][i].MessageBody   + "</div>" + "> " + "<div style=\" display: inline-block; font-size: 15px; max-width: 100%;\">" + text[0].Username + "</div></div>";
-            }else{
-             message += "<div style=\"text-align: right; overflow-wrap: break-word; margin-top: 6px; \">"  + "<div style=\" display: inline-block; border: solid white; border-radius: 6px; padding: 5px 5px 5px 5px;\">" + text[1][i].MessageBody  + "</div>"  + "> " + "<div style=\" display: inline-block; font-size: 15px; max-width: 100%;\">" + text[0].CustomName + "</div></div>";
-            }
-        }else{
-            if(text[1][i].CustomName === null){
-                message += "<div style=\"text-align: left; overflow-wrap: break-word; margin-top: 6px;\">" + "<div style=\" display: inline-block; \">" + text[1][i].Username   + "</div>"+ " <" + "<div style=\" display: inline-block; font-size: 15px; border: solid white; border-radius: 6px; padding: 5px 5px 5px 5px; overflow-wrap: break-word; max-width: 100%;\">" + text[1][i].MessageBody + "</div></div>";
-            }else{
-                message += "<div style=\"text-align: left; overflow-wrap: break-word; margin-top: 6px; width:100%\">" + "<div style=\" display: inline-block;\">" + text[1][i].CustomName   + "</div>"+ " <" + "<div style=\" display: inline-block; font-size: 15px; border: solid white; border-radius: 6px; padding: 5px 5px 5px 5px; overflow-wrap: break-word; max-width: 100%;\">" + text[1][i].MessageBody + "</div></div>";
-            }
-        }      
-    }
-    document.getElementById("chatbox").innerHTML = message;
-    }
+                document.getElementById("chatbox").innerHTML = message;
+        }  
     if(/^\d+$/.test(friend)){
         xhttp.open("GET", "../restapi/index.php/user/getMessageForGroupChat?receiver=" + friend);
         xhttp.send();
     }else{
         xhttp.open("GET", "../restapi/index.php/user/getMessage?receiver=" + friend);
         xhttp.send();
-    }
-
+    }     
     var newscrollHeight = $("#chatbox")[0].scrollHeight - 20; //Scroll height after the request
     if(newscrollHeight > oldscrollHeight){
         $("#chatbox").animate({ scrollTop: newscrollHeight }, 'normal'); 

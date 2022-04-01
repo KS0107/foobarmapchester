@@ -9,12 +9,12 @@ body {
     font-family: 'Montserrat';
 }
 
-#friendsBox{
+#friendsBox, #privatebox{
     display: block;
     text-align: center;
 }
 
-#requestsBox, #privatebox, #publicbox{
+#requestsBox, #publicbox{
     display: none;
 }
 

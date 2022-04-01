@@ -4,9 +4,9 @@
     font-family: 'Montserrat';
 }
 body {
-    background-image: url("../images/map.png");
+    background-image: url(../images/map.png);
     background-attachment: fixed;
-    background-position: center;
+    background-position: center bottom;
     color: white;
     transition: 0.35s ease-in-out;
     overflow-x: hidden;
@@ -35,7 +35,6 @@ button {
     cursor: pointer;
 }
 button:hover {
-    background-color: rgba(59, 59, 59, 0.692);
     transition: 0.25s ease-in-out;
     border-radius: 15px;
 }
@@ -101,7 +100,7 @@ h3 {
     margin-left: 2%;
     margin-right: 2%;
     width: 20%;
-    height: 0%;
+    height: 10%;
 }
 #msg {
     max-width: 10%;

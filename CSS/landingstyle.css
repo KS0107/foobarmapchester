@@ -4,13 +4,13 @@
     font-family: 'Montserrat';
 }
 body {
-    background-image: url("../images/map.png");
-    background-attachment: fixed;
-    background-position: center bottom;
-    color: white;
-    transition: 0.35s ease-in-out;
-    overflow-x: hidden;
-    overscroll-behavior: none;
+  background-image: url(../images/map.png);
+  background-attachment: fixed;
+  background-position: center bottom;
+  color: white;
+  transition: 0.35s ease-in-out;
+  overflow-x: hidden;
+  overscroll-behavior: none;
 }
 h1 {
   text-align: center;
@@ -20,6 +20,14 @@ h1 {
   z-index: 6;
 
 } 
+h2 {
+  text-align: center;
+  font-size: 30px;
+  font-weight: 600;
+  position: relative;
+  z-index: 6;
+
+}
 
 #bleg {
   background-color: black;
@@ -33,7 +41,7 @@ h1 {
   min-width: 200px;
 }
 #StartButton:hover {
-  background-color: rgb(1, 15, 61);
+  background-color: rgb(15, 1, 61);
   color:rgb(255, 255, 255);
   min-width: 100px;
   padding: 10px 70px;

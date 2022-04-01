@@ -146,6 +146,7 @@ function retrieveEventRequest(search){
         privateRequests = "";
         privateRequestsArray = [];
         publicRequests = "";
+        publicRequestsArray = [];
         countForPrivate = 0;
         countForPublic = 0;
         for(let i = 0; i < response[1].length; i++){
@@ -175,38 +176,29 @@ function retrieveEventRequest(search){
                         tempRecord.Response = null;
                     }
                 }
-                if(tempRecord.Place.includes(search)){
+                if(tempRecord.Place.toLowerCase().includes(search.toLowerCase())){
                     privateRequestsArray.push(tempRecord);
                 }
             }else{ //public case
                 if((response[0] != response[1][i].requesterID) && (response[0] == response[1][i].TargetID) && (response[1][i].Status == "No Response")){
+                    tempRecord = 
+                    {
+                    "Day": response[1][i].Week,
+                    "Time": response[1][i].Date,
+                    "Place": response[1][i].Place,
+                    "Username": response[1][i].Username,
+                    "Response": 
+                        "<div id=" + response[1][i].RequestmsgID + ">" +
+                            "<div>" + "<button onclick=eventJoin('" + response[1][i].GroupChatID +  "')>Join</button>" + "</div>" +
+                            "<div>" + "<button onclick=eventNo('" + response[1][i].GroupChatID +  "')>Decline</button>" + "</div>" +
+                        "</div>"
+                    };      
                     if(response[1][i].Noti == "unread"){
                         countForPublic++;
                     }
-                    publicRequests +=
-                    "<div>" +
-                        "<table>" +
-                            "<tr>" +
-                                "<th>" + "Day" + "</th>" +
-                                "<th>" + "Date" + "</th>" +
-                                "<th>" + "Place" + "</th>" +
-                                "<th>" + "Host" + "</th>" +
-                                "<th>" + "Group Chat" + "</th>"+
-                            "</tr>" +
-                            "<tr>" +
-                                "<td>" + response[1][i].Week + "</td>" +
-                                "<td>" + response[1][i].Date + "</td>" +
-                                "<td>" + response[1][i].Place + "</td>" +
-                                "<td>" + response[1][i].Username + "</td>" +
-                                "<td>" + 
-                                    "<div id=" + response[1][i].RequestmsgID + ">" +
-                                        "<div>" + "<button onclick=eventJoin('" + response[1][i].GroupChatID +  "')>Join</button>" + "</div>" +
-                                        "<div>" + "<button onclick=eventNo('" + response[1][i].GroupChatID +  "')>Decline</button>" + "</div>" +
-                                    "</div>" +
-                                "</td>"+
-                            "</tr>" +
-                        "</table>" +
-                    "</div>";
+                    if(tempRecord.Place.toLowerCase().includes(search.toLowerCase())){
+                        publicRequestsArray.push(tempRecord);
+                    }
                 }
             }
         }
@@ -231,8 +223,12 @@ function retrieveEventRequest(search){
                 "<tr>" +
                     "<th>Day</th><th>Date</th><th>Place</th><th>Friend</th><th>Status</th>" + 
                 "</tr>";
+        noResponse = false;
+        accepted = false;
+        declined = false;
         privateRequestsArray.forEach(element => {
             if(element.Status == "No Response"){
+                noResponse = true;
                 noResponseTable += 
                 "<tr>" +
                 "<td>" + element.Day + "</td>" +
@@ -243,6 +239,7 @@ function retrieveEventRequest(search){
                 "<td>" + element.Response + "</td>"+
                 "</tr>";
             }else if(element.Status == "accepted"){
+                accepted = true;
                 acceptedTable += 
                 "<tr>" +
                 "<td>" + element.Day + "</td>" +
@@ -252,6 +249,7 @@ function retrieveEventRequest(search){
                 "<td>" + element.Status + "</td>"+
                 "</tr>";
             }else{
+                declined = true;
                 declinedTable += 
                 "<tr>" +
                 "<td>" + element.Day + "</td>" +
@@ -265,7 +263,36 @@ function retrieveEventRequest(search){
         noResponseTable += "</table>" + "</div>";
         acceptedTable += "</table>" + "</div>";
         declinedTable += "</table>" + "</div>";
-        document.getElementById("privateRequest").innerHTML = noResponseTable + acceptedTable + declinedTable;
+        outText = ""
+        if(noResponse){
+            outText += noResponseTable;
+        }if(accepted){
+            outText += acceptedTable;
+        }if(declined){
+            outText += declinedTable;
+        }
+        document.getElementById("privateRequest").innerHTML = outText;
+        publicRequests = 
+        "<div>" +
+            "<table>" +
+                "<tr>" +
+                    "<th>" + "Day" + "</th>" +
+                    "<th>" + "Date" + "</th>" +
+                    "<th>" + "Place" + "</th>" +
+                    "<th>" + "Host" + "</th>" +
+                    "<th>" + "Group Chat" + "</th>"+
+                "</tr>"
+        publicRequestsArray.forEach(element => {
+        publicRequests += 
+            "<tr>" +
+                "<td>" + element.Day + "</td>" +
+                "<td>" + element.Time + "</td>" +
+                "<td>" + element.Place + "</td>" +
+                "<td>" + element.Username + "</td>"+
+                "<td>" + element.Response + "</td>"+
+            "</tr>";
+        });
+        publicRequests += "</table>" + "</div>";
         document.getElementById("PublicRequest").innerHTML = publicRequests;
         
         if(countForPrivate == 0){
@@ -284,7 +311,7 @@ function retrieveEventRequest(search){
     xhttp.open("GET", "../restapi/index.php/user/getEventRequest");
     xhttp.send();
 }
-setInterval(function(){retrieveEventRequest("")}, 10000);
+setInterval(function(){retrieveEventRequest(document.getElementById("search").textContent)}, 1000);
 retrieveEventRequest("");
 
 

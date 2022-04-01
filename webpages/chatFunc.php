@@ -30,6 +30,7 @@
 				<div><button id="publicChat">Group</button></div>
 				<!-- <div id="friend-tag"><h2>Friends</h2></div> -->
 				<div id="add-friend"><a id="ibtn"></a></div>
+				<div id="add-event"><a id="ebtn"></a></div>
 				<div id="delete-friend"><a id="dbtn"></a></div>
 			</div>
 			<!-- <button class="deletemsg" id="delete">Delete</button>
@@ -64,6 +65,11 @@
 		<div id="close1"></div>
 	</div>
 
+	<div id="eventbox-container">
+		<iframe id="eventbox" src="eventList.html"  title=""></iframe>
+		<div id="close3"></div>
+	</div>
+
 	<div id="requestbox-container">
 		<iframe id="requestbox" src="requestForm.html"></iframe>
 		<div id="close2"></div>
@@ -75,6 +81,14 @@
 
 		document.getElementById("close1").addEventListener("click", function(){
 			document.getElementById("friendbox-container").style.display = "none";
+		});
+
+		document.getElementById("add-event").addEventListener("click", function(){
+			document.getElementById("eventbox-container").style.display = "block";
+		});
+
+		document.getElementById("close3").addEventListener("click", function(){
+			document.getElementById("eventbox-container").style.display = "none";
 		});
 
 		document.getElementById("request").addEventListener("click", function(){

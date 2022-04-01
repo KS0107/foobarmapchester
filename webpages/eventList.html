@@ -19,16 +19,19 @@
         </div>
     </div>
 
-    <div id="friendsBox">
-        <div class="form-wrapper">
-            <form action="">
-                <input type="text" onkeyup="showUsers(this.value)">
-            </form>
-        </div>
-        <div id="showBox"></div>
+    <div id="privatebox">
+        <form>
+            <input type="text" id="search" onkeyup="retrieveEventRequest(this.value)">
+        </form>
+        <div id="privateRequest"></div>
     </div>
 
-    <div id="requestsBox"></div>
+    <div id="publicbox">
+        <form>
+            <input type="text" id="search" onkeyup="retrieveEventRequest(this.value)">
+        </form>
+        <div id="PublicRequest"></div>
+    </div>
 
 </body>
 </html>

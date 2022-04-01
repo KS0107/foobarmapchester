@@ -34,12 +34,12 @@
 			</div>
 			<!-- <button class="deletemsg" id="delete">Delete</button>
 			<button class="logout" id="exit">Exit</button> -->
-			<div id="friends" style="position: relative;"><img src="../images/Bean.gif" alt="" style="width: 165px; height: 120px; position: absolute; top: 4em; left: 40%;"><h3 style="position: absolute; top: 10em; left: 44%;">Loading . . .</h3></div>
-			<div id="groupChat"></div>
+			<div id="friends" style="position: relative;"><img src="../images/Bean.gif" alt="" style="width: 165px; height: 120px; position: absolute; top: 4em; left: 25%;"><h3 style="position: absolute; top: 10em; left: 37%;">Loading . . .</h3></div>
+			<div id="groupChat" style="position: relative;"><img src="../images/Bean.gif" alt="" style="width: 165px; height: 120px; position: absolute; top: 4em; left: 25%;"><h3 style="position: absolute; top: 10em; left: 37%;">Loading . . .</h3></div>
 		</div>
 		<div id="chatbox-wrapper">
 		<div id="friend-name"></div>
-			<div id="chatbox"></div>
+			<div id="chatbox" style="position: relative;"></div>
 			<form autocomplete="off" name="message" method="post" style="display: flex;">
 				<span><input autocomplete="false" id="input" type="text"></input></span>
 				<div><button id="send">Send</button></div>
@@ -47,12 +47,15 @@
 			</form>
 			<button id="request">Make a request</button>
 		</div>
-		<div>
-			<form method="post" onsubmit="return false;"> 
-				<label for="customName" style="color: white;">Custom Name</label>
-				<input type="text" name="CustomName" id="CustomNameInput">
-				<input type="submit" id="CustomNamebtn">
-			</form>
+		<div id="setting-warapper">
+			<div id="setting">1</div>
+			<div id="CustonNameField" style="display: none;">
+				<form method="post" onsubmit="return false;"> 
+					<label for="customName" style="color: white;">Custom Name</label>
+					<input type="text" name="CustomName" id="CustomNameInput">
+					<input type="submit" id="CustomNamebtn">
+				</form>
+			</div>		
 		</div>
 	</div>
 	

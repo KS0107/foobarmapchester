@@ -136,6 +136,22 @@ label {
   background-color: #0c0c0c;
   color: white;
 }
+
+#setting-warapper{
+  width: 100%;
+  float: left;
+  position: relative;
+  left: -7%;
+}
+
+#setting{
+  width: 35px;
+  height: 35px;
+  background-image: url(../images/setting.png);
+  background-size: cover;
+
+}
+
 iframe {
   border-radius: 20px;
 }

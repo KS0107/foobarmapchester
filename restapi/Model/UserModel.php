@@ -465,7 +465,20 @@ class UserModel extends Database{
                 WHERE UserID = :userid";
         return $this->executeQuery($sql, ["name"=>$name, "userid"=>$userid]);
     }
+    
+    public function clearTimetableCell($weekday, $time){
+        $sql = "UPDATE Timetable
+                SET $weekday = NULL
+                WHERE Time =:time";
+        return $this->executeQuery($sql, ["time"=>$time]);
+    }
 
+    public function clearGroupChat($weekday, $time){
+        $sql = "UPDATE GroupChat
+                SET Status = 'inactive'
+                WHERE Day = :weekday AND Time = :time AND Status = 'active'";
+        return $this->executeQuery($sql, ["weekday"=>$weekday, "time"=>$time]);
+    }
 }
 
 ?>

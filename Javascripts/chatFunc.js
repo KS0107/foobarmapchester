@@ -10,7 +10,7 @@ $(document).ready(function(){
     $("#send").click(function(){
         var clientmsg = $("#input").val();
         $.post("../restapi/index.php/user/msgIn", {text: clientmsg, receiver: receiver, sender: getCookie("username")});
-        $("#input").val("");
+        $("#CustonNameField").val("");
         return false;
     });
 
@@ -27,6 +27,9 @@ $(document).ready(function(){
         
     });
 
+    $("#setting").click(function(){
+        $("#CustonNameField").slideToggle("slow");
+      });
 
 
     // $("#delete").click(function(){
@@ -127,6 +130,7 @@ function chatHandler(friend, bool=false, text=""){
     }
     receiver = friend; 
     
+    
     intervalID = setInterval(loadLog, 420, friend);
     
 }
@@ -159,7 +163,7 @@ function dateformatting(date, opt){
     }
 }
 
-const c = new Date();
+
 
 function compareDates(date1, date2="", interval){
     if(date2){
@@ -171,6 +175,7 @@ function compareDates(date1, date2="", interval){
             return false;
         }
     }else{
+        const c = new Date();
         var days =   Math.floor(c.getTime() / (1000 * 60 * 60 * 24)) - Math.floor(date1.getTime() / (1000 * 60 * 60 * 24));
         if(days >= interval){
             return true;
@@ -179,6 +184,30 @@ function compareDates(date1, date2="", interval){
         }
     }
 }
+
+function updateTimetable(){
+    const b = new Date();
+    var daysNames = ['Sun', 'Mon', "Tue", 'Wed', 'Thu', 'Fri', 'Sat'];
+    var weekday = daysNames[b.getDay()];
+    var hours = b.getHours();
+    var minutes = b.getMinutes();
+    var seconds = b.getSeconds();
+    var time = hours.toString() + "-" + minutes.toString() + "-" + seconds.toString();
+    if(time == "14-0-0" || time == "18-0-0" || time == "23-0-0" || time == "10-0-0"){
+        switch(time){
+            case "14-0-0": time = "10am-2pm"; break;
+            case "18-0-0": time = "2pm-6pm"; break;
+            case "23-0-0": time = "6pm-11pm"; break;
+            case "10-0-0": time = "11pm-10am"; break;
+        }
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("POST", "../restapi/index.php/user/deletingEventAndGroupChat");
+        xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhttp.send("weekday=" + weekday + "&time" + time);
+    }
+}
+
+setInterval(updateTimetable, 1000);
 
 function loadLog(friend){
     var oldscrollHeight = $("#chatbox")[0].scrollHeight - 20;
@@ -231,15 +260,15 @@ function loadLog(friend){
         
         if(text[1][i].UserID == text[0].Sender){
             if(text[0].CustomName === null){
-                message += "<div style=\"text-align: right; overflow-wrap: break-word;  margin-top: 6px;\">" + "<div style=\" display: inline-block; border: solid white; border-radius: 6px; padding: 5px 5px 5px 5px;\">" + text[1][i].MessageBody   + "</div>" + "> " + "<div style=\" display: inline-block; font-size: 15px;\">" + text[0].Username + "</div></div>";
+                message += "<div style=\"text-align: right; overflow-wrap: break-word;  margin-top: 6px;\">" + "<div style=\" display: inline-block; border: solid white; border-radius: 6px; padding: 5px 5px 5px 5px;\">" + text[1][i].MessageBody   + "</div>" + "> " + "<div style=\" display: inline-block; font-size: 15px; max-width: 100%;\">" + text[0].Username + "</div></div>";
             }else{
-             message += "<div style=\"text-align: right; overflow-wrap: break-word; margin-top: 6px; \">"  + "<div style=\" display: inline-block; border: solid white; border-radius: 6px; padding: 5px 5px 5px 5px;\">" + text[1][i].MessageBody  + "</div>"  + "> " + "<div style=\" display: inline-block; font-size: 15px; \">" + text[0].CustomName + "</div></div>";
+             message += "<div style=\"text-align: right; overflow-wrap: break-word; margin-top: 6px; \">"  + "<div style=\" display: inline-block; border: solid white; border-radius: 6px; padding: 5px 5px 5px 5px;\">" + text[1][i].MessageBody  + "</div>"  + "> " + "<div style=\" display: inline-block; font-size: 15px; max-width: 100%;\">" + text[0].CustomName + "</div></div>";
             }
         }else{
             if(text[1][i].CustomName === null){
-                message += "<div style=\"text-align: left; overflow-wrap: break-word; margin-top: 6px;\">" + "<div style=\" display: inline-block; \">" + text[1][i].Username   + "</div>"+ " <" + "<div style=\" display: inline-block; font-size: 15px; border: solid white; border-radius: 6px; padding: 5px 5px 5px 5px;\">" + text[1][i].MessageBody + "</div></div>";
+                message += "<div style=\"text-align: left; overflow-wrap: break-word; margin-top: 6px;\">" + "<div style=\" display: inline-block; \">" + text[1][i].Username   + "</div>"+ " <" + "<div style=\" display: inline-block; font-size: 15px; border: solid white; border-radius: 6px; padding: 5px 5px 5px 5px; overflow-wrap: break-word; max-width: 100%;\">" + text[1][i].MessageBody + "</div></div>";
             }else{
-                message += "<div style=\"text-align: left; overflow-wrap: break-word; margin-top: 6px;\">" + "<div style=\" display: inline-block;\">" + text[1][i].CustomName   + "</div>"+ " <" + "<div style=\" display: inline-block; font-size: 15px; border: solid white; border-radius: 6px; padding: 5px 5px 5px 5px;\">" + text[1][i].MessageBody + "</div></div>";
+                message += "<div style=\"text-align: left; overflow-wrap: break-word; margin-top: 6px; width:100%\">" + "<div style=\" display: inline-block;\">" + text[1][i].CustomName   + "</div>"+ " <" + "<div style=\" display: inline-block; font-size: 15px; border: solid white; border-radius: 6px; padding: 5px 5px 5px 5px; overflow-wrap: break-word; max-width: 100%;\">" + text[1][i].MessageBody + "</div></div>";
             }
         }      
     }

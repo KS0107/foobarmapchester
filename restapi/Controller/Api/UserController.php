@@ -759,5 +759,31 @@ class UserController extends BaseController{
         }
         $this->errorHandler($this->strErrorDesc, json_encode("you have successfully changed your custom name!!"), $this->strErrorHeader);
     }
+
+    public function deletingEventAndGroupChatAction(){
+        if(strtoupper($this->requestMethod) == "POST"){
+            try{
+                $userModel = new UserModel;
+                $weekday = $_POST["weekday"];
+                $time = $_POST["time"];
+                switch($time){
+                    case "10am-2pm": $time = 1; break;
+                    case "2pm-6pm": $time = 2; break;
+                    case "6pm-11pm": $time = 3; break;
+                    case "11pm-10am": $time = 4; break;
+                }
+                $userModel->clearTimetableCell($weekday, $time);
+                $userModel->clearGroupChat($weekday, $time);
+
+            }catch(Error $e){
+                $this->strErrorDesc = $e->getMessage();
+                $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
+            }
+        }else{
+            $this->strErrorDesc = 'Method not supported';
+            $this->strErrorHeader = 'HTTP/1.1 422 Unprocessable Entity';
+        }
+        $this->errorHandler($this->strErrorDesc, "", $this->strErrorHeader);
+    }
 }
 ?>

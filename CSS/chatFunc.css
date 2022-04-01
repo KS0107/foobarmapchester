@@ -126,7 +126,7 @@ label {
 
 
 
-#friendbox-container, #requestbox-container{
+#friendbox-container, #requestbox-container, #eventbox-container{
   font-family: 'Montserrat';
   border-radius: 13px;
   display: none;

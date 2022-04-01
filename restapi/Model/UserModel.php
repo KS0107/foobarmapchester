@@ -207,7 +207,7 @@ class UserModel extends Database{
     public function updateStatus($requestmsgID, $status){
         $sql = "UPDATE Requestmsg
                 SET Status = :status
-                WHERE RequestmsgID = :requestmsgID";
+                WHERE GroupChatID = :requestmsgID";
         $this->executeQuery($sql, ["status"=>$status, "requestmsgID"=>$requestmsgID]);
     }
 

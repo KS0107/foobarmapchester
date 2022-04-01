@@ -207,7 +207,7 @@ iframe {
 #add-event{
   width: 35px;
   height: 35px;
-  background-image: url(../images/add-friend-icon.png);
+  background-image: url(../images/event-icon.png);
   filter: invert(100%);
   background-size: cover;
   margin-top: 14px;

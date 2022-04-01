@@ -158,13 +158,13 @@ iframe {
   border-radius: 20px;
 }
 
-#friendbox, #requestbox{
+#friendbox, #requestbox, #eventbox{
   width: 99%;
   height: 99%;
 
 }
 
-#friendbox{
+#friendbox, #eventbox{
   overflow: auto;
 }
 
